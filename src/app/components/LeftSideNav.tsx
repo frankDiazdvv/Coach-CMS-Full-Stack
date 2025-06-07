@@ -6,7 +6,7 @@ const LeftSideNav: React.FC = () => {
         <nav className="left-side-nav">
             <ul>
                 <li>
-                    <Link href="/">Home</Link>
+                    <Link href="/client-side/coach-dashboard">Home</Link>
                 </li>
                 <li>
                     <Link href="/about">About</Link>

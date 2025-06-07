@@ -1,6 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
+import WorkoutDetailsModal from './WorkoutDetailsModal';
 
 interface Workout {
   id: number;
@@ -10,7 +11,13 @@ interface Workout {
 interface AddWorkoutModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSelectWorkout: (workout: string) => void;
+  onSelectWorkout: (
+    workoutName: string, 
+    sets: number,
+    reps: number,
+    targetWeight?: string,
+    comment?: string
+  ) => void;
 }
 
 const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSelectWorkout }) => {
@@ -19,6 +26,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   const [filteredWorkouts, setFilteredWorkouts] = useState<Workout[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
 
   // Fetch workouts from API when modal opens
   useEffect(() => {
@@ -65,57 +73,78 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
     );
   }, [searchQuery, workouts]);
 
+  const handleWorkoutSelect = (workoutName: string) => {
+    setSelectedWorkout(workoutName); // Open WorkoutDetailsModal
+  };
+
+  const handleWorkoutDetailsSubmit = (sets: number, reps: number, targetWeight?: string, comment?: string) => {
+    if (selectedWorkout) {
+      onSelectWorkout(selectedWorkout, sets, reps, targetWeight, comment);
+    }
+    setSelectedWorkout(null);
+    onClose();
+  };
+
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">Add Workout</h2>
+    <>
+      <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+        <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+          <h2 className="mb-4 text-xl font-bold text-gray-800">Add Workout</h2>
 
-        {/* Search Bar */}
-        <input
-          type="text"
-          placeholder="Search workouts..."
-          value={searchQuery}
-          onChange={(e) => setSearchQuery(e.target.value)}
-          className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
-        />
+          {/* Search Bar */}
+          <input
+            type="text"
+            placeholder="Search workouts..."
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+          />
 
-        {/* Scrollable Workout List */}
-        <div className="max-h-64 overflow-y-auto">
-          {isLoading ? (
-            <p className="text-gray-500">Loading...</p>
-          ) : error ? (
-            <p className="text-red-500">{error}</p>
-          ) : filteredWorkouts.length === 0 ? (
-            <p className="text-gray-500">No workouts found</p>
-          ) : (
-            filteredWorkouts.map((workout) => (
-              <div
-                key={workout.id}
-                onClick={() => {
-                  onSelectWorkout(workout.name);
-                  onClose();
-                }}  
-                className="cursor-pointer rounded-md p-2 hover:bg-gray-100"
-              >
-                {workout.name.toUpperCase()}
-              </div>
-            ))
-          )}
-        </div>
+          {/* Scrollable Workout List */}
+          <div className="max-h-64 overflow-y-auto">
+            {isLoading ? (
+              <p className="text-gray-500">Loading...</p>
+            ) : error ? (
+              <p className="text-red-500">{error}</p>
+            ) : filteredWorkouts.length === 0 ? (
+              <p className="text-gray-500">No workouts found</p>
+            ) : (
+              filteredWorkouts.map((workout) => (
+                <div
+                  key={workout.id}
+                  onClick={() => {
+                    handleWorkoutSelect(workout.name);
+                  }}  
+                  className="cursor-pointer rounded-md p-2 hover:bg-gray-100"
+                >
+                  {workout.name.toUpperCase()}
+                </div>
+              ))
+            )}
+          </div>
 
-        {/* Close Button */}
-        <div className="mt-4 flex justify-end">
-          <button
-            onClick={onClose}
-            className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
-          >
-            Close
-          </button>
+          {/* Close Button */}
+          <div className="mt-4 flex justify-end">
+            <button
+              onClick={onClose}
+              className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+            >
+              Close
+            </button>
+          </div>
         </div>
       </div>
-    </div>
+      {selectedWorkout && (
+          <WorkoutDetailsModal
+            isOpen={!!selectedWorkout}
+            workoutName={selectedWorkout}
+            onClose={() => setSelectedWorkout(null)}
+            onSubmit={handleWorkoutDetailsSubmit}
+          />
+        )}
+      </>
   );
 };
 

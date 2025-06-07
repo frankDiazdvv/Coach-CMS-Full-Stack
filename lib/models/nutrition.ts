@@ -1,25 +1,31 @@
-//NUTRITION SCHEMA WITH INTERFACE
-
 import { Schema, Types, model, models } from 'mongoose';
 
-// Define the Nutrition Item interface
-export interface INutritionItem {
-  food: string; // e.g., "Chicken Breast"
-  calories: number; // e.g., 200
-  comment?: string; // e.g., "Eat with veggies"
+export interface INutritionFood {
+  name: string;
+  quantity: number;
+  unit: string; // e.g., "items", "g", "ml"
+  calories: number;
+  protein: number;
+  carbs: number;
+  fats: number;
 }
 
-// Define the Daily Nutrition Schedule interface
-export interface IDailyNutrition {
-  weekDay: string; // e.g., "Monday"
+export interface INutritionItem {
+  mealName: string;
+  foods: INutritionFood[];
+  comment?: string;
+}
+
+export interface INutritionDay {
+  weekDay: string;
   items: INutritionItem[];
 }
 
-// Define the Nutrition Schedule interface
 export interface INutritionSchedule {
-  client: Types.ObjectId; // Reference to Client _id
-  coach?: Types.ObjectId; // Reference to Coach _id (optional)
-  schedule: IDailyNutrition[]; // Array of daily schedules
+  client: Types.ObjectId;
+  coach?: Types.ObjectId;
+  schedule: INutritionDay[];
+  notes: string;
   createdAt?: Date;
   updatedAt?: Date;
 }
@@ -37,13 +43,24 @@ const NutritionSchema = new Schema<INutritionSchedule>(
         },
         items: [
           {
-            food: { type: String, required: true },
-            calories: { type: Number, required: true },
+            mealName: { type: String, required: true },
+            foods: [
+              {
+                name: { type: String, required: true },
+                quantity: { type: Number, required: true },
+                unit: { type: String, required: true },
+                calories: { type: Number, required: true },
+                protein: { type: Number, required: true },
+                carbs: { type: Number, required: true },
+                fats: { type: Number, required: true },
+              },
+            ],
             comment: { type: String },
           },
         ],
       },
     ],
+    notes: {type: String, required: false},
   },
   { timestamps: true }
 );

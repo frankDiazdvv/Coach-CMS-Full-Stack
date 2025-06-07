@@ -35,9 +35,10 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
   const [isLoading, setIsLoading] = useState(false);
 
 
-  //Gets Workout Schedule from localStorage from AddWorkoutPage
+  //Gets Workout/Nutrition Schedule from localStorage from AddWorkoutPage/AddNutritionPage
   useEffect(() => {
     const tempWorkoutSchedule = localStorage.getItem('workoutSchedule');
+    const tempNutritionSchedule = localStorage.getItem('nutritionSchedule');
     const storedFormData = localStorage.getItem('clientFormData');
     if (storedFormData) {
       setFormData(JSON.parse(storedFormData));
@@ -46,6 +47,12 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
       setFormData((prev) => ({
         ...prev,
         workoutSchedule: JSON.parse(tempWorkoutSchedule) as any,
+      }));
+    }
+    if (tempNutritionSchedule) {
+      setFormData((prev) => ({
+        ...prev,
+        nutritionSchedule: JSON.parse(tempNutritionSchedule) as any,
       }));
     }
   }, [isOpen]);
@@ -95,6 +102,8 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
         body: JSON.stringify(formData),
       });
 
+      alert(JSON.stringify(formData));
+
 
       if (!response.ok) {
         let errorMessage = 'Failed to create client';
@@ -102,9 +111,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
         throw new Error(errorMessage);
       }
 
-      alert(JSON.stringify(formData));
 
       localStorage.removeItem('workoutSchedule');
+      localStorage.removeItem('nutritionSchedule');
       localStorage.removeItem('clientFormData');
 
       clearFormData();
@@ -118,12 +127,13 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
     }
   };
 
-  const handleAddWorkout = () => {
+  const handleAddSchedules = () => {
     localStorage.setItem('clientFormData', JSON.stringify(formData));
   };
 
   const handleCancel = () => {
     localStorage.removeItem('workoutSchedule');
+    localStorage.removeItem('nutritionSchedule');
     localStorage.removeItem('clientFormData');
     clearFormData();
     onClose(); // Call the prop to close the modal
@@ -283,17 +293,18 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
           {error && <p className="text-sm text-red-500">{error}</p>}
           <div className="flex justify-between">
             <Link href='./add-workout'
-              className="rounded-md bg-green-400 px-4 py-2 text-white cursor-pointer"
-              onClick={handleAddWorkout}
+              className="rounded-md bg-red-500 px-4 py-2 text-white cursor-pointer"
+              onClick={handleAddSchedules}
             >
               Add Workout
             </Link>
-            <button
+            <Link href='./add-nutrition'
               type="button"
-              className="rounded-md bg-gray-300 px-4 py-2 text-gray-700 opacity-50 cursor-not-allowed"
+              onClick={handleAddSchedules}
+              className="rounded-md bg-green-400 px-4 py-2 text-white cursor-pointer"
             >
               Add Nutrition Plan
-            </button>
+            </Link>
           </div>
           <div className="flex justify-end space-x-2">
             <button

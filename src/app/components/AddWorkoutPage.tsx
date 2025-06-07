@@ -1,25 +1,19 @@
-/*
-GOAL TODAY(05/30):
- - Create exercise details modal(sets, reps, comments, videoUrl??).
- - Create exercise card
-
-NOTES:
- - Need a delete workout for unwanted added exercises.
-*/
-
 
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AddWorkoutModal from './AddWorkoutModal';
+import WorkoutCard from './WorkoutCard';
+import ViewExerciseDetails from './ViewExerciseDetailsModal';
 
 interface IWorkout {
   name: string;
   sets: number;
   reps: number;
-  targetWeight: number;
+  targetWeight?: string;
   comment?: string;
+  imageUrl?: string;
 }
 
 interface WorkoutDay {
@@ -31,6 +25,11 @@ const AddWorkoutPage: React.FC = () => {
   const router = useRouter();
   const [schedule, setSchedule] = useState<WorkoutDay[]>([]);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [selectedWorkout, setSelectedWorkout] = useState<{
+    day: string;
+    index: number;
+    workout: IWorkout;
+  } | null>(null);
 
   const daysOfWeek = [
     'Monday',
@@ -43,19 +42,28 @@ const AddWorkoutPage: React.FC = () => {
   ];
 
 
+  // Load existing schedule from localStorage on mount
+  useEffect(() => {
+    const storedSchedule = localStorage.getItem('workoutSchedule');
+    if (storedSchedule) {
+      setSchedule(JSON.parse(storedSchedule));
+    }
+  }, []);
+
   const handleAddWorkout = (day: string) => {
     setSelectedDay(day);
   };
 
-  const handleSelectWorkout = (workout: string) => {
+  const handleSelectWorkout = (workoutName: string, workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string) => {
     if (selectedDay) {
       setSchedule((prev) => {
         const existingDay = prev.find((d) => d.weekDay === selectedDay);
         const newWorkout: IWorkout = {
-          name: workout,
-          reps: 0,
-          sets: 0,
-          targetWeight: 0,
+          name: workoutName,
+          reps: workoutReps,
+          sets: workoutSets,
+          targetWeight: targetWeight,
+          comment: workoutComment || 'No Comment',
         };
         if (existingDay) {
           return prev.map((d) =>
@@ -70,16 +78,55 @@ const AddWorkoutPage: React.FC = () => {
   };
 
   const handleConfirmWorkout = () => {
-    // Redirect back to coach-dashboard with the workout schedule
+    // Redirect back to coach-dashboard and open modal with the workout schedule
     localStorage.setItem('workoutSchedule', JSON.stringify(schedule));
     localStorage.setItem('openModalAfterWorkout', 'true');
     router.push(`/client-side/coach-dashboard`);
   };
 
+  const handleOpenDetails = (day: string, index: number, workout: IWorkout) => {
+    setSelectedWorkout({ day, index, workout });
+  };
+
+  const handleSaveWorkout = (updatedWorkout: IWorkout) => {
+    if (selectedWorkout) {
+      setSchedule((prev) =>
+        prev.map((d) =>
+          d.weekDay === selectedWorkout.day
+            ? {
+                ...d,
+                workouts: d.workouts.map((w, i) =>
+                  i === selectedWorkout.index ? updatedWorkout : w
+                ),
+              }
+            : d
+        )
+      );
+    }
+  };
+
+  const handleDeleteWorkout = () => {
+    if (selectedWorkout) {
+      setSchedule((prev) =>
+        prev.map((d) =>
+          d.weekDay === selectedWorkout.day
+            ? {
+                ...d,
+                workouts: d.workouts.filter((_, i) => i !== selectedWorkout.index),
+              }
+            : d
+        )
+      );
+      setSelectedWorkout(null);
+    }
+  };
+
   return (
     <div className="min-h-screen bg-gray-100 p-6">
       <div className="flex justify-between items-center mb-6">
-        <h1 className="text-2xl font-bold text-gray-800">Build Workout Schedule</h1>
+        <h1 className="text-2xl font-bold text-gray-800">
+          Build Workout Schedule
+        </h1>
         <button
           onClick={handleConfirmWorkout}
           className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
@@ -103,9 +150,15 @@ const AddWorkoutPage: React.FC = () => {
                 {/* Display added workouts for the day */}
                 {schedule.find((d) => d.weekDay === day)
                   ?.workouts.map((workout, index) => (
-                    <p key={index} className="bg-blue-800 rounded p-1 text-white text-sm">
-                      {workout.name}
-                    </p>
+                    <WorkoutCard
+                      key={index}
+                      name={workout.name}
+                      sets={workout.sets}
+                      reps={workout.reps}
+                      targetWeight={workout.targetWeight}
+                      imageUrl={workout.imageUrl}
+                      onClick={() => handleOpenDetails(day,index, workout)}
+                    />
                   ))}
               </div>
             </div>
@@ -118,6 +171,15 @@ const AddWorkoutPage: React.FC = () => {
         onClose={() => setSelectedDay(null)}
         onSelectWorkout={handleSelectWorkout}
       />
+      {selectedWorkout && (
+        <ViewExerciseDetails
+          isOpen={!!selectedWorkout}
+          workout={selectedWorkout.workout}
+          onClose={() => setSelectedWorkout(null)}
+          onSave={handleSaveWorkout}
+          onDelete={handleDeleteWorkout}
+        />
+      )}
     </div>
   );
 };

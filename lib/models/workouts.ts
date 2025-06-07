@@ -7,7 +7,7 @@ export interface IWorkout {
   name: string; // e.g., "Bench Press"
   sets: number; // e.g., 3
   reps: number; // e.g., 12
-  targetWeight: number; // e.g., 135 (in pounds or kg)
+  targetWeight?: string; // e.g., 135 (in pounds or kg)
   comment?: string; // e.g., "Focus on form"
 }
 
@@ -42,7 +42,7 @@ const WorkoutSchema = new Schema<IWorkoutSchedule>(
             name: { type: String, required: true },
             sets: { type: Number, required: true },
             reps: { type: Number, required: true },
-            targetWeight: { type: Number, required: true },
+            targetWeight: { type: String },
             comment: { type: String },
           },
         ],
@@ -51,17 +51,6 @@ const WorkoutSchema = new Schema<IWorkoutSchedule>(
   },
   { timestamps: true }
 );
-
-// "workoutSchedule":[
-//   {"weekDay":"Wednesday",
-//     "workouts":[
-//       {"name":"Tricep Pushdown on Cable",
-//         "reps":0,"sets":0,"targetWeight":0},
-//         {"name":"Elliptical","reps":0,"sets":0,"targetWeight":0},
-//         {"name":"Suspended crossess","reps":0,"sets":0,"targetWeight":0}
-//       ]
-//     }
-//   ]
 
 const WorkoutSchedule = models.workoutSchedule || model<IWorkoutSchedule>('workoutSchedule', WorkoutSchema);
 

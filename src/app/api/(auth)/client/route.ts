@@ -10,7 +10,7 @@ export const GET = async () => {
   try {
     await connect();
     console.log('Fetching clients');
-    const clients = await Client.find().populate('workoutSchedule').populate('nutritionSchedule');
+    const clients = await Client.find().populate('workoutSchedule').populate('nutritionSchedule').lean();
     return new NextResponse(JSON.stringify(clients), { status: 200 });
   } catch (error: any) {
     console.error('Error in GET /api/clients:', error.message);
@@ -26,11 +26,15 @@ export const POST = async (request: Request) => {
   try {
     await connect();
     const body = await request.json() as Partial<IClient> & {
-      workoutSchedule?: { DailyWorkSchedule: { weekDay: string; workouts: IWorkout[] }[] };
-      nutritionSchedule?: { DailyNutSchedule: { weekDay: string; items: INutritionItem[] }[] };
+      workoutSchedule?: { schedule: { weekDay: string; workouts: IWorkout[] }[] };
+      nutritionSchedule?: { 
+        schedule: { weekDay: string; items: INutritionItem[] }[],
+        notes: string
+      };
     };
 
-    if (!body.firstName || !body.email || !body.password || !body.phone || !body.gender || !body.goal || !body.currentWeight || !body.planAssigned || !body.coach) {
+    if (!body.firstName || !body.email || !body.password || !body.phone ||
+       !body.gender || !body.goal || !body.currentWeight || !body.planAssigned || !body.coach) {
       return new NextResponse('Missing required fields', { status: 400 });
     }
 
@@ -67,7 +71,7 @@ export const POST = async (request: Request) => {
       const nutritionSchedule = await NutritionSchedule.create({
         client: newClient._id,
         coach: body.coach,
-        schedule: body.nutritionSchedule.DailyNutSchedule,
+        schedule: body.nutritionSchedule,
       });
       nutritionScheduleId = nutritionSchedule._id;
     }
