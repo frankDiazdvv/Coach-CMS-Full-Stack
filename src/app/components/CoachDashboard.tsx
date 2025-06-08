@@ -175,7 +175,7 @@ const CoachDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gray-100 p-6">
+    <div className="fixed right-0 left-20 min-h-screen bg-gray-100 p-6">
       <div className="mb-8 flex items-center justify-between">
         <div className="flex items-center space-x-4">
           <Image

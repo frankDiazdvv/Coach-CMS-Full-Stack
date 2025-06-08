@@ -112,20 +112,23 @@ const ViewMealDetails: React.FC<ViewMealDetailsProps> = ({
                       </button>
                     </div>
                 ))}
-                <button
-                    type="button"
-                    onClick={() => setIsFoodSearchOpen(true)}
-                    className="mt-2 rounded-md bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
-                >
-                    Search Foods
-                </button>
-                <button
-                    type="button"
-                    onClick={() => setIsCustomFoodOpen(true)}
-                    className="rounded-md bg-green-500 px-3 py-1 text-white hover:bg-green-600"
-                >
-                    Add Your Own
-                </button>
+                <div className='flex gap-10'>
+                  <button
+                      type="button"
+                      onClick={() => setIsFoodSearchOpen(true)}
+                      className="mt-2 rounded-md bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+                  >
+                      Search Foods
+                  </button>
+                  <button
+                      type="button"
+                      onClick={() => setIsCustomFoodOpen(true)}
+                      className="mt-2 rounded-md bg-green-500 px-3 py-1 text-white hover:bg-green-600"
+                  >
+                      Add Your Own
+                  </button>
+                </div>
+                
               </div>
             ) : (
               <p className="text-sm text-gray-500">No foods added.</p>
