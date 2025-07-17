@@ -1,7 +1,7 @@
 //DYNAMIC ROUTES FOR COACHES
 
 import { NextResponse } from 'next/server';
-import connect from "../../../../../../lib/db";
+import connect from '../../../../../../lib/db';
 import Coach, { ICoach } from '../../../../../../lib/models/coach';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';

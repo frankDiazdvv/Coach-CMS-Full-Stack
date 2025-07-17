@@ -10,7 +10,7 @@ export const GET = async (request: Request, { params }: { params: { id: string }
     if (!mongoose.Types.ObjectId.isValid(params.id)) {
       return new NextResponse('Invalid schedule ID', { status: 400 });
     }
-    const schedule = await WorkoutSchedule.findById(params.id);
+    const schedule = await WorkoutSchedule.findById( params.id);
     if (!schedule) {
       return new NextResponse('Schedule not found', { status: 404 });
     }

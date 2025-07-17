@@ -6,17 +6,17 @@ import NutritionSchedule, { INutritionItem } from '../../../../../lib/models/nut
 import Coach from '../../../../../lib/models/coach';
 import { authMiddleware } from '../../../../../lib/auth';
 
-export const GET = async () => {
+export async function GET() {
   try {
     await connect();
     console.log('Fetching clients');
-    const clients = await Client.find().populate('workoutSchedule').populate('nutritionSchedule').lean();
+    const clients = await Client.find().populate('coach').populate('workoutSchedule').lean();
     return new NextResponse(JSON.stringify(clients), { status: 200 });
   } catch (error: any) {
     console.error('Error in GET /api/clients:', error.message);
     return new NextResponse('Error fetching clients: ' + error.message, { status: 500 });
   }
-};
+}
 
 export const POST = async (request: Request) => {
   console.log('POST /api/clients called');
@@ -27,10 +27,7 @@ export const POST = async (request: Request) => {
     await connect();
     const body = await request.json() as Partial<IClient> & {
       workoutSchedule?: { schedule: { weekDay: string; workouts: IWorkout[] }[] };
-      nutritionSchedule?: { 
-        schedule: { weekDay: string; items: INutritionItem[] }[],
-        notes: string
-      };
+      nutritionSchedule?: { schedule: { weekDay: string; items: INutritionItem[] }[] };
     };
 
     if (!body.firstName || !body.email || !body.password || !body.phone ||
@@ -56,35 +53,35 @@ export const POST = async (request: Request) => {
       nutritionSchedule: undefined,
     });
 
-    let workoutScheduleId;
-    if (body.workoutSchedule) {
-      const workoutSchedule = await WorkoutSchedule.create({
-        client: newClient._id,
-        coach: body.coach,
-        schedule: body.workoutSchedule,
-      });
-      workoutScheduleId = workoutSchedule._id;
-    }
+    // Create empty workout schedule if not provided
+    const workoutScheduleData = body.workoutSchedule?.schedule || [];
+    const workoutSchedule = await WorkoutSchedule.create({
+      client: newClient._id,
+      coach: body.coach,
+      schedule: Array.isArray(workoutScheduleData) ? workoutScheduleData : [],
+    });
+    const workoutScheduleId = workoutSchedule._id;
 
-    let nutritionScheduleId;
-    if (body.nutritionSchedule) {
-      const nutritionSchedule = await NutritionSchedule.create({
-        client: newClient._id,
-        coach: body.coach,
-        schedule: body.nutritionSchedule,
-      });
-      nutritionScheduleId = nutritionSchedule._id;
-    }
+    // Create empty nutrition schedule if not provided
+    const nutritionScheduleData = body.nutritionSchedule?.schedule || [];
+    const nutritionSchedule = await NutritionSchedule.create({
+      client: newClient._id,
+      coach: body.coach,
+      schedule: Array.isArray(nutritionScheduleData) ? nutritionScheduleData : [],
+    });
+    const nutritionScheduleId = nutritionSchedule._id;
 
+    // Update client with schedule IDs
     const updatedClient = await Client.findByIdAndUpdate(
       newClient._id,
       { $set: { workoutSchedule: workoutScheduleId, nutritionSchedule: nutritionScheduleId } },
       { new: true }
     ).populate('workoutSchedule').populate('nutritionSchedule');
 
+
     return new NextResponse(JSON.stringify(updatedClient), { status: 201 });
   } catch (error: any) {
-    console.error('Error in POST /api/clients:', error.message);
+    console.error('Error in POST /api/clients:', error.message, error.stack);
     return new NextResponse('Error creating client: ' + error.message, { status: 500 });
   }
 };

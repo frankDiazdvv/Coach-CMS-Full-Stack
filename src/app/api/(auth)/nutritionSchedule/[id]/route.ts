@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connect from '../../../../../../lib/db';
-import NutritionSchedule, { INutritionSchedule, INutritionItem, IDailyNutrition } from '../../../../../../lib/models/nutrition';
+import NutritionSchedule, { INutritionSchedule, INutritionItem, INutritionDay } from '../../../../../../lib/models/nutrition';
 import mongoose from 'mongoose';
 
 export const GET = async (request: Request, { params }: { params: { id: string } }) => {
@@ -41,7 +41,7 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       if (!validDays.includes(body.weekDay)) {
         return new NextResponse('Invalid weekDay', { status: 400 });
       }
-      if (!schedule.schedule.some((s: IDailyNutrition) => s.weekDay === body.weekDay)) {
+      if (!schedule.schedule.some((s: INutritionDay) => s.weekDay === body.weekDay)) {
         await NutritionSchedule.findByIdAndUpdate(params.id, {
           $push: { schedule: { weekDay: body.weekDay, items: [] } },
         });
@@ -55,7 +55,7 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       } else if (body.operation === 'pull') {
         updatedSchedule = await NutritionSchedule.findByIdAndUpdate(
           params.id,
-          { $pull: { 'schedule.$[day].items': { food: { $in: body.items.map((i) => i.food) } } } },
+          { $pull: { 'schedule.$[day].items': { food: { $in: body.items.map((i) => i.foods) } } } },
           { new: true, runValidators: true, arrayFilters: [{ 'day.weekDay': body.weekDay }] }
         );
       } else if (body.operation === 'replace') {

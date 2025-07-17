@@ -1,5 +1,7 @@
 import { Schema, model, models, Types } from 'mongoose';
 import bcrypt from 'bcrypt';
+import { ICoach } from './coach';
+import { IWorkoutSchedule } from './workouts';
 
 export interface IClient {
   firstName: string;
@@ -13,9 +15,9 @@ export interface IClient {
   targetWeight: string;
   planAssigned: string;
   planExpires?: Date;
-  workoutSchedule?: Types.ObjectId;
+  workoutSchedule?: Types.ObjectId | IWorkoutSchedule;
   nutritionSchedule?: Types.ObjectId;
-  coach: Types.ObjectId;
+  coach: Types.ObjectId | ICoach;
   imageUrl?: string;
   createdAt?: Date;
   updatedAt?: Date;
@@ -34,17 +36,8 @@ const ClientSchema = new Schema<IClient>(
     currentWeight: { type: String, required: true },
     targetWeight: { type: String, required: false },
     imageUrl: { type: String, required: false },
-    planAssigned: {
-      type: String,
-      required: true,
-      validate: {
-        validator: async function (value: string) {
-          const coach = await models.coach.findById(this.coach);
-          return coach && coach.plans.includes(value);
-        },
-        message: 'Plan must belong to the assigned coach',
-      },
-    },
+    planAssigned: { type: String, required: false },
+    planExpires: { type: Date, required: false },
     workoutSchedule: { type: Schema.Types.ObjectId, ref: 'workoutSchedule', required: false },
     nutritionSchedule: { type: Schema.Types.ObjectId, ref: 'nutritionSchedule', required: false },
     coach: {

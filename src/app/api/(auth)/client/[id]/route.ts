@@ -5,6 +5,8 @@ import WorkoutSchedule from '../../../../../../lib/models/workouts';
 import NutritionSchedule from '../../../../../../lib/models/nutrition';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import Coach from '../../../../../../lib/models/coach';
+import WorkoutLog from '../../../../../../lib/models/workoutLogs';
 
 export const GET = async (request: Request, { params }: { params: { id: string } }) => {
   try {
@@ -27,10 +29,11 @@ export const GET = async (request: Request, { params }: { params: { id: string }
 export const PATCH = async (request: Request, { params }: { params: { id: string } }) => {
   try {
     await connect();
+    console.log('PATCH request for client ID:', params.id); // Debug log
     if (!mongoose.Types.ObjectId.isValid(params.id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
-    const client = await Client.findById(params.id);
+    const client = await Client.findById(params.id).populate('coach');
     if (!client) {
       return new NextResponse('Client not found', { status: 404 });
     }
@@ -39,9 +42,12 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       nutritionSchedule?: { schedule: { weekDay: string; items: any[] }[] };
     };
 
-    // Hash password if provided
-    if (body.password) {
+   // Hash password if provided
+    if (body.password && body.password.trim() !== '') {
       body.password = await bcrypt.hash(body.password, 10);
+    } else {
+      // Retain existing password to satisfy required constraint
+      body.password = client.password;
     }
 
     // Update or create WorkoutSchedule
@@ -83,9 +89,14 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       { new: true, runValidators: true }
     ).populate('workoutSchedule').populate('nutritionSchedule');
 
+    if (!updatedClient) {
+      return new NextResponse('Failed to update client', { status: 500 });
+    }
+    
     return new NextResponse(JSON.stringify(updatedClient), { status: 200 });
   } catch (error: any) {
-    return new NextResponse('Error updating client: ' + error.message, { status: 500 });
+    
+    return new NextResponse('Error updating client: ' + error.stack, { status: 500 });
   }
 };
 
@@ -100,11 +111,14 @@ export const DELETE = async (request: Request, { params }: { params: { id: strin
       return new NextResponse('Client not found', { status: 404 });
     }
     if (client.workoutSchedule) {
-      await WorkoutSchedule.findByIdAndDelete(client.workoutSchedule);
+      await WorkoutSchedule.findByIdAndDelete(client.workoutSchedule._id);
     }
     if (client.nutritionSchedule) {
-      await NutritionSchedule.findByIdAndDelete(client.nutritionSchedule);
+      await NutritionSchedule.findByIdAndDelete(client.nutritionSchedule._id);
     }
+
+    // Delete associated workout logs
+    await WorkoutLog.deleteMany({ client: params.id });
     return new NextResponse(JSON.stringify({ message: 'Client deleted successfully' }), { status: 200 });
   } catch (error: any) {
     return new NextResponse('Error deleting client: ' + error.message, { status: 500 });
