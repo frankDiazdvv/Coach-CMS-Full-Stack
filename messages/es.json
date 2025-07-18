@@ -19,6 +19,7 @@
   "todayWorkouts": "Entrenamientos de Hoy",
   "scheduled": "{due, plural, =0 {Ningún Entrenamiento Hoy} one {{due} programado} other {{due} programados}}",
   "loadingWorkouts": "Cargando entrenamientos...",
+  "loadingProfile": "Cargando tu perfil...",
   "client": "Cliente",
   "plan": "Plan",
   "gender": "Género",
@@ -212,6 +213,30 @@
 
   "userProfileTitleBeforeName": "Perfil de ",
   "userPrifileTitleName": "{name}",
-  "userProfileTitleAfterName": ""
+  "userProfileTitleAfterName": "",
+  "manageAccountSubtitle": "Maneja tu cuenta y mira tu información",
+  "coachInfo": "Información del Coach",
+  "sendEmail": "Envia un Correo",
+  "noCoach": "Ningún Coach Asignado",
+  "noCoachSubtitle": "Tu Coach será asignado prontamente",
+  "profileOverview": "Resumen de Perfil",
+  "memberSince": "Miembro Desde",
+  "noExpirationDate": "Sin fecha de Expiración",
+  "myContactInformation": "Mi Información de Contacto",
+
+
+  
+  "yourMeasurements": "Tus Medidas",
+  "comingSoon": "Esta función estará disponible próximamente",
+
+   "navigation": {
+    "myWorkouts": "Mis Entrenamientos",
+    "myNutrition": "Mi Nutrición"
+  },
+  "bottomNavigation": {
+    "home": "Inicio",
+    "measurements": "Medidas",
+    "profile": "Perfil"
+  }
 
 }

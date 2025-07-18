@@ -19,6 +19,7 @@
   "todayWorkouts": "Today's Workouts",
   "scheduled": "{due, plural, =0 {No Workout Scheduled} other {{due} scheduled}}",
   "loadingWorkouts": "Loading workouts...",
+  "loadingProfile": "Loading your profile...",
   "client": "Client",
   "plan": "Plan",
   "gender": "Gender",
@@ -210,5 +211,28 @@
 
   "userProfileTitleBeforeName": "",
   "userPrifileTitleName": "{name}'s",
-  "userProfileTitleAfterName": " Profile Page"
+  "userProfileTitleAfterName": " Profile Page",
+  "manageAccountSubtitle": "Manage your account and view your information",
+  "coachInfo": "Información del Coach",
+  "sendEmail": "Send an Email", 
+  "noCoach": "No coach assigned",
+  "noCoachSubtitle": "A coach will be assigned to you soon",
+  "profileOverview": "Profile Overview",
+  "memberSince": "Member Since",
+  "noEspirationDate": "No Expiration Date",
+  "myContactInformation": "My Contact Information",
+
+  "yourMeasurements": "Your Measurements",
+  "comingSoon": "This feature will be coming soon",
+
+   "navigation": {
+    "myWorkouts": "My Workouts",
+    "myNutrition": "My Nutrition"
+  },
+  "bottomNavigation": {
+    "home": "Home",
+    "measurements": "Measurements",
+    "profile": "Profile"
+  }
+
 }
