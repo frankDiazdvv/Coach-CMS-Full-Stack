@@ -208,6 +208,10 @@
   "fetchWorkoutError": "Error al obtener el horario de entrenamiento",
   "noComment": "Sin Comentario",
   "noWorkoutScheduleId": "ID del horario de entrenamiento no encontrado",
-  "updateWorkoutError": "Error al actualizar el horario de entrenamiento"
+  "updateWorkoutError": "Error al actualizar el horario de entrenamiento",
+
+  "userProfileTitleBeforeName": "Perfil de ",
+  "userPrifileTitleName": "{name}",
+  "userProfileTitleAfterName": ""
 
 }

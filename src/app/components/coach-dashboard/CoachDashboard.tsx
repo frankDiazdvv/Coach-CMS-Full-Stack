@@ -915,7 +915,6 @@ const CoachDashboard: React.FC = () => {
             ) : (
               <div className="p-4 space-y-3">
                 {workoutLogs.map((log, index) => (
-                
                   <div
                     key={log._id}
                     className="group relative bg-gradient-to-r bg-[#324d6c] rounded-xl p-3 

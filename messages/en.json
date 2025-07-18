@@ -206,5 +206,9 @@
   "fetchWorkoutError": "Failed to fetch workout schedule",
   "noComment": "No Comment",
   "noWorkoutScheduleId": "No workout schedule ID found",
-  "updateWorkoutError": "Failed to update workout schedule"
+  "updateWorkoutError": "Failed to update workout schedule",
+
+  "userProfileTitleBeforeName": "",
+  "userPrifileTitleName": "{name}'s",
+  "userProfileTitleAfterName": " Profile Page"
 }
