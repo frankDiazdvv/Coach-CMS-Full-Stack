@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import WorkoutLog from '../../../../../../lib/models/workoutLogs';
 import connect from '../../../../../../lib/db';
 import jwt from 'jsonwebtoken';
@@ -6,35 +6,44 @@ import mongoose from 'mongoose';
 
 const JWT_SECRET = process.env.JWT_SECRET || 'your-secret-key';
 
-export async function GET(req: Request, { params }: { params: { id: string } }) {
-  await connect();
+// Helper to extract ID from request URL
+function getIdFromRequest(request: NextRequest): string | null {
+  const segments = request.nextUrl.pathname.split('/');
+  // Assuming URL is like /api/(auth)/logs/[id]
+  return segments[segments.length - 1] || null;
+}
 
-  const token = req.headers.get('authorization')?.split(' ')[1];
-  if (!token) {
-    return NextResponse.json({ message: 'Unauthorized: No token provided' }, { status: 401 });
-  }
-
-  let decoded;
+// GET: Fetch workout logs by client ID (from params or token)
+export async function GET(request: NextRequest) {
   try {
-    decoded = jwt.verify(token, JWT_SECRET) as { id?: string };
-    if (!decoded.id || !mongoose.Types.ObjectId.isValid(decoded.id)) {
-      return NextResponse.json({ message: 'Invalid client ID' }, { status: 400 });
+    await connect();
+
+    const token = request.headers.get('authorization')?.split(' ')[1];
+    if (!token) {
+      return new NextResponse('Unauthorized: No token provided', { status: 401 });
     }
-  } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Unauthorized. Invalid Token"
-    return new NextResponse(message, { status: 401 });
-  }
 
-  const clientId = params.id || decoded.id; // Use params.id if provided, else decoded.id
-  if (!clientId || !mongoose.Types.ObjectId.isValid(clientId)) {
-    return NextResponse.json({ message: 'Invalid client ID' }, { status: 400 });
-  }
+    let decoded;
+    try {
+      decoded = jwt.verify(token, JWT_SECRET) as { id?: string };
+      if (!decoded.id || !mongoose.Types.ObjectId.isValid(decoded.id)) {
+        return new NextResponse('Invalid token: No valid ID', { status: 400 });
+      }
+    } catch (error: unknown) {
+      const message = error instanceof Error ? error.message : 'Unauthorized. Invalid Token';
+      return new NextResponse(message, { status: 401 });
+    }
 
-  try {
+    const clientId = getIdFromRequest(request) || decoded.id;
+    if (!clientId || !mongoose.Types.ObjectId.isValid(clientId)) {
+      return new NextResponse('Invalid client ID', { status: 400 });
+    }
+
     const logs = await WorkoutLog.find({ client: clientId }).sort({ loggedAt: -1 });
     return NextResponse.json(logs, { status: 200 });
+
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error fetching client logs"
+    const message = error instanceof Error ? error.message : 'Error fetching workout logs';
     return new NextResponse(message, { status: 500 });
   }
 }
