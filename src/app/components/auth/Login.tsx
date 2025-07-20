@@ -51,9 +51,6 @@ const Login: React.FC = () => {
       localStorage.setItem('workoutScheduleId', data.workoutScheduleId);
       localStorage.setItem('nutritionScheduleId', data.nutritionScheduleId);
 
-      alert(JSON.stringify(data));
-
-
       // Redirect based on role
       if (data.role === 'coach') {
         router.push(coachDashboard);

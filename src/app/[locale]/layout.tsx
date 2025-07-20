@@ -1,28 +1,30 @@
-// src/app/[locale]/layout.tsx
 import { NextIntlClientProvider, hasLocale } from 'next-intl';
 import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import './globals.css';
 
-export const generateStaticParams = () => {
+// Force static generation of all locales
+export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
-};
+}
 
-type LocaleLayoutProps = {
+type Props = {
   children: React.ReactNode;
   params: { locale: string };
 };
 
-export default function LocaleLayout({ children, params }: LocaleLayoutProps) {
-  // Ensure that the incoming `locale` is valid
-  if (!hasLocale(routing.locales, params.locale)) {
+export default async function LocaleLayout({ children, params }: Props) {
+  const { locale } = params;
+
+  // Optional: fallback guard (redundant if generateStaticParams covers all)
+  if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
 
   return (
-    <html lang={params.locale}>
+    <html lang={locale}>
       <body>
-        <NextIntlClientProvider locale={params.locale}>
+        <NextIntlClientProvider locale={locale}>
           {children}
         </NextIntlClientProvider>
       </body>
