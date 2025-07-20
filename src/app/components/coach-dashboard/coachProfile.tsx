@@ -2,7 +2,7 @@
 
 import { Types } from "mongoose";
 import { Locale, useLocale, useTranslations } from "next-intl";
-import { useState, useEffect, startTransition, FormEvent } from "react";
+import { useState, useEffect, FormEvent } from "react";
 import { ICoach } from "../../../../lib/models/coach";
 import { routing } from "@/i18n/routing";
 import { useRouter } from "@/i18n/navigation";
@@ -12,7 +12,6 @@ const CoachProfile: React.FC = () => {
     const locale: string = useLocale();
     const router = useRouter();
     const pathname = usePathname();
-    const params = useParams();
     const t = useTranslations();    
     const [coachId, setCoachId] = useState<Types.ObjectId | null>(null);
     const [coach, setCoach] = useState<ICoach | null>(null);
@@ -80,9 +79,9 @@ const CoachProfile: React.FC = () => {
             setEmail(coachData.email || '');
             setPhone(coachData.phone || '');
             setPlans(coachData.plans || []);
-        } catch (err: any) {
-            console.error('fetchData error:', err);
-            setError(t('genericError', { message: err.message || t('unknownError') }));
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : t("genericError");
+            setError(message);
         } finally {
             setIsLoading(false);
         }
@@ -111,9 +110,9 @@ const CoachProfile: React.FC = () => {
             setCoach(updatedCoach);
             setError('Profile updated successfully!');
             setTimeout(() => setError(''), 3000);
-        } catch (err: any) {
-            console.error('Update error:', err);
-            setError(t('genericError', { message: err.message || t('unknownError') }));
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : t("genericError");
+            setError(message);
         }
     };
 

@@ -26,7 +26,7 @@ const ClientWorkoutDashboard: React.FC = () => {
     const id = localStorage.getItem('id');
     if (id) {
       const saved = localStorage.getItem(`loggedWorkouts_${id}`);
-      console.log(`logged workout saved - ${saved}`);
+      // console.log(`logged workout saved - ${saved}`);
       setLoggedWorkouts(saved ? JSON.parse(saved) : {});
     }
     setClientName(localStorage.getItem('name') || 'User');
@@ -51,7 +51,7 @@ const ClientWorkoutDashboard: React.FC = () => {
       }
     };
     initializeData();
-  });
+  }, []);
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
@@ -61,7 +61,7 @@ const ClientWorkoutDashboard: React.FC = () => {
       setIsLoading(false);
       return;
     }
-    console.log('Token used:', token); // Debug the token
+    // console.log('Token used:', token); // Debug the token
 
     try {
       const response = await fetch(`/api/workoutSchedule/${workoutScheduleId}`, {
@@ -77,15 +77,15 @@ const ClientWorkoutDashboard: React.FC = () => {
       }
 
       const data = await response.json();
-      console.log('Fetched data:', data);
+      // console.log('Fetched data:', data);
 
       setClientSchedule(data);
       const todayWeekday = today.toLocaleDateString('en-US', { weekday: 'long' });
       setDueToday(!!data.schedule.find((day: { weekDay: string; workouts: string | any[]; }) => day.weekDay === todayWeekday && day.workouts.length > 0));
 
-    } catch (error) {
-      console.error('Error fetching workout schedule:', error);
-      setError('Failed to fetch workout schedule');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t("genericError");
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -93,7 +93,7 @@ const ClientWorkoutDashboard: React.FC = () => {
 
   const today = new Date() // Set to a specific date for testing
   today.setHours(0, 0, 0, 0);
-  console.log('Today:', today);
+  // console.log('Today:', today);
 
   const handleDayClick = (day: IDailyWorkout) => {
     setSelectedDay(day);
@@ -123,7 +123,7 @@ const ClientWorkoutDashboard: React.FC = () => {
           return;
         }
 
-        console.log('Sending log request:', { client: clientId, workoutSchedule: workoutScheduleId, day: day.weekDay, comment });
+        // console.log('Sending log request:', { client: clientId, workoutSchedule: workoutScheduleId, day: day.weekDay, comment });
         const response = await fetch('/api/workoutLog', {
           method: 'POST',
           headers: {
@@ -340,7 +340,7 @@ const ClientWorkoutDashboard: React.FC = () => {
         {fullSchedule && (
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('weeklySchedule')}</h3>
-            {sortedSchedule?.map((daySchedule) => (
+            {sortedSchedule?.map((daySchedule, dayIndex) => (
               <div key={daySchedule.weekDay} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                 <div className="bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-4">
                   <h4 className="text-xl font-bold text-white">{daySchedule.weekDay}</h4>

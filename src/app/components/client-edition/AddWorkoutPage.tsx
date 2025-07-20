@@ -1,11 +1,10 @@
 'use client';
 
-import { useEffect, useState, useTransition } from 'react';
+import { useEffect, useState } from 'react';
 import { useRouter } from 'next/navigation';
 import AddWorkoutModal from './AddWorkoutModal';
 import WorkoutCard from './WorkoutCard';
 import ViewExerciseDetails from './ViewExerciseDetailsModal';
-import WorkoutSchedule from '../../../../lib/models/workouts';
 import { useTranslations } from 'next-intl';
 
 interface IWorkout {
@@ -90,8 +89,9 @@ const AddWorkoutPage: React.FC = () => {
 
       const data = await response.json();
       setSchedule(data.schedule || []);
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching workout schedule');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Error fetching workout schedule";
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -150,8 +150,9 @@ const AddWorkoutPage: React.FC = () => {
 
         localStorage.removeItem('workoutScheduleId');
         router.push(`/coach/all-clients`);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : t("genericError");
+        setError(message);
       } finally {
         setLoading(false);
       }

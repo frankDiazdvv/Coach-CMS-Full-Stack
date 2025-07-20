@@ -120,8 +120,9 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
 
       onClientAdded();
       onClose();
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t("genericError");
+      setError(message);
     } finally {
       setIsLoading(false);
     }

@@ -1,5 +1,4 @@
 import { useTranslations } from "use-intl";
-import { LiaComment } from "react-icons/lia";
 import { FaRegCommentDots } from "react-icons/fa6";
 
 interface WorkoutCardProps{
@@ -12,7 +11,7 @@ interface WorkoutCardProps{
     onClick: () => void;
 }
 
-const WorkoutCard: React.FC<WorkoutCardProps> = ({ name, sets, reps, targetWeight, comment, imageUrl, onClick }) => {
+const WorkoutCard: React.FC<WorkoutCardProps> = ({ name, sets, reps, targetWeight, comment, onClick }) => {
     const t = useTranslations();
 
 

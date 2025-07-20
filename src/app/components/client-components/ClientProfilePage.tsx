@@ -22,7 +22,7 @@ const ClientProfilePage: React.FC = () => {
     const WhatsAppLogo = '/WhatsAppLogo_White.svg';
 
 
-    const fetchData = useCallback(async () => {
+    const fetchData = async () => {
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id');
         if (!token || !id) {
@@ -55,7 +55,7 @@ const ClientProfilePage: React.FC = () => {
         } finally {
             setIsLoading(false);
         }
-    }, [t]);
+    };
 
     
     useEffect(() => {
@@ -85,7 +85,7 @@ const ClientProfilePage: React.FC = () => {
             }
         };
         initializeData();
-    }, [userData?.coach, fetchData]);
+    }, [userData?.coach]);
 
 
     const fetchCoachData = async () => {

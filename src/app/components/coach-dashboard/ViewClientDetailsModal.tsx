@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { useTranslations } from 'next-intl';
 import { IClient } from '../../../../lib/models/clients';
 import { ICoach } from '../../../../lib/models/coach';
-import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { Types } from 'mongoose';
 
@@ -90,8 +89,9 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
       }
       onClose();
       if (onPageRefresh) onPageRefresh();
-    } catch (err: any) {
-      setError(err.message);
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t("genericError");
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -119,8 +119,9 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
         }
         onClose();
         if (onPageRefresh) onPageRefresh();
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : t("genericError");
+        setError(message);
       } finally {
         setIsLoading(false);
       }

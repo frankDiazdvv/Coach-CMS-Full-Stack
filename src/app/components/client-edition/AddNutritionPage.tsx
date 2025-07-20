@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 import { useRouter } from 'next/navigation';
 import AddMealModal from './AddMealModal';
 import ViewMealDetails from './ViewMealDetailsModal';
@@ -44,7 +44,6 @@ const AddNutritionPage: React.FC = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false); // Mode flag
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
-  const [notes, setNotes] = useState<string>(''); // Maintain notes state
 
 
   const daysOfWeek = [
@@ -66,7 +65,6 @@ const AddNutritionPage: React.FC = () => {
 
     setFirstName(clientFirstName || '');
     setLastName(clientLastName || '');
-    if (storedNotes) setNotes(storedNotes);
 
     if (nutritionScheduleId) {
       setIsEditing(true);
@@ -109,8 +107,10 @@ const AddNutritionPage: React.FC = () => {
         setError('Invalid schedule data from API');
         setSchedule([]);
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred while fetching nutrition schedule');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t("genericError");
+      console.log(error);
+      setError(message);
     } finally {
       setLoading(false);
     }
@@ -156,12 +156,14 @@ const AddNutritionPage: React.FC = () => {
 
   const daysWithMeals = schedule.filter(day => day.items.length > 0).length || 1;
 
-  const weeklyAverages = {
-    calories: Math.round(totalMacros.calories / daysWithMeals),
-    protein: Math.round(totalMacros.protein / daysWithMeals),
-    carbs: Math.round(totalMacros.carbs / daysWithMeals),
-    fats: Math.round(totalMacros.fats / daysWithMeals),
-  };
+  const weeklyAverages = useMemo(() => {
+    return{
+      calories: Math.round(totalMacros.calories / daysWithMeals),
+      protein: Math.round(totalMacros.protein / daysWithMeals),
+      carbs: Math.round(totalMacros.carbs / daysWithMeals),
+      fats: Math.round(totalMacros.fats / daysWithMeals),
+    };
+  }, [totalMacros, daysWithMeals]);
 
   useEffect(() => {
     const clientId = localStorage.getItem('id');
@@ -254,8 +256,9 @@ const AddNutritionPage: React.FC = () => {
 
         localStorage.removeItem('nutritionScheduleId');
         router.push(`/coach/all-clients`);
-      } catch (err: any) {
-        setError(err.message);
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : t("genericError");
+        setError(message);
       } finally {
         setLoading(false);
       }
@@ -288,9 +291,6 @@ const AddNutritionPage: React.FC = () => {
       day: 'numeric'
     });
   };
-
-  let counter = 0;
-
   
  return (
     <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-4">

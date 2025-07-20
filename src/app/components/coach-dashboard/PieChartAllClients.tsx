@@ -129,7 +129,6 @@ const ClientPlansPieChart: React.FC<{ data: ClientPlanSummary[] }> = ({ data }) 
 
 const PieChartAllClients = ({ data, coachClients }: Props) => {
   const t = useTranslations();
-  const totalClients = coachClients.length; // Total includes all clients, assigned or not
 
   return (
     <div className="w-full lg:w-1/3">

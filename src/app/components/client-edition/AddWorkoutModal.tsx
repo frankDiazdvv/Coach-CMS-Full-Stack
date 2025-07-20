@@ -42,17 +42,18 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
             console.log(data.results[0]);
 
             const workoutList = data.results
-            .map((w: any) => {
-                const englishTranslation = w.translations.find((t: any) => t.language === 2);
+            .map((w: { translations: any[]; id: any; }) => {
+                const englishTranslation = w.translations.find((t: { language: number; }) => t.language === 2);
                     console.log('Workout:', w.id, 'Translation:', englishTranslation?.name);
                 return englishTranslation ? { id: w.id, name: englishTranslation.name } : null;
-            }).filter((w: any) => w && w.name && w.name.trim() !== '');
+            }).filter((w: { name: string; }) => w && w.name && w.name.trim() !== '');
 
             setWorkouts(workoutList);
             setFilteredWorkouts(workoutList);
 
-        } catch (err: any) {
-          setError(err.message || 'Failed to load workouts');
+        } catch (err: unknown) {
+          const message = err instanceof Error ? err.message : "Failed to Load Workouts";
+          setError(message);
         } finally {
           setIsLoading(false);
         }

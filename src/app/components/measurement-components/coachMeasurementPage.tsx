@@ -66,9 +66,9 @@ const CoachMeasurementPage: React.FC = () => {
             );
             setCoachClients(coachClients);
             console.log('Coach clients:', coachClients);
-        }  catch (err: any) {
-            console.error('fetchData error:', err);
-            setError(err.message || 'An error occurred');
+        }  catch (err: unknown) {
+            const message = err instanceof Error ? err.message : "An error occurred";
+            setError(message);
         } finally {
             setIsLoading(false);
         }

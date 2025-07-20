@@ -242,9 +242,9 @@ const CoachDashboard: React.FC = () => {
       .filter((d): d is DueSoon => d !== null);
       setExpiredPlans(expiredMemberships);
 
-    } catch (err: any) {
-      console.error('fetchData error:', err);
-      setError(t('genericError', { message: err.message || t('unknownError') }));
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t("genericError");
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -399,7 +399,7 @@ const CoachDashboard: React.FC = () => {
                         </td>
                       </tr>
                     ) : (
-                      clientsDueToday.map((client, index) => (
+                      clientsDueToday.map((client) => (
                         <tr key={client._id?.toString()} className="hover:bg-slate-50 transition-colors">
                           <td className="px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
@@ -914,7 +914,7 @@ const CoachDashboard: React.FC = () => {
               </div>
             ) : (
               <div className="p-4 space-y-3">
-                {workoutLogs.map((log, index) => (
+                {workoutLogs.map((log) => (
                   <div
                     key={log._id}
                     className="group relative bg-gradient-to-r bg-[#324d6c] rounded-xl p-3 
@@ -941,7 +941,7 @@ const CoachDashboard: React.FC = () => {
                         {log.comment && (
                           <div className="bg-white rounded-lg p-1 mb-1">
                             <p className="text-xs text-gray-600 italic">
-                              "{log.comment}"
+                              &quot;{log.comment}&quot;
                             </p>
                           </div>
                         )}

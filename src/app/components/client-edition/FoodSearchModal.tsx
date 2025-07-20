@@ -41,19 +41,20 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
       if (!response.ok) throw new Error('Failed to fetch foods');
       const data = await response.json();
       setFoods(data.foods || []);
-    } catch (err: any) {
-      setError(err.message || 'Failed to load foods');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to Load Foods";
+      setError(message);
     } finally {
       setIsLoading(false);
     }
   };
 
-  const calculateMacros = (food: any) => {
+  const calculateMacros = (food: { foodNutrients: any; }) => {
     const nutrients = food.foodNutrients;
-    const calories = nutrients.find((n: any) => n.nutrientId === 1008 || n.nutrientId === 2047)?.value || 0;
-    const protein = nutrients.find((n: any) => n.nutrientName === 'Protein')?.value || 0;
-    const carbs = nutrients.find((n: any) => n.nutrientName === 'Carbohydrate, by difference')?.value || 0;
-    const fats = nutrients.find((n: any) => n.nutrientName === 'Total lipid (fat)')?.value || 0;    
+    const calories = nutrients.find((n: { nutrientId: number; }) => n.nutrientId === 1008 || n.nutrientId === 2047)?.value || 0;
+    const protein = nutrients.find((n: { nutrientName: string; }) => n.nutrientName === 'Protein')?.value || 0;
+    const carbs = nutrients.find((n: { nutrientName: string; }) => n.nutrientName === 'Carbohydrate, by difference')?.value || 0;
+    const fats = nutrients.find((n: { nutrientName: string; }) => n.nutrientName === 'Total lipid (fat)')?.value || 0;    
     return { calories, protein, carbs, fats };
   };
 
