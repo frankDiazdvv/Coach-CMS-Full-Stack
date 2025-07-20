@@ -7,13 +7,18 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import WorkoutLog from '../../../../../../lib/models/workoutLogs';
 
-// GET request handler
-export async function GET(request: NextRequest, context: { params: { id: string } }) {
+function getIdFromRequest(request: NextRequest): string | null {
+  const segments = request.nextUrl.pathname.split('/');
+  return segments[segments.length - 1] || null;
+}
+
+// GET request
+export async function GET(request: NextRequest) {
   try {
     await connect();
-    const { id } = context.params;
+    const id = getIdFromRequest(request);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
 
@@ -32,18 +37,17 @@ export async function GET(request: NextRequest, context: { params: { id: string 
   }
 }
 
-// PATCH request handler
-export async function PATCH(request: NextRequest, context: { params: { id: string } }) {
+// PATCH request
+export async function PATCH(request: NextRequest) {
   try {
     await connect();
-    const { id } = context.params;
+    const id = getIdFromRequest(request);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
 
     const client = await Client.findById(id).populate('coach');
-
     if (!client) {
       return new NextResponse('Client not found', { status: 404 });
     }
@@ -108,13 +112,13 @@ export async function PATCH(request: NextRequest, context: { params: { id: strin
   }
 }
 
-// DELETE request handler
-export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
+// DELETE request
+export async function DELETE(request: NextRequest) {
   try {
     await connect();
-    const { id } = context.params;
+    const id = getIdFromRequest(request);
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
 
@@ -135,7 +139,7 @@ export async function DELETE(request: NextRequest, context: { params: { id: stri
     await WorkoutLog.deleteMany({ client: id });
 
     return new NextResponse(JSON.stringify({ message: 'Client deleted successfully' }), {
-      status: 200
+      status: 200,
     });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : 'Error deleting client';
