@@ -144,16 +144,16 @@ const Signup: React.FC = () => {
                 <div className="mt-4 text-center text-sm text-gray-600">
                     <p>
                         Already have an account?{' '}
-                        <Link href="/client-side/login" className="text-blue-600 hover:underline">
-                        Sign In
+                        <Link href="/login" className="text-blue-600 hover:underline">
+                            Sign In
                         </Link>
                     </p>
-                    <p>
+                    {/* <p>
                         Forgot your password?{' '}
                         <Link href="/forgot-password" className="text-blue-600 hover:underline">
-                        Reset it
+                         Reset it
                         </Link>
-                    </p>
+                    </p> */}
                 </div>
             </div>
         </div>
