@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connect from '../../../../../../lib/db';
 import Client, { IClient } from '../../../../../../lib/models/clients';
 import WorkoutSchedule from '../../../../../../lib/models/workouts';
@@ -7,50 +7,58 @@ import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import WorkoutLog from '../../../../../../lib/models/workoutLogs';
 
-export const GET = async (request: Request, { params }: { params: { id: string } }) => {
+// GET request handler
+export async function GET(request: NextRequest, context: { params: { id: string } }) {
   try {
     await connect();
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+    const { id } = context.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
-    const client = await Client.findById(params.id)
+
+    const client = await Client.findById(id)
       .populate('workoutSchedule')
       .populate('nutritionSchedule');
+
     if (!client) {
       return new NextResponse('Client not found', { status: 404 });
     }
+
     return new NextResponse(JSON.stringify(client), { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error fetching client"
+    const message = error instanceof Error ? error.message : 'Error fetching client';
     return new NextResponse(message, { status: 500 });
   }
-};
+}
 
-export const PATCH = async (request: Request, { params }: { params: { id: string } }) => {
+// PATCH request handler
+export async function PATCH(request: NextRequest, context: { params: { id: string } }) {
   try {
     await connect();
-    console.log('PATCH request for client ID:', params.id); // Debug log
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+    const { id } = context.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
-    const client = await Client.findById(params.id).populate('coach');
+
+    const client = await Client.findById(id).populate('coach');
+
     if (!client) {
       return new NextResponse('Client not found', { status: 404 });
     }
-    const body = await request.json() as Partial<IClient> & {
+
+    const body = (await request.json()) as Partial<IClient> & {
       workoutSchedule?: { schedule: { weekDay: string; workouts: any[] }[] };
       nutritionSchedule?: { schedule: { weekDay: string; items: any[] }[] };
     };
 
-   // Hash password if provided
     if (body.password && body.password.trim() !== '') {
       body.password = await bcrypt.hash(body.password, 10);
     } else {
-      // Retain existing password to satisfy required constraint
       body.password = client.password;
     }
 
-    // Update or create WorkoutSchedule
     if (body.workoutSchedule) {
       if (client.workoutSchedule) {
         await WorkoutSchedule.findByIdAndUpdate(client.workoutSchedule, {
@@ -66,7 +74,6 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       }
     }
 
-    // Update or create NutritionSchedule
     if (body.nutritionSchedule) {
       if (client.nutritionSchedule) {
         await NutritionSchedule.findByIdAndUpdate(client.nutritionSchedule, {
@@ -82,46 +89,56 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       }
     }
 
-    // Update client with new data
     const updatedClient = await Client.findByIdAndUpdate(
-      params.id,
+      id,
       { $set: body },
       { new: true, runValidators: true }
-    ).populate('workoutSchedule').populate('nutritionSchedule');
+    )
+      .populate('workoutSchedule')
+      .populate('nutritionSchedule');
 
     if (!updatedClient) {
       return new NextResponse('Failed to update client', { status: 500 });
     }
-    
+
     return new NextResponse(JSON.stringify(updatedClient), { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error updating client"
+    const message = error instanceof Error ? error.message : 'Error updating client';
     return new NextResponse(message, { status: 500 });
   }
-};
+}
 
-export const DELETE = async (request: Request, { params }: { params: { id: string } }) => {
+// DELETE request handler
+export async function DELETE(request: NextRequest, context: { params: { id: string } }) {
   try {
     await connect();
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+    const { id } = context.params;
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid client ID', { status: 400 });
     }
-    const client = await Client.findByIdAndDelete(params.id);
+
+    const client = await Client.findByIdAndDelete(id);
+
     if (!client) {
       return new NextResponse('Client not found', { status: 404 });
     }
+
     if (client.workoutSchedule) {
       await WorkoutSchedule.findByIdAndDelete(client.workoutSchedule._id);
     }
+
     if (client.nutritionSchedule) {
       await NutritionSchedule.findByIdAndDelete(client.nutritionSchedule._id);
     }
 
-    // Delete associated workout logs
-    await WorkoutLog.deleteMany({ client: params.id });
-    return new NextResponse(JSON.stringify({ message: 'Client deleted successfully' }), { status: 200 });
+    await WorkoutLog.deleteMany({ client: id });
+
+    return new NextResponse(JSON.stringify({ message: 'Client deleted successfully' }), {
+      status: 200
+    });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error deleting client"
+    const message = error instanceof Error ? error.message : 'Error deleting client';
     return new NextResponse(message, { status: 500 });
   }
-};
+}
