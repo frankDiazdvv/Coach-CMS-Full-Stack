@@ -135,12 +135,18 @@ const CoachProfile: React.FC = () => {
 
     function onSelectChange(event: React.ChangeEvent<HTMLSelectElement>) {
         const nextLocale = event.target.value as Locale;
-
-        // Manually set the cookie
-        document.cookie = `USER_LOCALE=${nextLocale}; path=/; max-age=31536000; samesite=lax` // 1 year
-
         const pathWithoutLocale = pathname.replace(`/${locale}`, '') || '/';
+
+        // Use router.replace with locale, and force a reload if needed
         router.replace(pathWithoutLocale, { locale: nextLocale });
+
+        // Optional: Force a full page reload to ensure middleware re-runs
+        // This is a fallback if client-side navigation fails in deployment
+        setTimeout(() => {
+            if (document.documentElement.lang !== nextLocale) {
+                window.location.href = `/${nextLocale}${pathWithoutLocale}`;
+            }
+        }, 100); // Small delay to allow router.replace to attempt first
     }
 
     const getLanguageFlag = (lang: string) => {

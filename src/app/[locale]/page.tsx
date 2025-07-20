@@ -23,9 +23,12 @@ export default function HomePage() {
         <p className="text-lg max-w-2xl mb-10 text-gray-600">
           SimpleFit helps new fitness coaches manage clients, plan workouts and nutrition, and stay on top of client check-ins — all in one place.
         </p>
-        <button className="mt-4 cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow-md transition">
-          Get Started
-        </button>
+        <Link href="/login">
+          <button className="mt-4 cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow-md transition">
+            Get Started
+          </button>
+        </Link>
+
       </main>
 
       {/* Features */}
