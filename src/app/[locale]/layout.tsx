@@ -3,20 +3,18 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import './globals.css';
 
-// Force static generation of all locales
-export function generateStaticParams() {
+export async function generateStaticParams(): Promise<Array<{ locale: string }>> {
   return routing.locales.map((locale) => ({ locale }));
 }
 
-type Props = {
+type LayoutProps = {
   children: React.ReactNode;
   params: { locale: string };
 };
 
-export default async function LocaleLayout({ children, params }: Props) {
+export default async function LocaleLayout({ children, params }: LayoutProps) {
   const { locale } = params;
 
-  // Optional: fallback guard (redundant if generateStaticParams covers all)
   if (!hasLocale(routing.locales, locale)) {
     notFound();
   }
