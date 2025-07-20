@@ -6,7 +6,7 @@ import { useState, useEffect, FormEvent } from "react";
 import { ICoach } from "../../../../lib/models/coach";
 import { routing } from "@/i18n/routing";
 import { useRouter } from "@/i18n/navigation";
-import { useParams, usePathname } from "next/navigation";
+import { usePathname } from "next/navigation";
 
 const CoachProfile: React.FC = () => {
     const locale: string = useLocale();
