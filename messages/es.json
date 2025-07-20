@@ -169,7 +169,7 @@
   "addCommentOptional": "Agregar un comentario (opcional)",
   "markComplete": "Marcar Completado",
   "workoutAlreadyLogged": "El entrenamiento ya fue registrado para hoy.",
-  "workoutLoggedSuccessfully": "¡Entrenamiento del {{day}} registrado exitosamente!",
+  "workoutLoggedSuccessfully": "¡Entrenamiento registrado exitosamente!",
   "workoutLogFailed": "Error al registrar el entrenamiento. Inténtalo de nuevo.",
   "restDay": "Día de Descanso",
   "enjoyYourRestDay": "Dizfruta tu bien merecido día de descanso!",

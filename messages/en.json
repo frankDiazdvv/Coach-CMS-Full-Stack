@@ -172,7 +172,7 @@
   "addCommentOptional": "Share your thoughts about this workout...",
   "markComplete": "Mark Complete",
   "workoutAlreadyLogged": "Workout already logged for today.",
-  "workoutLoggedSuccessfully": "Workout for {{day}} logged successfully!",
+  "workoutLoggedSuccessfully": "Workout logged successfully!",
   "workoutLogFailed": "Failed to log workout. Try again.",
 
 

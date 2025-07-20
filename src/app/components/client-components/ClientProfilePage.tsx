@@ -226,7 +226,7 @@ const ClientProfilePage: React.FC = () => {
                                                     <div className="flex items-center">
                                                         <Image src={WhatsAppLogo} alt="WhatsApp Logo" width={25} height={25}/>
                                                         <div>
-                                                            <h3 className="font-bold text-white text-wrap">{t("messageOnWhatsApp")}</h3>
+                                                            <h3 className="font-bold text-white text-wrap pl-2">{t("messageOnWhatsApp")}</h3>
                                                         </div>
                                                     </div>
                                                 </Link>

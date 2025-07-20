@@ -151,7 +151,7 @@ const ClientWorkoutDashboard: React.FC = () => {
         setLoggedWorkouts(updated);
         console.log('Updated loggedWorkouts:', updated);
         localStorage.setItem(`loggedWorkouts_${clientId}`, JSON.stringify(updated));
-        setMessage(t('workoutLoggedSuccessfully', { day: day.weekDay }));
+        setMessage(t('workoutLoggedSuccessfully'));
         setTimeout(() => setMessage(null), 15000);
       } catch (error) {
         console.error('Error logging workout:', error);

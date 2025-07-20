@@ -4,14 +4,21 @@ import Coach, { ICoach } from '../../../../../../lib/models/coach';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
+// Helper to get ID from request URL
+function getIdFromRequest(request: NextRequest): string | null {
+  const segments = request.nextUrl.pathname.split('/');
+  // Assuming URL is like /api/(auth)/coaches/[id]
+  return segments[segments.length - 1] || null;
+}
+
 // GET: Fetch a coach by ID
-export const GET = async (_req: NextRequest, context: { params: { id: string } }) => {
-  const { id } = context.params;
+export async function GET(request: NextRequest) {
+  const id = getIdFromRequest(request);
 
   try {
     await connect();
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
 
@@ -25,16 +32,16 @@ export const GET = async (_req: NextRequest, context: { params: { id: string } }
     const message = error instanceof Error ? error.message : 'Error fetching coach';
     return new NextResponse(message, { status: 500 });
   }
-};
+}
 
-// PATCH: Update any coach data
-export const PATCH = async (request: NextRequest, context: { params: { id: string } }) => {
-  const { id } = context.params;
+// PATCH: Update coach by ID
+export async function PATCH(request: NextRequest) {
+  const id = getIdFromRequest(request);
 
   try {
     await connect();
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
 
@@ -43,7 +50,7 @@ export const PATCH = async (request: NextRequest, context: { params: { id: strin
       return new NextResponse('Coach not found', { status: 404 });
     }
 
-    const body = await request.json() as Partial<ICoach> & { plansOperation?: 'append' | 'remove' };
+    const body = (await request.json()) as Partial<ICoach> & { plansOperation?: 'append' | 'remove' };
 
     if (body.password) {
       body.password = await bcrypt.hash(body.password, 10);
@@ -73,16 +80,16 @@ export const PATCH = async (request: NextRequest, context: { params: { id: strin
     const message = error instanceof Error ? error.message : 'Error updating coach';
     return new NextResponse(message, { status: 500 });
   }
-};
+}
 
-// DELETE: Delete a coach account
-export const DELETE = async (_req: NextRequest, context: { params: { id: string } }) => {
-  const { id } = context.params;
+// DELETE: Delete coach by ID
+export async function DELETE(request: NextRequest) {
+  const id = getIdFromRequest(request);
 
   try {
     await connect();
 
-    if (!mongoose.Types.ObjectId.isValid(id)) {
+    if (!id || !mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
 
@@ -96,4 +103,4 @@ export const DELETE = async (_req: NextRequest, context: { params: { id: string 
     const message = error instanceof Error ? error.message : 'Error deleting coach';
     return new NextResponse(message, { status: 500 });
   }
-};
+}
