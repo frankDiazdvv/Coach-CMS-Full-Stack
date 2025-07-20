@@ -8,15 +8,17 @@ import bcrypt from 'bcrypt';
 
 // GET: Fetch a coach by ID
 export const GET = async (request: Request, { params }: { params: { id: string } }) => {
+  const { id } = params;
+
   try {
     await connect();
     
     // Checks for ObjectId in url
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
 
-    const coach = await Coach.findById(params.id);
+    const coach = await Coach.findById(id);
     if (!coach) {
       return new NextResponse('Coach not found', { status: 404 });
     }

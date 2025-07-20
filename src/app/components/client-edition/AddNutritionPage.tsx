@@ -4,6 +4,8 @@ import { useState, useEffect } from 'react';
 import { useRouter } from 'next/navigation';
 import AddMealModal from './AddMealModal';
 import ViewMealDetails from './ViewMealDetailsModal';
+import { useTranslations } from 'next-intl';
+import { FaRegCommentDots } from 'react-icons/fa';
 
 interface INutritionFood {
   name: string;
@@ -27,6 +29,8 @@ interface INutritionDay {
 }
 
 const AddNutritionPage: React.FC = () => {
+  const t = useTranslations();
+  const tWeekday = useTranslations('weekdays');
   const router = useRouter();
   const [schedule, setSchedule] = useState<INutritionDay[]>([]);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
@@ -275,97 +279,165 @@ const AddNutritionPage: React.FC = () => {
     }
   };
 
-  return (
-    <div className="fixed left-20 right-0 min-h-screen bg-gray-100 p-4">
-      {/* Macro Summary */}
-      <div className="mb-6 bg-white rounded-lg shadow-lg p-6">
-        <div className='flex justify-between items-center mb-8'>
-          <h2 className="text-2xl font-bold text-gray-800">
-           {isEditing ? `Weekly Macro Average - ${firstName} ${lastName}` : `Macro Summary - Weekly Average`}
-          </h2>
-          {/* Save or Cancel Plan Button */}
-          <div className="flex justify-end gap-3">
+   const getCurrentDate = () => {
+    const currentDate = new Date();
+    return currentDate.toLocaleString(t("locale"), {
+      weekday: 'long',
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric'
+    });
+  };
+
+  let counter = 0;
+
+  
+ return (
+    <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-4">
+      {/* Header */}
+      <div className="mb-8">
+        <div className="flex items-center justify-between">
+          <div className='flex gap-2'>
+            <h1 className="text-3xl font-bold text-gray-800 mb-2">
+              {isEditing ? t('editNutritionPlan') : t('buildNutritionPlan')}
+            </h1>
+            <p className="flex items-center text-sm text-gray-500"> - {getCurrentDate()}</p>
+          </div>
+          <div className="flex items-center gap-4">
             <button
               onClick={handleCancelCreation}
-              className="rounded-md bg-gray-400 px-4 py-2 text-white hover:bg-gray-500 cursor-pointer"
               disabled={loading}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-medium rounded-xl shadow-md hover:from-gray-600 hover:to-gray-700 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Cancel
+              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+              </svg>
+              {t('cancel')}
             </button>
             <button
               onClick={handleConfirmNutrition}
-              className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 cursor-pointer"
               disabled={loading}
+              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              {loading ? 'Saving...' : 'Save Plan and Exit'}
+              {loading ? (
+                <>
+                  <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                  {t('saving')}
+                </>
+              ) : (
+                <>
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M5 13l4 4L19 7" />
+                  </svg>
+                  {isEditing ? t('saveChanges') : t('savePlan')}
+                </>
+              )}
             </button>
           </div>
         </div>
-        
-        
-        <div className="grid grid-cols-4">
-          <div>
-            <p className="text-sm font-medium text-gray-700">Calories</p>
-            <p className="text-lg">{weeklyAverages.calories} kcal</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-700">Protein</p>
-            <p className="text-lg">{weeklyAverages.protein} g</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-700">Carbs</p>
-            <p className="text-lg">{weeklyAverages.carbs} g</p>
-          </div>
-          <div>
-            <p className="text-sm font-medium text-gray-700">Fats</p>
-            <p className="text-lg">{weeklyAverages.fats} g</p>
+        {/* Weekly Macros & Client Name */}
+        <div className="flex flex-row gap-2">
+          {isEditing   && firstName && lastName && (
+            <span className="inline-flex text-md items-center px-3 h-12 rounded-full text-sm font-medium bg-blue-100 text-blue-800">
+              <span className='font-semibold pr-1'>{t('client')}:</span> {firstName} {lastName}
+            </span>
+          )}
+          {/* Weekly Average Numbers */}
+          <div className="inline-flex gap-2 items-center px-4 h-12 rounded-full text-sm font-medium bg-green-50 text-green-800 border border-green-200">
+            <div className='flex self-center'>
+              <h3 className='text-md font-semibold'>{t("weeklyMacroAverage")}:</h3>
+            </div>
+            <div className="flex flex-row gap-4">
+              <div>
+                <p className="text-sm font-semibold text-orange-600">{t("calories")}</p>
+                <p className="text-xs">{weeklyAverages.calories} kcal</p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-blue-600">{t("protein")}</p>
+                <p className="text-xs">{weeklyAverages.protein} g</p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-green-600">Carbs</p>
+                <p className="text-xs">{weeklyAverages.carbs} g</p>
+              </div>
+              <div>
+                <p className="text-sm font-semibold text-purple-600">{t("fats")}</p>
+                <p className="text-xs">{weeklyAverages.fats} g</p>
+              </div>
+            </div>
           </div>
         </div>
       </div>
 
+      
+
       {/* Meal Plan Editor */}
-      <div className="mb-6 bg-white rounded-lg shadow-lg p-4">
-        <div className="grid grid-cols-7">
+      <div className="fixed bottom-4 left-4 right-4 top-32 bg-white rounded-lg shadow-lg pt-2">
+        <div className="grid grid-cols-7 h-full p-0 overflow-y-auto">
           {daysOfWeek.map((day) => {
             const dayMacros = calculateMacros(
               schedule.find((d) => d.weekDay === day)?.items || []
             );
             return (
-              <div key={day} className="flex flex-col items-center">
-                <h3 className="text-base font-semibold text-gray-700 mb-2">{day}</h3>
-                <div className="gap-3 text-xs mb-2">
-                  <p><b>C:</b> {dayMacros.calories} kcal</p>
-                  <p><b>P:</b> {dayMacros.protein}g</p>
-                  <p><b>Ca:</b> {dayMacros.carbs}g</p>
-                  <p><b>F:</b> {dayMacros.fats}g</p>
+              <div key={day} className="flex flex-col items-center h-full">
+                <h3 className="text-base font-semibold text-gray-700 mb-2">{tWeekday(day)}</h3>
+                <div className="flex items-center gap-2 text-xs bg-white border border-gray-200 rounded-lg px-3 py-2 shadow-sm mb-2">
+                  <span className="text-orange-600 font-semibold">{dayMacros.calories}kcal</span>
+                  <div className="w-px h-4 bg-gray-200"></div>
+                  <span className="text-blue-600 font-semibold">{dayMacros.protein}g</span>
+                  <div className="w-px h-4 bg-gray-200"></div>
+                  <span className="text-green-600 font-semibold">{dayMacros.carbs}g</span>
+                  <div className="w-px h-4 bg-gray-200"></div>
+                  <span className="text-purple-600 font-semibold">{dayMacros.fats}g</span>
                 </div>
-                <div className="flex flex-col gap-1 w-full h-85 border-x border-gray-300 items-center justify-center">
+                <div className="flex-1 flex-col p-1 gap-1 w-full border-x border-slate-200 justify-center">
                   <button
                     onClick={() => handleAddMeal(day)}
-                    className="text-2xl text-blue-500 hover:text-blue-700 mb-2"
                     disabled={loading}
+                    className="w-full mb-4 p-2 cursor-pointer border-2 border-dashed border-green-300 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all duration-200 group"
                   >
-                    +
+                    <div className="flex flex-col items-center gap-2">
+                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors">
+                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                        </svg>
+                      </div>
+                      <span className="text-sm font-medium text-green-600 group-hover:text-green-700">
+                        {t('addMeal')}
+                      </span>
+                    </div>
                   </button>
+
+                  {/* Display meals for the day */}
                   {loading ? (
-                    <p className="text-gray-600">Loading Information...</p>
+                    <div className="flex items-center justify-center py-8">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
+                    </div>
                   ) : Array.isArray(schedule) && schedule.length > 0 && schedule.find((d) => d.weekDay === day)
                     ?.items.map((meal, index) => (
                       <div
                         key={index}
                         onClick={() => handleOpenDetails(day, index, meal)}
-                        className="w-11/12 p-2 border rounded bg-gray-100 hover:brightness-110 cursor-pointer"
+                        className="w-full p-3 mb-2 border border-gray-200 rounded-xl bg-white hover:bg-gray-50 hover:shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105"
                       >
-                        <h4 className="text-sm font-semibold">{meal.mealName}</h4>
-                        {meal.foods?.map((food, foodIndex) => (
-                          <p key={foodIndex} className="text-xs">
-                            {food.quantity}({food.unit}) - {food.name}
+                        <div className="flex items-center justify-between mb-2">
+                          <h4 className="text-sm font-semibold text-gray-800 truncate">{meal.mealName}</h4>
+                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                          </svg>
+                        </div>
+                        <div className="flex flex-row justify-between">
+                          <p  className="text-xs text-gray-600 truncate">
+                            {t("ingredientsInMeal", {count: meal.foods.length})}
                           </p>
-                        ))}
-                        {meal.comment && <p className="text-xs text-red-800">Contains Comment</p>}
+                          {meal.comment && (
+                            <p className="text-xs self-center text-amber-600 font-medium"><FaRegCommentDots/></p>
+                          )}
+                        </div>
+                        
                       </div>
                     ))}
-                </div>
+                </div>  
               </div>
             );
           })}

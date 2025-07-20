@@ -237,6 +237,22 @@
     "home": "Inicio",
     "measurements": "Medidas",
     "profile": "Perfil"
-  }
+  },
+
+  "buildNutritionPlan": "Construir Plan Nutricional",
+  "savePlan": "Guardar Plan",
+  "addMeal": "Añadir Comida",
+  "hasComment": "Contiene Comentario",
+  "ingredientsInMeal": "{count, plural, =0 {Nada Aquí} one {{count} ingrediente} other {{count} ingredientes}}",
+
+  "detailsFor": "Detalles de",
+  "mealName": "Nombre de Comida",
+  "foods": "Ingredientes",
+  "addYourOwn": "Añade el Tuyo",
+  "searchFoods": "Buscar Ingredientes",
+  "totalNutrition": "Nutrición Total",
+  "noFoodAdded": "No Comidas Añadidas",
+  "delete": "Borrar",
+  "accept": "Aceptar"
 
 }

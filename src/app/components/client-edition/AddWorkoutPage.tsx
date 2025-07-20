@@ -24,6 +24,7 @@ interface WorkoutDay {
 
 const AddWorkoutPage: React.FC = () => {
   const t = useTranslations();
+  const tWeekday = useTranslations('weekdays');
   const router = useRouter();
   const [schedule, setSchedule] = useState<WorkoutDay[]>([]);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
@@ -161,6 +162,17 @@ const AddWorkoutPage: React.FC = () => {
     }
   };
 
+  const handleCancelCreation = () => {
+    if(isEditing){
+      localStorage.removeItem('workoutScheduleId');
+      router.push(`/coach/all-clients`);
+    } else {
+      localStorage.removeItem('workoutSchedule');
+      localStorage.setItem('openModalAfterWorkout', 'true');
+      router.push(`/coach/coach-dashboard`);
+    }
+  };
+
   const getCurrentDate = () => {
     const currentDate = new Date();
     return currentDate.toLocaleString(t("locale"), {
@@ -209,7 +221,7 @@ const AddWorkoutPage: React.FC = () => {
   };
 
   return (
-    <div className="fixed left-20 right-0 min-h-screen bg-gray-100 p-6">
+    <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-6">
       {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -221,9 +233,25 @@ const AddWorkoutPage: React.FC = () => {
             </div>
             <div className="flex items-center gap-4">
               <button
+                onClick={handleCancelCreation}
+                disabled={loading}
+                className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-gray-400 to-gray-500 text-white font-medium rounded-xl shadow-md hover:from-gray-500 hover:to-gray-600 transition-all duration-200 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              >
+                {loading ? (
+                  <>
+                    <div className="animate-spin rounded-full h-4 w-4 border-b-2 border-white"></div>
+                    {t('loading')}
+                  </>
+                ) : (
+                  <>
+                    {t('cancel')}
+                  </>
+                )}
+              </button>
+              <button
                 onClick={handleConfirmWorkout}
                 disabled={loading}
-                className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+                className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
               >
                 {loading ? (
                   <>
@@ -251,15 +279,15 @@ const AddWorkoutPage: React.FC = () => {
         </div>
 
       {error && <p className="text-red-500 mb-4">{error}</p>}
-      <div className="fixed bottom-4 right-4 left-24 top-30 bg-white rounded-lg shadow-lg pt-4">
+      <div className="fixed bottom-4 right-4 left-4 top-30 bg-white rounded-lg shadow-lg pt-4">
         <div className="grid grid-cols-7 gap-0 h-full">
           {daysOfWeek.map((day) => (
             <div key={day} className="flex flex-col items-center h-full overflow-y-auto">
-              <h2 className="text-sm font-semibold text-gray-700 mb-2">{day}</h2>
+              <h2 className="text-sm font-semibold text-gray-700 mb-2">{tWeekday(day)}</h2>
               <div className="flex-1 flex-col p-2 gap-1 w-full border-x border-slate-200 overflow-y-auto justify-center">
                  <button
                   onClick={() => handleAddWorkout(day)}
-                  className="w-full mb-4 p-4 cursor-pointer border-2 border-dashed border-blue-300 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 group"
+                  className="w-full mb-4 p-2 cursor-pointer border-2 border-dashed border-blue-300 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 group"
                 >
                   <div className="flex flex-col items-center gap-2">
                     <div className="w-8 h-8 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
@@ -272,8 +300,11 @@ const AddWorkoutPage: React.FC = () => {
                     </span>
                   </div>
                 </button>
-                {/* Display added workouts for the day */}
-                {schedule.length > 0 && schedule.find((d) => d.weekDay === day)
+                {loading ? (
+                    <div className="flex items-center justify-center py-8">
+                      <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
+                    </div>
+                  ) : schedule.length > 0 && schedule.find((d) => d.weekDay === day)
                   ?.workouts.map((workout, index) => (
                     <WorkoutCard
                       key={index}
@@ -282,9 +313,10 @@ const AddWorkoutPage: React.FC = () => {
                       reps={workout.reps}
                       targetWeight={workout.targetWeight}
                       imageUrl={workout.imageUrl}
+                      comment={workout.comment}
                       onClick={() => handleOpenDetails(day,index, workout)}
                     />
-                  ))}
+                  ))} 
               </div>
             </div>
           ))}

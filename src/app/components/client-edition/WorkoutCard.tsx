@@ -1,3 +1,6 @@
+import { useTranslations } from "use-intl";
+import { LiaComment } from "react-icons/lia";
+import { FaRegCommentDots } from "react-icons/fa6";
 
 interface WorkoutCardProps{
     name: string;
@@ -5,34 +8,44 @@ interface WorkoutCardProps{
     reps: number;
     targetWeight?: string;
     imageUrl?: string;
+    comment?: string;
     onClick: () => void;
 }
 
-const WorkoutCard: React.FC<WorkoutCardProps> = ({ name, sets, reps, targetWeight, imageUrl, onClick }) => {
+const WorkoutCard: React.FC<WorkoutCardProps> = ({ name, sets, reps, targetWeight, comment, imageUrl, onClick }) => {
+    const t = useTranslations();
 
 
     return(
         <div 
             onClick={onClick}
-            className="flex flex-row rounded-lg border border-slate-300 shadow-sm w-full mb-2 bg-gray-50 hover:shadow-lg hover:brightness-95 cursor-pointer"
-        >
-            <div className="bg-gray-400 text-center h-vh w-14 rounded-l-lg ">
-                <img
-                 src={imageUrl || '/default-workout.png'} 
-                 alt=""
-                 className="flex content-center items-center self-center"
-                />
+            className="w-full p-3 mb-2 border border-gray-300 rounded-xl bg-gray-50/30 hover:bg-gray-50 hover:shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105"
+        > 
+            <div className="flex flex-col px-1"> 
+                <div className="flex items-center justify-between mb-0">
+                    <h2 className="text-sm font-semibold text-gray-800 truncate">{name}</h2>
+                    <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                    </svg>
+                </div>  
+                <div className="flex flex-row gap-2">
+                    <h3 className="text-xs">{sets} x {reps}</h3>
+                    <div className="flex flex-row">
+                        {targetWeight ? (
+                            <h3 className="text-xs text-gray-600 truncate mr-0.5">{t('weight')}: <span>{targetWeight}</span></h3>
+                        ) : (
+                            <h3 className="text-xs text-gray-600 truncate mr-0.5">{t('weight')}: <span>n/a</span></h3>
+                        )}
+                        
+                    </div>
+                    {comment !== 'No Comment' && (
+                            <div className="flex justify-center self-center text-xs text-amber-600 font-medium">
+                                <FaRegCommentDots/>
+                            </div>
+                        )}
+                </div>
                 
-            </div>
-            <div className="flex flex-col px-1">   
-                <h2 className="text-sm font-semibold">{name}</h2>
-                <h3 className="text-xs">{sets} x {reps}</h3>
-                {targetWeight &&
-                <>
-                    <p className="text-sm">Target Weight:</p><br />
-                    <h3 className="text-sm">{targetWeight}</h3>
-                </>
-                }
+                
             </div>
         </div>
     );

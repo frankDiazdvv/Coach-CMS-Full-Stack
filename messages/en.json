@@ -233,6 +233,25 @@
     "home": "Home",
     "measurements": "Measurements",
     "profile": "Profile"
-  }
+  },
+
+  "buildNutritionPlan": "Build Nutrition Plan",
+  "savePlan": "Save Plan",
+  "addMeal": "Add Meal",
+  "hasComment": "Has Comment",
+  "ingredientsInMeal": "{count, plural, =0 {No Ingredients} once {{count} ingredient} other {{count} ingredients}}",
+
+
+  "detailsFor": "Details For",
+  "mealName": "Meal Name",
+  "foods": "Foods",
+  "addYourOwn": "Add Your Own",
+  "searchFoods": "Search Foods",
+  "totalNutrition": "Total Nutrition",
+  "noFoodAdded": "No Food Added",
+  "delete": "Delete",
+  "accept": "Accept"
 
 }
+
+  
