@@ -24,8 +24,9 @@ export const GET = async (request: Request, { params }: { params: { id: string }
     }
 
     return new NextResponse(JSON.stringify(coach), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error fetching coach: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error fetching coach"
+    return new NextResponse(message, { status: 500 });
   }
 };
 
@@ -70,8 +71,9 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       { new: true, runValidators: true }
     );
     return new NextResponse(JSON.stringify(updatedCoach), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error updating coach: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error updating coach"
+    return new NextResponse(message, { status: 500 });
   }
 };
 
@@ -91,7 +93,8 @@ export const DELETE = async (request: Request, { params }: { params: { id: strin
     }
 
     return new NextResponse(JSON.stringify({ message: 'Coach deleted successfully' }), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error deleting coach: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error deleting client"
+    return new NextResponse(message, { status: 500 });
   }
 };

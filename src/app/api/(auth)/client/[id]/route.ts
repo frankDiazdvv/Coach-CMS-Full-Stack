@@ -5,7 +5,6 @@ import WorkoutSchedule from '../../../../../../lib/models/workouts';
 import NutritionSchedule from '../../../../../../lib/models/nutrition';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
-import Coach from '../../../../../../lib/models/coach';
 import WorkoutLog from '../../../../../../lib/models/workoutLogs';
 
 export const GET = async (request: Request, { params }: { params: { id: string } }) => {
@@ -21,8 +20,9 @@ export const GET = async (request: Request, { params }: { params: { id: string }
       return new NextResponse('Client not found', { status: 404 });
     }
     return new NextResponse(JSON.stringify(client), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error fetching client: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error fetching client"
+    return new NextResponse(message, { status: 500 });
   }
 };
 
@@ -94,9 +94,9 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
     }
     
     return new NextResponse(JSON.stringify(updatedClient), { status: 200 });
-  } catch (error: any) {
-    
-    return new NextResponse('Error updating client: ' + error.stack, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error updating client"
+    return new NextResponse(message, { status: 500 });
   }
 };
 
@@ -120,7 +120,8 @@ export const DELETE = async (request: Request, { params }: { params: { id: strin
     // Delete associated workout logs
     await WorkoutLog.deleteMany({ client: params.id });
     return new NextResponse(JSON.stringify({ message: 'Client deleted successfully' }), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error deleting client: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error deleting client"
+    return new NextResponse(message, { status: 500 });
   }
 };

@@ -1,4 +1,4 @@
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connect from '../../../../../../lib/db';
 import Coach, { ICoach } from '../../../../../../lib/models/coach';
 import Client, { IClient } from '../../../../../../lib/models/clients';
@@ -57,7 +57,8 @@ export const POST = async (request: Request) => {
     );
 
     return new NextResponse(JSON.stringify({ token, role, id: user._id, firstName, imageUrl, workoutScheduleId, nutritionScheduleId }), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error logging in: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error logging in"
+    return new NextResponse(message, { status: 500 });
   }
 };

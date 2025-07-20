@@ -4,7 +4,7 @@
 /*                               All-ClientsPage                                 */
 /* -------------------------------------------------------------------------- */
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import LeftSideNav from '@/app/components/LeftSideNav';
 import { IClient } from '../../../../../lib/models/clients';
@@ -28,7 +28,7 @@ const ClientsPage: React.FC = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   /* ------------------------------- Fetch Data ------------------------------ */
-  const fetchClients = async () => {
+  const fetchClients = useCallback(async () => {
     try {
       const token = localStorage.getItem('token');
       if (!token) throw new Error(t('noAuthToken'));
@@ -44,17 +44,18 @@ const ClientsPage: React.FC = () => {
       const data: IClient[] = await response.json();
       setClients(data);
       setFilteredClients(data);
-    } catch (err: any) {
-      setError(err.message || t('genericError'));
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : t("genericError");
+      setError(message);
     } finally {
       setLoading(false);
     }
-  };
+  }, [t]);
 
   // Fetch clients on mount
   useEffect(() => {
     fetchClients();
-  }, []);
+  }, [fetchClients]);
 
   const handleRefreshingPage = () => fetchClients();
 
@@ -167,7 +168,6 @@ const ClientsPage: React.FC = () => {
 
   const getExpirationBadge = (expireDate: string | undefined) => {
     const status = getExpirationStatus(expireDate);
-    const date = expireDate ? new Date(expireDate).toLocaleDateString() : t('noExpireDate');
     
     switch (status) {
       case 'expired':
@@ -317,7 +317,7 @@ const ClientsPage: React.FC = () => {
                   </tr>
                 </thead>
                 <tbody className="divide-y divide-slate-200">
-                  {filteredClients.map((client, index) => (
+                  {filteredClients.map((client) => (
                     <tr
                       key={client._id?.toString()}
                       onClick={() => {

@@ -12,9 +12,9 @@ export async function GET() {
     console.log('Fetching clients');
     const clients = await Client.find().populate('coach').populate('workoutSchedule').lean();
     return new NextResponse(JSON.stringify(clients), { status: 200 });
-  } catch (error: any) {
-    console.error('Error in GET /api/clients:', error.message);
-    return new NextResponse('Error fetching clients: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error fetching clients"
+    return new NextResponse(message, { status: 500 });
   }
 }
 
@@ -35,7 +35,7 @@ export const POST = async (request: Request) => {
       return new NextResponse('Missing required fields', { status: 400 });
     }
 
-    if (body.coach.toString() !== (auth as any).id) {
+    if (body.coach.toString() !== (auth).id) {
       return new NextResponse('Unauthorized: Coach ID mismatch', { status: 403 });
     }
 
@@ -80,8 +80,8 @@ export const POST = async (request: Request) => {
 
 
     return new NextResponse(JSON.stringify(updatedClient), { status: 201 });
-  } catch (error: any) {
-    console.error('Error in POST /api/clients:', error.message, error.stack);
-    return new NextResponse('Error creating client: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error creating client"
+    return new NextResponse(message, { status: 500 });
   }
 };

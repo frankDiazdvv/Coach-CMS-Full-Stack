@@ -18,6 +18,6 @@ export async function authMiddleware(request: Request) {
     }
     return decoded; // Returns { id, email, role, name, imageUrl }
   } catch (error) {
-    return new NextResponse('Unauthorized: Invalid token', { status: 401 });
+    return new NextResponse(`Unauthorized: ${error}`, { status: 401 });
   }
 }
