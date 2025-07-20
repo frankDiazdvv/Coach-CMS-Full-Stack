@@ -1,5 +1,5 @@
 // src/app/api/(auth)/workoutLog/route.ts
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import WorkoutLog from '../../../../../lib/models/workoutLogs';
 import connect from '../../../../../lib/db';
 import jwt from 'jsonwebtoken';
@@ -85,18 +85,17 @@ export async function POST(req: Request) {
   }
 }
 
-export async function DELETE(req: Request, { params }: { params: { id: string } }) {
+export async function DELETE(request: NextRequest) {
   await connect();
 
-  const token = req.headers.get('authorization')?.split(' ')[1];
+  const token = request.headers.get('authorization')?.split(' ')[1];
   if (!token) {
     return NextResponse.json({ message: 'Unauthorized: No token provided' }, { status: 401 });
   }
 
   let decoded;
   try {
-    decoded = jwt.verify(token, JWT_SECRET) as { id?: string, role?: string }; // Include role for coach check
-    console.log('Decoded token:', decoded); // Debug the decoded payload
+    decoded = jwt.verify(token, JWT_SECRET) as { id?: string, role?: string };
   } catch (error) {
     return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
   }
@@ -105,7 +104,10 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     return NextResponse.json({ message: 'Unauthorized: Only coaches can delete logs' }, { status: 403 });
   }
 
-  const logId = params.id;
+  // Extract log ID from the URL
+  const urlSegments = request.nextUrl.pathname.split('/');
+  const logId = urlSegments[urlSegments.length - 1];
+
   if (!logId || !mongoose.Types.ObjectId.isValid(logId)) {
     return NextResponse.json({ message: 'Invalid log ID' }, { status: 400 });
   }
@@ -116,7 +118,6 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
       return NextResponse.json({ message: 'Log not found' }, { status: 404 });
     }
 
-    // Optionally, verify the coach is associated with the client's coach
     const client = await Client.findById(log.client);
     if (!client || !client.coach.equals(decoded.id)) {
       return NextResponse.json({ message: 'Unauthorized: Coach not associated with client' }, { status: 403 });
