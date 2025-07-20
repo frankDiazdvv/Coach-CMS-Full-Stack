@@ -1,19 +1,16 @@
-//DYNAMIC ROUTES FOR COACHES
-
-import { NextResponse } from 'next/server';
+import { NextRequest, NextResponse } from 'next/server';
 import connect from '../../../../../../lib/db';
 import Coach, { ICoach } from '../../../../../../lib/models/coach';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 
 // GET: Fetch a coach by ID
-export const GET = async (request: Request, { params }: { params: { id: string } }) => {
-  const { id } = params;
+export const GET = async (_req: NextRequest, context: { params: { id: string } }) => {
+  const { id } = context.params;
 
   try {
     await connect();
-    
-    // Checks for ObjectId in url
+
     if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
@@ -23,78 +20,80 @@ export const GET = async (request: Request, { params }: { params: { id: string }
       return new NextResponse('Coach not found', { status: 404 });
     }
 
-    return new NextResponse(JSON.stringify(coach), { status: 200 });
+    return NextResponse.json(coach, { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error fetching coach"
+    const message = error instanceof Error ? error.message : 'Error fetching coach';
     return new NextResponse(message, { status: 500 });
   }
 };
 
 // PATCH: Update any coach data
-export const PATCH = async (request: Request, { params }: { params: { id: string } }) => {
+export const PATCH = async (request: NextRequest, context: { params: { id: string } }) => {
+  const { id } = context.params;
+
   try {
     await connect();
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
-    const coach = await Coach.findById(params.id);
+
+    const coach = await Coach.findById(id);
     if (!coach) {
       return new NextResponse('Coach not found', { status: 404 });
     }
+
     const body = await request.json() as Partial<ICoach> & { plansOperation?: 'append' | 'remove' };
 
-    // Hash password if provided
     if (body.password) {
       body.password = await bcrypt.hash(body.password, 10);
     }
 
     if (body.plans && body.plansOperation) {
-      if (body.plansOperation === 'append') {
-        const updatedCoach = await Coach.findByIdAndUpdate(
-          params.id,
-          { $addToSet: { plans: { $each: body.plans } } },
-          { new: true, runValidators: true }
-        );
-        return new NextResponse(JSON.stringify(updatedCoach), { status: 200 });
-      } else if (body.plansOperation === 'remove') {
-        const updatedCoach = await Coach.findByIdAndUpdate(
-          params.id,
-          { $pull: { plans: { $in: body.plans } } },
-          { new: true, runValidators: true }
-        );
-        return new NextResponse(JSON.stringify(updatedCoach), { status: 200 });
-      }
+      const updateOperation =
+        body.plansOperation === 'append'
+          ? { $addToSet: { plans: { $each: body.plans } } }
+          : { $pull: { plans: { $in: body.plans } } };
+
+      const updatedCoach = await Coach.findByIdAndUpdate(id, updateOperation, {
+        new: true,
+        runValidators: true,
+      });
+
+      return NextResponse.json(updatedCoach, { status: 200 });
     }
-    const updatedCoach = await Coach.findByIdAndUpdate(
-      params.id,
-      { $set: body },
-      { new: true, runValidators: true }
-    );
-    return new NextResponse(JSON.stringify(updatedCoach), { status: 200 });
+
+    const updatedCoach = await Coach.findByIdAndUpdate(id, { $set: body }, {
+      new: true,
+      runValidators: true,
+    });
+
+    return NextResponse.json(updatedCoach, { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error updating coach"
+    const message = error instanceof Error ? error.message : 'Error updating coach';
     return new NextResponse(message, { status: 500 });
   }
 };
 
 // DELETE: Delete a coach account
-export const DELETE = async (request: Request, { params }: { params: { id: string } }) => {
+export const DELETE = async (_req: NextRequest, context: { params: { id: string } }) => {
+  const { id } = context.params;
+
   try {
     await connect();
 
-    // Validate ObjectId
-    if (!mongoose.Types.ObjectId.isValid(params.id)) {
+    if (!mongoose.Types.ObjectId.isValid(id)) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
 
-    const coach = await Coach.findByIdAndDelete(params.id);
+    const coach = await Coach.findByIdAndDelete(id);
     if (!coach) {
       return new NextResponse('Coach not found', { status: 404 });
     }
 
-    return new NextResponse(JSON.stringify({ message: 'Coach deleted successfully' }), { status: 200 });
+    return NextResponse.json({ message: 'Coach deleted successfully' }, { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error deleting client"
+    const message = error instanceof Error ? error.message : 'Error deleting coach';
     return new NextResponse(message, { status: 500 });
   }
 };
