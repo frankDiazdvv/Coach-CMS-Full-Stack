@@ -1,6 +1,6 @@
 import { NextResponse } from 'next/server';
 import connect from '../../../../../../lib/db';
-import WorkoutSchedule, { IWorkoutSchedule, IWorkout, IDailyWorkout } from '../../../../../../lib/models/workouts';
+import WorkoutSchedule, { IWorkout, IDailyWorkout } from '../../../../../../lib/models/workouts';
 import mongoose from 'mongoose';
 
 
@@ -15,8 +15,9 @@ export const GET = async (request: Request, { params }: { params: { id: string }
       return new NextResponse('Schedule not found', { status: 404 });
     }
     return new NextResponse(JSON.stringify(schedule), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error fetching schedule: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error fetching schedule"
+    return new NextResponse(message, { status: 500 });
   }
 };
 
@@ -82,7 +83,8 @@ export const PATCH = async (request: Request, { params }: { params: { id: string
       return new NextResponse('Schedule not found', { status: 404 });
     }
     return new NextResponse(JSON.stringify(updatedSchedule), { status: 200 });
-  } catch (error: any) {
-    return new NextResponse('Error updating schedule: ' + error.message, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error updating schedules"
+    return new NextResponse(message, { status: 500 });
   }
 };

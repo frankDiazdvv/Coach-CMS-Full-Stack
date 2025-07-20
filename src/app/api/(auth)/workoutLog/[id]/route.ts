@@ -20,8 +20,9 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
     if (!decoded.id || !mongoose.Types.ObjectId.isValid(decoded.id)) {
       return NextResponse.json({ message: 'Invalid client ID' }, { status: 400 });
     }
-  } catch (error) {
-    return NextResponse.json({ message: 'Unauthorized: Invalid token' }, { status: 401 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Unauthorized. Invalid Token"
+    return new NextResponse(message, { status: 401 });
   }
 
   const clientId = params.id || decoded.id; // Use params.id if provided, else decoded.id
@@ -32,8 +33,8 @@ export async function GET(req: Request, { params }: { params: { id: string } }) 
   try {
     const logs = await WorkoutLog.find({ client: clientId }).sort({ loggedAt: -1 });
     return NextResponse.json(logs, { status: 200 });
-  } catch (error: any) {
-    console.error('Error fetching client logs:', error);
-    return NextResponse.json({ message: 'Error fetching client logs', error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error fetching client logs"
+    return new NextResponse(message, { status: 500 });
   }
 }

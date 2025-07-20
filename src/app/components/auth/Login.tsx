@@ -20,7 +20,6 @@ interface LoginResponse {
 const Login: React.FC = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [id, setId] = useState('');
   const [error, setError] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const router = useRouter();
@@ -61,8 +60,9 @@ const Login: React.FC = () => {
       } else {
         router.push(clientDashboard);
       }
-    } catch (err: any) {
-      setError(err.message || 'An error occurred');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "An error occurred";
+      setError(message);
     } finally {
       setIsLoading(false);
     }
@@ -101,7 +101,7 @@ const Login: React.FC = () => {
               placeholder="Enter your password"
             />
           </div>
-          {error && <p className="text-sm text-red-500">Email or Password didn't match. Try Again.</p>}
+          {error && <p className="text-sm text-red-500">Email or Password didn&apos;t match. Try Again.</p>}
           <button
             type="submit"
             disabled={isLoading}

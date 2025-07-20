@@ -22,8 +22,9 @@ export async function GET(req: Request) {
     if (decoded.role !== 'coach') {
       return NextResponse.json({ message: 'Unauthorized: Only coaches can view logs' }, { status: 403 });
     }
-  } catch (error) {
-    return NextResponse.json({ message: 'Unauthorized: Invalid token' }, { status: 401 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error. Invalid Token."
+    return new NextResponse(message, { status: 401 });
   }
 
   try {
@@ -33,9 +34,9 @@ export async function GET(req: Request) {
       .populate('client', 'firstName lastName imageUrl')
       .sort({ loggedAt: -1 });
     return NextResponse.json(logs, { status: 200 });
-  } catch (error: any) {
-    console.error('Error fetching logs:', error);
-    return NextResponse.json({ message: 'Error fetching logs', error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error fetching logs"
+    return new NextResponse(message, { status: 500 });
   }
 }
 
@@ -52,7 +53,7 @@ export async function POST(req: Request) {
     decoded = jwt.verify(token, JWT_SECRET) as { id?: string }; // Match the 'id' field from the token
     console.log('Decoded token:', decoded); // Debug the decoded payload
   } catch (error) {
-    return NextResponse.json({ message: 'Unauthorized: Invalid token' }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
   }
 
   const { workoutSchedule, day, comment } = await req.json(); // Parse JSON body
@@ -78,9 +79,9 @@ export async function POST(req: Request) {
     });
     await log.save();
     return NextResponse.json({ message: 'Workout logged successfully', log }, { status: 201 });
-  } catch (error: any) {
-    console.error('Error logging workout:', error);
-    return NextResponse.json({ message: 'Error logging workout', error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error logging workout"
+    return new NextResponse(message, { status: 500 });
   }
 }
 
@@ -97,7 +98,7 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
     decoded = jwt.verify(token, JWT_SECRET) as { id?: string, role?: string }; // Include role for coach check
     console.log('Decoded token:', decoded); // Debug the decoded payload
   } catch (error) {
-    return NextResponse.json({ message: 'Unauthorized: Invalid token' }, { status: 401 });
+    return NextResponse.json({ error: 'Unauthorized: Invalid token' }, { status: 401 });
   }
 
   if (decoded.role !== 'coach') {
@@ -123,8 +124,8 @@ export async function DELETE(req: Request, { params }: { params: { id: string } 
 
     await WorkoutLog.findByIdAndDelete(logId);
     return NextResponse.json({ message: 'Log deleted successfully' }, { status: 200 });
-  } catch (error: any) {
-    console.error('Error deleting log:', error);
-    return NextResponse.json({ message: 'Error deleting log', error: error.message }, { status: 500 });
+  } catch (error: unknown) {
+    const message = error instanceof Error ? error.message : "Error deleting log"
+    return new NextResponse(message, { status: 500 });
   }
 }

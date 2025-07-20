@@ -1,10 +1,7 @@
 'use client';
 
 import { useState, useEffect } from 'react';
-import { IClient } from '../../../../lib/models/clients';
 import { IWorkoutSchedule, IDailyWorkout } from '../../../../lib/models/workouts';
-import Link from 'next/link';
-import { set } from 'mongoose';
 import { useFormatter, useTranslations } from 'use-intl';
 
 const ClientWorkoutDashboard: React.FC = () => {
@@ -54,7 +51,7 @@ const ClientWorkoutDashboard: React.FC = () => {
       }
     };
     initializeData();
-  }, []);
+  });
 
   const fetchData = async () => {
     const token = localStorage.getItem('token');
@@ -87,6 +84,7 @@ const ClientWorkoutDashboard: React.FC = () => {
       setDueToday(!!data.schedule.find((day: { weekDay: string; workouts: string | any[]; }) => day.weekDay === todayWeekday && day.workouts.length > 0));
 
     } catch (error) {
+      console.error('Error fetching workout schedule:', error);
       setError('Failed to fetch workout schedule');
     } finally {
       setIsLoading(false);
@@ -342,7 +340,7 @@ const ClientWorkoutDashboard: React.FC = () => {
         {fullSchedule && (
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('weeklySchedule')}</h3>
-            {sortedSchedule?.map((daySchedule, dayIndex) => (
+            {sortedSchedule?.map((daySchedule) => (
               <div key={daySchedule.weekDay} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                 <div className="bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-4">
                   <h4 className="text-xl font-bold text-white">{daySchedule.weekDay}</h4>

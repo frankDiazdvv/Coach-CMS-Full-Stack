@@ -1,4 +1,4 @@
-import { NextRequest, NextResponse } from 'next/server';
+import { NextResponse } from 'next/server';
 import connect from '../../../../../../lib/db';
 import Coach, { ICoach } from '../../../../../../lib/models/coach';
 import Client, { IClient } from '../../../../../../lib/models/clients';

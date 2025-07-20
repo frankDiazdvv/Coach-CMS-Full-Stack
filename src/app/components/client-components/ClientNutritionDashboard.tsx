@@ -1,9 +1,7 @@
 'use client';
 
-import { useState, useEffect } from 'react';
-import { IClient } from '../../../../lib/models/clients';
+import { useState, useEffect, useCallback } from 'react';
 import { INutritionDay, INutritionItem, INutritionFood } from '../../../../lib/models/nutrition';
-import Link from 'next/link';
 import { useTranslations } from 'next-intl';
 
 const ClientNutritionDashboard: React.FC = () => {
@@ -17,30 +15,7 @@ const ClientNutritionDashboard: React.FC = () => {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedMeal, setSelectedMeal] = useState<INutritionItem | null>(null);
 
-  useEffect(() => {
-    setClientName(localStorage.getItem('name') || 'User');
-
-    const initializeData = async () => {
-      setIsLoading(true);
-      const id = localStorage.getItem('id');
-      if (!id) {
-        setError('No client ID in localStorage');
-        setIsLoading(false);
-        return;
-      }
-
-      try {
-        await fetchData();
-      } catch (err) {
-        console.error('Invalid client ID:', err);
-        setError('Invalid client ID');
-        setIsLoading(false);
-      }
-    };
-    initializeData();
-  }, []);
-
-  const fetchData = async () => {
+  const fetchData = useCallback(async () => {
     const token = localStorage.getItem('token');
     const nutritionScheduleId = localStorage.getItem('nutritionScheduleId');
     if (!token || !nutritionScheduleId) {
@@ -89,12 +64,37 @@ const ClientNutritionDashboard: React.FC = () => {
         };
         setWeekMacroAverage(averages);
       }
-    } catch (error) {
-      setError('Failed to fetch nutrition schedule');
+    } catch (err: unknown) {
+      const message = err instanceof Error ? err.message : "Failed to fetch nutrition schedule";
+      setError(message);
     } finally {
       setIsLoading(false);
     }
-  };
+  }, [t]);
+
+
+  useEffect(() => {
+    setClientName(localStorage.getItem('name') || 'User');
+
+    const initializeData = async () => {
+      setIsLoading(true);
+      const id = localStorage.getItem('id');
+      if (!id) {
+        setError('No client ID in localStorage');
+        setIsLoading(false);
+        return;
+      }
+
+      try {
+        await fetchData();
+      } catch (err) {
+        console.error('Invalid client ID:', err);
+        setError('Invalid client ID');
+        setIsLoading(false);
+      }
+    };
+    initializeData();
+  }, [fetchData]);
 
   const calculateMacros = (items: INutritionItem[]) => {
     return items.reduce(

@@ -1,6 +1,6 @@
 'use client'
 
-import { useState, useEffect } from "react";
+import { useState, useEffect, useCallback } from "react";
 import { IClient } from "../../../../lib/models/clients";
 import { ICoach } from "../../../../lib/models/coach";
 import { Locale, useLocale, useTranslations } from "next-intl";
@@ -19,41 +19,10 @@ const ClientProfilePage: React.FC = () => {
     const [coachData, setCoachData] = useState<ICoach | null>(null);
     const [isLoading, setIsLoading] = useState(true);
     const [error, setError] = useState<string | null>(null);
-    const [clientName, setClientName] = useState<string>('');
     const WhatsAppLogo = '/WhatsAppLogo_White.svg';
 
-    useEffect(() => {
-        setClientName(localStorage.getItem('name') || 'User');
 
-        const initializeData = async () => {
-            setIsLoading(true);
-            const id = localStorage.getItem('id');
-            if (!id) {
-                setError('No client ID in localStorage');
-                setIsLoading(false);
-                return;
-            }
-
-            try {
-                // Fetch user data first
-                await fetchData();
-                // Fetch coach data only after user data is fetched
-                if (userData?.coach) {
-                    await fetchCoachData();
-                } else {
-                    console.warn('No coach ID found in userData');
-                }
-            } catch (err) {
-                console.error('Error initializing data:', err);
-                setError('Failed to initialize data');
-            } finally {
-                setIsLoading(false);
-            }
-        };
-        initializeData();
-    }, [userData?.coach]);
-
-    const fetchData = async () => {
+    const fetchData = useCallback(async () => {
         const token = localStorage.getItem('token');
         const id = localStorage.getItem('id');
         if (!token || !id) {
@@ -86,7 +55,38 @@ const ClientProfilePage: React.FC = () => {
         } finally {
             setIsLoading(false);
         }
-    };
+    }, [t]);
+
+    
+    useEffect(() => {
+        const initializeData = async () => {
+            setIsLoading(true);
+            const id = localStorage.getItem('id');
+            if (!id) {
+                setError('No client ID in localStorage');
+                setIsLoading(false);
+                return;
+            }
+
+            try {
+                // Fetch user data first
+                await fetchData();
+                // Fetch coach data only after user data is fetched
+                if (userData?.coach) {
+                    await fetchCoachData();
+                } else {
+                    console.warn('No coach ID found in userData');
+                }
+            } catch (err) {
+                console.error('Error initializing data:', err);
+                setError('Failed to initialize data');
+            } finally {
+                setIsLoading(false);
+            }
+        };
+        initializeData();
+    }, [userData?.coach, fetchData]);
+
 
     const fetchCoachData = async () => {
         const token = localStorage.getItem('token');
