@@ -4,6 +4,7 @@
 /*                               All-ClientsPage                                 */
 /* -------------------------------------------------------------------------- */
 
+import { Types } from 'mongoose';
 import { useState, useEffect, useCallback } from 'react';
 import { useTranslations } from 'next-intl';
 import LeftSideNav from '@/app/components/LeftSideNav';
@@ -46,7 +47,13 @@ const ClientsPage: React.FC = () => {
       const data: IClient[] = await response.json();
 
       // Filter clients based on coachId
-    const coachClients = data.filter(client => client.coach.toString() === coachId);
+      const coachClients = data.filter(client => {
+        const clientCoachId = typeof client.coach === 'string'
+          ? client.coach
+          : client.coach?._id;
+
+        return clientCoachId?.toString() === coachId;
+      });
 
       setClients(coachClients);
       setFilteredClients(coachClients);
