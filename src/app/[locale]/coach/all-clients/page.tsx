@@ -28,12 +28,14 @@ const ClientsPage: React.FC = () => {
   const [sortDirection, setSortDirection] = useState<SortDirection>('asc');
 
   /* ------------------------------- Fetch Data ------------------------------ */
-  const fetchClients = useCallback(async () => {
+  const fetchClients = async () => {
     try {
       const token = localStorage.getItem('token');
+      const coachId = localStorage.getItem('id');
       if (!token) throw new Error(t('noAuthToken'));
+      if (!coachId) throw new Error(t('noAuthToken'));
 
-      const response = await fetch('/api/client', {
+      const response = await fetch(`/api/client`, {
         headers: {
           Authorization: `Bearer ${token}`,
           'Content-Type': 'application/json',
@@ -42,20 +44,24 @@ const ClientsPage: React.FC = () => {
 
       if (!response.ok) throw new Error(t('fetchError'));
       const data: IClient[] = await response.json();
-      setClients(data);
-      setFilteredClients(data);
+
+      // Filter clients based on coachId
+    const coachClients = data.filter(client => client.coach.toString() === coachId);
+
+      setClients(coachClients);
+      setFilteredClients(coachClients);
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : t("genericError");
       setError(message);
     } finally {
       setLoading(false);
     }
-  }, [t]);
+  };
 
   // Fetch clients on mount
   useEffect(() => {
     fetchClients();
-  }, [fetchClients]);
+  }, []);
 
   const handleRefreshingPage = () => fetchClients();
 
