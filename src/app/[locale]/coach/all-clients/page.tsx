@@ -246,6 +246,7 @@ const ClientsPage: React.FC = () => {
                   <input
                     type="text"
                     placeholder={t('searchPlaceholder')}
+                    autoComplete='client-search'
                     value={searchTerm}
                     onChange={(e) => setSearchTerm(e.target.value)}
                     className="block w-full pl-10 pr-3 py-3 border border-slate-300 rounded-xl leading-5 bg-white placeholder-gray-500 focus:outline-none focus:placeholder-gray-400 focus:ring-2 focus:ring-blue-500 focus:border-transparent"
