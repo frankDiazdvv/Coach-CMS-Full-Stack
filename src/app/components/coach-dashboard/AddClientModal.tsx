@@ -203,7 +203,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                 <input
                   type="email"
                   id="email"
-                  name="client-email"
+                  name="email"
                   autoComplete='client@email.com'
                   value={formData.email}
                   onChange={handleChange}
