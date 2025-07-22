@@ -146,7 +146,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
     <div className="fixed inset-0 z-150 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm overflow-y-scroll">
      <div className=" w-full max-w-3xl rounded-xl bg-white p-6 shadow-xl transform transition-all duration-300 scale-100 opacity-100 border border-gray-200">
         <h2 className="mb-5 text-2xl font-bold text-gray-800 text-center">{t("addNewClientHeader")}</h2>
-        <form onSubmit={handleSubmit} className="h-full overflow-y-auto">
+        <form onSubmit={handleSubmit} autoComplete='off' className="h-full overflow-y-auto">
           <div className="space-y-4">
             {/* Personal Info Row */}
             <div className='grid grid-cols-1 md:grid-cols-3 gap-3'>
@@ -157,6 +157,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   id="firstName"
                   name="firstName"
                   value={formData.firstName}
+                  autoComplete='off'
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400"
@@ -170,6 +171,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   id="lastName"
                   name="lastName"
                   value={formData.lastName}
+                  autoComplete='off'
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400"
@@ -181,6 +183,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                 <select
                   id="gender"
                   name="gender"
+                  autoComplete='off'
                   value={formData.gender}
                   onChange={handleChange}
                   required
@@ -201,6 +204,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   type="email"
                   id="email"
                   name="email"
+                  autoComplete='client@email.com'
                   value={formData.email}
                   onChange={handleChange}
                   required
@@ -214,6 +218,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   type="tel"
                   id="phone"
                   name="phone"
+                  autoComplete='off'
                   value={formData.phone}
                   onChange={handleChange}
                   required
@@ -232,6 +237,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   id="password"
                   name="password"
                   value={formData.password}
+                  autoComplete='new-password'
                   onChange={handleChange}
                   required
                   className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400"
@@ -244,6 +250,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   type="text"
                   id="goal"
                   name="goal"
+                  autoComplete='off'
                   value={formData.goal}
                   onChange={handleChange}
                   required
@@ -261,6 +268,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   type="text"
                   id="currentWeight"
                   name="currentWeight"
+                  autoComplete='off'
                   value={formData.currentWeight}
                   onChange={handleChange}
                   required
@@ -274,6 +282,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                   type="text"
                   id="targetWeight"
                   name="targetWeight"
+                  autoComplete='off'
                   value={formData.targetWeight}
                   onChange={handleChange}
                   className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400"
