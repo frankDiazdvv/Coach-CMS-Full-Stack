@@ -10,7 +10,8 @@ interface WorkoutDetailsModalProps {
     sets: number,
     reps: number,
     targetWeight?: string,
-    comment?: string
+    comment?: string,
+    workoutUrl?: string,
   ) => void;
 }
 
@@ -19,10 +20,11 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
   const [reps, setReps] = useState<number>(0);
   const [targetWeight, setTargetWeight] = useState<string>('');
   const [comment, setComment] = useState<string>('');
+  const [workoutUrl, setWorkoutUrl] = useState<string>('');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(sets, reps, targetWeight || undefined, comment || undefined);
+    onSubmit(sets, reps, targetWeight || undefined, comment || undefined, workoutUrl || undefined);
   };
 
   if (!isOpen) return null;
@@ -72,6 +74,16 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
               value={comment}
               onChange={(e) => setComment(e.target.value)}
               placeholder="e.g., Focus on form"
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Video URL:</label>
+            <input
+              type="text"
+              value={workoutUrl}
+              onChange={(e) => setWorkoutUrl(e.target.value)}
+              placeholder="Any video link"
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>

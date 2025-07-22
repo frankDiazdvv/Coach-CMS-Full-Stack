@@ -6,7 +6,6 @@ interface WorkoutCardProps{
     sets: number;
     reps: number;
     targetWeight?: string;
-    imageUrl?: string;
     comment?: string;
     onClick: () => void;
 }

@@ -13,7 +13,7 @@ interface IWorkout {
   reps: number;
   targetWeight?: string;
   comment?: string;
-  imageUrl?: string;
+  workoutUrl?: string;
 }
 
 interface WorkoutDay {
@@ -101,7 +101,7 @@ const AddWorkoutPage: React.FC = () => {
     setSelectedDay(day);
   };
 
-  const handleSelectWorkout = (workoutName: string, workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string) => {
+  const handleSelectWorkout = (workoutName: string, workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string, workoutUrl?: string) => {
     if (selectedDay) {
       setSchedule((prev) => {
         const existingDay = prev.find((d) => d.weekDay === selectedDay);
@@ -111,6 +111,7 @@ const AddWorkoutPage: React.FC = () => {
           sets: workoutSets,
           targetWeight: targetWeight,
           comment: workoutComment || 'No Comment',
+          workoutUrl: workoutUrl || '',
         };
         if (existingDay) {
           return prev.map((d) =>
@@ -313,7 +314,6 @@ const AddWorkoutPage: React.FC = () => {
                       sets={workout.sets}
                       reps={workout.reps}
                       targetWeight={workout.targetWeight}
-                      imageUrl={workout.imageUrl}
                       comment={workout.comment}
                       onClick={() => handleOpenDetails(day,index, workout)}
                     />

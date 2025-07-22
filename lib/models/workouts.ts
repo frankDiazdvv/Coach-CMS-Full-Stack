@@ -9,6 +9,7 @@ export interface IWorkout {
   reps: number; // e.g., 12
   targetWeight?: string; // e.g., 135 (in pounds or kg)
   comment?: string; // e.g., "Focus on form"
+  workoutUrl: string;
 }
 
 // Daily Workout Schedule interface
@@ -44,6 +45,7 @@ const WorkoutSchema = new Schema<IWorkoutSchedule>(
             reps: { type: Number, required: true },
             targetWeight: { type: String },
             comment: { type: String },
+            workoutUrl: { type: String },
           },
         ],
       },

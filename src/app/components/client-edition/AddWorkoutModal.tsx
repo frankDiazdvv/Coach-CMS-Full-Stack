@@ -16,7 +16,8 @@ interface AddWorkoutModalProps {
     sets: number,
     reps: number,
     targetWeight?: string,
-    comment?: string
+    comment?: string,
+    workoutUrl?: string,
   ) => void;
 }
 
@@ -78,9 +79,9 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
     setSelectedWorkout(workoutName); // Open WorkoutDetailsModal
   };
 
-  const handleWorkoutDetailsSubmit = (sets: number, reps: number, targetWeight?: string, comment?: string) => {
+  const handleWorkoutDetailsSubmit = (sets: number, reps: number, targetWeight?: string, comment?: string, workoutUrl?: string) => {
     if (selectedWorkout) {
-      onSelectWorkout(selectedWorkout, sets, reps, targetWeight, comment);
+      onSelectWorkout(selectedWorkout, sets, reps, targetWeight, comment, workoutUrl);
     }
     setSelectedWorkout(null);
     onClose();
