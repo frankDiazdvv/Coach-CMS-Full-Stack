@@ -10,6 +10,7 @@ interface ViewExerciseDetailsProps {
     reps: number;
     targetWeight?: string;
     comment?: string;
+    workoutUrl?: string;
   };
   onClose: () => void;
   onSave: (updatedWorkout: {
@@ -18,6 +19,7 @@ interface ViewExerciseDetailsProps {
     reps: number;
     targetWeight?: string;
     comment?: string;
+    workoutUrl?: string;
   }) => void;
   onDelete: () => void;
 }
@@ -33,6 +35,7 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
   const [reps, setReps] = useState<number>(workout.reps);
   const [targetWeight, setTargetWeight] = useState<string | undefined>(workout.targetWeight);
   const [comment, setComment] = useState<string | undefined>(workout.comment);
+  const [workoutUrl, setWorkoutUrl] = useState<string | undefined>(workout.workoutUrl);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,6 +45,7 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
       reps,
       targetWeight: targetWeight || undefined,
       comment: comment || undefined,
+      workoutUrl: workoutUrl || undefined,
     });
     onClose();
   };
@@ -93,6 +97,16 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
               value={comment || ''}
               onChange={(e) => setComment(e.target.value)}
               placeholder="e.g., Focus on form"
+              className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            />
+          </div>
+          <div>
+            <label className="block text-sm font-medium text-gray-700">Video URL</label>
+            <input
+              type="text"
+              value={workoutUrl || ''}
+              onChange={(e) => setWorkoutUrl(e.target.value)}
+              placeholder="Any video link"
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>

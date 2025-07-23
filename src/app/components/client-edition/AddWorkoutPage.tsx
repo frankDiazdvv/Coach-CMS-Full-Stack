@@ -329,6 +329,8 @@ const AddWorkoutPage: React.FC = () => {
         onClose={() => setSelectedDay(null)}
         onSelectWorkout={handleSelectWorkout}
       />
+      
+      {/* Modal for seeing workout details and/or edit them */}
       {selectedWorkout && (
         <ViewExerciseDetails
           isOpen={!!selectedWorkout}
