@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { IWorkoutSchedule, IDailyWorkout } from '../../../../lib/models/workouts';
 import { useFormatter, useTranslations } from 'use-intl';
+import Link from 'next/link';
+import { link } from 'fs';
 
 const ClientWorkoutDashboard: React.FC = () => {
   const t = useTranslations();
@@ -275,6 +277,16 @@ const ClientWorkoutDashboard: React.FC = () => {
                             <p className="text-sm text-gray-600 italic">{workout.comment}</p>
                           </div>
                         )}
+                        {workout.workoutUrl && (           
+                          <Link
+                            href={workout.workoutUrl}
+                            target="_blank"
+                            className="mt-4 inline-flex items-center justify-center px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                          >
+                            <span className="mr-2">▶️</span>
+                            Video Tutorial
+                          </Link>
+                        )}
                       </div>
                     ))}
                   
@@ -373,6 +385,16 @@ const ClientWorkoutDashboard: React.FC = () => {
                             <div className="mt-4 p-3 bg-white rounded-xl border border-gray-200">
                               <p className="text-sm text-gray-600 italic">{workout.comment}</p>
                             </div>
+                          )}
+                          {workout.workoutUrl && (           
+                            <Link
+                              href={workout.workoutUrl}
+                              target="_blank"
+                              className="mt-4 inline-flex items-center justify-center px-5 py-2 rounded-xl bg-gray-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            >
+                              <span className="mr-2">▶️</span>
+                              Video Tutorial
+                            </Link>
                           )}
                         </div>
                       ))}

@@ -2,10 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
+import { useLocale } from 'next-intl';
 
 interface Workout {
   id: number;
   name: string;
+  description: string;
+  images: string[];
 }
 
 interface AddWorkoutModalProps {
@@ -28,6 +31,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
+  const locale = useLocale();
 
   // Fetch workouts from API when modal opens
   useEffect(() => {
@@ -35,19 +39,45 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
       const fetchWorkouts = async () => {
         setIsLoading(true);
         setError('');
+
+        const languageId = locale === 'es' ? 4 : 2;
+
+
         try {
-            const response = await fetch('https://wger.de/api/v2/exerciseinfo/?language=2&limit=2000');
+            const response = await fetch(`https://wger.de/api/v2/exerciseinfo/?language=${languageId}&limit=2000`);
             if (!response.ok) throw new Error('Failed to fetch workouts');
             const data = await response.json();
 
-            console.log(data.results[0]);
+            // Map exercises with name, description, and fetch images
+            const workoutListPromises = data.results.map(async (w: any) => {
+              const translation = w.translations.find((t: any) => t.language === languageId);
 
-            const workoutList = data.results
-            .map((w: { translations: any[]; id: any; }) => {
-                const englishTranslation = w.translations.find((t: { language: number; }) => t.language === 2);
-                    console.log('Workout:', w.id, 'Translation:', englishTranslation?.name);
-                return englishTranslation ? { id: w.id, name: englishTranslation.name } : null;
-            }).filter((w: { name: string; }) => w && w.name && w.name.trim() !== '');
+              // Fetch images for this exercise
+              let images: string[] = [];
+              try {
+                const imageResponse = await fetch(`https://wger.de/api/v2/exerciseimage/?exercise=${w.id}`);
+                if (imageResponse.ok) {
+                  const imageData = await imageResponse.json();
+                  images = imageData.results.map((img: any) => img.image);
+                }
+              } catch (imgError) {
+                console.warn(`No images found for exercise ${w.id}`);
+              }
+
+              return translation && translation.name && translation.name.trim() !== ''
+                ? {
+                    id: w.id,
+                    name: translation.name,
+                    description: translation.description || 'No description available',
+                    images,
+                  }
+                : null;
+            });
+
+            // Resolve all promises to get the workout list
+            const workoutList = (await Promise.all(workoutListPromises)).filter(
+              (w: any) => w !== null
+            );
 
             setWorkouts(workoutList);
             setFilteredWorkouts(workoutList);
@@ -62,7 +92,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
 
       fetchWorkouts();
     }
-  }, [isOpen]);
+  }, [isOpen, locale]);
 
   // Filter workouts based on search query
   useEffect(() => {
@@ -116,12 +146,15 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
               filteredWorkouts.map((workout) => (
                 <div
                   key={workout.id}
-                  onClick={() => {
-                    handleWorkoutSelect(workout.name);
-                  }}  
-                  className="cursor-pointer rounded-md p-2 hover:bg-gray-100"
+                  onClick={() => handleWorkoutSelect(workout.name)}
+                  className="flex items-center gap-4 cursor-pointer rounded-md p-2 hover:bg-gray-100 transition"
                 >
-                  {workout.name.toUpperCase()}
+                  <img
+                    src={workout.images[0]}
+                    alt=''
+                    className="w-14 h-14 object-cover rounded-md bg-gray-200"
+                  />
+                  <h3 className="text-base font-medium text-gray-800">{workout.name}</h3>
                 </div>
               ))
             )}
