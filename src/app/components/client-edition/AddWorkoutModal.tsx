@@ -2,12 +2,13 @@
 
 import { useState, useEffect } from 'react';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
-import { useLocale } from 'next-intl';
+import { useLocale, useTranslations } from 'next-intl';
 
 interface Workout {
   id: number;
   name: string;
   description: string;
+  category: string;
   images: string[];
 }
 
@@ -16,6 +17,7 @@ interface AddWorkoutModalProps {
   onClose: () => void;
   onSelectWorkout: (
     workoutName: string, 
+    workoutImages: string[],
     sets: number,
     reps: number,
     targetWeight?: string,
@@ -25,13 +27,19 @@ interface AddWorkoutModalProps {
 }
 
 const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSelectWorkout }) => {
+  const t = useTranslations();
+  const tCategory = useTranslations('workoutCategories');
   const [searchQuery, setSearchQuery] = useState('');
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [filteredWorkouts, setFilteredWorkouts] = useState<Workout[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
+  const [selectedWorkoutImg, setSelectedWorkoutImg] = useState<string[] | null>(null);
   const locale = useLocale();
+
+  const noWorkoutIcon = '/no-image-icon.png';
+
 
   // Fetch workouts from API when modal opens
   useEffect(() => {
@@ -51,6 +59,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
             // Map exercises with name, description, and fetch images
             const workoutListPromises = data.results.map(async (w: any) => {
               const translation = w.translations.find((t: any) => t.language === languageId);
+              const category = w.category ? w.category.name : 'No Category';
 
               // Fetch images for this exercise
               let images: string[] = [];
@@ -69,6 +78,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
                     id: w.id,
                     name: translation.name,
                     description: translation.description || 'No description available',
+                    category: category,
                     images,
                   }
                 : null;
@@ -94,26 +104,29 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
     }
   }, [isOpen, locale]);
 
-  // Filter workouts based on search query
   useEffect(() => {
-    setFilteredWorkouts(
-      workouts.filter(
-    (workout) =>
-      workout.name &&
-      workout.name.toLowerCase().includes(searchQuery.toLowerCase())
-  )
-    );
-  }, [searchQuery, workouts]);
+  setFilteredWorkouts(
+    workouts.filter(
+      (workout) =>
+        workout.name &&
+        workout.category &&
+        (workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+          tCategory(workout.category).toLowerCase().includes(searchQuery.toLowerCase()))
+    )
+  );
+}, [searchQuery, workouts, tCategory]);
 
-  const handleWorkoutSelect = (workoutName: string) => {
+  const handleWorkoutSelect = (workoutName: string, workoutImages: string[]) => {
     setSelectedWorkout(workoutName); // Open WorkoutDetailsModal
+    setSelectedWorkoutImg(workoutImages);
   };
 
-  const handleWorkoutDetailsSubmit = (sets: number, reps: number, targetWeight?: string, comment?: string, workoutUrl?: string) => {
+  const handleWorkoutDetailsSubmit = (workoutImages: string[], sets: number, reps: number, targetWeight?: string, comment?: string, workoutUrl?: string) => {
     if (selectedWorkout) {
-      onSelectWorkout(selectedWorkout, sets, reps, targetWeight, comment, workoutUrl);
+      onSelectWorkout(selectedWorkout, workoutImages, sets, reps, targetWeight, comment, workoutUrl);
     }
     setSelectedWorkout(null);
+    setSelectedWorkoutImg(null);
     onClose();
   };
 
@@ -128,14 +141,14 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           {/* Search Bar */}
           <input
             type="text"
-            placeholder="Search workouts..."
+            placeholder="Search by workout or category..."
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
           />
 
           {/* Scrollable Workout List */}
-          <div className="max-h-64 overflow-y-auto">
+          <div className="max-h-100 overflow-y-auto">
             {isLoading ? (
               <p className="text-gray-500">Loading...</p>
             ) : error ? (
@@ -146,15 +159,22 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
               filteredWorkouts.map((workout) => (
                 <div
                   key={workout.id}
-                  onClick={() => handleWorkoutSelect(workout.name)}
+                  onClick={() => {
+                    handleWorkoutSelect(workout.name, workout.images)
+                    
+                  }}
                   className="flex items-center gap-4 cursor-pointer rounded-md p-2 hover:bg-gray-100 transition"
                 >
                   <img
-                    src={workout.images[0]}
+                    src={workout.images[0] || noWorkoutIcon}
                     alt=''
                     className="w-14 h-14 object-cover rounded-md bg-gray-200"
                   />
-                  <h3 className="text-base font-medium text-gray-800">{workout.name}</h3>
+                  <div>
+                    <h3 className="text-base font-medium text-black">{workout.name}</h3>
+                    <p className='text-sm text-gray-500'>{tCategory(workout.category)}</p>
+                  </div>
+                 
                 </div>
               ))
             )}
@@ -175,7 +195,11 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           <WorkoutDetailsModal
             isOpen={!!selectedWorkout}
             workoutName={selectedWorkout}
-            onClose={() => setSelectedWorkout(null)}
+            workoutImages={selectedWorkoutImg || []}
+            onClose={() => {
+              setSelectedWorkout(null);
+              setSelectedWorkoutImg(null);
+            }}
             onSubmit={handleWorkoutDetailsSubmit}
           />
         )}

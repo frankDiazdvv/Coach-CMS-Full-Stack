@@ -6,6 +6,7 @@ interface ViewExerciseDetailsProps {
   isOpen: boolean;
   workout: {
     name: string;
+    workoutImages: string[];
     sets: number;
     reps: number;
     targetWeight?: string;
@@ -15,6 +16,7 @@ interface ViewExerciseDetailsProps {
   onClose: () => void;
   onSave: (updatedWorkout: {
     name: string;
+    workoutImages: string[];
     sets: number;
     reps: number;
     targetWeight?: string;
@@ -36,11 +38,13 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
   const [targetWeight, setTargetWeight] = useState<string | undefined>(workout.targetWeight);
   const [comment, setComment] = useState<string | undefined>(workout.comment);
   const [workoutUrl, setWorkoutUrl] = useState<string | undefined>(workout.workoutUrl);
+  const [workoutImages, setWorkoutImages] = useState<string[]>(workout.workoutImages);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave({
       name: workout.name,
+      workoutImages,
       sets,
       reps,
       targetWeight: targetWeight || undefined,
@@ -58,6 +62,16 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
         <h2 className="mb-4 text-xl font-bold text-gray-800">
           Details of {workout.name}
         </h2>
+        <div className="mb-4 flex flex-row overflow-x-auto gap-2">
+          {workoutImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Workout image ${index + 1}`}
+              className="h-24 min-w-15 w-auto rounded border border-gray-200"
+            />
+          ))}
+        </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Sets</label>

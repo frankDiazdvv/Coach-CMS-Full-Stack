@@ -5,8 +5,10 @@ import { useState } from 'react';
 interface WorkoutDetailsModalProps {
   isOpen: boolean;
   workoutName: string;
+  workoutImages: string[];
   onClose: () => void;
   onSubmit: (
+    workoutImages: string[],
     sets: number,
     reps: number,
     targetWeight?: string,
@@ -15,7 +17,7 @@ interface WorkoutDetailsModalProps {
   ) => void;
 }
 
-const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, workoutName, onClose, onSubmit }) => {
+const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, workoutName, workoutImages, onClose, onSubmit }) => {
   const [sets, setSets] = useState<number>(0);
   const [reps, setReps] = useState<number>(0);
   const [targetWeight, setTargetWeight] = useState<string>('');
@@ -24,7 +26,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(sets, reps, targetWeight || undefined, comment || undefined, workoutUrl || undefined);
+    onSubmit(workoutImages, sets, reps, targetWeight || undefined, comment || undefined, workoutUrl || undefined);
   };
 
   if (!isOpen) return null;
@@ -35,6 +37,16 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
         <h2 className="mb-4 text-xl font-bold text-gray-800">
           Details for {workoutName}
         </h2>
+        <div className="mb-4 flex flex-row overflow-x-auto gap-2">
+          {workoutImages.map((img, index) => (
+            <img
+              key={index}
+              src={img}
+              alt={`Workout image ${index + 1}`}
+              className="h-24 w-auto rounded border border-gray-200"
+            />
+          ))}
+        </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">Sets</label>
@@ -78,7 +90,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Video URL:</label>
+            <label className="block text-sm font-medium text-gray-700">Demonstration URL:</label>
             <input
               type="text"
               value={workoutUrl}

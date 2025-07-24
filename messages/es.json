@@ -253,6 +253,28 @@
   "totalNutrition": "Nutrición Total",
   "noFoodAdded": "No Comidas Añadidas",
   "delete": "Borrar",
-  "accept": "Aceptar"
+  "accept": "Aceptar",
+
+  "workoutCategories": {
+    "Arms": "Brazos",
+    "Legs": "Piernas",
+    "Chest": "Pecho",
+    "Back": "Espalda",
+    "Shoulders": "Hombros",
+    "Core": "Centro",
+    "FullBody": "Cuerpo Completo",
+    "Cardio": "Cardio",
+    "Flexibility": "Flexibilidad",
+    "Calves": "Pantorrillas",
+    "Glutes": "Glúteos",
+    "Biceps": "Bíceps",
+    "Triceps": "Tríceps",
+    "Quadriceps": "Cuádriceps",
+    "Hamstrings": "Isquiotibiales",
+    "Forearms": "Antebrazos",
+    "Abs": "Abdominales",
+    "Lats": "Dorsales"
+  }
+
 
 }

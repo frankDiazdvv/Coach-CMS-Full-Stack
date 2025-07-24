@@ -9,6 +9,7 @@ import { useTranslations } from 'next-intl';
 
 interface IWorkout {
   name: string;
+  workoutImages: string[];
   sets: number;
   reps: number;
   targetWeight?: string;
@@ -37,8 +38,7 @@ const AddWorkoutPage: React.FC = () => {
   const [isEditing, setIsEditing] = useState<boolean>(false); // Mode flag
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
-
-
+  
   const daysOfWeek = [
     'Monday',
     'Tuesday',
@@ -101,12 +101,13 @@ const AddWorkoutPage: React.FC = () => {
     setSelectedDay(day);
   };
 
-  const handleSelectWorkout = (workoutName: string, workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string, workoutUrl?: string) => {
+  const handleSelectWorkout = (workoutName: string, workoutImages: string[], workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string, workoutUrl?: string) => {
     if (selectedDay) {
       setSchedule((prev) => {
         const existingDay = prev.find((d) => d.weekDay === selectedDay);
         const newWorkout: IWorkout = {
           name: workoutName,
+          workoutImages: workoutImages,
           reps: workoutReps,
           sets: workoutSets,
           targetWeight: targetWeight,
@@ -311,10 +312,12 @@ const AddWorkoutPage: React.FC = () => {
                     <WorkoutCard
                       key={index}
                       name={workout.name}
+                      workoutImages={workout.workoutImages[0]}
                       sets={workout.sets}
                       reps={workout.reps}
                       targetWeight={workout.targetWeight}
                       comment={workout.comment}
+                      workoutUrl={workout.workoutUrl}
                       onClick={() => handleOpenDetails(day,index, workout)}
                     />
                   ))} 

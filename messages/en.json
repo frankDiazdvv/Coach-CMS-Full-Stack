@@ -250,7 +250,28 @@
   "totalNutrition": "Total Nutrition",
   "noFoodAdded": "No Food Added",
   "delete": "Delete",
-  "accept": "Accept"
+  "accept": "Accept",
+
+  "workoutCategories": {
+    "Arms": "Arms",
+    "Legs": "Legs",
+    "Chest": "Chest",
+    "Back": "Back",
+    "Shoulders": "Shoulders",
+    "Core": "Core",
+    "FullBody": "Full Body",
+    "Cardio": "Cardio",
+    "Flexibility": "Flexibility",
+    "Calves": "Calves",
+    "Glutes": "Glutes",
+    "Biceps": "Biceps",
+    "Triceps": "Triceps",
+    "Quadriceps": "Quadriceps",
+    "Hamstrings": "Hamstrings",
+    "Forearms": "Forearms",
+    "Abs": "Abs",
+    "Lats": "Lats"
+  }
 
 }
 
