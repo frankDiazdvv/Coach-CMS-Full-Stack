@@ -4,7 +4,7 @@ import { RiLinkM } from "react-icons/ri";
 
 interface WorkoutCardProps{
     name: string;
-    workoutImages: string;
+    workoutImages: string[];
     sets: number;
     reps: number;
     targetWeight?: string;
@@ -17,6 +17,8 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ name, workoutImages, sets, re
     const t = useTranslations();
     const noWorkoutIcon = '/no-image-icon.png';
 
+    const thumbImage = workoutImages && workoutImages.length > 0 ? workoutImages[0] : noWorkoutIcon;
+
 
     return(
         <div 
@@ -25,7 +27,7 @@ const WorkoutCard: React.FC<WorkoutCardProps> = ({ name, workoutImages, sets, re
         > 
             <div className="relative flex flex-row w-full overflow-hidden">
                 <div className="flex-shrink-0 flex items-center">
-                    <img src={workoutImages || noWorkoutIcon} alt="" className="w-16 h-16 border-r border-gray-300 object-cover rounded-l-xl" />
+                    <img src={thumbImage} alt="" className="w-16 h-16 border-r border-gray-300 object-cover rounded-l-xl" />
                 </div>
                 <div className="absolute top-0 right-0 bottom-0 left-16 flex flex-col px-1 ">
                     <div className="relative w-full flex items-center justify-between mb-0">

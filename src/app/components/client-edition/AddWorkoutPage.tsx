@@ -312,7 +312,7 @@ const AddWorkoutPage: React.FC = () => {
                     <WorkoutCard
                       key={index}
                       name={workout.name}
-                      workoutImages={workout.workoutImages[0]}
+                      workoutImages={workout.workoutImages}
                       sets={workout.sets}
                       reps={workout.reps}
                       targetWeight={workout.targetWeight}
