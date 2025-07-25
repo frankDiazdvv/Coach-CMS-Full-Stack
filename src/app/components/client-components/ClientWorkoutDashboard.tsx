@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 import { IWorkoutSchedule, IDailyWorkout } from '../../../../lib/models/workouts';
 import { useFormatter, useTranslations } from 'use-intl';
 import Link from 'next/link';
-import { link } from 'fs';
 
 const ClientWorkoutDashboard: React.FC = () => {
   const t = useTranslations();
@@ -258,7 +257,21 @@ const ClientWorkoutDashboard: React.FC = () => {
                         )}
                         
                         <h3 className="text-xl font-bold text-gray-900 mb-3">{workout.name}</h3>
-                        <div className="grid grid-cols-3 gap-4">
+                        {workout.workoutImages && workout.workoutImages.length > 0 && (
+                        <div className="mt-3 overflow-x-auto">
+                          <div className="flex gap-3 p-2 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
+                          {workout.workoutImages.map((image: string, imgIndex: number) => (
+                            <img
+                            key={imgIndex}
+                            src={image}
+                            alt={`Workout Image ${imgIndex + 1}`}
+                            className="w-auto h-28 rounded-lg object-contain flex-shrink-0"
+                            />
+                          ))}
+                          </div>
+                        </div>
+                      )}
+                        <div className="grid grid-cols-3 gap-4 mt-2">
                           <div className="text-center">
                             <p className="text-sm text-gray-500 font-medium">{t('sets')}</p>
                             <p className="text-2xl font-bold text-blue-600">{workout.sets}</p>
@@ -272,7 +285,7 @@ const ClientWorkoutDashboard: React.FC = () => {
                             <p className="text-2xl font-bold text-indigo-600">{workout.targetWeight || '—'}</p>
                           </div>
                         </div>
-                        {workout.comment && (
+                        {workout.comment !== 'No Comment' && (
                           <div className="mt-4 p-3 bg-white rounded-xl border border-gray-200">
                             <p className="text-sm text-gray-600 italic">{workout.comment}</p>
                           </div>
@@ -281,7 +294,7 @@ const ClientWorkoutDashboard: React.FC = () => {
                           <Link
                             href={workout.workoutUrl}
                             target="_blank"
-                            className="mt-4 inline-flex items-center justify-center px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="mt-4 w-full inline-flex items-center justify-center px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
                           >
                             <span className="mr-2">▶️</span>
                             Video Tutorial
@@ -367,7 +380,21 @@ const ClientWorkoutDashboard: React.FC = () => {
                           className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-all duration-300"
                         >
                           <h5 className="text-lg font-bold text-gray-900 mb-3">{workout.name}</h5>
-                          <div className="grid grid-cols-3 gap-4">
+                          {workout.workoutImages && workout.workoutImages.length > 0 && (
+                            <div className="mt-3 overflow-x-auto">
+                              <div className="flex gap-3 p-2 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
+                              {workout.workoutImages.map((image: string, imgIndex: number) => (
+                                <img
+                                key={imgIndex}
+                                src={image}
+                                alt={`Workout Image ${imgIndex + 1}`}
+                                className="w-auto h-28 rounded-lg object-contain flex-shrink-0"
+                                />
+                              ))}
+                              </div>
+                            </div>
+                          )}
+                          <div className="grid grid-cols-3 gap-4 mt-2">
                             <div className="text-center">
                               <p className="text-sm text-gray-500 font-medium">{t('sets')}</p>
                               <p className="text-xl font-bold text-blue-600">{workout.sets}</p>
@@ -381,7 +408,7 @@ const ClientWorkoutDashboard: React.FC = () => {
                               <p className="text-xl font-bold text-indigo-600">{workout.targetWeight || '—'}</p>
                             </div>
                           </div>
-                          {workout.comment && (
+                          {workout.comment !== 'No Comment' && (
                             <div className="mt-4 p-3 bg-white rounded-xl border border-gray-200">
                               <p className="text-sm text-gray-600 italic">{workout.comment}</p>
                             </div>
@@ -390,7 +417,7 @@ const ClientWorkoutDashboard: React.FC = () => {
                             <Link
                               href={workout.workoutUrl}
                               target="_blank"
-                              className="mt-4 inline-flex items-center justify-center px-5 py-2 rounded-xl bg-gray-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                              className="mt-4 w-full inline-flex items-center justify-center px-5 py-2 rounded-xl bg-gray-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             >
                               <span className="mr-2">▶️</span>
                               Video Tutorial
@@ -445,7 +472,21 @@ const ClientWorkoutDashboard: React.FC = () => {
                       }`}
                     >
                       <h3 className="text-xl font-bold text-gray-900 mb-3">{workout.name}</h3>
-                      <div className="grid grid-cols-3 gap-4">
+                      {workout.workoutImages && workout.workoutImages.length > 0 && (
+                        <div className="mt-3 overflow-x-auto">
+                          <div className="flex gap-3 p-2 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
+                          {workout.workoutImages.map((image: string, imgIndex: number) => (
+                            <img
+                            key={imgIndex}
+                            src={image}
+                            alt={`Workout Image ${imgIndex + 1}`}
+                            className="w-auto h-28 rounded-lg object-contain flex-shrink-0"
+                            />
+                          ))}
+                          </div>
+                        </div>
+                      )}
+                      <div className="grid grid-cols-3 gap-4 mt-2">
                         <div className="text-center">
                           <p className="text-sm text-gray-500 font-medium">{t('sets')}</p>
                           <p className="text-2xl font-bold text-blue-600">{workout.sets}</p>
