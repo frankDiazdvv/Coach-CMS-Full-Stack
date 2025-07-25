@@ -8,7 +8,7 @@ interface WorkoutDetailsModalProps {
   workoutImages: string[];
   onClose: () => void;
   onSubmit: (
-    workoutImages: string[],
+    workoutImg: string[],
     sets: number,
     reps: number,
     targetWeight?: string,
@@ -23,10 +23,11 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
   const [targetWeight, setTargetWeight] = useState<string>('');
   const [comment, setComment] = useState<string>('');
   const [workoutUrl, setWorkoutUrl] = useState<string>('');
+  const [workoutImg, setWorkoutimg] = useState<string[]>(workoutImages);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(workoutImages, sets, reps, targetWeight || undefined, comment || undefined, workoutUrl || undefined);
+    onSubmit(workoutImg, sets, reps, targetWeight || undefined, comment || undefined, workoutUrl || undefined);
   };
 
   if (!isOpen) return null;
@@ -38,7 +39,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
           Details for {workoutName}
         </h2>
         <div className="mb-4 flex flex-row overflow-x-auto gap-2">
-          {workoutImages.map((img, index) => (
+          {workoutImg.map((img, index) => (
             <img
               key={index}
               src={img}
@@ -110,6 +111,9 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
             <button
               type="submit"
               className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              onClick={() => {
+                setWorkoutimg(workoutImages);
+              }}
             >
               Save
             </button>

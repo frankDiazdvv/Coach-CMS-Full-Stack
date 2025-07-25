@@ -26,25 +26,20 @@ interface ViewExerciseDetailsProps {
   onDelete: () => void;
 }
 
-const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
-  isOpen,
-  workout,
-  onClose,
-  onSave,
-  onDelete,
-}) => {
+const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, workout, onClose, onSave, onDelete }) => {
   const [sets, setSets] = useState<number>(workout.sets);
   const [reps, setReps] = useState<number>(workout.reps);
   const [targetWeight, setTargetWeight] = useState<string | undefined>(workout.targetWeight);
   const [comment, setComment] = useState<string | undefined>(workout.comment);
   const [workoutUrl, setWorkoutUrl] = useState<string | undefined>(workout.workoutUrl);
-  const [workoutImages, setWorkoutImages] = useState<string[]>(workout.workoutImages);
+
+  const noWorkoutIcon = '/no-image-icon.png';
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     onSave({
       name: workout.name,
-      workoutImages,
+      workoutImages: workout.workoutImages,
       sets,
       reps,
       targetWeight: targetWeight || undefined,
@@ -63,7 +58,7 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({
           Details of {workout.name}
         </h2>
         <div className="mb-4 flex flex-row overflow-x-auto gap-2">
-          {workoutImages.map((img, index) => (
+          {workout.workoutImages.map((img, index) => (
             <img
               key={index}
               src={img}

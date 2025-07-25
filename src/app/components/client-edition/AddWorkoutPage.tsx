@@ -101,13 +101,13 @@ const AddWorkoutPage: React.FC = () => {
     setSelectedDay(day);
   };
 
-  const handleSelectWorkout = (workoutName: string, workoutImages: string[], workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string, workoutUrl?: string) => {
+  const handleSelectWorkout = (workoutName: string, workoutImg: string[], workoutReps: number, workoutSets: number, targetWeight?: string, workoutComment?: string, workoutUrl?: string) => {
     if (selectedDay) {
       setSchedule((prev) => {
         const existingDay = prev.find((d) => d.weekDay === selectedDay);
         const newWorkout: IWorkout = {
           name: workoutName,
-          workoutImages: workoutImages,
+          workoutImages: workoutImg,
           reps: workoutReps,
           sets: workoutSets,
           targetWeight: targetWeight,
@@ -149,6 +149,8 @@ const AddWorkoutPage: React.FC = () => {
         });
 
         if (!response.ok) throw new Error('Failed to update workout schedule');
+
+        const data = await response.json();
 
         localStorage.removeItem('workoutScheduleId');
         router.push(`/coach/all-clients`);

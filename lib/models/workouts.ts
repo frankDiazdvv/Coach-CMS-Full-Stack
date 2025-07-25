@@ -5,6 +5,7 @@ import { Schema, Types, model, models } from 'mongoose';
 // Workout interface
 export interface IWorkout {
   name: string; // e.g., "Bench Press"
+  workoutImages: string[]; // e.g., ['/images/bench-press1.jpg', '/images/bench-press2.jpg']
   sets: number; // e.g., 3
   reps: number; // e.g., 12
   targetWeight?: string; // e.g., 135 (in pounds or kg)
@@ -41,6 +42,7 @@ const WorkoutSchema = new Schema<IWorkoutSchedule>(
         workouts: [
           {
             name: { type: String, required: true },
+            workoutImages: [{ type: String }],
             sets: { type: Number, required: true },
             reps: { type: Number, required: true },
             targetWeight: { type: String },

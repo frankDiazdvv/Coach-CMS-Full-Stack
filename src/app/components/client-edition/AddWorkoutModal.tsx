@@ -7,7 +7,6 @@ import { useLocale, useTranslations } from 'next-intl';
 interface Workout {
   id: number;
   name: string;
-  description: string;
   category: string;
   images: string[];
 }
@@ -17,7 +16,7 @@ interface AddWorkoutModalProps {
   onClose: () => void;
   onSelectWorkout: (
     workoutName: string, 
-    workoutImages: string[],
+    workoutImg: string[],
     sets: number,
     reps: number,
     targetWeight?: string,
@@ -35,7 +34,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
-  const [selectedWorkoutImg, setSelectedWorkoutImg] = useState<string[] | null>(null);
+  const [selectedWorkoutImg, setSelectedWorkoutImg] = useState<string[]>([]);
   const locale = useLocale();
 
   const noWorkoutIcon = '/no-image-icon.png';
@@ -77,7 +76,6 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
                 ? {
                     id: w.id,
                     name: translation.name,
-                    description: translation.description || 'No description available',
                     category: category,
                     images,
                   }
@@ -104,29 +102,30 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
     }
   }, [isOpen, locale]);
 
+  //Search bar for workouts
   useEffect(() => {
-  setFilteredWorkouts(
-    workouts.filter(
-      (workout) =>
-        workout.name &&
-        workout.category &&
-        (workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-          tCategory(workout.category).toLowerCase().includes(searchQuery.toLowerCase()))
-    )
-  );
-}, [searchQuery, workouts, tCategory]);
+    setFilteredWorkouts(
+      workouts.filter(
+        (workout) =>
+          workout.name &&
+          workout.category &&
+          (workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+            tCategory(workout.category).toLowerCase().includes(searchQuery.toLowerCase()))
+      )
+    );
+  }, [searchQuery, workouts, tCategory]);
 
   const handleWorkoutSelect = (workoutName: string, workoutImages: string[]) => {
     setSelectedWorkout(workoutName); // Open WorkoutDetailsModal
     setSelectedWorkoutImg(workoutImages);
   };
 
-  const handleWorkoutDetailsSubmit = (workoutImages: string[], sets: number, reps: number, targetWeight?: string, comment?: string, workoutUrl?: string) => {
+  const handleWorkoutDetailsSubmit = (workoutImg: string[], sets: number, reps: number, targetWeight?: string, comment?: string, workoutUrl?: string) => {
     if (selectedWorkout) {
-      onSelectWorkout(selectedWorkout, workoutImages, sets, reps, targetWeight, comment, workoutUrl);
+      onSelectWorkout(selectedWorkout, workoutImg, sets, reps, targetWeight, comment, workoutUrl);
     }
     setSelectedWorkout(null);
-    setSelectedWorkoutImg(null);
+    setSelectedWorkoutImg([]);
     onClose();
   };
 
@@ -198,7 +197,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
             workoutImages={selectedWorkoutImg || []}
             onClose={() => {
               setSelectedWorkout(null);
-              setSelectedWorkoutImg(null);
+              setSelectedWorkoutImg([]);
             }}
             onSubmit={handleWorkoutDetailsSubmit}
           />
