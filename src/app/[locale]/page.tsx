@@ -1,63 +1,446 @@
-// pages/index.tsx
-
+import { Metadata } from 'next';
+import { ChevronRight, Users, Calendar, Bell, BarChart3, Globe, Smartphone, Video, Target, Check, Star, ArrowRight } from 'lucide-react';
+import LandingPageTopBar from '../components/LandingPageTopBar';
 import Link from 'next/link';
 
-export default function HomePage() {
+// Define metadata for SEO
+export const metadata: Metadata = {
+  title: 'Lite Trainer - Simple Client Management for Fitness Coaches',
+  description: 'Lite Trainer is an affordable, easy-to-use client management system for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.',
+  keywords: 'fitness coaching, client management, workout planning, nutrition tracking, bilingual fitness app',
+  openGraph: {
+    title: 'Lite Trainer - Fitness Coaching Made Simple',
+    description: 'The perfect client management tool for beginner fitness coaches. Affordable, intuitive, and bilingual.',
+    url: 'https://yourdomain.com',
+    type: 'website',
+    images: ['/og-image.jpg'],
+  },
+  twitter: {
+    card: 'summary_large_image',
+    title: 'Lite Trainer - Fitness Coaching Made Simple',
+    description: 'Manage your fitness clients with ease using Lite Trainer. Affordable and bilingual.',
+    images: ['/og-image.jpg'],
+  },
+};
+
+// Structured data for SEO (schema.org)
+const schema = {
+  '@context': 'https://schema.org',
+  '@type': 'WebSite',
+  name: 'Lite Trainer',
+  url: 'https://yourdomain.com',
+  description: 'Client management system for fitness coaches',
+  potentialAction: {
+    '@type': 'SearchAction',
+    target: 'https://yourdomain.com/search?q={search_term_string}',
+    'query-input': 'required name=search_term_string',
+  },
+};
+
+const features = [
+  {
+    icon: <Users className="w-8 h-8" />,
+    title: 'Complete Client Management',
+    description: 'Create, edit, and manage all your clients’ information in one centralized dashboard. View everyone at a glance.',
+  },
+  {
+    icon: <Calendar className="w-8 h-8" />,
+    title: 'Weekly Workout & Nutrition Planning',
+    description: 'Design comprehensive weekly schedules for workouts and nutrition. Track macros and meal planning with ease.',
+  },
+  {
+    icon: <Bell className="w-8 h-8" />,
+    title: 'Real-Time Workout Logging',
+    description: 'Clients log completed workouts instantly. Get immediate notifications in your dashboard to stay connected.',
+  },
+  {
+    icon: <BarChart3 className="w-8 h-8" />,
+    title: 'Smart Dashboard Analytics',
+    description: 'See who’s working out today, track membership expirations, and visualize client distribution with interactive charts.',
+  },
+  {
+    icon: <Globe className="w-8 h-8" />,
+    title: 'Bilingual Support',
+    description: 'Full platform available in English and Spanish. Serve diverse clients with language options that work for everyone.',
+  },
+  {
+    icon: <Smartphone className="w-8 h-8" />,
+    title: 'Mobile-First Client Experience',
+    description: 'Clients access their workouts and meals on-the-go with a responsive, mobile-optimized interface.',
+  },
+  {
+    icon: <Video className="w-8 h-8" />,
+    title: 'Video Tutorial Integration',
+    description: 'Attach video tutorial links to any workout. Help clients master proper form and technique.',
+  },
+  {
+    icon: <Target className="w-8 h-8" />,
+    title: 'Macro & Meal Tracking',
+    description: 'Nutrition coaches can track weekly macros and individual meal macros for precise dietary guidance.',
+  },
+];
+
+const loginPage = '/login';
+const footerLogo = '/DarkBG-logo.svg';
+
+
+
+export default function LiteTrainerLanding() {
   return (
-    <div className="min-h-screen bg-gray-50 text-gray-800 flex flex-col">
-      {/* Top Nav */}
-      <header className="w-full flex justify-between items-center px-6 py-4 bg-white shadow-sm">
-        <h1 className="text-2xl font-bold text-blue-600">SimpleFit</h1>
-        <Link href="/login">
-          <button className="text-white p-2  hover:bg-blue-800 font-normal rounded-xl bg-blue-600 hover:rounded-full transition-all ease-in-out cursor-pointer ">
-            Login
-          </button>
-        </Link>
-      </header>
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+      {/* Structured Data for SEO */}
+      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
 
-      {/* Main Hero */}
-      <main className="flex-grow flex flex-col items-center justify-center text-center px-6 py-20">
-        <h2 className="text-4xl sm:text-5xl font-extrabold mb-6">
-          Simple Coaching Software for New Fitness Coaches
-        </h2>
-        <p className="text-lg max-w-2xl mb-10 text-gray-600">
-          SimpleFit helps new fitness coaches manage clients, plan workouts and nutrition, and stay on top of client check-ins — all in one place.
-        </p>
-        <Link href="/login">
-          <button className="mt-4 cursor-pointer bg-blue-600 text-white px-6 py-3 rounded-lg hover:bg-blue-700 shadow-md transition">
-            Get Started
-          </button>
-        </Link>
+      {/* Animated Background Elements */}
+      <div className="fixed inset-0 overflow-hidden pointer-events-none">
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
+      </div>
 
+      {/* Navigation */}
+      <LandingPageTopBar />
+
+      {/* Hero Section */}
+      <main className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto text-center">
+          <div className="mb-8">
+            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-purple-500/20 text-purple-300 border border-purple-500/30">
+              <Star className="w-4 h-4 mr-2" />
+              Perfect for Beginner Coaches
+            </span>
+          </div>
+
+          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+            <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+              Simple Coaching
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent">
+              Made Powerful
+            </span>
+          </h1>
+
+          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+            The perfect bridge between basic tools and expensive enterprise software.
+            <span className="text-purple-300"> Lite Trainer</span> gives you all the core features you need
+            to grow your coaching business — without the complexity or cost.
+          </p>
+
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
+            <Link href={loginPage}>
+              <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
+                Start Free Trial
+                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+            
+            <button className="cursor-not-allowed text-white border border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
+              Watch Demo
+            </button>
+          </div>
+
+          {/* Stats */}
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
+            <div className="text-center">
+              <div className="text-4xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">$9.99</div>
+              <div className="text-gray-400">Starting Price/Month</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">10</div>
+              <div className="text-gray-400">Clients Included</div>
+            </div>
+            <div className="text-center">
+              <div className="text-4xl bg-clip-text mb-2">🇺🇸 🇪🇸</div>
+              <div className="text-gray-400">Languages Supported</div>
+            </div>
+          </div>
+        </div>
       </main>
 
-      {/* Features */}
-      <section className="bg-white py-16 px-6">
-        <div className="max-w-5xl mx-auto grid grid-cols-1 sm:grid-cols-3 gap-8 text-center">
-          <div>
-            <h3 className="text-xl font-bold mb-2">Client Management</h3>
-            <p className="text-gray-600">Easily add, track, and communicate with clients as you grow your coaching business.</p>
+      {/* Features Section */}
+      <section id="features" className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Everything You Need to
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-purple-400 to-[#B2CAF6] bg-clip-text text-transparent">
+                Scale Your Coaching
+              </span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              Focus on what matters most — coaching your clients. We handle the technology.
+            </p>
           </div>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Workout & Nutrition Scheduling</h3>
-            <p className="text-gray-600">Create tailored workout and meal plans for your clients with minimal setup.</p>
-          </div>
-          <div>
-            <h3 className="text-xl font-bold mb-2">Client Check-ins</h3>
-            <p className="text-gray-600">Clients can log workouts and stay accountable through a trackable check-in system.</p>
+
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {features.map((feature, index) => (
+              <article
+                key={index}
+                className="group bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-6 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300 hover:transform hover:scale-105"
+                style={{ animationDelay: `${index * 0.1}s` }}
+              >
+                <div className="text-purple-400 mb-4 group-hover:text-pink-400 transition-colors">
+                  {feature.icon}
+                </div>
+                <h3 className="text-xl font-semibold mb-3 text-white group-hover:text-purple-200 transition-colors">
+                  {feature.title}
+                </h3>
+                <p className="text-gray-400 group-hover:text-gray-300 transition-colors">
+                  {feature.description}
+                </p>
+              </article>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* Pricing Notice */}
-      <section className="bg-gray-100 text-center py-12 px-4">
-        <h4 className="text-xl font-semibold text-gray-700 mb-2">Membership Plans Coming Soon!</h4>
-        <p className="text-gray-500">We’re working on flexible pricing for every coach. Stay tuned for updates!</p>
+      {/* Why Lite Trainer Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/20 to-pink-900/20">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+            <div>
+              <h2 className="text-4xl md:text-5xl font-bold mb-8">
+                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                  Why Choose
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                  Lite Trainer?
+                </span>
+              </h2>
+              <div className="space-y-6">
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">No Learning Curve</h3>
+                    <p className="text-gray-300">Intuitive design that feels familiar from day one. Start coaching, not learning software.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Perfect Bridge Solution</h3>
+                    <p className="text-gray-300">Between basic tools and expensive enterprise software. Get professional features at a beginner-friendly price.</p>
+                  </div>
+                </div>
+                <div className="flex items-start gap-4">
+                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                    <Check className="w-4 h-4 text-white" />
+                  </div>
+                  <div>
+                    <h3 className="text-xl font-semibold text-white mb-2">Core Features Focus</h3>
+                    <p className="text-gray-300">We focus on what coaches actually need daily, without overwhelming you with unnecessary features.</p>
+                  </div>
+                </div>
+              </div>
+            </div>
+            <div className="relative">
+              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10">
+                <div className="text-center mb-6">
+                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <Target className="w-8 h-8 text-white" />
+                  </div>
+                  <h3 className="text-2xl font-bold text-white mb-2">Built for Growth</h3>
+                  <p className="text-gray-300">Start small, scale smartly</p>
+                </div>
+                <div className="space-y-4 text-sm">
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Client Management</span>
+                    <span className="text-green-400">✓</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Workout Planning</span>
+                    <span className="text-green-400">✓</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Nutrition Tracking</span>
+                    <span className="text-green-400">✓</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Mobile Access</span>
+                    <span className="text-green-400">✓</span>
+                  </div>
+                  <div className="flex justify-between">
+                    <span className="text-gray-300">Bilingual Support</span>
+                    <span className="text-green-400">✓</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Pricing Section */}
+      <section id="pricing" className="relative py-20 px-4 sm:px-6 lg:px-8">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-4xl md:text-5xl font-bold mb-6">
+              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                Simple, Transparent
+              </span>
+              <br />
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                Pricing
+              </span>
+            </h2>
+            <p className="text-xl text-gray-300 max-w-3xl mx-auto">
+              No hidden fees. No complicated tiers. Just honest pricing that grows with you.
+            </p>
+          </div>
+
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-5xl mx-auto">
+            {/* Basic Plan */}
+            <article className="bg-white/5 backdrop-blur-sm border border-white/10 rounded-2xl p-8 hover:bg-white/10 hover:border-purple-500/50 transition-all duration-300">
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">Basic Plan</h3>
+                <p className="text-gray-400 mb-6">Perfect for getting started</p>
+                <div className="text-5xl font-bold text-white mb-2">
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$9.99</span>
+                </div>
+                <p className="text-gray-400">per month</p>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Up to 10 clients</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">First 3 clients free</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Complete client management</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Workout & nutrition planning</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Real-time notifications</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Mobile-friendly interface</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">English & Spanish support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Video tutorial integration</span>
+                </div>
+              </div>
+
+              <Link href={loginPage}>
+                <button className="cursor-pointer w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105">
+                  Get Started
+                </button>
+              </Link>
+            </article>
+
+            {/* VIP Plan */}
+            <article className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-400 transition-all duration-300">
+              <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
+                <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                  Coming Soon
+                </span>
+              </div>
+
+              <div className="text-center mb-8">
+                <h3 className="text-2xl font-bold text-white mb-2">VIP Plan</h3>
+                <p className="text-gray-400 mb-6">Advanced features for scaling coaches</p>
+                <div className="text-5xl font-bold text-white mb-2">
+                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">TBA</span>
+                </div>
+                <p className="text-gray-400">per month</p>
+              </div>
+
+              <div className="space-y-4 mb-8">
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">Up to 25 clients</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <span className="text-gray-300">All Basic plan features</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <span className="text-purple-300">Specialized measurement system</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <span className="text-purple-300">Advanced analytics</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <span className="text-purple-300">Priority support</span>
+                </div>
+                <div className="flex items-center gap-3">
+                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <span className="text-purple-300">More features in development</span>
+                </div>
+              </div>
+
+              <button className="w-full bg-gray-600 text-gray-300 py-3 rounded-full font-semibold cursor-not-allowed">
+                Notify Me When Available
+              </button>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      {/* CTA Section */}
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6">
+            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              Ready to Transform
+            </span>
+            <br />
+            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Your Coaching Business?
+            </span>
+          </h2>
+          <p className="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">
+            Join the growing community of coaches who’ve discovered the perfect balance of simplicity and power.
+          </p>
+          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+            <Link href={loginPage}>
+              <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
+                Start Free Trial Now
+                <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+              </button>
+            </Link>
+            <p className="text-gray-400 text-sm">No credit card required • 14-day free trial</p>
+          </div>
+        </div>
       </section>
 
       {/* Footer */}
-      <footer className="text-center py-6 text-gray-500 text-sm">
-        &copy; {new Date().getFullYear()} SimpleFit. All rights reserved.
+      <footer className="relative py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+        <div className="max-w-7xl mx-auto">
+          <div className="flex flex-col md:flex-row justify-between items-center">
+            <div className="flex items-center space-x-2 mb-4 md:mb-0">
+              <img src={footerLogo} alt="" />
+            </div>
+            <div className="text-gray-400 text-sm">
+              © {new Date().getFullYear()} Lite Trainer. All rights reserved.
+            </div>
+          </div>
+        </div>
       </footer>
     </div>
   );
