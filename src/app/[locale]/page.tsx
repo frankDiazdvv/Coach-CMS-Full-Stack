@@ -14,8 +14,8 @@ export const metadata = {
   title: 'LITE Trainer — Manage Clients Easily',
   description: 'Simple, intuitive client management system designed for beginner online coaches. Get started today.',
   openGraph: {
-    title: 'LiteTrainer — Manage Clients Easily',
-    description: 'Simple, intuitive client management system for online coaches.',
+    title: 'LITE Trainer — Manage Clients Easily',
+    description: 'Begginer-friendly client management system for fitness coaches.',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
     images: [
@@ -30,8 +30,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LiteTrainer — Manage Clients Easily',
-    description: 'Simple, intuitive client management system for online coaches.',
+    title: 'LITE Trainer — Manage Clients Easily',
+    description: 'Begginer-friendly client management system for fitness coaches.',
     images: ['https://litetrainer.com/opengraph-image.png'],
   },
 };

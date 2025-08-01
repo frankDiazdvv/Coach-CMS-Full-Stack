@@ -9,10 +9,10 @@ export const metadata = {
     default: 'LITE Trainer',
     template: '%s | LITE Trainer',
   },
-  description: 'The simplest client management tool for beginner online coaches.',
+  description: 'The simplest begginer-friendly client management system for fitness coaches.',
   twitter: {
     card: 'summary_large_image',
-  }
+  },
 };
 
 export default async function LocaleLayout({
