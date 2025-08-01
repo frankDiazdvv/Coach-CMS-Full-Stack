@@ -5,23 +5,31 @@ export default function sitemap(): Promise<MetadataRoute.Sitemap> {
  
     return Promise.resolve([
         {
-            url: `${process.env.PUBLIC_BASE_URL}`,
+            url: "https://litetrainer.com",
             lastModified: new Date(),
         },
         {
-            url: `${process.env.PUBLIC_BASE_URL}/en`,
+            url: `https://litetrainer.com/en`,
             lastModified: new Date(),
         },
         {
-            url: `${process.env.PUBLIC_BASE_URL}/es`,
+            url: `https://litetrainer.com/es`,
             lastModified: new Date(),
         },
         {
-            url: `${process.env.PUBLIC_BASE_URL}/login`,
+            url: `https://litetrainer.com/en/login`,
             lastModified: new Date(),
         },
         {
-            url: `${process.env.PUBLIC_BASE_URL}/sign-up`,
+            url: `https://litetrainer.com/en/sign-up`,
+            lastModified: new Date(),
+        },
+        {
+            url: `https://litetrainer.com/es/login`,
+            lastModified: new Date(),
+        },
+        {
+            url: `https://litetrainer.com/es/sign-up`,
             lastModified: new Date(),
         },
     ]);
