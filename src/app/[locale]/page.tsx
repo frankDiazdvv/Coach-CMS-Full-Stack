@@ -80,7 +80,7 @@ const features = [
   },
 ];
 
-export default function LiteTrainerLanding({ params }: { params: { locale: string } }) {
+export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
