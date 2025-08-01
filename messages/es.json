@@ -274,6 +274,143 @@
     "Forearms": "Antebrazos",
     "Abs": "Abdominales",
     "Lats": "Dorsales"
+  },
+
+  "metadata": {
+    "title": "Lite Trainer - Gestión Simple de Clientes para Entrenadores de Fitness",
+    "description": "Lite Trainer es un sistema de gestión de clientes asequible y fácil de usar para entrenadores de fitness principiantes. Gestiona clientes, entrenamientos y nutrición sin complicaciones.",
+    "keywords": "entrenamiento fitness, gestión de clientes, planificación de entrenamientos, seguimiento de nutrición, aplicación bilingüe de fitness"
+  },
+  "LandingPage": {
+    "hero": {
+      "badge": "Perfecto para Entrenadores Principiantes",
+      "title1": "Entrenamiento Simple",
+      "title2": "Hecho Poderoso",
+      "description": "El puente perfecto entre herramientas básicas y software empresarial costoso. ",
+      "description2": " te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio de entrenamiento — sin complejidad ni altos costos.",
+      "cta1": "Comienza la Prueba Gratis",
+      "cta2": "Ver Demo"
+    },
+    "stats": {
+      "price": "Precio Inicial/Mes",
+      "clients": "Clientes Incluidos",
+      "languages": "Idiomas Soportados"
+    },
+    "features": {
+      "title1": "Todo lo que Necesitas para",
+      "title2": "Escalar tu Entrenamiento",
+      "description": "Concéntrate en lo que más importa — entrenar a tus clientes. Nosotros nos encargamos de la tecnología.",
+      "items": [
+        {
+          "title": "Gestión Completa de Clientes",
+          "description": "Crea, edita y gestiona toda la información de tus clientes en un panel centralizado. Visualízalos todos de un vistazo."
+        },
+        {
+          "title": "Planificación Semanal de Entrenamientos y Nutrición",
+          "description": "Diseña horarios semanales completos para entrenamientos y nutrición. Sigue macros y planifica comidas con facilidad."
+        },
+        {
+          "title": "Registro de Entrenamientos en Tiempo Real",
+          "description": "Los clientes registran los entrenamientos completados al instante. Recibe notificaciones inmediatas en tu panel."
+        },
+        {
+          "title": "Análisis Inteligente del Panel",
+          "description": "Ve quién entrena hoy, rastrea vencimientos de membresías y visualiza la distribución de clientes con gráficos interactivos."
+        },
+        {
+          "title": "Soporte Bilingüe",
+          "description": "Plataforma completa disponible en inglés y español. Atiende a clientes diversos con opciones de idioma que funcionan para todos."
+        },
+        {
+          "title": "Experiencia Móvil Prioritaria",
+          "description": "Los clientes acceden a sus entrenamientos y comidas en movimiento con una interfaz optimizada para móviles."
+        },
+        {
+          "title": "Integración de Tutoriales en Video",
+          "description": "Adjunta enlaces de tutoriales en video a cualquier entrenamiento. Ayuda a los clientes a dominar la forma y técnica correctas."
+        },
+        {
+          "title": "Seguimiento de Macros y Comidas",
+          "description": "Los entrenadores de nutrición pueden seguir macros semanales y de comidas individuales para una guía dietética precisa."
+        }
+      ]
+    },
+    "why": {
+      "title1": "¿Por Qué Elegir",
+      "title2": "Lite Trainer?",
+      "items": [
+        {
+          "title": "Sin Curva de Aprendizaje",
+          "description": "Diseño intuitivo que se siente familiar desde el primer día. Comienza a entrenar, no a aprender software."
+        },
+        {
+          "title": "Solución Puente Perfecta",
+          "description": "Entre herramientas básicas y software empresarial costoso. Obtén funciones profesionales a un precio amigable para principiantes."
+        },
+        {
+          "title": "Enfoque en Funciones Esenciales",
+          "description": "Nos enfocamos en lo que los entrenadores realmente necesitan a diario, sin abrumarte con funciones innecesarias."
+        }
+      ],
+      "growth": {
+        "title": "Construido para el Crecimiento",
+        "description": "Comienza pequeño, escala de manera inteligente",
+        "features": [
+          "Gestión de Clientes",
+          "Planificación de Entrenamientos",
+          "Seguimiento de Nutrición",
+          "Acceso Móvil",
+          "Soporte Bilingüe"
+        ]
+      }
+    },
+    "pricing": {
+      "title1": "Precios Simples y Transparentes",
+      "title2": "",
+      "description": "Sin costos ocultos. Sin niveles complicados. Solo precios honestos que crecen contigo.",
+      "basic": {
+        "title": "Plan Básico",
+        "description": "Perfecto para comenzar",
+        "per": "por mes",
+        "features": [
+          "Hasta 10 clientes",
+          "Primeros 3 clientes gratis",
+          "Gestión completa de clientes",
+          "Planificación de entrenamientos y nutrición",
+          "Notificaciones en tiempo real",
+          "Interfaz amigable para móviles",
+          "Soporte en inglés y español",
+          "Integración de tutoriales en video"
+        ],
+        "cta": "Comenzar"
+      },
+      "vip": {
+        "title": "Plan VIP",
+        "description": "Funciones avanzadas para entrenadores en crecimiento",
+        "per": "por mes",
+        "price": "A Confirmar",
+        "coming": "Próximamente",
+        "features": [
+          "Hasta 25 clientes",
+          "Todas las funciones del plan básico",
+          "Sistema de medición especializado",
+          "Análisis avanzados",
+          "Soporte prioritario",
+          "Más funciones en desarrollo"
+        ],
+        "cta": "Notifícame Cuando Esté Disponible"
+      }
+    },
+    "cta": {
+      "title1": "¿Listo para Transformar",
+      "title2": "tu Negocio de Entrenamiento?",
+      "description": "Únete a la creciente comunidad de entrenadores que han descubierto el equilibrio perfecto entre simplicidad y potencia.",
+      "button": "Comienza la Prueba Gratis Ahora",
+      "note": "No se requiere tarjeta de crédito • Prueba gratis de 14 días"
+    },
+    "footer": {
+      "rights": "Todos los derechos reservados."
+    }
   }
 
 

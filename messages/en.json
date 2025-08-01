@@ -271,6 +271,143 @@
     "Forearms": "Forearms",
     "Abs": "Abs",
     "Lats": "Lats"
+  },
+
+  "metadata": {
+    "title": "Lite Trainer - Simple Client Management for Fitness Coaches",
+    "description": "Lite Trainer is an affordable, easy-to-use client management system for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.",
+    "keywords": "fitness coaching, client management, workout planning, nutrition tracking, bilingual fitness app"
+  },
+  "LandingPage": {
+    "hero": {
+      "badge": "Perfect for Beginner Coaches",
+      "title1": "Simple Coaching",
+      "title2": "Made Powerful",
+      "description": "The perfect bridge between basic tools and expensive enterprise software. ",
+      "description2": " gives you all the core features you need to grow your coaching business — without the complexity or cost.",
+      "cta1": "Start Free Trial",
+      "cta2": "Watch Demo"
+    },
+    "stats": {
+      "price": "Starting Price/Month",
+      "clients": "Clients Included",
+      "languages": "Languages Supported"
+    },
+    "features": {
+      "title1": "Everything You Need to",
+      "title2": "Scale Your Coaching",
+      "description": "Focus on what matters most — coaching your clients. We handle the technology.",
+      "items": [
+        {
+          "title": "Complete Client Management",
+          "description": "Create, edit, and manage all your clients’ information in one centralized dashboard. View everyone at a glance."
+        },
+        {
+          "title": "Weekly Workout & Nutrition Planning",
+          "description": "Design comprehensive weekly schedules for workouts and nutrition. Track macros and meal planning with ease."
+        },
+        {
+          "title": "Real-Time Workout Logging",
+          "description": "Clients log completed workouts instantly. Get immediate notifications in your dashboard to stay connected."
+        },
+        {
+          "title": "Smart Dashboard Analytics",
+          "description": "See who’s working out today, track membership expirations, and visualize client distribution with interactive charts."
+        },
+        {
+          "title": "Bilingual Support",
+          "description": "Full platform available in English and Spanish. Serve diverse clients with language options that work for everyone."
+        },
+        {
+          "title": "Mobile-First Client Experience",
+          "description": "Clients access their workouts and meals on-the-go with a responsive, mobile-optimized interface."
+        },
+        {
+          "title": "Video Tutorial Integration",
+          "description": "Attach video tutorial links to any workout. Help clients master proper form and technique."
+        },
+        {
+          "title": "Macro & Meal Tracking",
+          "description": "Nutrition coaches can track weekly macros and individual meal macros for precise dietary guidance."
+        }
+      ]
+    },
+    "why": {
+      "title1": "Why Choose",
+      "title2": "Lite Trainer?",
+      "items": [
+        {
+          "title": "No Learning Curve",
+          "description": "Intuitive design that feels familiar from day one. Start coaching, not learning software."
+        },
+        {
+          "title": "Perfect Bridge Solution",
+          "description": "Between basic tools and expensive enterprise software. Get professional features at a beginner-friendly price."
+        },
+        {
+          "title": "Core Features Focus",
+          "description": "We focus on what coaches actually need daily, without overwhelming you with unnecessary features."
+        }
+      ],
+      "growth": {
+        "title": "Built for Growth",
+        "description": "Start small, scale smartly",
+        "features": [
+          "Client Management",
+          "Workout Planning",
+          "Nutrition Tracking",
+          "Mobile Access",
+          "Bilingual Support"
+        ]
+      }
+    },
+    "pricing": {
+      "title1": "Simple, Transparent",
+      "title2": "Pricing",
+      "description": "No hidden fees. No complicated tiers. Just honest pricing that grows with you.",
+      "basic": {
+        "title": "Basic Plan",
+        "description": "Perfect for getting started",
+        "per": "per month",
+        "features": [
+          "Up to 10 clients",
+          "First 3 clients free",
+          "Complete client management",
+          "Workout & nutrition planning",
+          "Real-time notifications",
+          "Mobile-friendly interface",
+          "English & Spanish support",
+          "Video tutorial integration"
+        ],
+        "cta": "Get Started"
+      },
+      "vip": {
+        "title": "VIP Plan",
+        "description": "Advanced features for scaling coaches",
+        "per": "per month",
+        "price": "TBA",
+        "coming": "Coming Soon",
+        "features": [
+          "Up to 25 clients",
+          "All Basic plan features",
+          "Specialized measurement system",
+          "Advanced analytics",
+          "Priority support",
+          "More features in development"
+        ],
+        "cta": "Notify Me When Available"
+      }
+    },
+    "cta": {
+      "title1": "Ready to Transform",
+      "title2": "Your Coaching Business?",
+      "description": "Join the growing community of coaches who’ve discovered the perfect balance of simplicity and power.",
+      "button": "Start Free Trial Now",
+      "note": "No credit card required • 14-day free trial"
+    },
+    "footer": {
+      "rights": "All rights reserved."
+    }
   }
 
 }
