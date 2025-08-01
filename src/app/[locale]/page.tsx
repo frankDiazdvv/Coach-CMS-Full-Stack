@@ -1,4 +1,3 @@
-import { Metadata } from 'next';
 import { useTranslations } from 'next-intl';
 import { ChevronRight, Users, Calendar, Bell, BarChart3, Globe, Smartphone, Video, Target, Check, Star, ArrowRight } from 'lucide-react';
 import LandingPageTopBar from '../components/LandingPageTopBar';
@@ -11,79 +10,32 @@ const footerLogo = '/DarkBG-logo.svg';
 const domain = 'https://litetrainer.com';
 const ogImage = '/squareLogo.svg';
 
-export async function generateMetadata({ params }: { params: { locale: string } }): Promise<Metadata> {
-  const messages = (await import(`../../../messages/${await params.locale}.json`)).default;
-  const title = messages.metadata?.title || 'Lite Trainer - Simple Client Management for Fitness Coaches';
-  const description = messages.metadata?.description || 'Lite Trainer is an affordable, easy-to-use client management system for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.';
-  const keywords = messages.metadata?.keywords || 'fitness coaching, client management, workout planning, nutrition tracking, bilingual fitness app';
-
-  return {
-    title,
-    description,
-    keywords,
-    robots: 'index, follow',
-    alternates: {
-      canonical: `${domain}/${await params.locale}`,
-      languages: {
-        en: `${domain}/en`,
-        es: `${domain}/es`,
+export const metadata = {
+  title: 'LITE Trainer — Manage Clients Easily',
+  description: 'Simple, intuitive client management system designed for beginner online coaches. Get started today.',
+  openGraph: {
+    title: 'LiteTrainer — Manage Clients Easily',
+    description: 'Simple, intuitive client management system for online coaches.',
+    url: 'https://litetrainer.com',
+    siteName: 'LITE Trainer',
+    images: [
+      {
+        url: 'https://litetrainer.com/opengraph-image.png',
+        width: 1200,
+        height: 630,
+        alt: 'LiteTrainer dashboard preview',
       },
-    },
-    openGraph: {
-      title,
-      description,
-      url: `${domain}/${await params.locale}`,
-      type: 'website',
-      locale: await params.locale === 'es' ? 'es_ES' : 'en_US',
-      images: [
-        {
-          url: `${domain}${ogImage}`,
-          width: 1200,
-          height: 630,
-          alt: 'Lite Trainer Preview',
-        },
-      ],
-    },
-    twitter: {
-      card: 'summary_large_image',
-      title,
-      description,
-      images: [`${domain}${ogImage}`],
-    },
-    other: {
-      'application-name': 'Lite Trainer',
-    },
-  };
-}
-
-// Structured data for SEO (schema.org)
-const schema = (locale: string) => ({
-  '@context': 'https://schema.org',
-  '@type': 'SoftwareApplication',
-  name: 'Lite Trainer',
-  url: `${domain}/${locale}`,
-  description:
-    locale === 'es'
-      ? 'Lite Trainer es un sistema de gestión de clientes asequible y fácil de usar para entrenadores de fitness principiantes.'
-      : 'Lite Trainer is an affordable, easy-to-use client management system for beginner fitness coaches.',
-  applicationCategory: 'BusinessApplication',
-  operatingSystem: 'Web',
-  offers: {
-    '@type': 'Offer',
-    price: '9.99',
-    priceCurrency: 'USD',
-    availability: 'https://schema.org/InStock',
+    ],
+    type: 'website',
   },
-  inLanguage: locale === 'es' ? 'es' : 'en',
-  featureList: [
-    'Client Management',
-    'Workout Planning',
-    'Nutrition Tracking',
-    'Bilingual Support',
-    'Mobile Access',
-  ],
-  alternateName: ['LiteTrainer', 'Lite Trainer App'],
-});
+  twitter: {
+    card: 'summary_large_image',
+    title: 'LiteTrainer — Manage Clients Easily',
+    description: 'Simple, intuitive client management system for online coaches.',
+    images: ['https://litetrainer.com/opengraph-image.png'],
+  },
+};
+
 
 const features = [
   {
@@ -133,9 +85,6 @@ export default function LiteTrainerLanding({ params }: { params: { locale: strin
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
-      {/* Structured Data for SEO */}
-      <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema(params.locale)) }} />
-
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
