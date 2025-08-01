@@ -288,8 +288,8 @@
       "title2": "Hecho Poderoso",
       "description": "El puente perfecto entre herramientas básicas y software empresarial costoso. ",
       "description2": " te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio de entrenamiento — sin complejidad ni altos costos.",
-      "cta1": "Comienza la Prueba Gratis",
-      "cta2": "Ver Demo"
+      "cta1": "únete a Lite Trainer Ahora",
+      "cta2": "Hazta 3 Clientes Gratis antes de Comprometerte"
     },
     "stats": {
       "price": "Precio Inicial/Mes",
@@ -341,26 +341,26 @@
       "items": [
         {
           "title": "Sin Curva de Aprendizaje",
-          "description": "Diseño intuitivo que se siente familiar desde el primer día. Comienza a entrenar, no a aprender software."
+          "description": "Diseño simple e intuitivo que se siente familiar desde el primer día. Comienza a entrenar, no a aprender software."
         },
         {
           "title": "Solución Puente Perfecta",
-          "description": "Entre herramientas básicas y software empresarial costoso. Obtén funciones profesionales a un precio amigable para principiantes."
+          "description": "Deja de lidiar con tantas herramientas ó de tener que invertir tanto dinero en software con prestaciones innecesarias. Obtén funciones profesionales a un precio amigable para principiantes."
         },
         {
           "title": "Enfoque en Funciones Esenciales",
-          "description": "Nos enfocamos en lo que los entrenadores realmente necesitan a diario, sin abrumarte con funciones innecesarias."
+          "description": "Nos enfocamos en las prestaciones que los entrenadores realmente necesitan a diario, sin abrumarte con funciones innecesarias."
         }
       ],
       "growth": {
         "title": "Construido para el Crecimiento",
         "description": "Comienza pequeño, escala de manera inteligente",
         "features": [
-          "Gestión de Clientes",
-          "Planificación de Entrenamientos",
-          "Seguimiento de Nutrición",
-          "Acceso Móvil",
-          "Soporte Bilingüe"
+          "Gestión total de Clientes",
+          "Planificación de Entrenamientos Semanal con una gran base de datos",
+          "Seguimiento de Nutrición Semanal con datos de macronutrientes",
+          "Acceso Móvil para Clientes con capacidades de registro",
+          "Soporte Bilingüe para hablantes de español e inglés"
         ]
       }
     },
@@ -388,7 +388,7 @@
         "title": "Plan VIP",
         "description": "Funciones avanzadas para entrenadores en crecimiento",
         "per": "por mes",
-        "price": "A Confirmar",
+        "price": "N/A",
         "coming": "Próximamente",
         "features": [
           "Hasta 25 clientes",
@@ -404,9 +404,9 @@
     "cta": {
       "title1": "¿Listo para Transformar",
       "title2": "tu Negocio de Entrenamiento?",
-      "description": "Únete a la creciente comunidad de entrenadores que han descubierto el equilibrio perfecto entre simplicidad y potencia.",
-      "button": "Comienza la Prueba Gratis Ahora",
-      "note": "No se requiere tarjeta de crédito • Prueba gratis de 14 días"
+      "description": "Diseñado para entrenadores que recién comienzan, Lite Trainer te ayuda a liberarte de la carga de manejar múltiples aplicaciones. No necesitas comprometerte con software costoso.",
+      "button": "Comienza tu Prueba Gratis Ahora",
+      "note": "Dizfruta de los primeros 3 clientes gratis. No tarjeta requerida. Sin compromisos."
     },
     "footer": {
       "rights": "Todos los derechos reservados."

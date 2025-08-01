@@ -42,6 +42,7 @@ export default async function LocaleLayout({
         <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png" />
         <meta name="apple-mobile-web-app-title" content="LITE Trainer" />
         <link rel="manifest" href="/site.webmanifest" />
+        <link rel="canonical" href={`https://litetrainer.com/${locale}`} />
         {/* Alternate language links */}
         <link rel="alternate" href="https://litetrainer.com/en" hrefLang="en" />
         <link rel="alternate" href="https://litetrainer.com/es" hrefLang="es" />

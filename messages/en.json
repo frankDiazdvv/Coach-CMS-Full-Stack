@@ -285,8 +285,8 @@
       "title2": "Made Powerful",
       "description": "The perfect bridge between basic tools and expensive enterprise software. ",
       "description2": " gives you all the core features you need to grow your coaching business — without the complexity or cost.",
-      "cta1": "Start Free Trial",
-      "cta2": "Watch Demo"
+      "cta1": "Join LITE Trainer Now",
+      "cta2": "Up to 3 Clients Free before you commit"
     },
     "stats": {
       "price": "Starting Price/Month",
@@ -338,40 +338,40 @@
       "items": [
         {
           "title": "No Learning Curve",
-          "description": "Intuitive design that feels familiar from day one. Start coaching, not learning software."
+          "description": "Simple and intuitive design that feels familiar from day one. Start coaching, not learning software."
         },
         {
-          "title": "Perfect Bridge Solution",
-          "description": "Between basic tools and expensive enterprise software. Get professional features at a beginner-friendly price."
+          "title": "Perfect Beginner Solution",
+          "description": "Stop dealing with a plethora of tools or having to invest a lot of cash in a software with features you don't need just to keep track of your clients. Get professional features at a beginner-friendly price."
         },
         {
           "title": "Core Features Focus",
-          "description": "We focus on what coaches actually need daily, without overwhelming you with unnecessary features."
+          "description": "We focus on the core needs coaches actually need daily, without overwhelming you with unnecessary features."
         }
       ],
       "growth": {
         "title": "Built for Growth",
         "description": "Start small, scale smartly",
         "features": [
-          "Client Management",
-          "Workout Planning",
-          "Nutrition Tracking",
-          "Mobile Access",
-          "Bilingual Support"
+          "Full Client Management",
+          "Weekly Workout Planning with huge Database",
+          "Weekly Nutrition Tracking with Macro Nutrient Data",
+          "Mobile Access for Clients with logging capabilities",
+          "Bilingual Support for Spanish and English speakers"
         ]
       }
     },
     "pricing": {
       "title1": "Simple, Transparent",
       "title2": "Pricing",
-      "description": "No hidden fees. No complicated tiers. Just honest pricing that grows with you.",
+      "description": "No hidden fees. No complicated tiers. Just honest simple pricing that grows with you.",
       "basic": {
         "title": "Basic Plan",
         "description": "Perfect for getting started",
         "per": "per month",
         "features": [
-          "Up to 10 clients",
           "First 3 clients free",
+          "Up to 10 clients",
           "Complete client management",
           "Workout & nutrition planning",
           "Real-time notifications",
@@ -395,15 +395,15 @@
           "Priority support",
           "More features in development"
         ],
-        "cta": "Notify Me When Available"
+        "cta": "Available Soon"
       }
     },
     "cta": {
       "title1": "Ready to Transform",
       "title2": "Your Coaching Business?",
-      "description": "Join the growing community of coaches who’ve discovered the perfect balance of simplicity and power.",
-      "button": "Start Free Trial Now",
-      "note": "No credit card required • 14-day free trial"
+      "description": "Designed for coaches just starting out, Lite Trainer helps you break free from juggling multiple apps. No need to commit to expensive software.",
+      "button": "Join LITE Trainer Now",
+      "note": "Enjoy up to 3 clients for free. No credit card required. No strings attached."
     },
     "footer": {
       "rights": "All rights reserved."

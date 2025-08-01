@@ -11,10 +11,10 @@ const domain = 'https://litetrainer.com';
 const ogImage = '/squareLogo.svg';
 
 export const metadata = {
-  title: 'LITE Trainer — Manage Clients Easily',
-  description: 'Simple, intuitive client management system designed for beginner online coaches. Get started today.',
+  title: 'LITE Trainer — Begginer Friendly Client Management System',
+  description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
   openGraph: {
-    title: 'LITE Trainer — Manage Clients Easily',
+    title: 'LITE Trainer — Begginer Friendly Client Management System',
     description: 'Begginer-friendly client management system for fitness coaches.',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
@@ -283,7 +283,7 @@ export default function LiteTrainerLanding() {
               </span>
               <br />
               <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
-                {t('pricing.title2') || 'Pricing'}
+                {t('pricing.title2') || ''}
               </span>
             </h2>
             <p className="text-xl text-gray-300 max-w-3xl mx-auto">
