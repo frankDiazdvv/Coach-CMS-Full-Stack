@@ -6,6 +6,7 @@ import NutritionSchedule from '../../../../../../lib/models/nutrition';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
 import WorkoutLog from '../../../../../../lib/models/workoutLogs';
+import Coach from '../../../../../../lib/models/coach';
 
 function getIdFromRequest(request: NextRequest): string | null {
   const segments = request.nextUrl.pathname.split('/');
@@ -137,6 +138,10 @@ export async function DELETE(request: NextRequest) {
     }
 
     await WorkoutLog.deleteMany({ client: id });
+
+    // Decrement clientCount
+    await Coach.findByIdAndUpdate(client.coach, { $inc: { clientCount: -1 } });
+
 
     return new NextResponse(JSON.stringify({ message: 'Client deleted successfully' }), {
       status: 200,

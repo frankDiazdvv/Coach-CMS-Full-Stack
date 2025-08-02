@@ -5,6 +5,12 @@ import WorkoutSchedule, { IWorkout } from '../../../../../lib/models/workouts';
 import NutritionSchedule, { INutritionItem } from '../../../../../lib/models/nutrition';
 import Coach from '../../../../../lib/models/coach';
 import { authMiddleware } from '../../../../../lib/auth';
+import Stripe from 'stripe';
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2025-07-30.basil', // API version
+});
+
 
 export async function GET() {
   try {
@@ -30,12 +36,14 @@ export const POST = async (request: Request) => {
       nutritionSchedule?: { schedule: { weekDay: string; items: INutritionItem[] }[] };
     };
 
-    if (!body.firstName || !body.email || !body.password || !body.phone ||
-       !body.gender || !body.goal || !body.currentWeight || !body.planAssigned || !body.coach) {
-      return new NextResponse('Missing required fields', { status: 400 });
+    const requiredFields = ['firstName', 'email', 'password', 'phone', 'gender', 'goal', 'currentWeight', 'planAssigned', 'coach'];
+    for (const field of requiredFields) {
+      if (!body[field as keyof typeof body]) {
+        return new NextResponse(`Missing field: ${field}`, { status: 400 });
+      }
     }
 
-    if (body.coach.toString() !== (auth).id) {
+    if (body.coach?.toString() !== (auth).id) {
       return new NextResponse('Unauthorized: Coach ID mismatch', { status: 403 });
     }
 
@@ -47,20 +55,60 @@ export const POST = async (request: Request) => {
       return new NextResponse('Plan not found in coach’s plans', { status: 400 });
     }
 
-    const canCreateClient = coach.isSubscribed || coach.clients.lenght < 3;
+    // Check client limit and subscription status
+    const FREE_CLIENT_LIMIT = 3;
+    const BASIC_PAID_LIMIT = 10;
 
-    if (!canCreateClient) {
-      return new Response(
-        JSON.stringify({ error: 'Upgrade required to add more than 3 clients.' }),
+    if (!coach.isSubscribed && coach.clientCount >= FREE_CLIENT_LIMIT) {
+      // First, check if they have a Stripe customer
+      if (!coach.stripeCustomerId) {
+        const customer = await stripe.customers.create({
+          email: coach.email,
+          name: coach.name,
+        });
+
+        await Coach.findByIdAndUpdate(coach._id, { stripeCustomerId: customer.id });
+        coach.stripeCustomerId = customer.id;
+      }
+
+      // Now check if there's an active subscription
+      const subscriptions = await stripe.subscriptions.list({
+        customer: coach.stripeCustomerId,
+        status: 'active',
+        limit: 1,
+      });
+
+      if (subscriptions.data.length === 0) {
+        return new NextResponse(
+          JSON.stringify({
+            error: 'Free limit reached. Please subscribe to add more clients.',
+            redirectToCheckout: true,
+          }),
+          { status: 403 }
+        );
+      }
+
+      // Update coach subscription status if active sub is found
+      coach.isSubscribed = true;
+      await coach.save();
+    }
+
+    if (coach.isSubscribed && coach.clientCount >= BASIC_PAID_LIMIT) {
+      return new NextResponse(
+        JSON.stringify({ error: 'Maximum of 10 clients reached for your current plan.' }),
         { status: 403 }
       );
     }
+
 
     const newClient = await Client.create({
       ...body,
       workoutSchedule: undefined,
       nutritionSchedule: undefined,
     });
+
+    // Increment clientCount
+    await Coach.findByIdAndUpdate(coach._id, { $inc: { clientCount: 1 } });
 
     // Create empty workout schedule if not provided
     const workoutScheduleData = body.workoutSchedule?.schedule || [];

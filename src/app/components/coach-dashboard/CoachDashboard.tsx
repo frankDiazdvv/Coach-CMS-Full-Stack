@@ -265,22 +265,17 @@ const CoachDashboard: React.FC = () => {
     }
   }, [dueSoonClientId, areCoachClients]);
 
-  // const handleUpgrade = async () => {
-  //   const res = await fetch('/api/create-checkout-session', {
-  //     method: 'POST',
-  //     body: JSON.stringify({
-  //       email: user.email,
-  //       priceId: 'price_id_for_your_plan',
-  //     }),
-  //     headers: {
-  //       'Content-Type': 'application/json',
-  //     },
-  //   });
+  const handleUpgrade = async () => {
+    const res = await fetch('/api/create-checkout-session', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ coachId: coach?._id }),
+    });
 
-  //   const { sessionId } = await res.json();
-  //   const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
-  //   await stripe?.redirectToCheckout({ sessionId });
-  // };
+    const { url } = await res.json();
+    window.location.href = url; // Redirect to Stripe Checkout
+  };
+
 
 
 
@@ -315,7 +310,7 @@ const CoachDashboard: React.FC = () => {
               </p>
               <button
                 className="mt-2 px-4 py-2 bg-purple-600 text-white rounded-md"
-                // onClick={() => handleUpgrade()}
+                onClick={() => handleUpgrade()}
               >
                 Upgrade Now
               </button>

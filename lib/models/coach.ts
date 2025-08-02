@@ -1,7 +1,7 @@
+// coach.ts
 import { Schema, model, models, Types } from 'mongoose';
 import bcrypt from 'bcrypt';
 
-// Define the coach interface
 export interface ICoach {
   name: string;
   email: string;
@@ -9,6 +9,8 @@ export interface ICoach {
   phone: string;
   plans: string[];
   isSubscribed: boolean;
+  clientCount: number; // New field to track client count
+  stripeCustomerId?: string; // Optional field for Stripe customer ID
   createdAt?: Date;
   updatedAt?: Date;
   _id?: Types.ObjectId;
@@ -22,6 +24,8 @@ const CoachSchema = new Schema<ICoach>(
     phone: { type: String, required: true },
     plans: [{ type: String, required: true }],
     isSubscribed: { type: Boolean, default: false },
+    clientCount: { type: Number, default: 0 }, // Initialize to 0
+    stripeCustomerId: { type: String, required: false }, // Optional
   },
   { timestamps: true }
 );
