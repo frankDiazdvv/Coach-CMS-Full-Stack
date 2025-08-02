@@ -30,8 +30,8 @@ export const metadata = {
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LITE Trainer — Manage Clients Easily',
-    description: 'Begginer-friendly client management system for fitness coaches.',
+    title: 'LITE Trainer — Begginer Friendly Client Management System',
+    description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
     images: ['https://litetrainer.com/opengraph-image.png'],
   },
 };

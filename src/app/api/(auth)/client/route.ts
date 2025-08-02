@@ -47,6 +47,15 @@ export const POST = async (request: Request) => {
       return new NextResponse('Plan not found in coach’s plans', { status: 400 });
     }
 
+    const canCreateClient = coach.isSubscribed || coach.clients.lenght < 3;
+
+    if (!canCreateClient) {
+      return new Response(
+        JSON.stringify({ error: 'Upgrade required to add more than 3 clients.' }),
+        { status: 403 }
+      );
+    }
+
     const newClient = await Client.create({
       ...body,
       workoutSchedule: undefined,

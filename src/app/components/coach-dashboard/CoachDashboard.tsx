@@ -249,6 +249,7 @@ const CoachDashboard: React.FC = () => {
       setIsLoading(false);
     }
   };
+  
 
   useEffect(() => {
     if (viewClientId) {
@@ -263,6 +264,24 @@ const CoachDashboard: React.FC = () => {
       setDueSoonClientDetails(selectedDueSoonClient || null);
     }
   }, [dueSoonClientId, areCoachClients]);
+
+  // const handleUpgrade = async () => {
+  //   const res = await fetch('/api/create-checkout-session', {
+  //     method: 'POST',
+  //     body: JSON.stringify({
+  //       email: user.email,
+  //       priceId: 'price_id_for_your_plan',
+  //     }),
+  //     headers: {
+  //       'Content-Type': 'application/json',
+  //     },
+  //   });
+
+  //   const { sessionId } = await res.json();
+  //   const stripe = await loadStripe(process.env.NEXT_PUBLIC_STRIPE_PUBLISHABLE_KEY!);
+  //   await stripe?.redirectToCheckout({ sessionId });
+  // };
+
 
 
   const clientDetailsSchedule = clientDetails?.workoutSchedule as IWorkoutSchedule;
@@ -289,6 +308,19 @@ const CoachDashboard: React.FC = () => {
     <div className="min-h-screen ">
       {/* Main Content */}
       <div className="absolute left-20 right-0 xl:right-80 md:right-72 p-6 pb-8">
+        {coach && !coach.isSubscribed && areCoachClients.length >= 3 && (
+            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mt-4">
+              <p className="text-yellow-800 font-semibold">
+                You’ve reached the free client limit. Upgrade to manage more clients.
+              </p>
+              <button
+                className="mt-2 px-4 py-2 bg-purple-600 text-white rounded-md"
+                // onClick={() => handleUpgrade()}
+              >
+                Upgrade Now
+              </button>
+            </div>
+          )}
         {/* Header */}
         <div className="mb-8 flex items-center justify-between bg-white rounded-2xl shadow-sm p-4 border border-slate-200">
           <div className="flex items-center space-x-4">

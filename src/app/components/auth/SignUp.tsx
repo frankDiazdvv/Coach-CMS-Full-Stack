@@ -15,6 +15,7 @@ const Signup: React.FC = () => {
     const [password, setPassword] = useState('');
     const [phone, setPhone] = useState('');
     const [plansInput, setPlansInput] = useState('');
+    const [membershipInput, setMembershipInput] = useState('');
     const [error, setError] = useState('');
     const router = useRouter();
 
@@ -130,6 +131,23 @@ const Signup: React.FC = () => {
                             placeholder="Enter your plans separated by comma"
                         />
                     </div>
+                    <div>
+                    <label htmlFor="plan" className="block text-sm font-medium text-gray-700">
+                        Choose Membership
+                    </label>
+                    <select
+                        id="membership"
+                        required
+                        value={membershipInput}
+                        onChange={(e) => setMembershipInput(e.target.value)}
+                        className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2"
+                    >
+                        <option value="" disabled>Select a plan</option>
+                        <option value="price_basic_id">Basic - $9.99/mo</option>
+                        <option value="price_pro_id" disabled>Pro - $24.99/mo</option>
+                    </select>
+                    </div>
+
                     {error && <p className="text-sm text-red-500">{error}</p>}
                     <button
                         type="submit"
@@ -141,7 +159,8 @@ const Signup: React.FC = () => {
                         {isLoading ? 'Signing Up...' : 'Sign Up'}
                     </button>
                 </form>
-                <div className="mt-4 text-center text-sm text-gray-600">
+                <div className="mt-2 text-center text-sm text-gray-600">
+                    <p>All information is required</p>
                     <p>
                         Already have an account?{' '}
                         <Link href="/login" className="text-blue-600 hover:underline">

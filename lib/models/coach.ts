@@ -8,6 +8,7 @@ export interface ICoach {
   password: string;
   phone: string;
   plans: string[];
+  isSubscribed: boolean;
   createdAt?: Date;
   updatedAt?: Date;
   _id?: Types.ObjectId;
@@ -20,6 +21,7 @@ const CoachSchema = new Schema<ICoach>(
     password: { type: String, required: true },
     phone: { type: String, required: true },
     plans: [{ type: String, required: true }],
+    isSubscribed: { type: Boolean, default: false },
   },
   { timestamps: true }
 );
