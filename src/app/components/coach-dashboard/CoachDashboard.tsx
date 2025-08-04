@@ -17,6 +17,8 @@ import { WorkoutLog } from '../../../../lib/models/types';
 import Link from 'next/link';
 import TotalLogsByClientChart from './TotalLogChart';
 import PieChartAllClients from './PieChartAllClients';
+import router from 'next/router';
+import MembershipButtons from './MembershipButtons';
 
 interface ClientWorkoutSummary {
   clientId: string;
@@ -265,20 +267,6 @@ const CoachDashboard: React.FC = () => {
     }
   }, [dueSoonClientId, areCoachClients]);
 
-  const handleUpgrade = async () => {
-    const res = await fetch('/api/create-checkout-session', {
-      method: 'POST',
-      headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ coachId: coach?._id }),
-    });
-
-    const { url } = await res.json();
-    window.location.href = url; // Redirect to Stripe Checkout
-  };
-
-
-
-
   const clientDetailsSchedule = clientDetails?.workoutSchedule as IWorkoutSchedule;
 
   if (!coachId) {
@@ -303,19 +291,18 @@ const CoachDashboard: React.FC = () => {
     <div className="min-h-screen ">
       {/* Main Content */}
       <div className="absolute left-20 right-0 xl:right-80 md:right-72 p-6 pb-8">
+        {/* Choose Membership */}
         {coach && !coach.isSubscribed && areCoachClients.length >= 3 && (
-            <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mt-4">
-              <p className="text-yellow-800 font-semibold">
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6">
+            <p className="text-yellow-800 font-semibold">
                 You’ve reached the free client limit. Upgrade to manage more clients.
-              </p>
-              <button
-                className="mt-2 px-4 py-2 bg-purple-600 text-white rounded-md"
-                onClick={() => handleUpgrade()}
-              >
-                Upgrade Now
-              </button>
+            </p>
+            <h3 className='text-xl font-bold'>Choose Membership</h3>
+            <div className='flex gap-4 mt-4'>
+              <MembershipButtons coachId={coach._id?.toString() || ''} />
             </div>
-          )}
+          </div>
+        )}
         {/* Header */}
         <div className="mb-8 flex items-center justify-between bg-white rounded-2xl shadow-sm p-4 border border-slate-200">
           <div className="flex items-center space-x-4">
@@ -340,16 +327,30 @@ const CoachDashboard: React.FC = () => {
           </div>
 
           {/* ADD CLIENT BUTTON */}
-          <button
-            onClick={() => setIsModalOpen(true)}
-            className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700
-             text-white cursor-pointer font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
-          >
-            <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
-            </svg>
-            {t('addClient')}
-          </button>
+          {coach && !coach.isSubscribed && areCoachClients.length >= 3 ? (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-400 to-gray-500
+              text-white cursor-not-allowed font-medium rounded-xl shadow-md"
+              disabled
+            >
+              <svg className="w-5 h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              {t('addClient')}
+            </button>
+          ) : (
+            <button
+              onClick={() => setIsModalOpen(true)}
+              className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700
+              text-white cursor-pointer font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
+            >
+              <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
+              </svg>
+              {t('addClient')}
+            </button>
+          )}
         </div>
         
         <AddClientModal

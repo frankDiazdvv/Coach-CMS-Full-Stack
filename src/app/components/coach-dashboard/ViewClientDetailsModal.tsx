@@ -12,10 +12,11 @@ interface ViewClientDetailsProps {
   onClose: () => void;
   client: IClient | null;
   coach: ICoach | null;
+  clientLength: number;
   onPageRefresh: () => void;
 }
 
-const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onClose, client, coach, onPageRefresh }) => {
+const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onClose, client, coach, clientLength, onPageRefresh }) => {
   const t = useTranslations();
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState<string | null>(null);
@@ -209,6 +210,7 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
             </div>
           )}
 
+          
           <div className="space-y-6">
             {/* Quick Actions */}
             <div>
@@ -237,119 +239,131 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
               </div>
             </div>
             
-            {/* Personal Information */}
-            <div>
-              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center">
-                  <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                  </svg>
-                </div>
-                {t('personalInformation')}
-              </h3>
-              
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('firstName')} <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="firstName"
-                    value={formData.firstName || ''}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                    placeholder={t('enterFirstName')}
-                  />
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('lastName')} <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="text"
-                    name="lastName"
-                    value={formData.lastName || ''}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                    placeholder={t('enterLastName')}
-                  />
-                </div>
-              </div>
+            <fieldset 
+              disabled={!!(coach && !coach.isSubscribed && clientLength >= 3)}
+              className='text-gray-400'
+            >
+              {coach && !coach.isSubscribed && clientLength >= 3 && (
+                <p className="text-red-500 mb-6">
+                  You’ve reached the free client limit. Upgrade your plan to edit clients.*
+                </p>
+              )}
 
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
+              {/* Personal Information */}
+              <div>
+                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                  <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center">
+                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                    </svg>
+                  </div>
+                  {t('personalInformation')}
+                </h3>
+                
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('firstName')} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="firstName"
+                      value={formData.firstName || ''}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                      placeholder={t('enterFirstName')}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('lastName')} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="text"
+                      name="lastName"
+                      value={formData.lastName || ''}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                      placeholder={t('enterLastName')}
+                    />
+                  </div>
+                </div>
+
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('phone')} <span className="text-red-500">*</span>
+                    </label>
+                    <input
+                      type="tel"
+                      name="phone"
+                      value={formData.phone || ''}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                      placeholder={t('enterPhone')}
+                    />
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">
+                      {t('newPassword')} ({t('optional')})
+                    </label>
+                    <input
+                      type="password"
+                      name="password"
+                      value={formData.password || ''}
+                      autoComplete='new-password'
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                      placeholder={t('typeNewPassword')}
+                    />
+                  </div>
+                </div>
+
+                <div className="mt-4">
                   <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('phone')} <span className="text-red-500">*</span>
+                    {t('email')} <span className="text-red-500">*</span>
                   </label>
                   <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone || ''}
+                    type="email"
+                    name="email"
+                    value={formData.email || ''}
+                    autoComplete='client@email.com'
                     onChange={handleChange}
                     className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                    placeholder={t('enterPhone')}
+                    placeholder={t('enterEmail')}
                   />
                 </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('newPassword')} ({t('optional')})
-                  </label>
-                  <input
-                    type="password"
-                    name="password"
-                    value={formData.password || ''}
-                    autoComplete='new-password'
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                    placeholder={t('typeNewPassword')}
-                  />
-                </div>
-              </div>
 
-              <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-2">
-                  {t('email')} <span className="text-red-500">*</span>
-                </label>
-                <input
-                  type="email"
-                  name="email"
-                  value={formData.email || ''}
-                  autoComplete='client@email.com'
-                  onChange={handleChange}
-                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                  placeholder={t('enterEmail')}
-                />
-              </div>
-
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('gender')}</label>
-                  <select
-                    name="gender"
-                    value={formData.gender || ''}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white appearance-none"
-                  >
-                    <option value="">{t('selectGender')}</option>
-                    <option value="Male">{t('male')}</option>
-                    <option value="Female">{t('female')}</option>
-                    <option value="Other">{t('other')}</option>
-                  </select>
-                </div>
-                <div>
-                  <label className="block text-sm font-medium text-gray-700 mb-2">{t('goal')}</label>
-                  <input
-                    type="text"
-                    name="goal"
-                    value={formData.goal || ''}
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                    placeholder={t('enterGoal')}
-                  />
+                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('gender')}</label>
+                    <select
+                      name="gender"
+                      value={formData.gender || ''}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white appearance-none"
+                    >
+                      <option value="">{t('selectGender')}</option>
+                      <option value="Male">{t('male')}</option>
+                      <option value="Female">{t('female')}</option>
+                      <option value="Other">{t('other')}</option>
+                    </select>
+                  </div>
+                  <div>
+                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('goal')}</label>
+                    <input
+                      type="text"
+                      name="goal"
+                      value={formData.goal || ''}
+                      onChange={handleChange}
+                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                      placeholder={t('enterGoal')}
+                    />
+                  </div>
                 </div>
               </div>
-            </div>
+            </fieldset>
+            
 
             {/* Fitness Information */}
             <div>
@@ -455,13 +469,29 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
                 )}
                 {t('saveChanges')}
               </button>
+              {coach && !coach.isSubscribed && clientLength >= 3 ? (  
+                <button
+                  onClick={handleDelete}
+                  disabled={isLoading}
+                  className={`flex items-center gap-2 px-6 py-2 rounded-xl font-medium transition-all ${
+                    isLoading
+                      ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
+                      : 'bg-gray-600 text-white cursor-not-allowed hover:bg-gray-700 shadow-md hover:shadow-lg'
+                  }`}
+                >
+                  <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+                  </svg>
+                  {t('deleteUser')}
+                </button>
+              ) : (
               <button
                 onClick={handleDelete}
                 disabled={isLoading}
                 className={`flex items-center gap-2 px-6 py-2 rounded-xl font-medium transition-all ${
                   isLoading
                     ? 'bg-gray-300 text-gray-500 cursor-not-allowed'
-                    : 'bg-red-600 text-white hover:bg-red-700 shadow-md hover:shadow-lg'
+                    : 'bg-red-600 text-white cursor-pointer hover:bg-red-700 shadow-md hover:shadow-lg'
                 }`}
               >
                 <svg className="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -469,6 +499,7 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
                 </svg>
                 {t('deleteUser')}
               </button>
+              )}
             </div>
             <button
               onClick={handleCancel}

@@ -11,6 +11,7 @@ import LeftSideNav from '@/app/components/LeftSideNav';
 import { IClient } from '../../../../../lib/models/clients';
 import { ICoach } from '../../../../../lib/models/coach';
 import ViewClientDetailsModal from '@/app/components/coach-dashboard/ViewClientDetailsModal';
+import MembershipButtons from '@/app/components/coach-dashboard/MembershipButtons';
 
 type SortField = 'name' | 'email' | 'phone' | 'goal' | 'planAssigned' | 'planExpires';
 type SortDirection = 'asc' | 'desc';
@@ -217,6 +218,18 @@ const ClientsPage: React.FC = () => {
 
       {/* Main Content */}
       <main className="flex-1 ml-20 p-8 overflow-y-auto">
+        {/* Choose Membership */}
+        {selectedCoach && !selectedCoach.isSubscribed && clients.length >= 3 && (
+          <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6">
+            <p className="text-yellow-800 font-semibold">
+                You’ve reached the free client limit. Upgrade to manage more clients.
+            </p>
+            <h3 className='text-xl font-bold'>Choose Membership</h3>
+            <div className='flex gap-4 mt-4'>
+              <MembershipButtons coachId={selectedCoach._id?.toString() || ''} />
+            </div>
+          </div>
+        )}
         {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">
@@ -386,6 +399,7 @@ const ClientsPage: React.FC = () => {
           onClose={() => setIsModalOpen(false)}
           client={selectedClient}
           coach={selectedCoach}
+          clientLength={filteredClients.length}
           onPageRefresh={handleRefreshingPage}
         />
       </main>

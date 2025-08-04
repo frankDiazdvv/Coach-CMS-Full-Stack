@@ -7,6 +7,8 @@ import { ICoach } from "../../../../lib/models/coach";
 import { routing } from "@/i18n/routing";
 import { useRouter } from "@/i18n/navigation";
 import { usePathname } from "next/navigation";
+import MembershipButtons from "./MembershipButtons";
+import { Sparkles, ClipboardPlus, Dumbbell } from "lucide-react"
 
 const CoachProfile: React.FC = () => {
     const locale: string = useLocale();
@@ -22,6 +24,8 @@ const CoachProfile: React.FC = () => {
     const [phone, setPhone] = useState('');
     const [plans, setPlans] = useState<string[]>([]);
     const [newPlan, setNewPlan] = useState('');
+    const [planName, setPlanName] = useState('');
+    const [isSubscribed, setIsSubscribed] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -79,6 +83,8 @@ const CoachProfile: React.FC = () => {
             setEmail(coachData.email || '');
             setPhone(coachData.phone || '');
             setPlans(coachData.plans || []);
+            setPlanName(coachData.planName);
+            setIsSubscribed(coachData.isSubscribed);
         } catch (err: unknown) {
             const message = err instanceof Error ? err.message : t("genericError");
             setError(message);
@@ -147,6 +153,10 @@ const CoachProfile: React.FC = () => {
                 window.location.href = `/${nextLocale}${pathWithoutLocale}`;
             }
         }, 100); // Small delay to allow router.replace to attempt first
+    }
+
+    const handleManageBilling = () => {
+        window.location.href = "https://billing.stripe.com/p/login/6oUaEYb0u06v0LJ5ao7kc00";
     }
 
     const getLanguageFlag = (lang: string) => {
@@ -313,12 +323,12 @@ const CoachProfile: React.FC = () => {
                                 {/* Training Plans Section */}
                                 <div>
                                     <div className="flex items-center gap-3 mb-4">
-                                        <div className="w-6 h-6 bg-green-100 rounded-lg flex items-center justify-center">
-                                            <svg className="w-4 h-4 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                            <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z" />
                                             </svg>
                                         </div>
-                                        <label className="text-sm font-medium text-gray-700">{t("trainingPlans")}</label>
+                                        <label className="text-xl font-bold text-black">{t("trainingPlans")}</label>
                                     </div>
                                     
                                     <div className="space-y-3">
@@ -379,7 +389,53 @@ const CoachProfile: React.FC = () => {
                                 </div>
                             </div>
                         </div>
+                        {/* Membership Section */}
+                        <div className="mt-8 p-6 bg-white rounded-2xl shadow-lg">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
+                                    <Sparkles className="w-5 h-5 text-blue-600" />
+                                </div>
+                                <h2 className="text-xl font-bold text-gray-900">Your Current Plan</h2>
+                            </div>
+                            <div className="mb-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
+                                <p className="text-lg">
+                                    <span className="font-semibold">{isSubscribed ? `${planName}\u00A0` : 'Free Plan\u00A0'}</span>
+                                    — {isSubscribed ? '$15/mo, up to 25 clients' : 'Free, up to 3 clients'}
+                                </p>
+                            </div>
+                            {/* Check if client is subscribed */}
+                            {coach && coach.isSubscribed ? (
+                                <div className="mt-12">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
+                                            <Dumbbell className="w-5 h-5 text-gray-600" />
+                                        </div>
+                                        <h2 className="text-xl font-bold text-gray-900">Manage Your Membership</h2>
+                                    </div>
+                                    <button
+                                        onClick={handleManageBilling}
+                                        className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                                    >
+                                        Manage Billing
+                                    </button>       
+                                </div>                  
+                            ) : (
+                                <div className="mt-12">
+                                    <div className="flex items-center gap-3 mb-6">
+                                        <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
+                                            <ClipboardPlus className="w-5 h-5 text-green-600" />
+                                        </div>
+                                        <h2 className="text-xl font-bold text-gray-900">Become a member and enjoy more benefits</h2>
+                                    </div>
+                                    <div className="flex flex-row gap-4">
+                                        <MembershipButtons coachId={coachId?.toString()!}/>    
+                                    </div>
+                                </div>
+                                  
+                            )}
+                        </div>
                     </div>
+                    
 
                     {/* Settings Sidebar */}
                     <div className="lg:col-span-1">
