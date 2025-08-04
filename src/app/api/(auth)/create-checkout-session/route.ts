@@ -12,7 +12,7 @@ export const POST = async (req: Request) => {
     const body = await req.text();
     console.log('Raw request body:', body);
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL || 'http://localhost:3000';
+    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
 
 
     const { coachId, priceId, locale } = JSON.parse(body);
