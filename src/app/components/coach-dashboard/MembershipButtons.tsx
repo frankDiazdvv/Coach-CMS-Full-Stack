@@ -7,7 +7,6 @@ import { Crown } from 'lucide-react';
 export default function PricingButtons({ coachId }: { coachId: string }) {
     const locale = useLocale();
 
-
   const starterPriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_STARTER!;
   const vipPriceId = process.env.NEXT_PUBLIC_STRIPE_PRICE_ID_VIP!;
 

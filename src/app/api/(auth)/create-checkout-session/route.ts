@@ -14,7 +14,6 @@ export const POST = async (req: Request) => {
 
     const baseUrl = process.env.PUBLIC_BASE_URL;
 
-
     const { coachId, priceId, locale } = JSON.parse(body);
     console.log('Parsed coachId:', coachId);
     console.log('Parsed priceId:', priceId);
@@ -54,6 +53,10 @@ export const POST = async (req: Request) => {
       allow_promotion_codes: true,
       success_url: `${baseUrl}/${locale}/coach/coach-dashboard?success=1`,
       cancel_url: `${baseUrl}/${locale}/coach/coach-dashboard?canceled=1`,
+      metadata: {
+        coachId: coachId,
+        planName: selectedPlanName, // Include plan name in metadata
+      },
     });
 
     return NextResponse.json({ url: session.url });
