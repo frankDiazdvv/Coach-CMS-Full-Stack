@@ -14,7 +14,7 @@ export const POST = async (req: Request) => {
 
     const baseUrl = process.env.PUBLIC_BASE_URL;
 
-    const { coachId, priceId, locale } = JSON.parse(body);
+    const { coachId, priceId, locale, planName } = JSON.parse(body);
     console.log('Parsed coachId:', coachId);
     console.log('Parsed priceId:', priceId);
 
@@ -55,7 +55,7 @@ export const POST = async (req: Request) => {
       cancel_url: `${baseUrl}/${locale}/coach/coach-dashboard?canceled=1`,
       metadata: {
         coachId: coachId,
-        planName: selectedPlanName, // Include plan name in metadata
+        planName, // Include plan name in metadata
       },
     });
 
