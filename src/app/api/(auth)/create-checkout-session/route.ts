@@ -51,6 +51,7 @@ export const POST = async (req: Request) => {
           quantity: 1,
         },
       ],
+      allow_promotion_codes: true,
       success_url: `${baseUrl}/${locale}/coach/coach-dashboard?success=1`,
       cancel_url: `${baseUrl}/${locale}/coach/coach-dashboard?canceled=1`,
     });
