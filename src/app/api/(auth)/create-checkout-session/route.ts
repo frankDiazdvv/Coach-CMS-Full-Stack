@@ -12,7 +12,7 @@ export const POST = async (req: Request) => {
     const body = await req.text();
     console.log('Raw request body:', body);
 
-    const baseUrl = process.env.NEXT_PUBLIC_BASE_URL;
+    const baseUrl = process.env.PUBLIC_BASE_URL;
 
 
     const { coachId, priceId, locale } = JSON.parse(body);
@@ -22,7 +22,6 @@ export const POST = async (req: Request) => {
     if (!coachId || !priceId) {
       return new NextResponse('Missing coachId or priceId', { status: 400 });
     }
-
 
     await connect();
     const coach = await Coach.findById(coachId);
