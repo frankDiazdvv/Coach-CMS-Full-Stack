@@ -21,7 +21,11 @@ export const POST = async (request: Request) => {
       return new NextResponse('Missing required fields', { status: 400 });
     }
     await connect();
-    const newCoach = await Coach.create(body);
+
+    const newCoach = await Coach.create({
+        ...body,
+      }
+    );
     return new NextResponse(JSON.stringify(newCoach), { status: 201 });
   } catch (error: unknown) {
     const message = error instanceof Error ? error.message : "Error deleting client"
