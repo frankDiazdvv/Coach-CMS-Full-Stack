@@ -10,6 +10,7 @@
   },
   "dependencies": {
     "@stripe/stripe-js": "^7.8.0",
+    "@uploadthing/react": "^7.3.2",
     "bcrypt": "^6.0.0",
     "jsonwebtoken": "^9.0.2",
     "lucide-react": "^0.535.0",
@@ -22,7 +23,8 @@
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
     "recharts": "^3.0.2",
-    "stripe": "^18.4.0"
+    "stripe": "^18.4.0",
+    "uploadthing": "^7.7.3"
   },
   "devDependencies": {
     "@eslint/eslintrc": "^3",

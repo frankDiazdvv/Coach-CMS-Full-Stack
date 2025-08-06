@@ -4,3 +4,6 @@
 .form-input{
     @apply mt-1 block w-full rounded-md border border-gray-300 px-3 py-1 focus:border-blue-500 focus:outline-none;
 }
+
+@import "uploadthing/tw/v4";
+@source "../node_modules/@uploadthing/react/dist";

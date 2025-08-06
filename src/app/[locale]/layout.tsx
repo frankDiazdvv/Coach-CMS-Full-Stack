@@ -3,6 +3,9 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import './globals.css';
 import { Metadata } from 'next';
+import { NextSSRPlugin } from '@uploadthing/react/next-ssr-plugin';
+import { extractRouterConfig } from 'uploadthing/server';
+import { ourFileRouter } from '../api/(auth)/uploadthing/core';
 
 export const metadata = {
   title: {
@@ -51,6 +54,7 @@ export default async function LocaleLayout({
         <link rel="sitemap" href="/sitemap.xml" type="application/xml" />
       </head>
       <body>
+        <NextSSRPlugin routerConfig={extractRouterConfig(ourFileRouter)}/>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
         </NextIntlClientProvider>

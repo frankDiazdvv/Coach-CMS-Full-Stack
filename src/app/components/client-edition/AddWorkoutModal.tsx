@@ -3,6 +3,7 @@
 import { useState, useEffect } from 'react';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
 import { useLocale, useTranslations } from 'next-intl';
+import CustomWorkoutModal from './CustomWorkoutDetailsModal';
 
 interface Workout {
   id: number;
@@ -35,6 +36,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   const [error, setError] = useState('');
   const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
   const [selectedWorkoutImg, setSelectedWorkoutImg] = useState<string[]>([]);
+  const [creatingOwnWorkout, setCreatingOwnWorkout] = useState(false);
   const locale = useLocale();
 
   const noWorkoutIcon = '/no-image-icon.png';
@@ -180,7 +182,13 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           </div>
 
           {/* Close Button */}
-          <div className="mt-4 flex justify-end">
+          <div className="mt-4 flex justify-between">
+            <button
+              onClick={() => setCreatingOwnWorkout(true)}
+              className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+            >
+              Create Own
+            </button>
             <button
               onClick={onClose}
               className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
@@ -190,6 +198,17 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           </div>
         </div>
       </div>
+      {creatingOwnWorkout && (
+        <CustomWorkoutModal
+          isOpen={creatingOwnWorkout}
+          onClose={() => setCreatingOwnWorkout(false)}
+          onSubmit={(name, img, sets, reps, targetWeight, comment, workoutUrl) => {
+            onSelectWorkout(name, img, sets, reps, targetWeight, comment, workoutUrl);
+            setCreatingOwnWorkout(false);
+            onClose(); // Close the parent modal
+          }}
+        />
+      )}
       {selectedWorkout && (
           <WorkoutDetailsModal
             isOpen={!!selectedWorkout}
