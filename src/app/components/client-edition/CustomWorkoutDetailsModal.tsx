@@ -135,20 +135,23 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
             </p>
             <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Workout Image</label>
-                <UploadButton
+                <UploadDropzone
                     endpoint="workoutImage"
-                    appearance={{
-                        button: "bg-blue-600 text-white px-4 py-2 rounded-md hover:bg-blue-700",
-                        container: "mt-2",
-                    }}
                     onClientUploadComplete={(res) => {
-                        if (res && res.length > 0) {
-                            setImageUrl(res[0].url);
-                        }
+                    if (res && res[0]?.url) {
+                        setImageUrl(res[0].url);
+                        setUploadStatus("done");
+                    }
                     }}
-                    onUploadError={(error: Error) => {
-                        console.error("Upload failed", error);
+                    onUploadError={(error) => {
+                    console.error("Upload failed", error);
+                    setUploadStatus("error");
                     }}
+                    appearance={{
+                    // dropzone: "border border-dashed border-gray-400 p-4 rounded-md bg-gray-50 hover:bg-gray-100",
+                    label: "text-gray-700",
+                    }}
+                    className="w-full"
                 />
 
                 {uploadStatus === "done" && (
