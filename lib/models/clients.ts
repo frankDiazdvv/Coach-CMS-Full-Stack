@@ -19,6 +19,8 @@ export interface IClient {
   nutritionSchedule?: Types.ObjectId;
   coach: Types.ObjectId | ICoach;
   imageUrl?: string;
+  resetToken?: string;
+  resetTokenExpiry?: number;
   createdAt?: Date;
   updatedAt?: Date;
   _id: Types.ObjectId;
@@ -36,6 +38,8 @@ const ClientSchema = new Schema<IClient>(
     currentWeight: { type: String, required: true },
     targetWeight: { type: String, required: false },
     imageUrl: { type: String, required: false },
+    resetToken: { type: String, required: false },
+    resetTokenExpiry: { type: Number, required: false },
     planAssigned: { type: String, required: false },
     planExpires: { type: Date, required: false },
     workoutSchedule: { type: Schema.Types.ObjectId, ref: 'workoutSchedule', required: false },
