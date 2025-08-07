@@ -1,8 +1,7 @@
 'use client';
 
 import { useState } from 'react';
-import { UploadButton, UploadDropzone } from '../../../../lib/uploadthing';
-import "@uploadthing/react/styles.css";
+import { Uploader } from '../ImageUploader';
 
 
 interface CustomWorkoutModalProps {
@@ -25,13 +24,12 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   onSubmit,
 }) => {
   const [workoutName, setWorkoutName] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
+  const [imageUrl, setImageUrl] = useState<string[]>([]);
   const [sets, setSets] = useState(0);
   const [reps, setReps] = useState(0);
   const [targetWeight, setTargetWeight] = useState('');
   const [comment, setComment] = useState('');
   const [workoutUrl, setWorkoutUrl] = useState('');
-  const [uploadStatus, setUploadStatus] = useState<'idle' | 'done' | 'error'>('idle');
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -41,7 +39,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
       return;
     }
 
-    const images = imageUrl ? [imageUrl] : [];
+    const images = imageUrl.length > 0 ? imageUrl : [];
 
     onSubmit(
       workoutName,
@@ -55,7 +53,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
 
     // Reset fields
     setWorkoutName('');
-    setImageUrl('');
+    setImageUrl([]);
     setSets(0);
     setReps(0);
     setTargetWeight('');
@@ -63,6 +61,32 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
     setWorkoutUrl('');
     onClose();
   };
+
+  const handleCancel = async () => {
+  try {
+    // Only delete if image(s) exist
+    if (imageUrl.length > 0) {
+      await fetch('/api/imageHandling/delete-images', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ urls: imageUrl }),
+      });
+    }
+  } catch (err) {
+    console.error('Error deleting uploaded images:', err);
+  }
+
+  // Reset fields and close modal
+  setWorkoutName('');
+  setImageUrl([]);
+  setSets(0);
+  setReps(0);
+  setTargetWeight('');
+  setComment('');
+  setWorkoutUrl('');
+  onClose();
+};
+
 
   if (!isOpen) return null;
 
@@ -135,42 +159,14 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
             </p>
             <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700 mb-1">Workout Image</label>
-                <UploadDropzone
-                    endpoint="workoutImage"
-                    onClientUploadComplete={(res) => {
-                    if (res && res[0]?.url) {
-                        setImageUrl(res[0].url);
-                        setUploadStatus("done");
-                    }
-                    }}
-                    onUploadError={(error) => {
-                    console.error("Upload failed", error);
-                    setUploadStatus("error");
-                    }}
-                    appearance={{
-                    // dropzone: "border border-dashed border-gray-400 p-4 rounded-md bg-gray-50 hover:bg-gray-100",
-                    label: "text-gray-700",
-                    }}
-                    className="w-full"
-                />
-
-                {uploadStatus === "done" && (
-                    <>
-                    <p className="text-green-600 text-sm mt-2">✅ Upload complete!</p>
-                    <img src={imageUrl} alt="Workout preview" className="mt-2 h-24 object-cover rounded border" />
-                    </>
-                )}
-
-                {uploadStatus === "error" && (
-                    <p className="text-red-600 text-sm mt-2">❌ Something went wrong.</p>
-                )}
+                <Uploader onUploadComplete={(urls) => setImageUrl(urls)} />
             </div>
           </div>
           
           <div className="flex justify-end gap-2">
             <button
               type="button"
-              onClick={onClose}
+              onClick={handleCancel}
               className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
               Cancel
