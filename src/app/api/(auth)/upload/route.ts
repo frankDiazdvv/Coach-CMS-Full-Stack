@@ -17,7 +17,7 @@ const s3 = new S3Client({
 
 const router: Router = {
   client: s3,
-  bucketName: process.env.R2_BUCKET!,
+  bucketName: process.env.NEXT_PUBLIC_R2_BUCKET!,
   routes: {
     demo: route({
       fileTypes: ['image/*'],

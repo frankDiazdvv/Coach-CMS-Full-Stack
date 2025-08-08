@@ -18,7 +18,7 @@ export async function POST(req: NextRequest) {
       const key = new URL(url).pathname.replace(/^\/?[^\/]+\/?/, ''); // remove bucket name
       await r2.send(
         new DeleteObjectCommand({
-          Bucket: process.env.R2_BUCKET!,
+          Bucket: process.env.NEXT_PUBLIC_R2_BUCKET!,
           Key: key,
         })
       );
