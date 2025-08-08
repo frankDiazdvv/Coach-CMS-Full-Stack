@@ -15,10 +15,7 @@ export function Uploader({ onUploadComplete }: UploaderProps) {
   useEffect(() => {
     if (uploadedFiles.length > 0 && !hasReportedUpload) {
       const urls = uploadedFiles.map((file) => {
-        const bucketName = process.env.NEXT_PUBLIC_R2_BUCKET;
-        const accountId = process.env.NEXT_PUBLIC_R2_ACCOUNT_ID;
-
-        return `https://${accountId}.r2.cloudflarestorage.com/${bucketName}/${file.objectKey}`;
+        return `https://cdn.litetrainer.com/${file.objectKey}`;
       });
 
       console.log('✅ Upload successful:', urls);
