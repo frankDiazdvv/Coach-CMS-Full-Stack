@@ -6,6 +6,7 @@ interface WorkoutDetailsModalProps {
   isOpen: boolean;
   workoutName: string;
   workoutImages: string[];
+  workoutUrl?: string;
   onClose: () => void;
   onSubmit: (
     workoutImg: string[],
@@ -17,23 +18,23 @@ interface WorkoutDetailsModalProps {
   ) => void;
 }
 
-const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, workoutName, workoutImages, onClose, onSubmit }) => {
+const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, workoutName, workoutImages, workoutUrl, onClose, onSubmit }) => {
   const [sets, setSets] = useState<number>(0);
   const [reps, setReps] = useState<number>(0);
   const [targetWeight, setTargetWeight] = useState<string>('');
   const [comment, setComment] = useState<string>('');
-  const [workoutUrl, setWorkoutUrl] = useState<string>('');
+  const [workoutLink, setWorkoutLink] = useState<string | undefined>(workoutUrl);
   const [workoutImg, setWorkoutimg] = useState<string[]>(workoutImages);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    onSubmit(workoutImg, sets, reps, targetWeight || undefined, comment || undefined, workoutUrl || undefined);
+    onSubmit(workoutImg, sets, reps, targetWeight || undefined, comment || undefined, workoutLink || undefined);
   };
 
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-80 flex items-center justify-center bg-black/50">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-4 text-xl font-bold text-gray-800">
           Details for {workoutName}
@@ -94,8 +95,8 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
             <label className="block text-sm font-medium text-gray-700">Demonstration URL:</label>
             <input
               type="text"
-              value={workoutUrl}
-              onChange={(e) => setWorkoutUrl(e.target.value)}
+              value={workoutLink}
+              onChange={(e) => setWorkoutLink(e.target.value)}
               placeholder="Any video link"
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />

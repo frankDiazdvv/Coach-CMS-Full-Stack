@@ -3,13 +3,18 @@
 import { useState, useEffect } from 'react';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
 import { useLocale, useTranslations } from 'next-intl';
-import CustomWorkoutModal from './CustomWorkoutDetailsModal';
+import WorkoutLibraryModal from './CustomWorkoutLibrary';
 
 interface Workout {
   id: number;
   name: string;
   category: string;
   images: string[];
+  sets: number,
+  reps: number,
+  targetWeight?: string,
+  comment?: string,
+  workoutUrl?: string;
 }
 
 interface AddWorkoutModalProps {
@@ -30,16 +35,22 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   const t = useTranslations();
   const tCategory = useTranslations('workoutCategories');
   const [searchQuery, setSearchQuery] = useState('');
+  const [coachId, setCoachId] = useState<string | null>(null);
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [filteredWorkouts, setFilteredWorkouts] = useState<Workout[]>([]);
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
   const [selectedWorkout, setSelectedWorkout] = useState<string | null>(null);
   const [selectedWorkoutImg, setSelectedWorkoutImg] = useState<string[]>([]);
-  const [creatingOwnWorkout, setCreatingOwnWorkout] = useState(false);
+  const [getFromWorkoutLibrary, setGetFromWorkoutLibrary] = useState(false);
   const locale = useLocale();
 
   const noWorkoutIcon = '/no-image-icon.png';
+
+  useEffect(() => {
+    const id = localStorage.getItem('id');
+    setCoachId(id);
+  },[]);
 
 
   // Fetch workouts from API when modal opens
@@ -184,10 +195,10 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           {/* Close Button */}
           <div className="mt-4 flex justify-between">
             <button
-              onClick={() => setCreatingOwnWorkout(true)}
+              onClick={() => setGetFromWorkoutLibrary(true)}
               className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
-              Create Own
+              Get From Library
             </button>
             <button
               onClick={onClose}
@@ -198,17 +209,19 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           </div>
         </div>
       </div>
-      {creatingOwnWorkout && (
-        <CustomWorkoutModal
-          isOpen={creatingOwnWorkout}
-          onClose={() => setCreatingOwnWorkout(false)}
-          onSubmit={(name, img, sets, reps, targetWeight, comment, workoutUrl) => {
-            onSelectWorkout(name, img, sets, reps, targetWeight, comment, workoutUrl);
-            setCreatingOwnWorkout(false);
-            onClose(); // Close the parent modal
+      {getFromWorkoutLibrary && (
+        <WorkoutLibraryModal
+          coachId={coachId} // Replace with dynamic value from props/context
+          isOpen={getFromWorkoutLibrary}
+          onClose={() => setGetFromWorkoutLibrary(false)}
+          onSelect={() => {
+            handleWorkoutDetailsSubmit
+            setGetFromWorkoutLibrary(false);
+            onClose(); // Optionally close AddWorkoutModal after choosing
           }}
         />
       )}
+
       {selectedWorkout && (
           <WorkoutDetailsModal
             isOpen={!!selectedWorkout}

@@ -1,66 +1,68 @@
 'use client';
 
-import { useState } from 'react';
+import { useEffect, useState } from 'react';
 import { Uploader } from '../ImageUploader';
 
 
 interface CustomWorkoutModalProps {
   isOpen: boolean;
   onClose: () => void;
-  onSubmit: (
-    workoutName: string,
-    workoutImg: string[],
-    sets: number,
-    reps: number,
-    targetWeight?: string,
-    comment?: string,
-    workoutUrl?: string,
-  ) => void;
 }
 
 const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   isOpen,
   onClose,
-  onSubmit,
 }) => {
   const [workoutName, setWorkoutName] = useState('');
   const [imageUrl, setImageUrl] = useState<string[]>([]);
-  const [sets, setSets] = useState(0);
-  const [reps, setReps] = useState(0);
-  const [targetWeight, setTargetWeight] = useState('');
-  const [comment, setComment] = useState('');
   const [workoutUrl, setWorkoutUrl] = useState('');
 
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
+ const handleSubmit = async (e: React.FormEvent) => {
+  e.preventDefault();
+  const coachId = localStorage.getItem('id');
+  if(!coachId) throw new Error("No Coach Id");
 
-    if (!workoutName || sets <= 0 || reps <= 0) {
-      alert("Please fill out the required fields.");
-      return;
+  if (!workoutName) {
+    alert("Please fill out the required fields.");
+    return;
+  }
+
+  try {
+    // Extract the first image URL & object key if needed
+    const image = imageUrl.length > 0 ? imageUrl[0] : undefined;
+
+    const res = await fetch('/api/savedWorkouts', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        coachId,
+        name: workoutName,
+        imageUrl: image,
+        objectKey: image ? new URL(image).pathname.slice(1) : undefined, // Example objectKey
+        workoutUrl: workoutUrl || undefined
+      }),
+    });
+
+    if (!res.ok) {
+      const errData = await res.json();
+      throw new Error(errData.error || 'Failed to save workout');
     }
 
-    const images = imageUrl.length > 0 ? imageUrl : [];
+    const savedWorkout = await res.json();
+    console.log("Workout saved:", savedWorkout);
 
-    onSubmit(
-      workoutName,
-      images,
-      sets,
-      reps,
-      targetWeight || undefined,
-      comment || undefined,
-      workoutUrl || undefined
-    );
-
-    // Reset fields
+    // Reset form
     setWorkoutName('');
     setImageUrl([]);
-    setSets(0);
-    setReps(0);
-    setTargetWeight('');
-    setComment('');
     setWorkoutUrl('');
     onClose();
-  };
+
+  } catch (error) {
+    console.error("Error saving workout:", error);
+    alert("There was an error saving the workout.");
+  }
+};
+
 
   const handleCancel = async () => {
   try {
@@ -79,10 +81,6 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   // Reset fields and close modal
   setWorkoutName('');
   setImageUrl([]);
-  setSets(0);
-  setReps(0);
-  setTargetWeight('');
-  setComment('');
   setWorkoutUrl('');
   onClose();
 };
@@ -91,7 +89,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-70 flex items-center justify-center bg-black/50">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-4 text-xl font-bold text-gray-800">Create Custom Workout</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
@@ -102,45 +100,6 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
               value={workoutName}
               onChange={(e) => setWorkoutName(e.target.value)}
               required
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Sets *</label>
-            <input
-              type="number"
-              value={sets}
-              onChange={(e) => setSets(Number(e.target.value))}
-              required
-              min={1}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Reps *</label>
-            <input
-              type="number"
-              value={reps}
-              onChange={(e) => setReps(Number(e.target.value))}
-              required
-              min={1}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Target Weight</label>
-            <input
-              type="text"
-              value={targetWeight}
-              onChange={(e) => setTargetWeight(e.target.value)}
-              className="mt-1 w-full rounded-md border px-3 py-2"
-            />
-          </div>
-          <div>
-            <label className="block text-sm font-medium text-gray-700">Comment</label>
-            <textarea
-              value={comment}
-              onChange={(e) => setComment(e.target.value)}
               className="mt-1 w-full rounded-md border px-3 py-2"
             />
           </div>
