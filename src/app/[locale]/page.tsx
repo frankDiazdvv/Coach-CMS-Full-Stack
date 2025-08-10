@@ -84,7 +84,7 @@ export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
@@ -96,56 +96,67 @@ export default function LiteTrainerLanding() {
 
       {/* Hero Section */}
       <main className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
-        <div className="max-w-7xl mx-auto text-center">
-          <div className="mb-8">
-            <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-purple-500/20 text-purple-300 border border-purple-500/30">
-              <Star className="w-4 h-4 mr-2" />
-              {t('hero.badge') || 'Perfect for Beginner Coaches'}
-            </span>
+        <div className="max-w-8xl mx-auto text-center">
+          <div className='flex flex-row mb-40'>
+            <div className='w-full'>
+              <div className="mb-8">
+                <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-purple-500/20 text-purple-300 border border-purple-500/30">
+                  <Star className="w-4 h-4 mr-2" />
+                  {t('hero.badge') || 'Perfect for Beginner Coaches'}
+                </span>
+              </div>
+
+              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+                <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
+                  {t('hero.title1') || 'Simple Coaching'}
+                </span>
+                <br />
+                <span className="bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent">
+                  {t('hero.title2') || 'Made Powerful'}
+                </span>
+              </h1>
+
+              <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
+                {t('hero.description') ||
+                  'The perfect bridge between basic tools and expensive enterprise software. '}
+                <span className="text-purple-300">LITE Trainer</span>
+                {t('hero.description2') ||
+                  ' gives you all the core features you need to grow your coaching business — without the complexity or cost.'}
+              </p>
+
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                <Link href={loginPage}>
+                  <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
+                    {t('hero.cta1') || 'Start Free Trial'}
+                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                  </button>
+                </Link>
+                <button className="cursor-not-allowed text-white border border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
+                  {t('hero.cta2') || 'Watch Demo'}
+                </button>
+              </div>
+            </div>
+            <div className='relative w-full h-64 md:h-auto'>
+              <div className="absolute top-0 left-0 w-90 h-full rounded-l-xl bg-gradient-to-l from-transparent to-purple-950/50 z-10"></div>
+              <img 
+                src='./dashboardSC.png'
+                alt="Dashboard-screenshot" 
+                className='w-full h-full object-cover object-left rounded-2xl'
+              />
+            </div>
           </div>
-
-          <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
-            <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
-              {t('hero.title1') || 'Simple Coaching'}
-            </span>
-            <br />
-            <span className="bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent">
-              {t('hero.title2') || 'Made Powerful'}
-            </span>
-          </h1>
-
-          <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
-            {t('hero.description') ||
-              'The perfect bridge between basic tools and expensive enterprise software. '}
-            <span className="text-purple-300">Lite Trainer</span>
-            {t('hero.description2') ||
-              ' gives you all the core features you need to grow your coaching business — without the complexity or cost.'}
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-4 justify-center items-center mb-16">
-            <Link href={loginPage}>
-              <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
-                {t('hero.cta1') || 'Start Free Trial'}
-                <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-              </button>
-            </Link>
-            <button className="cursor-not-allowed text-white border border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
-              {t('hero.cta2') || 'Watch Demo'}
-            </button>
-          </div>
-
           {/* Stats */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
             <div className="text-center">
-              <div className="text-4xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">$9.99</div>
+              <div className="text-5xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">$9.99</div>
               <div className="text-gray-400">{t('stats.price') || 'Starting Price/Month'}</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">10</div>
+              <div className="text-5xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">10</div>
               <div className="text-gray-400">{t('stats.clients') || 'Clients Included'}</div>
             </div>
             <div className="text-center">
-              <div className="text-4xl bg-clip-text mb-2">🇺🇸 🇪🇸</div>
+              <div className="text-5xl bg-clip-text mb-2">🇺🇸 🇪🇸</div>
               <div className="text-gray-400">{t('stats.languages') || 'Languages Supported'}</div>
             </div>
           </div>
