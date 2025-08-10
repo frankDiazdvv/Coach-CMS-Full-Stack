@@ -196,13 +196,13 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
           <div className="mt-4 flex justify-between">
             <button
               onClick={() => setGetFromWorkoutLibrary(true)}
-              className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+              className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Get From Library
+              + From Library
             </button>
             <button
               onClick={onClose}
-              className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+              className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-xl shadow-md hover:from-red-700 hover:to-red-800 transition-all duration-200 transform hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Close
             </button>
@@ -210,17 +210,17 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
         </div>
       </div>
       {getFromWorkoutLibrary && (
-        <WorkoutLibraryModal
-          coachId={coachId} // Replace with dynamic value from props/context
-          isOpen={getFromWorkoutLibrary}
-          onClose={() => setGetFromWorkoutLibrary(false)}
-          onSelect={() => {
-            handleWorkoutDetailsSubmit
-            setGetFromWorkoutLibrary(false);
-            onClose(); // Optionally close AddWorkoutModal after choosing
-          }}
-        />
-      )}
+      <WorkoutLibraryModal
+        coachId={coachId}
+        isOpen={getFromWorkoutLibrary}
+        onClose={() => setGetFromWorkoutLibrary(false)}
+        onSelect={(workoutName, workoutImg, sets, reps, targetWeight, comment, workoutUrl) => {
+          onSelectWorkout(workoutName, workoutImg, sets, reps, targetWeight, comment, workoutUrl);
+          setGetFromWorkoutLibrary(false); // close library
+          onClose(); //close AddWorkoutModal
+        }}
+      />
+    )}
 
       {selectedWorkout && (
           <WorkoutDetailsModal

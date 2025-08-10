@@ -7,11 +7,13 @@ import { Uploader } from '../ImageUploader';
 interface CustomWorkoutModalProps {
   isOpen: boolean;
   onClose: () => void;
+  onCreated: () => void;
 }
 
 const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   isOpen,
   onClose,
+  onCreated,
 }) => {
   const [workoutName, setWorkoutName] = useState('');
   const [imageUrl, setImageUrl] = useState<string[]>([]);
@@ -39,7 +41,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
         name: workoutName,
         imageUrl: image,
         objectKey: image ? new URL(image).pathname.slice(1) : undefined, // Example objectKey
-        workoutUrl: workoutUrl || undefined
+        workoutUrl: workoutUrl
       }),
     });
 
@@ -55,6 +57,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
     setWorkoutName('');
     setImageUrl([]);
     setWorkoutUrl('');
+    onCreated();
     onClose();
 
   } catch (error) {
@@ -89,7 +92,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-70 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-70 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-4 text-xl font-bold text-gray-800">Create Custom Workout</h2>
         <form onSubmit={handleSubmit} className="space-y-4">

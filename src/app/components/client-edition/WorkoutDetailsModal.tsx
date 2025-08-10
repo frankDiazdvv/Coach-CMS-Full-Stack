@@ -34,7 +34,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
   if (!isOpen) return null;
 
   return (
-    <div className="fixed inset-0 z-80 flex items-center justify-center bg-black/50">
+    <div className="fixed inset-0 z-80 flex items-center justify-center bg-black/20 backdrop-blur-md">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-4 text-xl font-bold text-gray-800">
           Details for {workoutName}
@@ -95,7 +95,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
             <label className="block text-sm font-medium text-gray-700">Demonstration URL:</label>
             <input
               type="text"
-              value={workoutLink}
+              value={workoutUrl}
               onChange={(e) => setWorkoutLink(e.target.value)}
               placeholder="Any video link"
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"

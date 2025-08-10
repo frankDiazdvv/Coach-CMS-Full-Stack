@@ -39,29 +39,32 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
   const [selectedWorkoutImg, setSelectedWorkoutImg] = useState<string[]>([]);
 
   // Fetch all saved workouts
-  useEffect(() => {
-    if (!isOpen) return;
-    const fetchWorkouts = async () => {
-      setLoading(true);
-      try {
-        const res = await fetch(`/api/savedWorkouts?coachId=${coachId}`);
-        const data = await res.json();
-        setWorkouts(data || []);
-      } catch (err) {
-        console.error('Error fetching workouts:', err);
-      } finally {
-        setLoading(false);
-      }
-    };
+  const fetchWorkouts = async () => {
+    setLoading(true);
+    try {
+      const res = await fetch(`/api/savedWorkouts?coachId=${coachId}`);
+      const data = await res.json();
+      setWorkouts(data || []);
+    } catch (err) {
+      console.error('Error fetching workouts:', err);
+    } finally {
+      setLoading(false);
+    }
+  };
 
+  useEffect(() => {
+  if (isOpen) {
     fetchWorkouts();
-  }, [isOpen, coachId]);
+  }
+}, [isOpen, coachId]);
 
   const handleDelete = async (id: string) => {
     if (!confirm('Are you sure you want to delete this workout?')) return;
     try {
       await fetch(`/api/savedWorkouts/${id}`, { method: 'DELETE' });
       setWorkouts((prev) => prev.filter((w) => w._id !== id));
+      console.log("Workout Deleted Successfully!");
+
     } catch (err) {
       console.error('Error deleting workout:', err);
     }
@@ -91,10 +94,10 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
     <>
       {/* Main Library Modal */}
       <div className="fixed inset-0 z-60 flex items-center justify-center backdrop-blur-xs bg-black/40">
-        <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
+        <div className="absolute top-10 bottom-10 w-full max-w-lg rounded-lg bg-white p-6 shadow-lg">
           <div className="flex justify-between items-center mb-4">
             <h2 className="text-xl font-bold text-gray-800">Workout Library</h2>
-            <button onClick={onClose} className="text-gray-500 hover:text-gray-700">
+            <button onClick={onClose} className="text-gray-500 hover:text-gray-700 hover:font-black cursor-pointer">
               ✕
             </button>
           </div>
@@ -104,20 +107,20 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
           ) : workouts.length === 0 ? (
             <p className="text-center text-gray-500">No saved workouts yet.</p>
           ) : (
-            <ul className="space-y-3 max-h-60 overflow-y-auto">
+            <ul className="absolute bottom-20 top-18 right-6 left-6 space-y-3 overflow-y-auto ">
               {workouts.map((workout) => (
                 <li
                   key={workout._id}
-                  className="flex items-center justify-between border p-2 rounded-md cursor-pointer"
+                  className="flex items-center justify-between border p-0 rounded-md cursor-pointer hover:bg-gray-50"
                 >
                   <div
-                    className="flex items-center gap-3 flex-grow"
+                    className="flex items-center gap-3 flex-grow "
                     onClick={() => handleWorkoutSelect(workout.name, workout.imageUrl, workout.workoutUrl)}
                   >
                     <img
                       src={workout.imageUrl[0] || noWorkoutIcon}
                       alt={workout.name}
-                      className="w-12 h-12 object-cover rounded"
+                      className="w-16 h-16 object-cover rounded-l-md"
                     />
                     <span className="font-medium">{workout.name}</span>
                   </div>
@@ -126,7 +129,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
                       e.stopPropagation(); // Prevent triggering onSelect
                       handleDelete(workout._id);
                     }}
-                    className="text-red-500 hover:text-red-700"
+                    className="text-red-500 hover:text-red-700 rounded-md px-1 mx-1 hover:bg-red-50 hover:font-semibold cursor-pointer"
                   >
                     Delete
                   </button>
@@ -135,10 +138,10 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
             </ul>
           )}
 
-          <div className="mt-4 flex justify-end gap-2">
+          <div className="absolute bottom-6 right-6">
             <button
               onClick={() => setShowCreateModal(true)}
-              className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               Create Workout
             </button>
@@ -151,6 +154,10 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
         <CustomWorkoutModal
           isOpen={showCreateModal}
           onClose={() => setShowCreateModal(false)}
+          onCreated={() => {
+          setShowCreateModal(false);
+          fetchWorkouts();
+        }}
         />
       )}
 

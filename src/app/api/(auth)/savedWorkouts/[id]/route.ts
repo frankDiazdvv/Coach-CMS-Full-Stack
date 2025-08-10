@@ -30,12 +30,14 @@ export async function DELETE(req: NextRequest) {
     }
 
     // Delete from Cloudflare R2
-    await r2.send(
-      new DeleteObjectCommand({
-        Bucket: process.env.NEXT_PUBLIC_R2_BUCKET!,
-        Key: workout.objectKey,
-      })
-    );
+    if (workout.objectKey && workout.objectKey.trim() !== '') {
+      await r2.send(
+        new DeleteObjectCommand({
+          Bucket: process.env.NEXT_PUBLIC_R2_BUCKET!,
+          Key: workout.objectKey,
+        })
+      );
+    }
 
     // Delete from MongoDB
     await workout.deleteOne();
