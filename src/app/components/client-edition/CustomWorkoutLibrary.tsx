@@ -3,6 +3,7 @@
 import { useEffect, useState } from 'react';
 import CustomWorkoutModal from './CustomWorkoutDetailsModal';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
+import { useTranslations } from 'next-intl';
 
 interface Workout {
   _id: string;
@@ -31,6 +32,7 @@ interface WorkoutLibraryModalProps {
 }
 
 const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClose, coachId, onSelect }) => {
+  const t = useTranslations();
   const [workouts, setWorkouts] = useState<Workout[]>([]);
   const [loading, setLoading] = useState(true);
   const [showCreateModal, setShowCreateModal] = useState(false);
@@ -96,7 +98,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
       <div className="fixed inset-0 z-60 flex items-center justify-center backdrop-blur-xs bg-black/40">
         <div className="absolute top-10 bottom-10 w-full max-w-lg rounded-lg bg-white p-6 shadow-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-gray-800">Workout Library</h2>
+            <h2 className="text-xl font-bold text-gray-800">{t("workoutLibrary")}</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700 hover:font-black cursor-pointer">
               ✕
             </button>
@@ -105,7 +107,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
           {loading ? (
             <p className="text-center text-gray-500">Loading...</p>
           ) : workouts.length === 0 ? (
-            <p className="text-center text-gray-500">No saved workouts yet.</p>
+            <p className="text-center text-gray-500">{t("noSavedWorkouts")}</p>
           ) : (
             <ul className="absolute bottom-20 top-18 right-6 left-6 space-y-3 overflow-y-auto ">
               {workouts.map((workout) => (
@@ -114,7 +116,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
                   className="flex items-center justify-between border p-0 rounded-md cursor-pointer hover:bg-gray-50"
                 >
                   <div
-                    className="flex items-center gap-3 flex-grow "
+                    className="flex items-center gap-3 flex-grow"
                     onClick={() => handleWorkoutSelect(workout.name, workout.imageUrl, workout.workoutUrl)}
                   >
                     <img
@@ -122,7 +124,13 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
                       alt={workout.name}
                       className="w-16 h-16 object-cover rounded-l-md"
                     />
-                    <span className="font-medium">{workout.name}</span>
+                    <div className='w-full flex flex-col'>
+                      <span className="font-medium truncate min-w-[10rem] max-w-[18rem] block">{workout.name}</span>
+                      {workout.workoutUrl && (
+                        <span className="font-normal text-xs truncate min-w-[10rem] max-w-[18rem] block">{workout.workoutUrl}</span>
+                      )}
+                    </div>
+                    
                   </div>
                   <button
                     onClick={(e) => {
@@ -131,7 +139,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
                     }}
                     className="text-red-500 hover:text-red-700 rounded-md px-1 mx-1 hover:bg-red-50 hover:font-semibold cursor-pointer"
                   >
-                    Delete
+                    {t("delete")}
                   </button>
                 </li>
               ))}
@@ -143,7 +151,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
               onClick={() => setShowCreateModal(true)}
               className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Create Workout
+              {t("createWorkout")}
             </button>
           </div>
         </div>

@@ -1,6 +1,7 @@
 import { cn } from '../../../../lib/utils';
 import type { UploadHookControl } from 'better-upload/client';
 import { Loader2, Upload } from 'lucide-react';
+import { useTranslations } from 'next-intl';
 import { useId } from 'react';
 import { useDropzone } from 'react-dropzone';
 
@@ -30,6 +31,7 @@ export function UploadDropzone({
   uploadOverride,
 }: UploadDropzoneProps) {
   const id = useId();
+  const t = useTranslations();
 
   const { getRootProps, getInputProps, isDragActive, inputRef } = useDropzone({
     onDrop: (files) => {
@@ -74,7 +76,7 @@ export function UploadDropzone({
         </div>
 
         <div className="mt-3 space-y-1 text-center">
-          <p className="text-sm font-semibold">Drag and drop files here</p>
+          <p className="text-sm font-semibold">{t("dragAndDrop")}</p>
 
           <p className="text-muted-foreground max-w-64 text-xs">
             {typeof description === 'string' ? (
@@ -82,10 +84,10 @@ export function UploadDropzone({
             ) : (
               <>
                 {description?.maxFiles &&
-                  `You can upload ${description.maxFiles} file${description.maxFiles !== 1 ? 's' : ''}.`}{' '}
+                  `${t("canUploadFile")}`}{' '}
                 {description?.maxFileSize &&
-                  `${description.maxFiles !== 1 ? 'Each u' : 'U'}p to ${description.maxFileSize}.`}{' '}
-                {description?.fileTypes && `Accepted ${description.fileTypes}.`}
+                  `${t("upTo")} ${description.maxFileSize}.`}{' '}
+                {description?.fileTypes && `${t("accepted")} ${description.fileTypes}.`}
               </>
             )}
           </p>
@@ -108,7 +110,7 @@ export function UploadDropzone({
               <Upload className="size-6" />
             </div>
 
-            <p className="mt-3 text-sm font-semibold">Drop files here</p>
+            <p className="mt-3 text-sm font-semibold">{t("dropHere")}</p>
           </div>
         </div>
       )}

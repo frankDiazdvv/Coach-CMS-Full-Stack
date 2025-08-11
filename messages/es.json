@@ -100,6 +100,7 @@
   "addPlanPlaceholder": "Añade un nuevo plan",
   "addPlan": "Añadir Plan",
   "saveChanges": "Guardar Cambios",
+  "save": "Guardar",
   "settings": "Configuraciones",
   "quickStats": "Estadísticas",
   "activePlans": "Planes Activos",
@@ -245,7 +246,7 @@
   "hasComment": "Contiene Comentario",
   "ingredientsInMeal": "{count, plural, =0 {Nada Aquí} one {{count} ingrediente} other {{count} ingredientes}}",
 
-  "detailsFor": "Detalles de",
+  "detailsFor": "Detalles para",
   "mealName": "Nombre de Comida",
   "foods": "Ingredientes",
   "addYourOwn": "Añade el Tuyo",
@@ -411,7 +412,31 @@
     "footer": {
       "rights": "Todos los derechos reservados."
     }
-  }
+  },
+  "noWorkoutFound": "No Se Encontraron Resultados",
+  "fromLibrary": "+ Mis Entrenamientos",
+  "close": "Cerrar",
+  "searchBarPlaceholder": "Busca por entrenamiento o categoria...",
+
+  "workoutLibrary": "Mi Libreria de Entrenamientos",
+  "noSavedWorkouts": "Nada Guardado Todavia",
+  "createWorkout": "Crear Ejercicio",
+
+  "createCustomWorkout": "Crear Ejercicio Personalizado",
+  "workoutName": "Nombre de Ejercicio",
+  "videoUrlSub": "Pega un link a un video de ejemplo (ej. YouTube, TikTok, Instagram)",
+  "workoutImage": "Imagen de Ejercicio",
+  "saveWorkout": "Guardar Ejercicio",
+
+  "uploadedFiles": "Archivos Añadidos",
+  "dragAndDrop": "Arrastra y suelta tus archivos aqui",
+  "dropHere": "Suelta tu archivo aqui",
+  "canUploadFile": "Puedes subir un archivo",
+  "upTo": "de hasta",
+  "accepted": "Aceptados",
+  "demonstrationUrl": "Link de Demostración",
+  "commentPlaceholder": "ej. Enfócate en tu forma",
+  "videoLinkPlaceholder": "Cualquier Link de Video"
 
 
 }

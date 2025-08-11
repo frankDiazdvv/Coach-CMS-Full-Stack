@@ -3,12 +3,14 @@
 import { useEffect, useState } from 'react';
 import { useUploadFiles } from 'better-upload/client';
 import { UploadDropzone } from '@/app/components/ui/upload-dropzone';
+import { useTranslations } from 'next-intl';
 
 interface UploaderProps {
   onUploadComplete: (urls: string[]) => void;
 }
 
 export function Uploader({ onUploadComplete }: UploaderProps) {
+  const t = useTranslations();
   const { control, uploadedFiles, error } = useUploadFiles({ route: 'demo' });
   const [hasReportedUpload, setHasReportedUpload] = useState(false);
 
@@ -44,7 +46,7 @@ export function Uploader({ onUploadComplete }: UploaderProps) {
       {/* Optional: show upload results to user */}
       {uploadedFiles.length > 0 && (
         <div className="mt-4">
-          <h4 className="font-semibold text-sm mb-2">Uploaded Files:</h4>
+          <h4 className="font-semibold text-sm mb-2">{t("uploadedFiles")}:</h4>
           <ul className="text-sm list-disc list-inside">
             {uploadedFiles.map((file, idx) => (
               <li key={idx}>

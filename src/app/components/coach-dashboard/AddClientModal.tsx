@@ -101,16 +101,21 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
         body: JSON.stringify(formData),
       });
 
-      // Removed alert as per instructions to avoid window.alert()
       // alert(JSON.stringify(formData));
 
 
       if (!response.ok) {
-        let errorMessage = 'Failed to create client';
-        errorMessage = response.statusText || errorMessage;
+        // Try to read the backend's message
+        let errorMessage;
+        try {
+          const data = await response.json();
+          errorMessage = data.error || JSON.stringify(data);
+        } catch {
+          errorMessage = await response.text();
+        }
+        console.log(`Error ${response.status}: ${errorMessage}`);
         throw new Error(errorMessage);
       }
-
 
       localStorage.removeItem('workoutSchedule');
       localStorage.removeItem('nutritionSchedule');

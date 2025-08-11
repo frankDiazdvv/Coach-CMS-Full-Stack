@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 interface WorkoutDetailsModalProps {
@@ -19,6 +20,7 @@ interface WorkoutDetailsModalProps {
 }
 
 const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, workoutName, workoutImages, workoutUrl, onClose, onSubmit }) => {
+  const t = useTranslations();
   const [sets, setSets] = useState<number>(0);
   const [reps, setReps] = useState<number>(0);
   const [targetWeight, setTargetWeight] = useState<string>('');
@@ -37,7 +39,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
     <div className="fixed inset-0 z-80 flex items-center justify-center bg-black/20 backdrop-blur-md">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
         <h2 className="mb-4 text-xl font-bold text-gray-800">
-          Details for {workoutName}
+          {t("detailsFor")} {workoutName}
         </h2>
         <div className="mb-4 flex flex-row overflow-x-auto gap-2">
           {workoutImg.map((img, index) => (
@@ -51,7 +53,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Sets</label>
+            <label className="block text-sm font-medium text-gray-700">{t("sets")}</label>
             <input
               type="number"
               value={sets}
@@ -62,7 +64,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Reps</label>
+            <label className="block text-sm font-medium text-gray-700">{t("reps")}</label>
             <input
               type="number"
               value={reps}
@@ -73,31 +75,31 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Target Weight</label>
+            <label className="block text-sm font-medium text-gray-700">{t("targetWeight")}</label>
             <input
               type="text"
               value={targetWeight}
               onChange={(e) => setTargetWeight(e.target.value)}
-              placeholder="e.g., 135 lbs"
+              placeholder={t("targetWeightPlaceholder")}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Comment</label>
+            <label className="block text-sm font-medium text-gray-700">{t("comment")}</label>
             <textarea
               value={comment}
               onChange={(e) => setComment(e.target.value)}
-              placeholder="e.g., Focus on form"
+              placeholder={t("commentPlaceholder")}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Demonstration URL:</label>
+            <label className="block text-sm font-medium text-gray-700">{t("demonstrationUrl")}:</label>
             <input
               type="text"
               value={workoutUrl}
               onChange={(e) => setWorkoutLink(e.target.value)}
-              placeholder="Any video link"
+              placeholder={t("videoLinkPlaceholder")}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
@@ -107,7 +109,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
               onClick={onClose}
               className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
@@ -116,7 +118,7 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
                 setWorkoutimg(workoutImages);
               }}
             >
-              Save
+              {t("save")}
             </button>
           </div>
         </form>

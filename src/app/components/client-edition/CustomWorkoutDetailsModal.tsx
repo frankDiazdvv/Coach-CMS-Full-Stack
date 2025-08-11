@@ -2,6 +2,7 @@
 
 import { useEffect, useState } from 'react';
 import { Uploader } from '../ImageUploader';
+import { useTranslations } from 'next-intl';
 
 
 interface CustomWorkoutModalProps {
@@ -15,9 +16,10 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   onClose,
   onCreated,
 }) => {
+  const t = useTranslations();
   const [workoutName, setWorkoutName] = useState('');
   const [imageUrl, setImageUrl] = useState<string[]>([]);
-  const [workoutUrl, setWorkoutUrl] = useState('');
+  const [workoutDemoUrl, setWorkoutDemoUrl] = useState('');
 
  const handleSubmit = async (e: React.FormEvent) => {
   e.preventDefault();
@@ -41,7 +43,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
         name: workoutName,
         imageUrl: image,
         objectKey: image ? new URL(image).pathname.slice(1) : undefined, // Example objectKey
-        workoutUrl: workoutUrl
+        workoutUrl: workoutDemoUrl
       }),
     });
 
@@ -56,7 +58,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
     // Reset form
     setWorkoutName('');
     setImageUrl([]);
-    setWorkoutUrl('');
+    setWorkoutDemoUrl('');
     onCreated();
     onClose();
 
@@ -84,7 +86,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   // Reset fields and close modal
   setWorkoutName('');
   setImageUrl([]);
-  setWorkoutUrl('');
+  setWorkoutDemoUrl('');
   onClose();
 };
 
@@ -94,10 +96,10 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   return (
     <div className="fixed inset-0 z-70 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">Create Custom Workout</h2>
+        <h2 className="mb-4 text-xl font-bold text-gray-800">{t("createCustomWorkout")}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Workout Name *</label>
+            <label className="block text-sm font-medium text-gray-700">{t("workoutName")} *</label>
             <input
               type="text"
               value={workoutName}
@@ -110,17 +112,17 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
             <div>
                 <label className="block text-sm font-medium text-gray-700">Video URL</label>
                 <input
-                type="text"
-                value={workoutUrl}
-                onChange={(e) => setWorkoutUrl(e.target.value)}
-                className="mt-1 w-full rounded-md border px-3 py-2"
+                  type="text"
+                  value={workoutDemoUrl}
+                  onChange={(e) => setWorkoutDemoUrl(e.target.value)}
+                  className="mt-1 w-full rounded-md border px-3 py-2"
                 />
             </div>
             <p className="text-xs text-gray-500 mt-1">
-                Paste a link to a demo video (e.g. YouTube, TikTok, Instagram)
+                {t("videoUrlSub")}
             </p>
             <div className="mt-4">
-                <label className="block text-sm font-medium text-gray-700 mb-1">Workout Image</label>
+                <label className="block text-sm font-medium text-gray-700 mb-1">{t("workoutImage")}</label>
                 <Uploader onUploadComplete={(urls) => setImageUrl(urls)} />
             </div>
           </div>
@@ -131,13 +133,13 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
               onClick={handleCancel}
               className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
               className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
             >
-              Save Workout
+              {t("saveWorkout")}
             </button>
           </div>
         </form>

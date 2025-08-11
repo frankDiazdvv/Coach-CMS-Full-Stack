@@ -6,7 +6,7 @@ export async function POST(req: NextRequest) {
   try {
     await connect();
     const body = await req.json();
-    const { coachId, name, imageUrl, objectKey } = body;
+    const { coachId, name, imageUrl, objectKey, workoutUrl } = body;
 
     if (!coachId || !name) {
       return NextResponse.json({ error: 'Missing required fields' }, { status: 400 });
@@ -17,6 +17,7 @@ export async function POST(req: NextRequest) {
       name,
       imageUrl,
       objectKey,
+      workoutUrl
     });
 
     return NextResponse.json(workout, { status: 201 });

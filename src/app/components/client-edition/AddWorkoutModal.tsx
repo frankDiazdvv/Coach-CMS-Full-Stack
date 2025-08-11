@@ -148,12 +148,12 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
         <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-          <h2 className="mb-4 text-xl font-bold text-gray-800">Add Workout</h2>
+          <h2 className="mb-4 text-xl font-bold text-gray-800">{t("addWorkout")}</h2>
 
           {/* Search Bar */}
           <input
             type="text"
-            placeholder="Search by workout or category..."
+            placeholder={t("searchBarPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
@@ -166,7 +166,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
             ) : error ? (
               <p className="text-red-500">{error}</p>
             ) : filteredWorkouts.length === 0 ? (
-              <p className="text-gray-500">No workouts found</p>
+              <p className="text-gray-500">{t("noWorkoutFound")}</p>
             ) : (
               filteredWorkouts.map((workout) => (
                 <div
@@ -198,13 +198,13 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
               onClick={() => setGetFromWorkoutLibrary(true)}
               className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              + From Library
+              {t("fromLibrary")}
             </button>
             <button
               onClick={onClose}
               className="inline-flex items-center cursor-pointer gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-red-700 text-white font-medium rounded-xl shadow-md hover:from-red-700 hover:to-red-800 transition-all duration-200 transform hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
-              Close
+              {t("close")}
             </button>
           </div>
         </div>

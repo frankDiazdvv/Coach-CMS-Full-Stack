@@ -98,6 +98,7 @@
   "addPlanPlaceholder": "Add a new training plan",
   "addPlan": "Add Plan",
   "saveChanges": "Save Changes",
+  "save": "Save",
   "settings": "Settings",
   "quickStats": "Quick Stats",
   "activePlans": "Active Plans",
@@ -408,8 +409,32 @@
     "footer": {
       "rights": "All rights reserved."
     }
-  }
+  },
+
+  "noWorkoutFound": "No Workouts Found",
+  "fromLibrary": "+ My Library",
+  "close": "Close",
+  "searchBarPlaceholder": "Search by workout or category...",
+
+  "workoutLibrary": "My Workout Library",
+  "noSavedWorkouts": "No saved workouts yet.",
+  "createWorkout": "Create Exercise",
+
+  "createCustomWorkout": "Create Custom Workout",
+  "workoutName": "Workout Name",
+  "videoUrlSub": "Paste a link to a demo video (e.g. YouTube, TikTok, Instagram)",
+  "workoutImage": "Exercise Image",
+  "saveWorkout": "Save Exercise",
+
+
+  "uploadedFiles": "Uploaded Files",
+  "dragAndDrop": "Drag and drop files here",
+  "dropHere": "Drop files here",
+  "canUploadFile": "You can upload a file",
+  "upTo": "up to",
+  "accepted": "Accepted",
+  "demonstrationUrl": "Demonstration URL",
+  "commentPlaceholder": "e.g., Focus on form",
+  "videoLinkPlaceholder": "Any video link"
 
 }
-
-  
