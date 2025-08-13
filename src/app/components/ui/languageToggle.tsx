@@ -18,7 +18,7 @@ export default function LanguageToggle() {
     const pathWithoutLocale = pathname.replace(`/${locale}`, "") || "/";
 
     // Update router locale
-    router.replace(pathWithoutLocale, undefined);
+    router.replace(pathWithoutLocale, { locale: nextLocale });
 
     // Optional: fallback to full reload if needed
     setTimeout(() => {
