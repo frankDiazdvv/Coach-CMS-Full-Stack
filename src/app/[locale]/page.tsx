@@ -11,11 +11,11 @@ const domain = 'https://litetrainer.com';
 const ogImage = '/squareLogo.svg';
 
 export const metadata = {
-  title: 'LITE Trainer — Begginer Friendly Client Management System',
+  title: 'Lite Trainer — Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
   description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
   openGraph: {
-    title: 'LITE Trainer — Begginer Friendly Client Management System',
-    description: 'Begginer-friendly client management system for fitness coaches.',
+    title: 'Lite Trainer — Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
+    description: 'Beginner-friendly client management system for fitness coaches.',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
     images: [
@@ -23,14 +23,14 @@ export const metadata = {
         url: 'https://litetrainer.com/opengraph-image.png',
         width: 1200,
         height: 630,
-        alt: 'LiteTrainer dashboard preview',
+        alt: 'LITE Trainer dashboard preview with workout and nutrition planning',
       },
     ],
     type: 'website',
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'LITE Trainer — Begginer Friendly Client Management System',
+    title: 'LITE Trainer — Beginner Friendly Client Management System',
     description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
     images: ['https://litetrainer.com/opengraph-image.png'],
   },
@@ -118,16 +118,16 @@ export default function LiteTrainerLanding() {
 
               <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
                 {t('hero.description') ||
-                  'The perfect bridge between basic tools and expensive enterprise software. '}
+                  'The perfect bridge between basic tools and expensive enterprise software.'}
                 <span className="text-purple-300">LITE Trainer</span>
                 {t('hero.description2') ||
-                  ' gives you all the core features you need to grow your coaching business — without the complexity or cost.'}
+                  'Weekly Workout & Nutrition Planning for Beginner Coaches — without the complexity or cost.'}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
                 <Link href={loginPage}>
                   <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
-                    {t('hero.cta1') || 'Start Free Trial'}
+                    {t('hero.cta1') || 'Start Free Trial for Lite Trainer Coaching App'}
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
@@ -136,11 +136,11 @@ export default function LiteTrainerLanding() {
                 </button>
               </div>
             </div>
-            <div className='relative w-full h-64 md:h-auto'>
+            <div className='relative hidden w-full h-64 md:h-auto xl:block'>
               <div className="absolute top-0 left-0 w-90 h-full rounded-l-xl bg-gradient-to-l from-transparent to-purple-950/50 z-10"></div>
               <img 
                 src='./dashboardSC.png'
-                alt="Dashboard-screenshot" 
+                alt="Lite Trainer app dashboard showing weekly workout and nutrition plan" 
                 className='w-full h-full object-cover object-left rounded-2xl'
               />
             </div>
@@ -458,3 +458,29 @@ export default function LiteTrainerLanding() {
     </div>
   );
 }
+
+
+
+/*
+I'm in the developing phase still. Honestly, I've been developing it since April. I've been taking it slow since I've also been learning with this application. 
+But I believe I'm close to being able to launch the MVP. I mean, I already have it up on the Internet. I already bought a domain. I already have a landing page, a 
+very simple one, but it works. I already implemented Stripe for payment processing. So let me explain the flow to you a little bit so you can have an idea of more 
+or less what's happening. So a client, and by that I mean a coach, goes to the landing page. They review the important data, whatever, and then they decide to create 
+an account. So they go to the sign-up page. They create their account. They place their name, email, their personal plans that they want to offer, and their cell 
+phone number. That's it. They create their account with no credit card in between. They get three free client creations. So they can manage up to three clients without 
+having to ever use their credit card. Once they hit the three-client creation mark, they will then hit a paywall. Once they hit the paywall, they have to either pay or 
+stop using. So they pay the starter plan, and now they have up to 15 clients. I am planning on building a pro plan later on, but for now I want to launch the starter 
+plan. The starter plan allows you to do basically everything. A coach will be able to create a client from the dashboard. This is how the dashboard looks like. 
+You have the coach's name up top, a big button that says create client. Within the main section, you have a chart with every single client that has a workout due today. 
+Underneath, you have three charts. One, it's a pie chart telling you all the clients that you currently have enrolled in plans organized by plan. You can view the 
+percentage of all the plans that you have assigned to each client. In the middle, you have client logs. Every time a client does a workout successfully, and they log a 
+message that they completed the workout, or they just simply completed the workout, it would show up in there as a line chart. To the right of that, you have a warnings 
+chart where you will see all the clients which their membership is about to expire, or the ones which their membership has already expired. To the right of the screen, 
+you have a long sidebar for notifications. Each time a client logs a workout, you will see their notification there. John Doe logged their workout on Wednesday. This is 
+the message they left, and then the time stamp. That's basically it. To the left of the screen, you have a side nav menu for navigation. You have home, all clients, 
+profile, about, and so on. When it comes to creating a client, the coach clicks that big button in the middle, and you see a modal for the client information. You start by 
+filling out the personal information. Name, email, gender, weight, target weight, goal, what plan you want to assign for them, the expiring date for their plan, and then 
+you see two buttons in the bottom. One to add a workout, and then one to add a nutrition plan. Once you click on either one of them, you will be taken to a new page, which 
+is the workout or nutrition builder. In here, you can build their weekly workouts or nutrition plan, just for the week. You have an empty Monday through Sunday clean schedule. 
+In there, you can add, for example, the workouts. If you want, I can explain that to you right now.
+*/

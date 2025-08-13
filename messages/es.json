@@ -106,7 +106,7 @@
   "activePlans": "Planes Activos",
   "profileStatus": "Estado de Perfil",
   "active": "Activo",
-  "language": "Preferencia de Lenguaje",
+  "language": "Idioma",
 
 
   "addNewClientHeader": "Añadir Nuevo Cliente",
@@ -288,8 +288,8 @@
       "title1": "Entrenamiento Simple",
       "title2": "Hecho Poderoso",
       "description": "El puente perfecto entre herramientas básicas y software empresarial costoso. ",
-      "description2": " te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio de entrenamiento — sin complejidad ni altos costos.",
-      "cta1": "únete a Lite Trainer Ahora",
+      "description2": " te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio de entrenamiento sin complejidad ni altos costos.",
+      "cta1": "Únete a Lite Trainer Ahora",
       "cta2": "Hazta 3 Clientes Gratis antes de Comprometerte"
     },
     "stats": {
@@ -436,7 +436,11 @@
   "accepted": "Aceptados",
   "demonstrationUrl": "Link de Demostración",
   "commentPlaceholder": "ej. Enfócate en tu forma",
-  "videoLinkPlaceholder": "Cualquier Link de Video"
+  "videoLinkPlaceholder": "Cualquier Link de Video",
+
+  "getStarted": "Comenzar",
+  "pricing": "Precios",
+  "features": "Prestaciones"
 
 
 }

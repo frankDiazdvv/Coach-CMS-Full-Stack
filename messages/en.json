@@ -104,7 +104,7 @@
   "activePlans": "Active Plans",
   "profileStatus": "Profile Status",
   "active": "Active",
-  "language": "Language Preference",
+  "language": "Language",
 
 
   "addNewClientHeader": "Add New Client",
@@ -297,7 +297,7 @@
     "features": {
       "title1": "Everything You Need to",
       "title2": "Scale Your Coaching",
-      "description": "Focus on what matters most — coaching your clients. We handle the technology.",
+      "description": "Focus on what matters most, coaching your clients. We handle the technology.",
       "items": [
         {
           "title": "Complete Client Management",
@@ -435,6 +435,10 @@
   "accepted": "Accepted",
   "demonstrationUrl": "Demonstration URL",
   "commentPlaceholder": "e.g., Focus on form",
-  "videoLinkPlaceholder": "Any video link"
+  "videoLinkPlaceholder": "Any video link",
+
+  "getStarted": "Get Started",
+  "pricing": "Pricing",
+  "features": "Features"
 
 }
