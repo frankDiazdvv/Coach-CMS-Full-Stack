@@ -1,6 +1,7 @@
 'use client';
 
 import Link from "next/link";
+import Image from "next/image";
 import { useRouter } from 'next/navigation';
 import { useState } from "react";
 
@@ -57,12 +58,34 @@ const Signup: React.FC = () => {
     
     
     return (
-        <div className="flex min-h-screen items-center justify-center bg-gray-100">
-            <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
-                <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">Sign Up</h2>
-                <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="flex flex-col min-h-screen items-center justify-center bg-white">
+            <div className='fixed top-4 left-6 hidden md:block'>
+                <Link href={"/"}>
+                  <Image
+                    src={"/squareLogo.svg"}
+                    alt='logo'
+                    width={50}
+                    height={50}
+                    quality={80}
+                  />
+                </Link>
+            </div>
+            <div className='md:hidden pt-10'>
+                <Link href={"/"}>
+                  <Image
+                    src={"/LT-no-bg-logo.png"}
+                    alt='logo'
+                    width={200}
+                    height={45}
+                    quality={100}
+                  />
+                </Link>
+            </div>
+            <div className="w-full max-w-md rounded-lg bg-white p-8">
+                <h1 className="sm:mb-6 md:mb-10 text-center text-2xl md:text-3xl font-semibold text-gray-800">Create you Coach Account</h1>
+                <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
-                        <label htmlFor="user-name" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="user-name" className="block text-sm font-medium text-gray-500">
                          Name
                         </label>
                         <input
@@ -71,12 +94,12 @@ const Signup: React.FC = () => {
                             value={name}
                             onChange={(e) => setName(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                            className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                             placeholder="Enter your Name"
                         />
                     </div>
                     <div>
-                        <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="email" className="block text-sm font-medium text-gray-500">
                          Email
                         </label>
                         <input
@@ -85,12 +108,12 @@ const Signup: React.FC = () => {
                             value={email}
                             onChange={(e) => setEmail(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                            className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                             placeholder="Enter your email"
                         />
                     </div>
                     <div>
-                        <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="password" className="block text-sm font-medium text-gray-500">
                          Password
                         </label>
                         <input
@@ -99,12 +122,12 @@ const Signup: React.FC = () => {
                             value={password}
                             onChange={(e) => setPassword(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                            className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                             placeholder="Enter your password"
                         />
                     </div>
                     <div>
-                        <label htmlFor="phone" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="phone" className="block text-sm font-medium text-gray-500">
                          Phone
                         </label>
                         <input
@@ -113,12 +136,12 @@ const Signup: React.FC = () => {
                             value={phone}
                             onChange={(e) => setPhone(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                            className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                             placeholder="Enter your phone number"
                         />
                     </div>
                     <div>
-                        <label htmlFor="plans" className="block text-sm font-medium text-gray-700">
+                        <label htmlFor="plans" className="block text-sm font-medium text-gray-500">
                          Plans
                         </label>
                         <input
@@ -127,7 +150,7 @@ const Signup: React.FC = () => {
                             value={plansInput}
                             onChange={(e) => setPlansInput(e.target.value)}
                             required
-                            className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+                            className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                             placeholder="Enter your plans separated by comma"
                         />
                     </div>
@@ -136,7 +159,7 @@ const Signup: React.FC = () => {
                     <button
                         type="submit"
                         disabled={isLoading}
-                        className={`w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+                        className={`cursor-pointer w-full rounded-md bg-blue-600 px-4 py-3 text-white text-lg hover:bg-blue-700 focus:outline-none hover:rounded-none transition-all duration-200 focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
                         isLoading ? 'opacity-50 cursor-not-allowed' : ''
                         }`}
                     >
@@ -151,12 +174,6 @@ const Signup: React.FC = () => {
                             Sign In
                         </Link>
                     </p>
-                    {/* <p>
-                        Forgot your password?{' '}
-                        <Link href="/forgot-password" className="text-blue-600 hover:underline">
-                         Reset it
-                        </Link>
-                    </p> */}
                 </div>
             </div>
         </div>

@@ -3,6 +3,7 @@
 import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import Link from 'next/link';
+import Image from 'next/image';
 
 const clientDashboard = '/client/client-workout-dashboard';
 const coachDashboard = '/coach/coach-dashboard';
@@ -66,12 +67,36 @@ const Login: React.FC = () => {
   };
 
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gray-100">
-      <div className="w-full max-w-md rounded-lg bg-white p-8 shadow-md">
-        <h2 className="mb-6 text-center text-2xl font-bold text-gray-800">Login</h2>
+    <div className="flex flex-col min-h-screen items-center justify-center bg-white">
+      <div className='fixed top-4 left-6 hidden md:block'>
+        <Link href={"/"}>
+          <Image
+            src={"/squareLogo.svg"}
+            alt='logo'
+            width={50}
+            height={50}
+            quality={80}
+          />
+        </Link>
+      </div>
+      <div className='md:hidden pt-10'>
+        <Link href={"/"}>
+          <Image
+            src={"/LT-no-bg-logo.png"}
+            alt='logo'
+            width={200}
+            height={45}
+            quality={100}
+          />
+        </Link>
+      </div>
+      
+      
+      <div className="w-full max-w-md rounded-lg bg-white p-8 mx-4">
+        <h1 className="mb-10 text-center font-semibold text-3xl">Sign in to your account</h1>
         <form onSubmit={handleSubmit} className="space-y-6">
           <div>
-            <label htmlFor="email" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="email" className="block text-sm font-medium text-gray-500">
               Email
             </label>
             <input
@@ -80,12 +105,12 @@ const Login: React.FC = () => {
               value={email}
               onChange={(e) => setEmail(e.target.value)}
               required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+              className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 p-3 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
               placeholder="Enter your email"
             />
           </div>
           <div>
-            <label htmlFor="password" className="block text-sm font-medium text-gray-700">
+            <label htmlFor="password" className="block text-sm font-medium text-gray-500">
               Password
             </label>
             <input
@@ -94,30 +119,31 @@ const Login: React.FC = () => {
               value={password}
               onChange={(e) => setPassword(e.target.value)}
               required
-              className="mt-1 block w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
+              className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 p-3 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
               placeholder="Enter your password"
             />
+            <p className='text-xs text-gray-600 pt-1 px-1'>New Client? Ask your coach for your password to log in</p>
           </div>
           {error && <p className="text-sm text-red-500">Email or Password didn&apos;t match. Try Again.</p>}
           <button
             type="submit"
             disabled={isLoading}
-            className={`w-full rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
+            className={`cursor-pointer w-full rounded-md bg-blue-600 px-4 py-3 text-white text-lg hover:bg-blue-700 hover:rounded-none transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-offset-2 ${
               isLoading ? 'opacity-50 cursor-not-allowed' : ''
             }`}
           >
-            {isLoading ? 'Logging in...' : 'Login'}
+            {isLoading ? 'Logging in...' : 'Log in'}
           </button>
         </form>
         <div className="mt-4 text-center text-sm text-gray-600">
           <p>
-            Don&apos;t have an account?{' '}
+            New to Coaching?{' '}
             <Link href="/sign-up" className="text-blue-600 hover:underline">
-              Create one
+              Create an account
             </Link>
           </p>
           <p>
-            Forgot your password?{' '}
+            Forgot coach password?{' '}
             <Link href="/forgot-password" className="text-blue-600 hover:underline">
               Reset it
             </Link>

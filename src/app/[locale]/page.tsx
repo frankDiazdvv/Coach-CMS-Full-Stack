@@ -84,11 +84,11 @@ export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-950 to-slate-900 text-white overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
-        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-500 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-900 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
+        <div className="absolute -bottom-40 -left-40 w-80 h-80 bg-blue-950 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse" style={{ animationDelay: '2s' }}></div>
       </div>
 
       {/* Navigation */}
@@ -137,7 +137,7 @@ export default function LiteTrainerLanding() {
               </div>
             </div>
             <div className='relative hidden w-full h-64 md:h-auto xl:block'>
-              <div className="absolute top-0 left-0 w-90 h-full rounded-l-xl bg-gradient-to-l from-transparent to-purple-950/50 z-10"></div>
+              <div className="absolute top-0 left-0 w-80 h-full rounded-l-xl bg-gradient-to-l from-transparent via-gray-700/30 to-black/50 z-10"></div>
               <img 
                 src='./dashboardSC.png'
                 alt="Lite Trainer app dashboard showing weekly workout and nutrition plan" 
