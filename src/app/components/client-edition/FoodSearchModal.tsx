@@ -1,7 +1,9 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { useState } from 'react';
+import { FormEvent, useState } from 'react';
+import { IoSearch } from "react-icons/io5";
+
 
 interface FoodSearchModalProps {
   isOpen: boolean;
@@ -31,7 +33,8 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
 
   const API_KEY = 'JcaHk6y5uiwKlPLBt1hietUxOn2yb6JgbEZNhHcn';
 
-  const handleSearch = async () => {
+  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
+    e.preventDefault();
     setIsLoading(true);
     setError('');
     try {
@@ -110,22 +113,24 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-2xl font-semibold text-gray-800">{t("searchFoods")}</h2>
-        <div className="flex flex-row gap-2 mb-4">
-          <input
-            type="text"
-            placeholder={t("searchFoodPlaceholder")}
-            value={searchQuery}
-            onChange={(e) => setSearchQuery(e.target.value)}
-            className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
-          />
-          <button
-            onClick={handleSearch}
-            className="cursor-pointer rounded-md bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
-          >
-            {t("search")}
-          </button>
-        </div>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-800 cursor-default">{t("searchFoods")}</h2>
+        <form onSubmit={handleSearch}>
+          <div className="flex flex-row gap-1 mb-4">
+            <input
+              type="text"
+              placeholder={t("searchFoodPlaceholder")}
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              className="w-full rounded-md border border-gray-300 hover:border-black px-3 py-2 focus:border-blue-500 focus:outline-none"
+            />
+            <button
+              type='submit'
+              className="cursor-pointer rounded-md hover:rounded-4xl bg-blue-500 px-3 py-1 text-white hover:bg-blue-600 transition-all duration-400"
+            >
+              <IoSearch className='text-xl' />
+            </button>
+          </div>
+        </form>
         <div className="max-h-64 overflow-y-auto">
           {isLoading ? (
             <p className="text-gray-500">Loading...</p>
@@ -157,7 +162,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
           <div className="mt-4">
             <div className="flex space-x-2">
               <div>
-                <label className="block text-sm font-medium text-gray-700">Quantity</label>
+                <label className="block text-sm font-medium text-gray-700">{t("quantity")}</label>
                 <input
                   type="number"
                   value={quantity}
@@ -167,15 +172,15 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">Unit</label>
+                <label className="block text-sm font-medium text-gray-700">{t("unit")}</label>
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
                   className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
                 >
-                  <option value="g">grams (g)</option>
-                  <option value="ml">milliliters (ml)</option>
-                  <option value="oz">ounces (oz)</option>
+                  <option value="g">{t("grams")} (g)</option>
+                  <option value="ml">{t("milliliters")} (ml)</option>
+                  <option value="oz">{t("ounces")} (oz)</option>
                   {selectedFood.foodMeasures && selectedFood.foodMeasures.length > 0 && (
                     selectedFood.foodMeasures.map((measure: any) => (
                       <option key={measure.id} value={measure.disseminationText}>
@@ -191,7 +196,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
         <div className="mt-4 flex justify-end space-x-2">
           <button
             onClick={onClose}
-            className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+            className="cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
           >
             {t("cancel")}
           </button>
@@ -199,7 +204,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
             onClick={handleSelect}
             disabled={!selectedFood}
             className={`rounded-md px-4 py-2 text-white ${
-              selectedFood ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
+              selectedFood ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'
             }`}
           >
             {t("addFood")}

@@ -226,7 +226,7 @@ const AddWorkoutPage: React.FC = () => {
   };
 
   return (
-    <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-6">
+    <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-6 cursor-default ">
       {/* Header */}
         <div className="mb-8">
           <div className="flex items-center justify-between">

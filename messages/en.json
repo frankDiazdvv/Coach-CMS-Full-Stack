@@ -454,7 +454,10 @@
   "units": "units",
   "milliliters": "milliliter(s)",
   "ounces": "ounce(s)",
-  "slices": "slice(s)"
+  "slices": "slice(s)",
+
+  "createMeal": "Create Meal",
+  "addCustomFood": "Add Custom Food"
 
 
 }

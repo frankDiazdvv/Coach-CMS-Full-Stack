@@ -293,7 +293,7 @@ const AddNutritionPage: React.FC = () => {
   };
   
  return (
-    <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-4">
+    <div className="fixed z-200 left-0 right-0 min-h-screen bg-gray-100 p-4 cursor-default">
       {/* Header */}
       <div className="mb-8">
         <div className="flex items-center justify-between">
@@ -307,7 +307,7 @@ const AddNutritionPage: React.FC = () => {
             <button
               onClick={handleCancelCreation}
               disabled={loading}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-medium rounded-xl shadow-md hover:from-gray-600 hover:to-gray-700 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex cursor-pointer items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-500 to-gray-600 text-white font-medium rounded-xl shadow-md hover:from-gray-600 hover:to-gray-700 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
@@ -317,7 +317,7 @@ const AddNutritionPage: React.FC = () => {
             <button
               onClick={handleConfirmNutrition}
               disabled={loading}
-              className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
+              className="inline-flex cursor-pointer items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700 text-white font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95 disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {loading ? (
                 <>

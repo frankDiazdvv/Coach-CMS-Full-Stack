@@ -144,15 +144,15 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
             <button
               type="button"
               onClick={onClose}
-              className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+              className="rounded-md cursor-pointer bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
             >
-              Cancel
+              {t("cancel")}
             </button>
             <button
               type="submit"
-              className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+              className="rounded-md cursor-pointer bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
             >
-              Add Custom Food
+              {t("addCustomFood")}
             </button>
           </div>
         </form>

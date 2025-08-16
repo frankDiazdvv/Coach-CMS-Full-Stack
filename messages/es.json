@@ -455,7 +455,11 @@
   "units": "unidades",
   "milliliters": "mililitro(s)",
   "ounces": "onza(s)",
-  "slices": "rebanada(s)"
+  "slices": "rebanada(s)",
+
+
+  "createMeal": "Crear Comida",
+  "addCustomFood": "Añadir Comida"
 
 
 
