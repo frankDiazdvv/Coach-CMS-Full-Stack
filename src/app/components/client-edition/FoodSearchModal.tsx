@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 interface FoodSearchModalProps {
@@ -26,6 +27,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   const [unit, setUnit] = useState<string>('g'); // grams
   const [isLoading, setIsLoading] = useState(false);
   const [error, setError] = useState('');
+  const t = useTranslations();
 
   const API_KEY = 'JcaHk6y5uiwKlPLBt1hietUxOn2yb6JgbEZNhHcn';
 
@@ -108,20 +110,20 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">Search Food</h2>
-        <div className="mb-4">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-800">{t("searchFoods")}</h2>
+        <div className="flex flex-row gap-2 mb-4">
           <input
             type="text"
-            placeholder="Search foods (e.g., Banana)"
+            placeholder={t("searchFoodPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
             className="w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
           />
           <button
             onClick={handleSearch}
-            className="mt-2 rounded-md bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
+            className="cursor-pointer rounded-md bg-blue-500 px-3 py-1 text-white hover:bg-blue-600"
           >
-            Search
+            {t("search")}
           </button>
         </div>
         <div className="max-h-64 overflow-y-auto">
@@ -130,7 +132,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
           ) : error ? (
             <p className="text-red-500">{error}</p>
           ) : foods.length === 0 ? (
-            <p className="text-gray-500">No foods found</p>
+            <p className="text-gray-500">{t("noFoodsFound")}</p>
           ) : (
             foods.map((food) => {
               const calories = food.foodNutrients.find(
@@ -191,7 +193,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
             onClick={onClose}
             className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button
             onClick={handleSelect}
@@ -200,7 +202,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
               selectedFood ? 'bg-blue-600 hover:bg-blue-700' : 'bg-gray-400 cursor-not-allowed'
             }`}
           >
-            Add Food
+            {t("addFood")}
           </button>
         </div>
       </div>

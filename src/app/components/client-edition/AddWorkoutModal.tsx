@@ -148,8 +148,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
         <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-          <h2 className="mb-4 text-xl font-bold text-gray-800">{t("addWorkout")}</h2>
-
+          <h2 className="mb-4 text-2xl font-semibold text-gray-800">{t("addWorkout")}</h2>
           {/* Search Bar */}
           <input
             type="text"

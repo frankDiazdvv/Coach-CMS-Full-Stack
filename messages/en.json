@@ -439,6 +439,22 @@
 
   "getStarted": "Get Started",
   "pricing": "Pricing",
-  "features": "Features"
+  "features": "Features",
+
+  "addFood": "Add Food",
+  "search": "Search",
+  "searchFood": "Search Foods",
+  "searchFoodPlaceholder": "Search foods (e.g., Banana)",
+  "noFoodsFound": "No foods found",
+  "addCustomIng": "Add Custom Ingredient",
+  "foodName": "Ingredient Name",
+  "foodNamePlaceholder": "e.g. Ground Beef, Black Beans",
+  "quantity": "Quantity",
+  "unit": "Unit",
+  "units": "units",
+  "milliliters": "milliliter(s)",
+  "ounces": "ounce(s)",
+  "slices": "slice(s)"
+
 
 }

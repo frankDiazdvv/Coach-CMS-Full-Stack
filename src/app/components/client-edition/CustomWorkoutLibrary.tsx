@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react';
 import CustomWorkoutModal from './CustomWorkoutDetailsModal';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
 import { useTranslations } from 'next-intl';
+import { FaRegTrashAlt } from "react-icons/fa";
+
 
 interface Workout {
   _id: string;
@@ -98,7 +100,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
       <div className="fixed inset-0 z-60 flex items-center justify-center backdrop-blur-xs bg-black/40">
         <div className="absolute top-10 bottom-10 w-full max-w-lg rounded-lg bg-white p-6 shadow-lg">
           <div className="flex justify-between items-center mb-4">
-            <h2 className="text-xl font-bold text-gray-800">{t("workoutLibrary")}</h2>
+            <h2 className="text-2xl font-semibold text-gray-800">{t("workoutLibrary")}</h2>
             <button onClick={onClose} className="text-gray-500 hover:text-gray-700 hover:font-black cursor-pointer">
               ✕
             </button>
@@ -113,7 +115,7 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
               {workouts.map((workout) => (
                 <li
                   key={workout._id}
-                  className="flex items-center justify-between border p-0 rounded-md cursor-pointer hover:bg-gray-50"
+                  className="flex items-center justify-between border p-0 rounded-md cursor-pointer hover:bg-gray-50 hover:border-black"
                 >
                   <div
                     className="flex items-center gap-3 flex-grow"
@@ -137,9 +139,9 @@ const WorkoutLibraryModal: React.FC<WorkoutLibraryModalProps> = ({ isOpen, onClo
                       e.stopPropagation(); // Prevent triggering onSelect
                       handleDelete(workout._id);
                     }}
-                    className="text-red-500 hover:text-red-700 rounded-md px-1 mx-1 hover:bg-red-50 hover:font-semibold cursor-pointer"
+                    className="text-gray-400 hover:text-red-500 mx-2 p-2 rounded-full hover:bg-red-100 cursor-pointer"
                   >
-                    {t("delete")}
+                    <FaRegTrashAlt />
                   </button>
                 </li>
               ))}

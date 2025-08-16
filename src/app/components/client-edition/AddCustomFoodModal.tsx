@@ -1,6 +1,7 @@
 'use client';
 
 import { useState } from 'react';
+import { useTranslations } from 'use-intl';
 
 interface AddCustomFoodModalProps {
   isOpen: boolean;
@@ -26,6 +27,7 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
   const [fats, setFats] = useState<number>(0);
   const [quantity, setQuantity] = useState<number>(1);
   const [unit, setUnit] = useState<string>('items');
+  const t = useTranslations();
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -55,21 +57,21 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">Add Custom Food</h2>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-800">{t("addCustomIng")}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Food Name</label>
+            <label className="block text-sm font-medium text-gray-700">{t("foodName")}</label>
             <input
               type="text"
               value={name}
               onChange={(e) => setName(e.target.value)}
-              placeholder='e.g. Ground Beef'
+              placeholder={t("foodNamePlaceholder")}
               required
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Calories (kcal per serving)</label>
+            <label className="block text-sm font-medium text-gray-700">{t("calories")} (kcal)</label>
             <input
               type="number"
               value={calories}
@@ -80,7 +82,7 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Protein (g per serving)</label>
+            <label className="block text-sm font-medium text-gray-700">{t("protein")} (g)</label>
             <input
               type="number"
               value={protein}
@@ -91,7 +93,7 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Carbs (g per serving)</label>
+            <label className="block text-sm font-medium text-gray-700">{t("carbs")} (g)</label>
             <input
               type="number"
               value={carbs}
@@ -102,7 +104,7 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Fats (g per serving)</label>
+            <label className="block text-sm font-medium text-gray-700">{t("fats")} (g)</label>
             <input
               type="number"
               value={fats}
@@ -114,7 +116,7 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
           </div>
           <div className="flex space-x-2">
             <div>
-              <label className="block text-sm font-medium text-gray-700">Quantity</label>
+              <label className="block text-sm font-medium text-gray-700">{t("quantity")}</label>
               <input
                 type="number"
                 value={quantity}
@@ -124,17 +126,17 @@ const AddCustomFoodModal: React.FC<AddCustomFoodModalProps> = ({ isOpen, onClose
               />
             </div>
             <div>
-              <label className="block text-sm font-medium text-gray-700">Unit</label>
+              <label className="block text-sm font-medium text-gray-700">{t("unit")}</label>
               <select
                 value={unit}
                 onChange={(e) => setUnit(e.target.value)}
                 className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
               >
-                <option value="items">units</option>
-                <option value="g">grams (g)</option>
-                <option value="ml">milliliters (ml)</option>
-                <option value="oz">ounces (oz)</option>
-                <option value="slices">slices</option>
+                <option value="items">{t("units")}</option>
+                <option value="g">{t("grams")} (g)</option>
+                <option value="ml">{t("milliliters")} (ml)</option>
+                <option value="oz">{t("ounces")} (oz)</option>
+                <option value="slices">{t("slices")}</option>
               </select>
             </div>
           </div>

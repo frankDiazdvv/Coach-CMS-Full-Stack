@@ -96,7 +96,7 @@ const CustomWorkoutModal: React.FC<CustomWorkoutModalProps> = ({
   return (
     <div className="fixed inset-0 z-70 flex items-center justify-center bg-black/50 backdrop-blur-sm">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">{t("createCustomWorkout")}</h2>
+        <h2 className="mb-4 text-2xl font-bold text-gray-800">{t("createCustomWorkout")}</h2>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
             <label className="block text-sm font-medium text-gray-700">{t("workoutName")} *</label>

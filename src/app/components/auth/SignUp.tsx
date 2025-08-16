@@ -82,7 +82,7 @@ const Signup: React.FC = () => {
                 </Link>
             </div>
             <div className="w-full max-w-md rounded-lg bg-white p-8">
-                <h1 className="sm:mb-6 md:mb-10 text-center text-2xl md:text-3xl font-semibold text-gray-800">Create you Coach Account</h1>
+                <h1 className="sm:mb-6 md:mb-10 text-center text-2xl md:text-3xl font-semibold text-gray-800">Create your Coach Account</h1>
                 <form onSubmit={handleSubmit} className="space-y-4">
                     <div>
                         <label htmlFor="user-name" className="block text-sm font-medium text-gray-500">

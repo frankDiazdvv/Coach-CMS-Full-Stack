@@ -1,5 +1,6 @@
 'use client';
 
+import { useTranslations } from 'next-intl';
 import { useState } from 'react';
 
 interface ViewExerciseDetailsProps {
@@ -32,6 +33,7 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
   const [targetWeight, setTargetWeight] = useState<string | undefined>(workout.targetWeight);
   const [comment, setComment] = useState<string | undefined>(workout.comment);
   const [workoutUrl, setWorkoutUrl] = useState<string | undefined>(workout.workoutUrl);
+  const t = useTranslations();
 
   const noWorkoutIcon = '/no-image-icon.png';
 
@@ -53,9 +55,9 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
 
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">
-          Details of {workout.name}
+      <div className="w-full max-w-md rounded-lg bg-white px-6 py-3 shadow-lg">
+        <h2 className="mb-2 text-2xl font-semibold text-gray-800">
+          {t("detailsFor")} {workout.name}
         </h2>
         <div className="mb-4 flex flex-row overflow-x-auto gap-2">
           {workout.workoutImages.map((img, index) => (
@@ -69,7 +71,7 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
           <div>
-            <label className="block text-sm font-medium text-gray-700">Sets</label>
+            <label className="block text-sm font-medium text-gray-700">{t("sets")}</label>
             <input
               type="number"
               value={sets}
@@ -80,7 +82,7 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Reps</label>
+            <label className="block text-sm font-medium text-gray-700">{t("reps")}</label>
             <input
               type="number"
               value={reps}
@@ -91,31 +93,31 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Target Weight</label>
+            <label className="block text-sm font-medium text-gray-700">{t("targetWeight")}</label>
             <input
               type="text"
               value={targetWeight || ''}
               onChange={(e) => setTargetWeight(e.target.value)}
-              placeholder="e.g., 135 lbs"
+              placeholder={t("weightPlaceholder")}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Comment</label>
+            <label className="block text-sm font-medium text-gray-700">{t("comment")}</label>
             <textarea
               value={comment || ''}
               onChange={(e) => setComment(e.target.value)}
-              placeholder="e.g., Focus on form"
+              placeholder={t("commentPlaceholder")}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
           <div>
-            <label className="block text-sm font-medium text-gray-700">Video URL</label>
+            <label className="block text-sm font-medium text-gray-700">{t("demonstrationUrl")}</label>
             <input
               type="text"
               value={workoutUrl || ''}
               onChange={(e) => setWorkoutUrl(e.target.value)}
-              placeholder="Any video link"
+              placeholder={t("videoLinkPlaceholder")}
               className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
             />
           </div>
@@ -123,23 +125,23 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
             <button
               type="button"
               onClick={onDelete}
-              className="rounded-md bg-red-600 px-4 py-2 text-white hover:bg-red-700"
+              className="rounded-md cursor-pointer bg-red-600 px-4 py-2 text-white hover:bg-red-700"
             >
-              Delete
+              {t("delete")}
             </button>
             <div className="flex space-x-2">
               <button
                 type="button"
                 onClick={onClose}
-                className="rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
+                className="rounded-md cursor-pointer bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
               >
-                Cancel
+                {t("cancel")}
               </button>
               <button
                 type="submit"
-                className="rounded-md bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
+                className="rounded-md cursor-pointer bg-blue-600 px-4 py-2 text-white hover:bg-blue-700"
               >
-                Accept
+                {t("accept")}
               </button>
             </div>
           </div>

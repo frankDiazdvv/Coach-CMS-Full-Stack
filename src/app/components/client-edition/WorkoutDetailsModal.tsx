@@ -37,8 +37,8 @@ const WorkoutDetailsModal: React.FC<WorkoutDetailsModalProps> = ({ isOpen, worko
 
   return (
     <div className="fixed inset-0 z-80 flex items-center justify-center bg-black/20 backdrop-blur-md">
-      <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-xl font-bold text-gray-800">
+      <div className="w-full max-w-md rounded-lg bg-white px-6 py-4 shadow-lg">
+        <h2 className="mb-4 text-2xl font-semibold text-gray-800">
           {t("detailsFor")} {workoutName}
         </h2>
         <div className="mb-4 flex flex-row overflow-x-auto gap-2">

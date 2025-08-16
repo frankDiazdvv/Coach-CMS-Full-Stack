@@ -440,7 +440,24 @@
 
   "getStarted": "Comenzar",
   "pricing": "Precios",
-  "features": "Prestaciones"
+  "features": "Prestaciones",
+
+  "addFood": "Añadir Comida",
+  "search": "Buscar",
+  "searchFood": "Buscar Comidas",
+  "searchFoodPlaceholder": "Buscar comidas (ej., Banana)",
+  "noFoodsFound": "Nada fue Encontrado",
+  "addCustomIng": "Añadir Ingrediente Personalizado",
+  "foodName": "Nombre de Ingrediente",
+  "foodNamePlaceholder": "ej. carne molida, habichuelas negras",
+  "quantity": "Cantidad",
+  "unit": "Unidad",
+  "units": "unidades",
+  "milliliters": "mililitro(s)",
+  "ounces": "onza(s)",
+  "slices": "rebanada(s)"
+
+
 
 
 }
