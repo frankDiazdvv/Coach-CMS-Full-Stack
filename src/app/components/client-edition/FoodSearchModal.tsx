@@ -4,6 +4,7 @@ import { useTranslations } from 'next-intl';
 import { FormEvent, useState } from 'react';
 import { IoSearch } from "react-icons/io5";
 import { useLocale } from 'next-intl';
+import ingredientsES from '../../../../lib/ingredients_local_db/ingredientsES.json';
 
 
 interface FoodSearchModalProps {
@@ -34,10 +35,11 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   const locale = useLocale();
 
   const API_KEY = 'JcaHk6y5uiwKlPLBt1hietUxOn2yb6JgbEZNhHcn';
+  const noImage = '/no-image-icon.png';
 
   const filterIngredients = (results: any[]) => {
     return results.filter(item => 
-      // item.ingredients && item.ingredients.length > 0
+      item.nutriments && item.nutriments["energy-kcal_100g"] > 0 &&
       !(item.categories_tags || []).some((tag: string) => 
         ["en:beverages", "en:snacks", "en:sodas", "en:prepared-meals"].includes(tag)
       )
@@ -61,6 +63,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
         );
         if (!response.ok) throw new Error("Failed to fetch foods (USDA)");
         data = await response.json();
+        console.log(data);
         setFoods(data.foods || []);
 
       } else {
@@ -77,8 +80,13 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
 
         const filteredProducts = filterIngredients(data.products || []);
 
+        // Filter local JSON (simple case-insensitive match)
+        const localMatches = ingredientsES.filter(item =>
+          item.product_name.toLowerCase().includes(searchQuery.toLowerCase())
+        );
+
         console.log(data.products);
-        setFoods(data.products || []);
+        setFoods([...localMatches, ...filteredProducts]);
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : "Failed to Load Foods";
@@ -209,9 +217,11 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
                       : ""
                   }`}
                 >
-                  <div className='object-contain object-center w-10 h-full mr-2'>
-                    <img className='h-10 w-auto' src={foodImage} alt="" />
-                  </div>
+                  {locale === 'es' && (
+                    <div className='object-cover object-center w-10 h-full mr-2'>
+                      <img className='h-10 w-auto' src={foodImage || noImage} alt="No se ve ni pinga" />
+                    </div>
+                  )}
                   <div className='flex flex-col justify-center'>
                     <p className="text-sm">{name}</p>
                     <p className="text-xs text-gray-500">
@@ -248,7 +258,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
                   <option value="oz">{t("ounces")} (oz)</option>
                   {selectedFood.foodMeasures && selectedFood.foodMeasures.length > 0 && (
                     selectedFood.foodMeasures.map((measure: any) => (
-                      <option key={measure.id} value={measure.disseminationText}>
+                      <option key={locale === "en" ? measure.id : measure.measureId} value={measure.disseminationText}>
                         {measure.disseminationText} ({measure.gramWeight}g)
                       </option>
                     ))
