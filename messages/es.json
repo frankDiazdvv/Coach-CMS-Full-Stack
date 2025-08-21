@@ -255,6 +255,7 @@
   "noFoodAdded": "No Comidas Añadidas",
   "delete": "Borrar",
   "accept": "Aceptar",
+  "addMealComment": "ej. Comida alta en proteínas",
 
   "workoutCategories": {
     "Arms": "Brazos",
@@ -445,7 +446,7 @@
   "addFood": "Añadir Comida",
   "search": "Buscar",
   "searchFood": "Buscar Comidas",
-  "searchFoodPlaceholder": "Buscar comidas (ej., Banana)",
+  "searchFoodPlaceholder": "Busca por nombre o tipo de alimento...",
   "noFoodsFound": "Nada fue Encontrado",
   "addCustomIng": "Añadir Ingrediente Personalizado",
   "foodName": "Nombre de Ingrediente",

@@ -1,11 +1,11 @@
 'use client';
 
 import { useTranslations } from 'next-intl';
-import { FormEvent, useState } from 'react';
-import { IoSearch } from "react-icons/io5";
+import { useEffect, useState } from 'react';
+import { IoSearch } from 'react-icons/io5';
 import { useLocale } from 'next-intl';
-import ingredientsES from '../../../../lib/ingredients_local_db/ingredientsES.json';
-
+import Fuse from 'fuse.js';
+import ingredients from '../../../../lib/ingredients_local_db/ingredients.json';
 
 interface FoodSearchModalProps {
   isOpen: boolean;
@@ -26,6 +26,7 @@ interface FoodSearchModalProps {
 const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSelectFood }) => {
   const [searchQuery, setSearchQuery] = useState('');
   const [foods, setFoods] = useState<any[]>([]);
+  const [allFoods, setAllFoods] = useState<any[]>([]); // Store all foods for filtering
   const [selectedFood, setSelectedFood] = useState<any | null>(null);
   const [quantity, setQuantity] = useState<number>(1);
   const [unit, setUnit] = useState<string>('g'); // grams
@@ -38,114 +39,114 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   const noImage = '/no-image-icon.png';
 
   const filterIngredients = (results: any[]) => {
-    return results.filter(item => 
-      item.nutriments && item.nutriments["energy-kcal_100g"] > 0 &&
-      !(item.categories_tags || []).some((tag: string) => 
-        ["en:beverages", "en:snacks", "en:sodas", "en:prepared-meals"].includes(tag)
-      )
+    return results.filter(
+      (item) =>
+        item.nutriments &&
+        item.nutriments['energy-kcal_100g'] > 0
     );
   };
 
-  const handleSearch = async (e: FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setError('');
-
-    try {
-      let data;
-
-      if (locale === "en") {
-        // USDA
-        const response = await fetch(
-          `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${API_KEY}&query=${encodeURIComponent(
-            searchQuery
-          )}&dataType=Foundation,Survey (FNDDS)&pageSize=50`
-        );
-        if (!response.ok) throw new Error("Failed to fetch foods (USDA)");
-        data = await response.json();
-        console.log(data);
-        setFoods(data.foods || []);
-
-      } else {
-
-        // Spanish -> OFF
-        const response = await fetch(
-          // https://world.openfoodfacts.org/cgi/search.pl?search_terms=manzana&search_simple=1&json=1&tagtype_0=brands&tag_contains_0=without
-          `https://es.openfoodfacts.org/cgi/search.pl?search_terms=${encodeURIComponent(
-            searchQuery
-          )}&search_simple=1&action=process&json=1&page_size=50`
-        );
-        if (!response.ok) throw new Error("Failed to fetch foods (OFF)");
-        data = await response.json();
-
-        const filteredProducts = filterIngredients(data.products || []);
-
-        // Filter local JSON (simple case-insensitive match)
-        const localMatches = ingredientsES.filter(item =>
-          item.product_name.toLowerCase().includes(searchQuery.toLowerCase())
-        );
-
-        console.log(data.products);
-        setFoods([...localMatches, ...filteredProducts]);
-      }
-    } catch (err: unknown) {
-      const message = err instanceof Error ? err.message : "Failed to Load Foods";
-      setError(message);
-    } finally {
-      setIsLoading(false);
+  // Load foods when modal opens
+  useEffect(() => {
+    if (!isOpen) {
+      setFoods([]);
+      setAllFoods([]);
+      setSearchQuery('');
+      setSelectedFood(null);
+      setQuantity(1);
+      setUnit('g');
+      return;
     }
-  };
 
+    const loadFoods = async () => {
+      setIsLoading(true);
+      setError('');
+
+      try {
+        let data: any[] = [];
+
+          // if (locale === 'en') {
+          // // Fetch from USDA
+          // const response = await fetch(
+          //   `https://api.nal.usda.gov/fdc/v1/foods/search?api_key=${API_KEY}&query=&dataType=Foundation,Survey (FNDDS)&pageSize=2000`
+          // );
+          // if (!response.ok) throw new Error('Failed to fetch foods (USDA)');
+          // const result = await response.json();
+          // data = result.foods || [];
+          // }
+          data = ingredients.foods;
+
+        setAllFoods(data);
+        setFoods(data); // Initially display all foods
+      } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : 'Failed to Load Foods';
+        setError(message);
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    loadFoods();
+  }, [isOpen, locale]);
+
+  // Filter foods as searchQuery changes
+  useEffect(() => {
+    if (!searchQuery) {
+      setFoods(allFoods); // Show all foods when query is empty
+      return;
+    }
+
+    if (locale === 'en') {
+      // Fuse.js for english search
+      const fuse = new Fuse(allFoods, {
+        keys: ['en_product_name', 'category.en'],
+        threshold: 0.3,
+      });
+      const results = fuse.search(searchQuery).map((result) => result.item);
+      setFoods(results);
+    } else {
+      // Fuse.js for Spanish search
+      const fuse = new Fuse(allFoods, {
+        keys: ['es_product_name', 'category.es'],
+        threshold: 0.3, // 0 = exact, 1 = very loose
+      });
+      const results = fuse.search(searchQuery).map((result) => result.item);
+      const filteredResults = filterIngredients(results);
+      setFoods(filteredResults);
+    }
+  }, [searchQuery, allFoods, locale]);
 
   const calculateMacros = (food: any) => {
-  if (locale === "en") {
-    // USDA
-    const nutrients = food.foodNutrients || [];
-    const calories = nutrients.find((n: { nutrientId: number; }) => n.nutrientId === 1008 || n.nutrientId === 2047)?.value || 0;
-    const protein = nutrients.find((n: { nutrientName: string; }) => n.nutrientName === "Protein")?.value || 0;
-    const carbs = nutrients.find((n: { nutrientName: string; }) => n.nutrientName === "Carbohydrate, by difference")?.value || 0;
-    const fats = nutrients.find((n: { nutrientName: string; }) => n.nutrientName === "Total lipid (fat)")?.value || 0;
-    return { calories, protein, carbs, fats };
-  } else {
-    // OFF
-    const n = food.nutriments || {};
-    const calories = n["energy-kcal_100g"] || 0;
-    const protein = n["proteins_100g"] || 0;
-    const carbs = n["carbohydrates_100g"] || 0;
-    const fats = n["fat_100g"] || 0;
-    return { calories, protein, carbs, fats };
-  }
-};
-
+      const n = food.nutriments || {};
+      const calories = n['energy-kcal_100g'] || 0;
+      const protein = n['proteins_100g'] || 0;
+      const carbs = n['carbohydrates_100g'] || 0;
+      const fats = n['fat_100g'] || 0;
+      return { calories, protein, carbs, fats };
+  };
 
   const handleSelect = () => {
     if (selectedFood) {
       const macros = calculateMacros(selectedFood);
-      let scaleFactor = quantity; // Default for per-item measures
+      let scaleFactor = quantity;
 
       if (unit === 'g') {
-        //scale by quantity / 100 since macros are per 100g
         scaleFactor = quantity / 100;
       } else if (unit === 'ml') {
-        // assume 1ml = 1g for simplicity
         scaleFactor = quantity / 100;
       } else if (unit === 'oz') {
-        // scale by Ounces
         scaleFactor = quantity / 3.53;
       } else {
-        // If unit is a foodMeasure (e.g., "1 egg"), find the gram weight and scale accordingly
-        const selectedMeasure = selectedFood.foodMeasures.find(
-          (measure: any) => measure.disseminationText === unit
-        );
+        const selectedMeasure = selectedFood.foodMeasures?.find((measure: any) => locale === "en" ? measure.en_disseminationText === unit : measure.es_disseminationText === unit);
         if (selectedMeasure) {
           const gramWeight = selectedMeasure.gramWeight;
-          scaleFactor = (quantity * gramWeight) / 100; // Scale by (quantity * weight per item) / 100
+          scaleFactor = (quantity * gramWeight) / 100;
         }
       }
 
       onSelectFood(
         {
-          name: locale === "en" ? selectedFood.description : selectedFood.product_name,
+          name: locale === 'en' ? selectedFood.en_product_name : selectedFood.es_product_name,
           calories: parseFloat((macros.calories * scaleFactor).toFixed(2)),
           protein: parseFloat((macros.protein * scaleFactor).toFixed(2)),
           carbs: parseFloat((macros.carbs * scaleFactor).toFixed(2)),
@@ -156,10 +157,10 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
       );
 
       setSearchQuery('');
-      setFoods([]);
+      setFoods(allFoods);
       setSelectedFood(null);
       setQuantity(1);
-      setUnit('g'); // Reset to grams
+      setUnit('g');
       onClose();
     }
   };
@@ -169,64 +170,43 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   return (
     <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
       <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-        <h2 className="mb-4 text-2xl font-semibold text-gray-800 cursor-default">{t("searchFoods")}</h2>
-        <form onSubmit={handleSearch}>
-          <div className="flex flex-row gap-1 mb-4">
-            <input
-              type="text"
-              placeholder={t("searchFoodPlaceholder")}
-              value={searchQuery}
-              onChange={(e) => setSearchQuery(e.target.value)}
-              className="w-full rounded-md border border-gray-300 hover:border-black px-3 py-2 focus:border-blue-500 focus:outline-none"
-            />
-            <button
-              type='submit'
-              className="cursor-pointer rounded-md hover:rounded-4xl bg-blue-500 px-3 py-1 text-white hover:bg-blue-600 transition-all duration-400"
-            >
-              <IoSearch className='text-xl' />
-            </button>
-          </div>
-        </form>
+        <h2 className="mb-4 text-2xl font-semibold text-gray-800 cursor-default">{t('searchFoods')}</h2>
+        <div className="mb-4">
+          <input
+            type="text"
+            placeholder={t('searchFoodPlaceholder')}
+            value={searchQuery}
+            onChange={(e) => setSearchQuery(e.target.value)}
+            className="w-full rounded-md border border-gray-300 hover:border-black px-3 py-2 focus:border-blue-500 focus:outline-none"
+          />
+        </div>
         <div className="max-h-64 overflow-y-auto">
           {isLoading ? (
             <p className="text-gray-500">Loading...</p>
           ) : error ? (
             <p className="text-red-500">{error}</p>
           ) : foods.length === 0 ? (
-            <p className="text-gray-500">{t("noFoodsFound")}</p>
+            <p className="text-gray-500">{t('noFoodsFound')}</p>
           ) : (
             foods.map((food) => {
-              const id = locale === "en" ? food.fdcId : food.id;
-              const name = locale === "en" ? food.description : food.product_name;
-              const calories =
-                locale === "en"
-                  ? food.foodNutrients.find(
-                      (nutrient: any) =>
-                        nutrient.nutrientId === 1008 || nutrient.nutrientId === 2047
-                    )?.value || 0
-                  : food.nutriments?.["energy-kcal_100g"] || 0;
-                const foodImage = locale === "es" ? food.image_front_small_url : '';
+              const id = food.id;
+              const name = locale === 'en' ? food.en_product_name : food.es_product_name;
+              const calories = food.nutriments?.['energy-kcal_100g'] || 0;
+              const categories = locale === 'en' ? food.category?.en : food.category?.es || '';
+              const foodImage = food.image_front_small_url || '';
 
               return (
                 <div
                   key={id}
                   onClick={() => setSelectedFood(food)}
                   className={`cursor-pointer flex flex-row rounded-md p-2 hover:bg-gray-100 ${
-                    (locale === "en" ? selectedFood?.fdcId : selectedFood?.id) === id
-                      ? "bg-gray-200"
-                      : ""
+                    (selectedFood?.id) === id ? 'bg-gray-200' : ''
                   }`}
                 >
-                  {locale === 'es' && (
-                    <div className='object-cover object-center w-10 h-full mr-2'>
-                      <img className='h-10 w-auto' src={foodImage || noImage} alt="No se ve ni pinga" />
-                    </div>
-                  )}
-                  <div className='flex flex-col justify-center'>
-                    <p className="text-sm">{name}</p>
-                    <p className="text-xs text-gray-500">
-                      {calories} kcal/100g
-                    </p>
+                  <div className="flex flex-col justify-center">
+
+                    <p className="text-sm font-semibold">{name} <span className='font-normal text-gray-600'> - {categories}</span></p>
+                    <p className="text-xs text-gray-500">{calories} kcal/100g</p>
                   </div>
                 </div>
               );
@@ -237,7 +217,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
           <div className="mt-4">
             <div className="flex space-x-2">
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t("quantity")}</label>
+                <label className="block text-sm font-medium text-gray-700">{t('quantity')}</label>
                 <input
                   type="number"
                   value={quantity}
@@ -247,22 +227,20 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
                 />
               </div>
               <div>
-                <label className="block text-sm font-medium text-gray-700">{t("unit")}</label>
+                <label className="block text-sm font-medium text-gray-700">{t('unit')}</label>
                 <select
                   value={unit}
                   onChange={(e) => setUnit(e.target.value)}
                   className="mt-1 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
                 >
-                  <option value="g">{t("grams")} (g)</option>
-                  <option value="ml">{t("milliliters")} (ml)</option>
-                  <option value="oz">{t("ounces")} (oz)</option>
-                  {selectedFood.foodMeasures && selectedFood.foodMeasures.length > 0 && (
-                    selectedFood.foodMeasures.map((measure: any) => (
-                      <option key={locale === "en" ? measure.id : measure.measureId} value={measure.disseminationText}>
-                        {measure.disseminationText} ({measure.gramWeight}g)
-                      </option>
-                    ))
-                  )}
+                  <option value="g">{t('grams')} (g)</option>
+                  <option value="ml">{t('milliliters')} (ml)</option>
+                  <option value="oz">{t('ounces')} (oz)</option>
+                  {selectedFood.foodMeasures?.map((measure: any) => (
+                    <option key={measure.measureId} value={locale === "en" ? measure.en_disseminationText : measure.es_disseminationText}>
+                      {locale === "en" ? measure.en_disseminationText : measure.es_disseminationText} ({measure.gramWeight}g)
+                    </option>
+                  ))}
                 </select>
               </div>
             </div>
@@ -273,7 +251,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
             onClick={onClose}
             className="cursor-pointer rounded-md bg-gray-200 px-4 py-2 text-gray-700 hover:bg-gray-300"
           >
-            {t("cancel")}
+            {t('cancel')}
           </button>
           <button
             onClick={handleSelect}
@@ -282,7 +260,7 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
               selectedFood ? 'bg-blue-600 hover:bg-blue-700 cursor-pointer' : 'bg-gray-400 cursor-not-allowed'
             }`}
           >
-            {t("addFood")}
+            {t('addFood')}
           </button>
         </div>
       </div>

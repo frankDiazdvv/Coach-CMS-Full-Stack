@@ -102,7 +102,7 @@ const AddMealModal: React.FC<AddMealModalProps> = ({ isOpen, onClose, onSelectMe
                 type="text"
                 value={mealName}
                 onChange={(e) => setMealName(e.target.value)}
-                placeholder={t("searchFoodPlaceholder")}
+                placeholder={t("mealName")}
                 required
                 className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-800 placeholder-gray-400 transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 focus:outline-none"
               />
@@ -184,7 +184,7 @@ const AddMealModal: React.FC<AddMealModalProps> = ({ isOpen, onClose, onSelectMe
               <textarea
                 value={comment}
                 onChange={(e) => {setComment(e.target.value)}}
-                placeholder="e.g., High protein meal"
+                placeholder={t("addMealComment")}
                 rows={4}
                 className="w-full rounded-xl border-2 border-gray-200 px-4 py-3 text-gray-800 placeholder-gray-400 resize-none transition-all focus:border-blue-500 focus:ring-4 focus:ring-blue-500/20 focus:outline-none"
               />
