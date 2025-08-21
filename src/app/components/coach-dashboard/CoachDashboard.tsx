@@ -327,7 +327,9 @@ const CoachDashboard: React.FC = () => {
           </div>
 
           {/* ADD CLIENT BUTTON */}
-          {coach && !coach.isSubscribed && areCoachClients.length >= 3 ? (
+          {coach && (
+            (!coach.isSubscribed && areCoachClients.length >= 3) || 
+            (coach.isSubscribed && areCoachClients.length >= 10)) ? (
             <button
               onClick={() => setIsModalOpen(true)}
               className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-400 to-gray-500

@@ -14,7 +14,7 @@ const LeftSideNav: React.FC = () => {
   const allClients = "/coach/all-clients";
   const measurements = "/coach/coach-side-measurement-page";
   const coachProfile = "/coach/coach-profile-page";
-  const aboutPage = "/contact"; // SOON TO BE CHANGED
+  const aboutPage = "/coach/about-page"; // SOON TO BE CHANGED
 
   return (
     <nav className="fixed left-0 top-0 bottom-0 shadow-xl/30 bg-[#1F2D3D] w-20 flex flex-col items-center justify-start p-4 z-10">
