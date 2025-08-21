@@ -737,7 +737,7 @@
       "id": "local-46",
       "es_product_name": "Mantequilla de Maní",
       "en_product_name": "Peanut Butter",
-      "category": { "en": "Nuts & Seeds", "es": "Frutos Secos y Semillas" },
+      "category": { "en": "Spreads & Toppings", "es": "Untables y Aderezos" },
       "nutriments": {
         "energy-kcal_100g": 576,
         "proteins_100g": 21.2,
@@ -954,8 +954,234 @@
       "foodMeasures": [
           {"es_disseminationText": "Vaso", "en_disseminationText": "Cup", "gramWeight": 250, "measureId": 1107}
       ]
-    }
+    },
+    {
+      "id": "local-60",
+      "es_product_name": "Jarabe de Arce/Maple Puro",
+      "en_product_name": "Pure Maple Syrup",
+      "category": { "en": "Sweetener", "es": "Endulzante" },
+      "nutriments": {
+        "energy-kcal_100g": 366,
+        "proteins_100g": 0.3,
+        "carbohydrates_100g": 89.9,
+        "fat_100g": 0.1
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Tbsp", "en_disseminationText": "Cucharada", "gramWeight": 15, "measureId": 1108}
+      ]
+    },
+    {
+      "id": "local-61",
+      "es_product_name": "Whey Protein - Unflavored",
+      "en_product_name": "Whey Protein - Sin Sabor",
+      "category": { "en": "Supplements", "es": "Suplementos" },
+      "nutriments": {
+        "energy-kcal_100g": 399,
+        "proteins_100g": 73.3,
+        "carbohydrates_100g": 10,
+        "fat_100g": 6.7
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Scoop", "en_disseminationText": "Porcíon", "gramWeight": 15, "measureId": 1109}
+      ]
+    },
+    {
+      "id": "local-62",
+      "es_product_name": "Nutella",
+      "en_product_name": "Nutella",
+      "category": { "en": "Spreads & Toppings", "es": "Untables y Aderezos" },
+      "nutriments": {
+        "energy-kcal_100g": 540,
+        "proteins_100g": 5.4,
+        "carbohydrates_100g": 59.4,
+        "fat_100g": 29.7
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Scoop", "en_disseminationText": "Porcíon", "gramWeight": 18.5, "measureId": 1110}
+      ]
+    },
+    {
+      "id": "local-63",
+      "es_product_name": "Jugo de Naranja 100% Puro",
+      "en_product_name": "Orage Juice 100% Pure",
+      "category": { "en": "Beverages", "es": "Bebidas" },
+      "nutriments": {
+        "energy-kcal_100g": 45,
+        "proteins_100g": 0.7,
+        "carbohydrates_100g": 10.4,
+        "fat_100g": 0.2
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cup", "en_disseminationText": "Vaso", "gramWeight": 235, "measureId": 1110}
+      ]
+    },
+    {
+      "id": "local-64",
+      "es_product_name": "Requesón (Cottage Cheese)",
+      "en_product_name": "Cottage Cheese",
+      "category": { "en": "Dairy", "es": "Lácteos" },
+      "nutriments": {
+        "energy-kcal_100g": 98,
+        "proteins_100g": 11.1,
+        "carbohydrates_100g": 3.4,
+        "fat_100g": 4.3
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cup", "en_disseminationText": "Vaso", "gramWeight": 235, "measureId": 1110}
+      ]
+    },
+    {
+      "id": "local-65",
+      "es_product_name": "Chocolate Oscuro 70%",
+      "en_product_name": "Dark Chocolate 70%",
+      "category": { "en": "Sweets", "es": "Dulces" },
+      "nutriments": {
+        "energy-kcal_100g": 590,
+        "proteins_100g": 9,
+        "carbohydrates_100g": 29,
+        "fat_100g": 43
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción (1 onza)", "en_disseminationText": "Serving (1 oz)", "gramWeight": 28, "measureId": 1111}
+      ]
+    },
+    {
+      "id": "local-66",
+      "es_product_name": "Camarón",
+      "en_product_name": "Shrimp",
+      "category": { "en": "Seafood", "es": "Mariscos" },
+      "nutriments": {
+        "energy-kcal_100g": 99,
+        "proteins_100g": 24,
+        "carbohydrates_100g": 0.2,
+        "fat_100g": 0.3
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 145, "measureId": 1112}
+      ]
+    },
+    {
+      "id": "local-67",
+      "es_product_name": "Claras de Huevo",
+      "en_product_name": "Egg Whites",
+      "category": { "en": "Dairy & Eggs", "es": "Lácteos y Huevos" },
+      "nutriments": {
+        "energy-kcal_100g": 52,
+        "proteins_100g": 11,
+        "carbohydrates_100g": 0.7,
+        "fat_100g": 0.2
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Clara de Huevo Grande", "en_disseminationText": "Large Egg White", "gramWeight": 33, "measureId": 1113}
+      ]
+    },
+    {
+      "id": "local-68",
+      "es_product_name": "Pavo Molido",
+      "en_product_name": "Ground Turkey",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 150,
+        "proteins_100g": 19,
+        "carbohydrates_100g": 0,
+        "fat_100g": 8
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1114}  
+      ]
+    },
+    {
+      "id": "local-69",
+      "es_product_name": "Pollo Molido",
+      "en_product_name": "Ground Chicken",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 143,
+        "proteins_100g": 17,
+        "carbohydrates_100g": 0,
+        "fat_100g": 8
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1115}  
 
-    
+      ]
+    },
+    {
+      "id": "local-70",
+      "es_product_name": "Bistec Ribeye",
+      "en_product_name": "Ribeye Steak",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 291,
+        "proteins_100g": 24,
+        "carbohydrates_100g": 0,
+        "fat_100g": 21
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1116}
+      ]
+    },
+    {
+      "id": "local-71",
+      "es_product_name": "Muslo de Pollo",
+      "en_product_name": "Chicken Thigh",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 209,
+        "proteins_100g": 26,
+        "carbohydrates_100g": 0,
+        "fat_100g": 11
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1117}  
+
+      ]
+    },
+    {
+      "id": "local-72",
+      "es_product_name": "Tocino",
+      "en_product_name": "Bacon",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 541,
+        "proteins_100g": 37,
+        "carbohydrates_100g": 1.4,
+        "fat_100g": 42
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Rebanada", "en_disseminationText": "Slice", "gramWeight": 8, "measureId": 1118}  
+      ]
+    },
+    {
+      "id": "local-73",
+      "es_product_name": "Jamón de Cerdo sin Curar",
+      "en_product_name": "Uncured Pork Ham",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 145,
+        "proteins_100g": 21,
+        "carbohydrates_100g": 1.5,
+        "fat_100g": 6
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Rebanada Fina", "en_disseminationText": "Thin Slice", "gramWeight": 15, "measureId": 1119}
+      ]
+    },
+    {
+      "id": "local-74",
+      "es_product_name": "Salami",
+      "en_product_name": "Salami",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 357,
+        "proteins_100g": 25,
+        "carbohydrates_100g": 0.1,
+        "fat_100g": 28.6
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Rebanada Fina", "en_disseminationText": "Thin Slice", "gramWeight": 5.6, "measureId": 1120},
+          {"es_disseminationText": "Porción (5 rebanadas)", "en_disseminationText": "Serving(5 slices)", "gramWeight": 28, "measureId": 1121}
+      ]
+    }
   ]
 }
