@@ -11,11 +11,12 @@ const domain = 'https://litetrainer.com';
 const ogImage = '/squareLogo.svg';
 
 export const metadata = {
-  title: 'Lite Trainer — Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
-  description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
+  // title: 'Lite Trainer — Beginner Friendly Fitness Coaching Software for Online & In-Person Coaches',
+  title: 'Lite Trainer - Beginner Friendly Fitness Coaching Software',
+  description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches - no bloat, just essential features. English & Spanish support.',
   openGraph: {
     title: 'Lite Trainer — Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
-    description: 'Beginner-friendly client management system for fitness coaches.',
+    description: 'Beginner-friendly, affordable client management system for In-person & Online fitness coaches.',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
     images: [
@@ -33,6 +34,10 @@ export const metadata = {
     title: 'LITE Trainer — Beginner Friendly Client Management System',
     description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
     images: ['https://litetrainer.com/opengraph-image.png'],
+  },
+  icons: {
+    icon: '/favicon.ico',
+    shortcut: '/favicon.ico', 
   },
 };
 
@@ -139,8 +144,9 @@ export default function LiteTrainerLanding() {
             <div className='relative hidden w-full h-64 md:h-auto xl:block'>
               <div className="absolute top-0 left-0 w-80 h-full rounded-l-xl bg-gradient-to-l from-transparent via-gray-700/30 to-black/50 z-10"></div>
               <img 
-                src='./dashboardSC.png'
+                src='./dashboardSC.webp'
                 alt="Lite Trainer app dashboard showing weekly workout and nutrition plan" 
+                fetchPriority='high'
                 className='w-full h-full object-cover object-left rounded-2xl'
               />
             </div>

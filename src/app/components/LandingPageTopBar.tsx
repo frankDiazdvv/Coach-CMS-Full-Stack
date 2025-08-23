@@ -1,7 +1,7 @@
 'use client';
 
 import React, { useState, useEffect } from 'react';
-import { Menu, X, Target, Globe } from 'lucide-react';
+import { Menu, X } from 'lucide-react';
 import Link from 'next/link';
 import LanguageToggle from './ui/languageToggle';
 import { useTranslations } from 'next-intl';
@@ -46,6 +46,7 @@ export default function LandingPageTopBar() {
           <button
             className="md:hidden text-white"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
+            name='Menu Button'
           >
             {isMenuOpen ? <X className="w-6 h-6" /> : <Menu className="w-6 h-6" />}
           </button>
