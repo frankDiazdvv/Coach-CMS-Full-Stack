@@ -158,7 +158,7 @@ export default function LiteTrainerLanding() {
               <div className="text-gray-400">{t('stats.price') || 'Starting Price/Month'}</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">10</div>
+              <div className="text-5xl font-bold bg-[#B2CAF6] bg-clip-text text-transparent mb-2">15</div>
               <div className="text-gray-400">{t('stats.clients') || 'Clients Included'}</div>
             </div>
             <div className="text-center">
