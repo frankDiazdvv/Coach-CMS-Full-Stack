@@ -122,6 +122,39 @@ const CoachProfile: React.FC = () => {
         }
     };
 
+    const handleDeleteCoachAccount = async () => {
+        if (!confirm(t('confirmDeleteAccount'))) {
+            return;
+        }
+        const coachId = localStorage.getItem('id');
+
+        if (!coachId) {
+            setError(t('noCoachId'));
+            return;
+        }
+
+        try{
+            const response = await fetch(`/api/coaches/${coachId}`, {
+                method: 'DELETE',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ coachId }),
+            });
+
+            if (!response.ok) {
+                throw new Error('Failed to delete account');
+            }
+
+            // Clear localStorage and redirect to homepage or login page
+            localStorage.removeItem('token');
+            localStorage.removeItem('id');
+            router.push('/');
+
+        } catch (err: unknown) {
+            const message = err instanceof Error ? err.message : t("genericError");
+            setError(message);
+        }
+    }
+
     const addPlan = () => {
         if (newPlan.trim()) {
             setPlans([...plans, newPlan.trim()]);
@@ -389,6 +422,49 @@ const CoachProfile: React.FC = () => {
                                 </div>
                             </div>
                         </div>
+                    </div>
+                    
+
+                    {/* Settings & Membership Sidebar */}
+                    <div className="lg:col-span-1">
+                        <div className="bg-white rounded-2xl shadow-lg p-6">
+                            <div className="flex items-center gap-3 mb-6">
+                                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
+                                    <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
+                                    </svg>
+                                </div>
+                                <h2 className="text-xl font-bold text-gray-900">{t("settings")}</h2>
+                            </div>
+
+                            <div>
+                                <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-3">
+                                    {t("language")}
+                                </label>
+                                <div className="relative">
+                                    <select
+                                        name="language"
+                                        id="language"
+                                        defaultValue={locale}
+                                        onChange={onSelectChange}
+                                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white appearance-none cursor-pointer"
+                                    >
+                                        {routing.locales.map((lang) => (
+                                            <option key={lang} value={lang}>
+                                                {getLanguageFlag(lang)} {getLanguageName(lang)}
+                                            </option>
+                                        ))}
+                                    </select>
+                                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
+                                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
+                                        </svg>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
                         {/* Membership Section */}
                         <div className="mt-8 p-6 bg-white rounded-2xl shadow-lg">
                             <div className="flex items-center gap-3 mb-6">
@@ -430,68 +506,20 @@ const CoachProfile: React.FC = () => {
                                     <div className="flex flex-row gap-4">
                                         <MembershipButtons coachId={coachId?.toString()!}/>    
                                     </div>
-                                </div>
-                                  
+                                </div>   
                             )}
+                        </div>
+                        <div className="">
+                            <button
+                                className="w-full mt-8 px-4 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                                onClick={handleDeleteCoachAccount}
+                            >
+                                DELETE COACH ACCOUNT
+                            </button>
                         </div>
                     </div>
                     
-
-                    {/* Settings Sidebar */}
-                    <div className="lg:col-span-1">
-                        <div className="bg-white rounded-2xl shadow-lg p-6">
-                            <div className="flex items-center gap-3 mb-6">
-                                <div className="w-8 h-8 bg-purple-100 rounded-lg flex items-center justify-center">
-                                    <svg className="w-5 h-5 text-purple-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10.325 4.317c.426-1.756 2.924-1.756 3.35 0a1.724 1.724 0 002.573 1.066c1.543-.94 3.31.826 2.37 2.37a1.724 1.724 0 001.065 2.572c1.756.426 1.756 2.924 0 3.35a1.724 1.724 0 00-1.066 2.573c.94 1.543-.826 3.31-2.37 2.37a1.724 1.724 0 00-2.572 1.065c-.426 1.756-2.924 1.756-3.35 0a1.724 1.724 0 00-2.573-1.066c-1.543.94-3.31-.826-2.37-2.37a1.724 1.724 0 00-1.065-2.572c-1.756-.426-1.756-2.924 0-3.35a1.724 1.724 0 001.066-2.573c-.94-1.543.826-3.31 2.37-2.37.996.608 2.296.07 2.572-1.065z" />
-                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 12a3 3 0 11-6 0 3 3 0 016 0z" />
-                                    </svg>
-                                </div>
-                                <h2 className="text-xl font-bold text-gray-900">{t("settings")}</h2>
-                            </div>
-
-                            <div>
-                                <label htmlFor="language" className="block text-sm font-medium text-gray-700 mb-3">
-                                    {t("language")}
-                                </label>
-                                <div className="relative">
-                                    <select
-                                        name="language"
-                                        id="language"
-                                        defaultValue={locale}
-                                        onChange={onSelectChange}
-                                        className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white appearance-none cursor-pointer"
-                                    >
-                                        {routing.locales.map((lang) => (
-                                            <option key={lang} value={lang}>
-                                                {getLanguageFlag(lang)} {getLanguageName(lang)}
-                                            </option>
-                                        ))}
-                                    </select>
-                                    <div className="absolute inset-y-0 right-0 flex items-center pr-3 pointer-events-none">
-                                        <svg className="w-5 h-5 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M19 9l-7 7-7-7" />
-                                        </svg>
-                                    </div>
-                                </div>
-                            </div>
-
-                            {/* Coach Stats */}
-                            <div className="mt-8 p-4 bg-gradient-to-r from-blue-50 to-purple-50 rounded-xl">
-                                <h3 className="text-sm font-semibold text-gray-700 mb-3">{t("quickStats")}</h3>
-                                <div className="space-y-2">
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-gray-600">{t("activePlans")}</span>
-                                        <span className="font-medium text-blue-600">{plans.length}</span>
-                                    </div>
-                                    <div className="flex justify-between text-sm">
-                                        <span className="text-gray-600">{t("profileStatus")}</span>
-                                        <span className="font-medium text-green-600">{t("active")}</span>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    
                 </div>
             </div>
         </div>

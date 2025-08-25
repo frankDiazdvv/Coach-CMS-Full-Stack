@@ -217,6 +217,7 @@
   "coachInfo": "Información del Coach",
   "sendEmail": "Send an Email", 
   "noCoach": "No coach assigned",
+  "noCoachId": "No coach id assigned",
   "noCoachSubtitle": "A coach will be assigned to you soon",
   "profileOverview": "Profile Overview",
   "memberSince": "Member Since",
@@ -458,7 +459,9 @@
   "slices": "slice(s)",
 
   "createMeal": "Create Meal",
-  "addCustomFood": "Add Custom Food"
+  "addCustomFood": "Add Custom Food",
+
+  "confirmDeleteAccount": "Are you sure you want to delete your coach account? This action cannot be undone."
 
 
 }

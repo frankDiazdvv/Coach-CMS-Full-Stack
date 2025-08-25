@@ -11,6 +11,7 @@ export interface ICoach {
   isSubscribed: boolean;
   clientCount: number; // New field to track client count
   stripeCustomerId?: string; // Optional field for Stripe customer ID
+  stripeSubscriptionId: { type: String, required: false },
   planName: string;
   resetToken?: string;
   resetTokenExpiry?: number;
@@ -29,6 +30,7 @@ const CoachSchema = new Schema<ICoach>(
     isSubscribed: { type: Boolean, default: false },
     clientCount: { type: Number, default: 0 }, // Initialize to 0
     stripeCustomerId: { type: String, required: false },
+    stripeSubscriptionId: { type: String, required: false },
     planName: { type: String, default: 'Free' },
     resetToken: { type: String, required: false },
     resetTokenExpiry: { type: Number, required: false },  

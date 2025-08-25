@@ -58,7 +58,7 @@ const CoachDashboard: React.FC = () => {
   const [coach, setCoach] = useState<ICoach | null>(null);
   const [workoutLogs, setLocalWorkoutLogs] = useState<WorkoutLog[]>([]);
   const [viewDetailsModal, setViewDetailsModal] = useState(false);
-  const [viewClientId, setViewClientId] = useState<string | null>(null); // Changed to string for _id compatibility
+  const [viewClientId, setViewClientId] = useState<string | undefined>(undefined); // Changed to string for _id compatibility
   const [dueSoonClientId, setDueSoonClientId] = useState<string | null>(null); 
   const [clientDetails, setClientDetails] = useState<IClient | null>(null); // Changed to single client object
   const [dueSoonClientDetails, setDueSoonClientDetails] = useState<IClient | null>(null);
@@ -468,7 +468,7 @@ const CoachDashboard: React.FC = () => {
                               className="text-blue-600 hover:text-blue-900 font-medium cursor-pointer"
                               onClick={() => {
                                 setViewDetailsModal(true)
-                                setViewClientId(client._id.toString())
+                                setViewClientId(client._id?.toString())
                               }}
                             >
                               {t('viewDetails')}

@@ -460,7 +460,10 @@
 
 
   "createMeal": "Crear Comida",
-  "addCustomFood": "Añadir Comida"
+  "addCustomFood": "Añadir Comida",
+
+  "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta de coach? Esta acción no se puede deshacer."
+
 
 
 

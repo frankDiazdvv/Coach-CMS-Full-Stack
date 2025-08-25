@@ -19,7 +19,7 @@ export async function GET() {
     const clients = await Client.find().populate('coach').populate('workoutSchedule').lean();
     return new NextResponse(JSON.stringify(clients), { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error fetching clients"
+    const message = error instanceof Error ? error.message : "Error fetching clients";
     return new NextResponse(message, { status: 500 });
   }
 }

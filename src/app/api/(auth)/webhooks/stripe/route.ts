@@ -66,6 +66,34 @@ export async function POST(req: Request) {
       console.error('Failed to update coach after subscription:', err);
       return new NextResponse('Webhook processing failed', { status: 500 });
     }
+  } else if(event.type === 'customer.subscription.deleted'){
+    const subscription = event.data.object as Stripe.Subscription;
+
+    try {
+      await connect();
+
+      const subscriptionId = subscription.id;
+
+      // Update the coach document
+      const updatedCoach = await Coach.findOneAndUpdate(
+        { stripeSubscriptionId: subscriptionId },
+        {
+          isSubscribed: false,
+          stripeSubscriptionId: null,
+          planName: 'Free',
+        },
+        { new: true }
+      );
+
+      if (updatedCoach) {
+        console.log('✅ Coach subscription cancelled:', updatedCoach._id);
+      } else {
+        console.warn('⚠️ No matching coach found for subscriptionId:', subscriptionId);
+      }
+    } catch (err) {
+      console.error('Failed to update coach after subscription cancellation:', err);
+      return new NextResponse('Webhook processing failed', { status: 500 });
+    }
   }
 
   return new NextResponse('Success', { status: 200 });

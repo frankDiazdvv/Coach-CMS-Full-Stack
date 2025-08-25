@@ -3,6 +3,7 @@ import connect from '../../../../../../lib/db';
 import Coach, { ICoach } from '../../../../../../lib/models/coach';
 import mongoose from 'mongoose';
 import bcrypt from 'bcrypt';
+import Stripe from 'stripe';
 
 // Helper to get ID from request URL
 function getIdFromRequest(request: NextRequest): string | null {
@@ -10,6 +11,10 @@ function getIdFromRequest(request: NextRequest): string | null {
   // Assuming URL is like /api/(auth)/coaches/[id]
   return segments[segments.length - 1] || null;
 }
+
+const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
+  apiVersion: '2025-07-30.basil',
+});
 
 // GET: Fetch a coach by ID
 export async function GET(request: NextRequest) {
@@ -93,10 +98,29 @@ export async function DELETE(request: NextRequest) {
       return new NextResponse('Invalid coach ID', { status: 400 });
     }
 
-    const coach = await Coach.findByIdAndDelete(id);
+    const coach = await Coach.findById(id);
     if (!coach) {
       return new NextResponse('Coach not found', { status: 404 });
     }
+
+    // 1. Cancel subscription in Stripe (if exists)
+    if (coach.stripeSubscriptionId) {
+      try {
+        await stripe.subscriptions.cancel(coach.stripeSubscriptionId);
+        console.log(`✅ Stripe subscription cancelled for coach ${coach._id}`);
+      } catch (err) {
+        return Error(`⚠️ Failed to cancel Stripe subscription for coach ${coach._id}`);
+        //Return Error if not able to cancel subscription
+      }
+    }
+
+    if (coach.stripeCustomerId) {
+      await stripe.customers.del(coach.stripeCustomerId);
+    }
+
+
+    // 2. Delete the coach document
+    await Coach.findByIdAndDelete(id);
 
     return NextResponse.json({ message: 'Coach deleted successfully' }, { status: 200 });
   } catch (error: unknown) {
