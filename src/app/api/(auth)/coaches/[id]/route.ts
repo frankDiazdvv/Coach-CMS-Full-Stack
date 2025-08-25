@@ -109,7 +109,7 @@ export async function DELETE(request: NextRequest) {
         await stripe.subscriptions.cancel(coach.stripeSubscriptionId);
         console.log(`✅ Stripe subscription cancelled for coach ${coach._id}`);
       } catch (err) {
-        return Error(`⚠️ Failed to cancel Stripe subscription for coach ${coach._id}`);
+        return new NextResponse(`⚠️ Failed to cancel Stripe subscription for coach ${coach._id}`, { status: 500 });
         //Return Error if not able to cancel subscription
       }
     }
