@@ -1,7 +1,3 @@
-//TODO:
-// 1. Client Profile Page
-// 2. Measurement Page(coach & Client)
-
 'use client';
 
 import {useTranslations} from 'next-intl';
@@ -58,7 +54,7 @@ const CoachDashboard: React.FC = () => {
   const [coach, setCoach] = useState<ICoach | null>(null);
   const [workoutLogs, setLocalWorkoutLogs] = useState<WorkoutLog[]>([]);
   const [viewDetailsModal, setViewDetailsModal] = useState(false);
-  const [viewClientId, setViewClientId] = useState<string | undefined>(undefined); // Changed to string for _id compatibility
+  const [viewClientId, setViewClientId] = useState<string | null>(null); // Changed to string for _id compatibility
   const [dueSoonClientId, setDueSoonClientId] = useState<string | null>(null); 
   const [clientDetails, setClientDetails] = useState<IClient | null>(null); // Changed to single client object
   const [dueSoonClientDetails, setDueSoonClientDetails] = useState<IClient | null>(null);

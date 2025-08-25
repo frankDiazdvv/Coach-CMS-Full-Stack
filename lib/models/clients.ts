@@ -23,7 +23,7 @@ export interface IClient {
   resetTokenExpiry?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  _id?: Types.ObjectId;
+  _id: Types.ObjectId;
 }
 
 const ClientSchema = new Schema<IClient>(

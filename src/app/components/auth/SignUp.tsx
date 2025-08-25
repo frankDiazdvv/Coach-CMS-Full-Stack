@@ -142,7 +142,7 @@ const Signup: React.FC = () => {
                     </div>
                     <div>
                         <label htmlFor="plans" className="block text-sm font-medium text-gray-500">
-                         Plans
+                         Plans Offered
                         </label>
                         <input
                             id="plans"
@@ -153,6 +153,8 @@ const Signup: React.FC = () => {
                             className="mt-1 block w-full rounded-md border hover:border-slate-800 border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none focus:ring focus:ring-blue-200"
                             placeholder="Enter your plans separated by comma"
                         />
+                        <p className="text-xs text-gray-400 mt-1">What Memberships/Plans fo you offer?(e.g. Weight Loss, Workout + Nutrition, Starter Plan, ...)</p>
+                        
                     </div>
 
                     {error && <p className="text-sm text-red-500">{error}</p>}
