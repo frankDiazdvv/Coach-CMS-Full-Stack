@@ -259,7 +259,7 @@ const CoachProfile: React.FC = () => {
     }
 
     return (
-        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 absolute left-20 right-0 top-0 bottom-0 overflow-auto">
+        <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 absolute left-0 md:left-20 right-0 top-0 bottom-0 pb-20 md:pb-4 overflow-auto">
             <div className="container mx-auto px-4 py-8">
                 {/* Header */}
                 <div className="mb-8">

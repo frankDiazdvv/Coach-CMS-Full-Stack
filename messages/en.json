@@ -461,7 +461,10 @@
   "createMeal": "Create Meal",
   "addCustomFood": "Add Custom Food",
 
-  "confirmDeleteAccount": "Are you sure you want to delete your coach account? This action cannot be undone."
+  "confirmDeleteAccount": "Are you sure you want to delete your coach account? This action cannot be undone.",
+
+  "dashboardInfoTitle": "You're on mobile!",
+  "clientCreationDesktop": "Open your account on desktop to create and manage clients."
 
 
 }

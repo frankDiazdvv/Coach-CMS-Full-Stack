@@ -462,7 +462,10 @@
   "createMeal": "Crear Comida",
   "addCustomFood": "Añadir Comida",
 
-  "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta de coach? Esta acción no se puede deshacer."
+  "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta de coach? Esta acción no se puede deshacer.",
+
+  "dashboardInfoTitle": "Estás en móvil!",
+  "clientCreationDesktop": "Abre tu cuenta en escritorio para crear y gestionar clientes."
 
 
 

@@ -15,6 +15,7 @@ import TotalLogsByClientChart from './TotalLogChart';
 import PieChartAllClients from './PieChartAllClients';
 import router from 'next/router';
 import MembershipButtons from './MembershipButtons';
+import { Bell, X, Info } from 'lucide-react';
 
 interface ClientWorkoutSummary {
   clientId: string;
@@ -61,6 +62,8 @@ const CoachDashboard: React.FC = () => {
   const [chartData, setChartData] = useState<ClientWorkoutSummary[]>([]);
   const [membershipClients, setMembershipClients] = useState<ClientPlanSummary[]>([])
   const [isDueSoonModalOpen, setIsDueSoonModalOpen] = useState(false);
+  const [isNotificationsOpen, setIsNotificationsOpen] = useState(false);
+  const [infoModal, setInfoModal] = useState(false);
 
   const WhatsAppLogo = '/WhatsAppLogo.png';
   const today = new Date().toLocaleString('en-US', { weekday: 'long' });
@@ -286,7 +289,7 @@ const CoachDashboard: React.FC = () => {
   return (
     <div className="min-h-screen ">
       {/* Main Content */}
-      <div className="absolute left-20 right-0 xl:right-80 md:right-72 p-6 pb-8">
+      <div className="absolute left-0 md:left-20 right-0 xl:right-80 p-6 pb-24 md:pb-8">
         {/* Choose Membership */}
         {coach && !coach.isSubscribed && areCoachClients.length >= 3 && (
           <div className="bg-yellow-100 border-l-4 border-yellow-500 p-4 mb-6">
@@ -300,11 +303,10 @@ const CoachDashboard: React.FC = () => {
           </div>
         )}
         {/* Header */}
-        <div className="mb-8 flex items-center justify-between bg-white rounded-2xl shadow-sm p-4 border border-slate-200">
-          <div className="flex items-center space-x-4">
+        <div className="mb-8 flex items-center justify-between bg-white rounded-2xl shadow-sm p-3 md:p-4 border border-slate-200">
+          <div className="flex items-center space-x-2 md:space-x-4">
             <div className="relative">
               {/* COACH PROFILE IMAGE */}
-
               {/* <Image
                 src={profilePic}
                 alt={t('profileAlt')}
@@ -317,8 +319,8 @@ const CoachDashboard: React.FC = () => {
               </div>
             </div>
             <div>
-              <h1 className="text-2xl font-bold text-gray-800 mb-1">{t('welcome')}, {userName}</h1>
-              <p className="text-sm text-gray-500">{t('welcomeBack')}</p>
+              <h1 className="text-xl md:text-2xl font-bold text-gray-800 mb-1">{t('welcome')}, {userName}</h1>
+              <p className="text-xs md:text-sm text-gray-500">{t('welcomeBack')}</p>
             </div>
           </div>
 
@@ -328,7 +330,7 @@ const CoachDashboard: React.FC = () => {
             (coach.isSubscribed && areCoachClients.length >= 10)) ? (
             <button
               onClick={() => setIsModalOpen(true)}
-              className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-400 to-gray-500
+              className="hidden group relative md:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-400 to-gray-500
               text-white cursor-not-allowed font-medium rounded-xl shadow-md"
               disabled
             >
@@ -340,7 +342,7 @@ const CoachDashboard: React.FC = () => {
           ) : (
             <button
               onClick={() => setIsModalOpen(true)}
-              className="group relative inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-blue-600 to-blue-700
+              className="hidden group relative md:inline-flex items-center gap-2 px-3 md:px-6 py-4 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700
               text-white cursor-pointer font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
             >
               <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -349,7 +351,28 @@ const CoachDashboard: React.FC = () => {
               {t('addClient')}
             </button>
           )}
+          <div className='md:hidden'>
+            <Info 
+              className='text-gray-700 active:text-black'
+              onClick={() => setInfoModal(!infoModal)}
+            />
+          </div>
         </div>
+
+        {infoModal && (
+          <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-100">
+            <div className="bg-white rounded-2xl shadow-lg p-6 max-w-lg w-full mx-4 relative">
+              <button 
+                className="absolute top-4 right-4 text-gray-500 hover:text-gray-700"
+                onClick={() => setInfoModal(false)}
+              >
+                <X className="w-6 h-6" />
+              </button>
+              <h2 className="text-2xl font-bold mb-4">{t('dashboardInfoTitle')}</h2>
+              <p className="text-gray-700 mb-2">{t('clientCreationDesktop')}</p>
+            </div>
+          </div>
+        )}
         
         <AddClientModal
           isOpen={isModalOpen}
@@ -900,8 +923,8 @@ const CoachDashboard: React.FC = () => {
           </div>
         )}
         
-        {/* Notifications Sidebar */}
-        <nav className="fixed right-0 top-0 bottom-0 bg-[#1f2d3d] shadow-xl/30 flex flex-col xl:w-80 md:w-72 z-10">
+        {/* Notifications Sidebar - Desktop */}
+        <nav className="hidden fixed right-0 top-0 bottom-0 bg-[#1f2d3d] shadow-xl/30 xl:flex flex-col xl:w-80 md:w-72 z-100">
           <div className="p-6 border-b border-slate-600">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
@@ -1002,6 +1025,117 @@ const CoachDashboard: React.FC = () => {
             </div>
           </div>
         </nav>
+
+        {/* Notifications Sidebar - Mobile */}
+        <button
+          className="cursor-pointer xl:hidden text-white fixed right-2 bottom-20 rounded-full p-3 active:scale-95 transition-all duration-300 bg-[#1f2d3d] border border-blue-400 shadow-xl/30 xl:w-24 md:w-18 z-150"
+          onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
+          name='Menu Button'
+        >
+          {isNotificationsOpen ? <X className="w-6 h-6" /> : <Bell className="w-6 h-6"/>}
+        </button>
+         <nav className={`fixed right-0 top-0 bottom-0 bg-[#1f2d3d] shadow-xl/30 flex flex-col w-dvw xl:w-80 md:w-72 z-100 transform transition-transform duration-300 
+            ${isNotificationsOpen ? "translate-x-0" : "translate-x-full"}`}>
+            <div className="p-6 border-b border-slate-600">
+              <div className="flex items-center justify-between px-6">
+                <div className="flex items-center gap-3">
+                  <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                    <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.5-3.5a1.5 1.5 0 010-2.12L20 8h-5m-5 9H5l3.5-3.5a1.5 1.5 0 000-2.12L5 8h5m0 0V3m0 5v10" />
+                    </svg>
+                  </div>
+                  <div>
+                    <h2 className="text-xl font-bold text-white">{t('notifications')}</h2>
+                    <p className="text-sm text-gray-400">{t('recentActivity')}</p>
+                  </div>
+                </div>
+                <div className="flex items-center gap-2">
+                  <div className="w-2 h-2 bg-indigo-400 rounded-full animate-pulse"></div>
+                  <span className="text-sm text-gray-400">{workoutLogs.length}</span>
+                </div>
+              </div>
+            </div>
+
+            <div className="flex-1 overflow-y-auto">
+              {isLoading ? (
+                <div className="p-6 text-center">
+                  <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-indigo-500 mx-auto mb-3"></div>
+                  <p className="text-gray-400">{t('loadingNotifications')}</p>
+                </div>
+              ) : workoutLogs.length === 0 ? (
+                <div className="p-6 text-center">
+                  <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mx-auto mb-4">
+                    <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M20 13V6a2 2 0 00-2-2H6a2 2 0 00-2 2v7m16 0v5a2 2 0 01-2 2H6a2 2 0 01-2-2v-5m16 0h-2.586a1 1 0 00-.707.293l-2.414 2.414a1 1 0 01-.707.293h-3.172a1 1 0 01-.707-.293l-2.414-2.414A1 1 0 006.586 13H4" />
+                    </svg>
+                  </div>
+                  <h3 className="text-lg font-medium text-gray-100 mb-2">{t('allCaughtUp')}</h3>
+                  <p className="text-gray-500">{t('noNewNotifications')}</p>
+                </div>
+              ) : (
+                <div className="p-4 space-y-3">
+                  {workoutLogs.map((log) => (
+                    <div
+                      key={log._id}
+                      className="group relative bg-gradient-to-r bg-[#324d6c] rounded-xl p-3 
+                      transition-all duration-200 border border-slate-600 hover:border-indigo-200 hover:shadow-md"
+                    >
+                      <div className="flex items-start gap-3">
+                        <div className="relative">
+                          <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-sm">
+                            {log.client.firstName.charAt(0)}
+                          </div>
+                        </div>
+                        <div className="flex-1 min-w-0">
+                          <div className="flex items-center justify-between mb-1">
+                            <h3 className="text-sm font-semibold text-white truncate">
+                              {`${log.client.firstName} ${log.client.lastName}`}
+                            </h3>
+                            <span className="text-xs text-gray-400">
+                              {new Date(log.loggedAt).toLocaleDateString()}
+                            </span>
+                          </div>
+                          <p className="text-sm text-gray-300 mb-1">
+                            {t('completedWorkoutOn')} <span className="font-semibold text-orange-400">{tWeekday(log.day)}</span>
+                          </p>
+                          {log.comment && (
+                            <div className="bg-white rounded-lg p-1 mb-1">
+                              <p className="text-xs text-gray-600 italic">
+                                &quot;{log.comment}&quot;
+                              </p>
+                            </div>
+                          )}
+                          <div className="flex items-center justify-between">
+                            <p className="text-xs text-gray-300">
+                              {new Date(log.loggedAt).toLocaleTimeString('en-US', {
+                                hour: '2-digit',
+                                minute: '2-digit',
+                              })}
+                            </p>
+                            <div className="flex items-center gap-1">
+                              <div className="w-1.5 h-1.5 bg-green-500 rounded-full"></div>
+                              <span className="text-xs text-green-600 font-medium">{t('completed')}</span>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      
+                      {/* Notification indicator */}
+                      <div className="absolute top-2 right-2 w-2 h-2 bg-indigo-500 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></div>
+                    </div>
+                  ))}
+                </div>
+              )}
+            </div>
+            
+            {/* Sidebar Footer */}
+            <div className="p-4 border-t border-slate-600">
+              <div className="flex items-center justify-between px-6 text-sm text-gray-300">
+                <span>{t('lastUpdated')}</span>
+                <span>{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
+              </div>
+            </div>
+          </nav>
       </div>
     </div>
     );

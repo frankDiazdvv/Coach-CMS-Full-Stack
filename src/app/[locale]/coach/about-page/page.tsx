@@ -6,7 +6,7 @@ export default function AboutPage(){
     return(
         <>
             <LeftSideNav/>
-            <main className="ml-20 p-4 bg-gradient-to-br from-slate-50 to-purple-100 h-dvh cursor-default flex items-center justify-center">
+            <main className="md:ml-20 p-4 bg-gradient-to-br from-slate-50 to-purple-100 h-dvh cursor-default flex items-center justify-center">
                 <div className="absolute top-6 right-6">
                     <Image
                         src="/squareLogo.svg"
