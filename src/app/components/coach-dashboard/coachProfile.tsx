@@ -402,7 +402,6 @@ const CoachProfile: React.FC = () => {
                                                 <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 4v16m8-8H4" />
                                                 </svg>
-                                                {t("addPlan")}
                                             </button>
                                         </div>
                                     </div>
@@ -471,12 +470,12 @@ const CoachProfile: React.FC = () => {
                                 <div className="w-8 h-8 bg-blue-100 rounded-lg flex items-center justify-center">
                                     <Sparkles className="w-5 h-5 text-blue-600" />
                                 </div>
-                                <h2 className="text-xl font-bold text-gray-900">Your Current Plan</h2>
+                                <h2 className="text-xl font-bold text-gray-900">{t("currentPlan")}</h2>
                             </div>
                             <div className="mb-4 p-4 border border-gray-200 rounded-lg bg-gray-50">
                                 <p className="text-lg">
                                     <span className="font-semibold">{isSubscribed ? `${planName}\u00A0` : 'Free Plan\u00A0'}</span>
-                                    — {isSubscribed ? '$15/mo, up to 25 clients' : 'Free, up to 3 clients'}
+                                    — {isSubscribed ? '$9.99/m, up to 15 clients' : 'Free, up to 3 clients'}
                                 </p>
                             </div>
                             {/* Check if client is subscribed */}
@@ -486,13 +485,13 @@ const CoachProfile: React.FC = () => {
                                         <div className="w-8 h-8 bg-gray-100 rounded-lg flex items-center justify-center">
                                             <Dumbbell className="w-5 h-5 text-gray-600" />
                                         </div>
-                                        <h2 className="text-xl font-bold text-gray-900">Manage Your Membership</h2>
+                                        <h2 className="text-xl font-bold text-gray-900">{t("manageMembership")}</h2>
                                     </div>
                                     <button
                                         onClick={handleManageBilling}
                                         className="w-full px-6 py-3 bg-gradient-to-r from-blue-600 to-purple-600 text-white rounded-xl hover:from-blue-700 hover:to-purple-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                                     >
-                                        Manage Billing
+                                        {t("manageBilling")}
                                     </button>       
                                 </div>                  
                             ) : (
@@ -501,7 +500,7 @@ const CoachProfile: React.FC = () => {
                                         <div className="w-8 h-8 bg-green-100 rounded-lg flex items-center justify-center">
                                             <ClipboardPlus className="w-5 h-5 text-green-600" />
                                         </div>
-                                        <h2 className="text-xl font-bold text-gray-900">Become a member and enjoy more benefits</h2>
+                                        <h2 className="text-xl font-bold text-gray-900">{t("becomeMemberAndEnjoy")}</h2>
                                     </div>
                                     <div className="flex flex-row gap-4">
                                         <MembershipButtons coachId={coachId?.toString()!}/>    
@@ -514,7 +513,7 @@ const CoachProfile: React.FC = () => {
                                 className="w-full mt-8 px-4 py-3 bg-red-600 text-white rounded-xl hover:bg-red-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer active:scale-95"
                                 onClick={handleDeleteCoachAccount}
                             >
-                                DELETE COACH ACCOUNT
+                                {t("deleteCoachAccount")}
                             </button>
                         </div>
                     </div>

@@ -15,7 +15,7 @@ import TotalLogsByClientChart from './TotalLogChart';
 import PieChartAllClients from './PieChartAllClients';
 import router from 'next/router';
 import MembershipButtons from './MembershipButtons';
-import { Bell, X, Info } from 'lucide-react';
+import { Bell, X, Info, ClipboardX } from 'lucide-react';
 
 interface ClientWorkoutSummary {
   clientId: string;
@@ -392,7 +392,7 @@ const CoachDashboard: React.FC = () => {
                 </svg>
               </div>
               <div>
-                <h2 className="text-xl font-bold text-gray-800">{t('todayWorkouts')}</h2>
+                <h2 className="text-md sm:text-xl font-bold text-gray-800">{t('todayWorkouts')}</h2>
                 <p className="text-sm text-gray-500">{todayDate}</p>
               </div>
             </div>
@@ -424,25 +424,23 @@ const CoachDashboard: React.FC = () => {
                 <table className="w-full">
                   <thead className="bg-slate-50 border-b border-slate-200">
                     <tr>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('client')}</th>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('plan')}</th>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('gender')}</th>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('goal')}</th>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('weight')}</th>
-                      <th className="px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('actions')}</th>
+                      <th className="px-4 md:px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('client')}</th>
+                      <th className="px-4 md:px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('plan')}</th>
+                      <th className="hidden px-4 sm:table-cell md:px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('gender')}</th>
+                      <th className="px-4 md:px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('goal')}</th>
+                      <th className="px-4 md:px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('weight')}</th>
+                      <th className="px-4 md:px-6 py-4 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">{t('actions')}</th>
                     </tr>
                   </thead>
                   <tbody className="divide-y divide-slate-200">
                     {clientsDueToday.length === 0 ? (
                       <tr>
-                        <td colSpan={6} className="px-6 py-12 text-center">
+                        <td colSpan={6} className="px-6 py-6 text-center">
                           <div className="flex flex-col items-center justify-center">
-                            <div className="w-16 h-16 bg-gray-100 rounded-full flex items-center justify-center mb-4">
-                              <svg className="w-8 h-8 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5H7a2 2 0 00-2 2v10a2 2 0 002 2h8a2 2 0 002-2V7a2 2 0 00-2-2h-2M9 5a2 2 0 002 2h2a2 2 0 002-2M9 5a2 2 0 012-2h2a2 2 0 012 2" />
-                              </svg>
+                            <div className="w-12 h-12 bg-gray-100 rounded-full flex items-center justify-center mb-1">
+                              <ClipboardX className="w-6 h-6 text-gray-400" />
                             </div>
-                            <h3 className="text-lg font-medium text-gray-900 mb-2">{t('noWorkoutsScheduled')}</h3>
+                            <h3 className="text-lg font-medium text-gray-900">{t('noWorkoutsScheduled')}</h3>
                             <p className="text-gray-500">{t('noWorkoutsMessage')}</p>
                           </div>
                         </td>
@@ -450,7 +448,7 @@ const CoachDashboard: React.FC = () => {
                     ) : (
                       clientsDueToday.map((client) => (
                         <tr key={client._id?.toString()} className="hover:bg-slate-50 transition-colors">
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-2 md:px-6 py-4 whitespace-nowrap">
                             <div className="flex items-center">
                               <div className="relative">
                                 {/* <Image
@@ -460,29 +458,28 @@ const CoachDashboard: React.FC = () => {
                                   height={40}
                                   className="rounded-full border-2 border-slate-100"
                                 /> */}
-                                <div className="w-12 h-12 text-xl bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
-                                  {client.firstName.charAt(0)}{client.lastName.charAt(0)}
+                                <div className="w-10 h-10 text-lg bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
+                                  <p>{client.firstName.charAt(0)}{client.lastName.charAt(0)}</p>
                                 </div>
-                                <div className="absolute -bottom-1 -right-1 w-4 h-4 bg-green-500 rounded-full border-2 border-white"></div>
                               </div>
-                              <div className="ml-4">
+                              <div className="ml-2 md:ml-4">
                                 <div className="text-sm font-medium text-gray-900">{`${client.firstName} ${client.lastName}`}</div>
                               </div>
                             </div>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="px-4 md:px-6 py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-blue-100 text-blue-800">
                               {client.planAssigned}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{client.gender}</td>
-                          <td className="px-6 py-4 whitespace-nowrap">
+                          <td className="hidden sm:table-cell px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{client.gender}</td>
+                          <td className="px-4 md:px py-4 whitespace-nowrap">
                             <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
                               {client.goal}
                             </span>
                           </td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-900">{client.currentWeight}</td>
-                          <td className="px-6 py-4 whitespace-nowrap text-sm font-medium">
+                          <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm text-gray-900">{client.currentWeight}</td>
+                          <td className="px-4 md:px-6 py-4 whitespace-nowrap text-sm font-medium">
                             <button
                               className="text-blue-600 hover:text-blue-900 font-medium cursor-pointer"
                               onClick={() => {
@@ -1028,7 +1025,7 @@ const CoachDashboard: React.FC = () => {
 
         {/* Notifications Sidebar - Mobile */}
         <button
-          className="cursor-pointer xl:hidden text-white fixed right-2 bottom-20 rounded-full p-3 active:scale-95 transition-all duration-300 bg-[#1f2d3d] border border-blue-400 shadow-xl/30 xl:w-24 md:w-18 z-150"
+          className="cursor-pointer xl:hidden text-white fixed right-2 bottom-20 md:bottom-2 rounded-full p-3 active:scale-95 transition-all duration-300 bg-[#1f2d3d] border border-blue-400 shadow-xl/30 z-150"
           onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
           name='Menu Button'
         >
@@ -1129,8 +1126,8 @@ const CoachDashboard: React.FC = () => {
             </div>
             
             {/* Sidebar Footer */}
-            <div className="p-4 border-t border-slate-600">
-              <div className="flex items-center justify-between px-6 text-sm text-gray-300">
+            <div className="py-6 xl:p-4 border-t border-slate-600">
+              <div className="flex items-center justify-between md:justify-start xl:justify-between md:gap-4 px-6 text-sm text-gray-300">
                 <span>{t('lastUpdated')}</span>
                 <span>{new Date().toLocaleTimeString('en-US', { hour: '2-digit', minute: '2-digit' })}</span>
               </div>

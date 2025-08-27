@@ -105,6 +105,11 @@
   "profileStatus": "Profile Status",
   "active": "Active",
   "language": "Language",
+  "currentPlan":"Your Current Plan",
+  "manageMembership": "Manage Your Membership",
+  "becomeMemberAndEnjoy": "Become a member and enjoy more benefits",
+  "deleteCoachAccount": "Delete Coach Account",
+  "manageBilling": "Manage Billing",
 
 
   "addNewClientHeader": "Add New Client",
@@ -464,7 +469,11 @@
   "confirmDeleteAccount": "Are you sure you want to delete your coach account? This action cannot be undone.",
 
   "dashboardInfoTitle": "You're on mobile!",
-  "clientCreationDesktop": "Open your account on desktop to create and manage clients."
+  "clientCreationDesktop": "Open your account on desktop to create and manage clients.",
+
+  "thankYouForUsing":"Thank you for using LITE Trainer 💪",
+  "thankYouText":"If you have any questions, suggestions, or feedback, please feel free to email us through this link:",
+  "contactUs": "Contact Us"
 
 
 }

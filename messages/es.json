@@ -17,7 +17,7 @@
   "profileAlt": "Foto de perfil",
   "addClient": "Agregar Cliente",
   "todayWorkouts": "Entrenamientos de Hoy",
-  "scheduled": "{due, plural, =0 {Ningún Entrenamiento Hoy} one {{due} programado} other {{due} programados}}",
+  "scheduled": "{due, plural, =0 {Ninguna Sesión Hoy} one {{due} sesión} other {{due} sesiones}}",
   "loadingWorkouts": "Cargando entrenamientos...",
   "loadingProfile": "Cargando tu perfil...",
   "client": "Cliente",
@@ -107,6 +107,12 @@
   "profileStatus": "Estado de Perfil",
   "active": "Activo",
   "language": "Idioma",
+  "currentPlan":"Tu Plan Actual",
+  "manageMembership": "Maneja tu Membresía",
+  "becomeMemberAndEnjoy": "Hazte miembro y disfruta de más beneficios",
+  "deleteCoachAccount": "Eliminar Cuenta de Coach",
+  "manageBilling": "Gestionar Membresía",
+
 
 
   "addNewClientHeader": "Añadir Nuevo Cliente",
@@ -465,7 +471,12 @@
   "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta de coach? Esta acción no se puede deshacer.",
 
   "dashboardInfoTitle": "Estás en móvil!",
-  "clientCreationDesktop": "Abre tu cuenta en escritorio para crear y gestionar clientes."
+  "clientCreationDesktop": "Abre tu cuenta en escritorio para crear y gestionar clientes.",
+
+
+  "thankYouForUsing":"Gracias por usar LITE Trainer 💪",
+  "thankYouText":"Si tienes alguna pregunta, sugerencia o comentario, no dudes en enviarnos un correo a través de este enlace:",
+  "contactUs": "Contáctanos"
 
 
 
