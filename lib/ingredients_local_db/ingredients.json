@@ -274,7 +274,7 @@
       "id": "local-17",
       "es_product_name": "Papa",
       "en_product_name": "Potato",
-      "category":"2",
+      "category": { "en": "Vegetable", "es": "Verdura" },
       "nutriments": {
         "energy-kcal_100g": 77,
         "proteins_100g": 2,
@@ -972,8 +972,8 @@
     },
     {
       "id": "local-61",
-      "es_product_name": "Whey Protein - Unflavored",
-      "en_product_name": "Whey Protein - Sin Sabor",
+      "es_product_name": "Whey Protein - Sin Sabor",
+      "en_product_name": "Whey Protein - Unflavored",
       "category": { "en": "Supplements", "es": "Suplementos" },
       "nutriments": {
         "energy-kcal_100g": 399,
@@ -982,7 +982,7 @@
         "fat_100g": 6.7
       },
       "foodMeasures": [
-          {"es_disseminationText": "Scoop", "en_disseminationText": "Porcíon", "gramWeight": 15, "measureId": 1109}
+          {"es_disseminationText": "Porcíon", "en_disseminationText": "Scoop", "gramWeight": 15, "measureId": 1109}
       ]
     },
     {
@@ -1019,7 +1019,7 @@
       "id": "local-64",
       "es_product_name": "Requesón (Cottage Cheese)",
       "en_product_name": "Cottage Cheese",
-      "category": { "en": "Dairy", "es": "Lácteos" },
+      "category": { "en": "Dairy & Eggs", "es": "Lácteos y Huevos" },
       "nutriments": {
         "energy-kcal_100g": 98,
         "proteins_100g": 11.1,
@@ -1049,7 +1049,7 @@
       "id": "local-66",
       "es_product_name": "Camarón",
       "en_product_name": "Shrimp",
-      "category": { "en": "Seafood", "es": "Mariscos" },
+      "category": { "en": "Fish & Seafood", "es": "Pescado y Mariscos" },
       "nutriments": {
         "energy-kcal_100g": 99,
         "proteins_100g": 24,
@@ -1079,7 +1079,7 @@
       "id": "local-68",
       "es_product_name": "Pavo Molido",
       "en_product_name": "Ground Turkey",
-      "category": { "en": "Meat", "es": "Carne" },
+      "category": { "en": "Poultry", "es": "Aves" },
       "nutriments": {
         "energy-kcal_100g": 150,
         "proteins_100g": 19,
@@ -1094,7 +1094,7 @@
       "id": "local-69",
       "es_product_name": "Pollo Molido",
       "en_product_name": "Ground Chicken",
-      "category": { "en": "Meat", "es": "Carne" },
+      "category": { "en": "Poultry", "es": "Aves"},
       "nutriments": {
         "energy-kcal_100g": 143,
         "proteins_100g": 17,
@@ -1125,7 +1125,7 @@
       "id": "local-71",
       "es_product_name": "Muslo de Pollo",
       "en_product_name": "Chicken Thigh",
-      "category": { "en": "Meat", "es": "Carne" },
+      "category": { "en": "Poultry", "es": "Aves" },
       "nutriments": {
         "energy-kcal_100g": 209,
         "proteins_100g": 26,
@@ -1181,6 +1181,496 @@
       "foodMeasures": [
           {"es_disseminationText": "Rebanada Fina", "en_disseminationText": "Thin Slice", "gramWeight": 5.6, "measureId": 1120},
           {"es_disseminationText": "Porción (5 rebanadas)", "en_disseminationText": "Serving(5 slices)", "gramWeight": 28, "measureId": 1121}
+      ]
+    },
+    {
+      "id": "local-75",
+      "es_product_name": "Harina de Coco",
+      "en_product_name": "Coconut Flour",
+      "category": { "en": "Breads & Flour", "es": "Panes y Harinas" },
+      "nutriments": {
+        "energy-kcal_100g": 400,
+        "proteins_100g": 20,
+        "carbohydrates_100g": 60,
+        "fat_100g": 13
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 7.5, "measureId": 1122}
+      ]
+    },
+    {
+      "id": "local-76",
+      "es_product_name": "Harina de Trigo Todo Uso",
+      "en_product_name": "All-Purpose Flour",
+      "category": { "en": "Breads & Flour", "es": "Panes y Harinas" },
+      "nutriments": {
+        "energy-kcal_100g": 365,
+        "proteins_100g": 10,
+        "carbohydrates_100g": 76,
+        "fat_100g": 1.2
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 7.5, "measureId": 1123}
+      ]
+    },
+    {
+      "id": "local-77",
+      "es_product_name": "Torta de Arroz",
+      "en_product_name": "Rice Cake",
+      "category": { "en": "Breads & Flour", "es": "Panes y Harinas" },
+      "nutriments": {
+        "energy-kcal_100g": 387,
+        "proteins_100g": 7.9,
+        "carbohydrates_100g": 81.6,
+        "fat_100g": 3.2
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Torta", "en_disseminationText": "Cake", "gramWeight": 9, "measureId": 1124 }
+      ]
+    },
+    {
+      "id": "local-78",
+      "es_product_name": "Bistec de Flanco",
+      "en_product_name": "Flank Steak",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 192,
+        "proteins_100g": 28,
+        "carbohydrates_100g": 0,
+        "fat_100g": 8
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1125 }
+      ]
+    },
+    {
+      "id": "local-79",
+      "es_product_name": "Bacalao/Pescado Blanco",
+      "en_product_name": "Cod/White Fish",
+      "category": { "en": "Fish & Seafood", "es": "Pescado y Mariscos" },
+      "nutriments": {
+        "energy-kcal_100g": 82,
+        "proteins_100g": 18,
+        "carbohydrates_100g": 0,
+        "fat_100g": 0.7
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 120, "measureId": 1126 }
+      ]
+    },
+    {
+      "id": "local-80",
+      "es_product_name": "Quinoa Cocida",
+      "en_product_name": "Cooked Quinoa",
+      "category": { "en": "Grains & Pasta", "es": "Cereales y Granos" },
+      "nutriments": {
+        "energy-kcal_100g": 120,
+        "proteins_100g": 4.1,
+        "carbohydrates_100g": 21.3,
+        "fat_100g": 1.9
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 185, "measureId": 1127 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1128 }
+      ]
+    },
+    {
+      "id": "local-81",
+      "es_product_name": "Dátiles",
+      "en_product_name": "Dates",
+      "category": { "en": "Fruit", "es": "Fruta" },
+      "nutriments": {
+        "energy-kcal_100g": 282,
+        "proteins_100g": 2.5,
+        "carbohydrates_100g": 75,
+        "fat_100g": 0.4
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Dátil Mediano", "en_disseminationText": "Medium Date", "gramWeight": 7.1, "measureId": 1129 },
+        { "es_disseminationText": "Porción (5 dátiles)", "en_disseminationText": "Serving (5 dates)", "gramWeight": 35.5, "measureId": 1130 }
+      ]
+    },
+    {
+      "id": "local-82",
+      "es_product_name": "Coles de Bruselas",
+      "en_product_name": "Brussel Sprouts",
+      "category": { "en": "Vegetable", "es": "Verdura" },
+      "nutriments": {
+        "energy-kcal_100g": 43,
+        "proteins_100g": 3.4,
+        "carbohydrates_100g": 8.9,
+        "fat_100g": 0.3
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 156, "measureId": 1131 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1132 }
+      ]
+    },
+    {
+      "id": "local-83",
+      "es_product_name": "Kiwi",
+      "en_product_name": "Kiwi",
+      "category": { "en": "Fruit", "es": "Fruta" },
+      "nutriments": {
+        "energy-kcal_100g": 61,
+        "proteins_100g": 1.1,
+        "carbohydrates_100g": 14.7,
+        "fat_100g": 0.5
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Kiwi Mediano", "en_disseminationText": "Medium Kiwi", "gramWeight": 75, "measureId": 1133 },
+        { "es_disseminationText": "Taza en Rebanadas", "en_disseminationText": "Sliced Cup", "gramWeight": 180, "measureId": 1134 }
+      ]
+    },
+    {
+      "id": "local-84",
+      "es_product_name": "Uvas",
+      "en_product_name": "Grapes",
+      "category": { "en": "Fruit", "es": "Fruta" },
+      "nutriments": {
+        "energy-kcal_100g": 69,
+        "proteins_100g": 0.7,
+        "carbohydrates_100g": 18,
+        "fat_100g": 0.2
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 151, "measureId": 1135 },
+        { "es_disseminationText": "Porción (10 uvas)", "en_disseminationText": "Serving (10 grapes)", "gramWeight": 50, "measureId": 1136 }
+      ]
+    },
+    {
+      "id": "local-85",
+      "es_product_name": "Col Rizada",
+      "en_product_name": "Kale",
+      "category": { "en": "Vegetable", "es": "Verdura" },
+      "nutriments": {
+        "energy-kcal_100g": 49,
+        "proteins_100g": 4.3,
+        "carbohydrates_100g": 8.8,
+        "fat_100g": 0.9
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cruda", "en_disseminationText": "Raw Cup", "gramWeight": 67, "measureId": 1137 },
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 130, "measureId": 1138 }
+      ]
+    },
+    {
+      "id": "local-86",
+      "es_product_name": "Espárragos",
+      "en_product_name": "Asparagus",
+      "category": { "en": "Vegetable", "es": "Verdura" },
+      "nutriments": {
+        "energy-kcal_100g": 20,
+        "proteins_100g": 2.2,
+        "carbohydrates_100g": 3.9,
+        "fat_100g": 0.1
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Lanza Mediana", "en_disseminationText": "Medium Spear", "gramWeight": 16, "measureId": 1139 },
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 134, "measureId": 1140 }
+      ]
+    },
+    {
+      "id": "local-87",
+      "es_product_name": "Coliflor",
+      "en_product_name": "Cauliflower",
+      "category": { "en": "Vegetable", "es": "Verdura" },
+      "nutriments": {
+        "energy-kcal_100g": 25,
+        "proteins_100g": 1.9,
+        "carbohydrates_100g": 5,
+        "fat_100g": 0.3
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Picada", "en_disseminationText": "Chopped Cup", "gramWeight": 107, "measureId": 1141 },
+        { "es_disseminationText": "Cabeza Mediana", "en_disseminationText": "Medium Head", "gramWeight": 575, "measureId": 1142 }
+      ]
+    },
+    {
+      "id": "local-88",
+      "es_product_name": "Bisonte",
+      "en_product_name": "Bison",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 143,
+        "proteins_100g": 25,
+        "carbohydrates_100g": 0,
+        "fat_100g": 4
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1143 },
+        { "es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 150, "measureId": 1144 }
+      ]
+    },
+    {
+      "id": "local-89",
+      "es_product_name": "Cordero",
+      "en_product_name": "Lamb",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 250,
+        "proteins_100g": 25,
+        "carbohydrates_100g": 0,
+        "fat_100g": 17
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1145 },
+        { "es_disseminationText": "Chuleta", "en_disseminationText": "Chop", "gramWeight": 70, "measureId": 1146 }
+      ]
+    },
+    {
+      "id": "local-90",
+      "es_product_name": "Pechuga de Pavo",
+      "en_product_name": "Turkey Breast",
+      "category": { "en": "Poultry", "es": "Aves" },
+      "nutriments": {
+        "energy-kcal_100g": 135,
+        "proteins_100g": 30,
+        "carbohydrates_100g": 0,
+        "fat_100g": 1
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 120, "measureId": 1147 },
+        { "es_disseminationText": "Porción Cocida", "en_disseminationText": "Cooked Serving", "gramWeight": 100, "measureId": 1148 }
+      ]
+    },
+    {
+      "id": "local-91",
+      "es_product_name": "Sardinas",
+      "en_product_name": "Sardines",
+      "category": { "en": "Fish & Seafood", "es": "Pescado y Mariscos" },
+      "nutriments": {
+        "energy-kcal_100g": 208,
+        "proteins_100g": 24.6,
+        "carbohydrates_100g": 0,
+        "fat_100g": 11.5
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Lata Pequeña", "en_disseminationText": "Small Can", "gramWeight": 92, "measureId": 1149 },
+        { "es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 50, "measureId": 1150 }
+      ]
+    },
+    {
+      "id": "local-92",
+      "es_product_name": "Caballa",
+      "en_product_name": "Mackerel",
+      "category": { "en": "Fish & Seafood", "es": "Pescado y Mariscos" },
+      "nutriments": {
+        "energy-kcal_100g": 205,
+        "proteins_100g": 18.6,
+        "carbohydrates_100g": 0,
+        "fat_100g": 13.9
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 112, "measureId": 1151 },
+        { "es_disseminationText": "Porción Cocida", "en_disseminationText": "Cooked Serving", "gramWeight": 100, "measureId": 1152 }
+      ]
+    },
+    {
+      "id": "local-93",
+      "es_product_name": "Queso Ricotta",
+      "en_product_name": "Ricotta Cheese",
+      "category": { "en": "Cheese & Dairy", "es": "Quesos y Lácteos" },
+      "nutriments": {
+        "energy-kcal_100g": 174,
+        "proteins_100g": 11.3,
+        "carbohydrates_100g": 3,
+        "fat_100g": 13
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 246, "measureId": 1153 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1154 }
+      ]
+    },
+    {
+      "id": "local-94",
+      "es_product_name": "Farro Cocido",
+      "en_product_name": "Cooked Farro",
+      "category": { "en": "Grains & Pasta", "es": "Cereales y Granos" },
+      "nutriments": {
+        "energy-kcal_100g": 131,
+        "proteins_100g": 5,
+        "carbohydrates_100g": 26,
+        "fat_100g": 0.8
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 200, "measureId": 1155 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1156 }
+      ]
+    },
+    {
+      "id": "local-95",
+      "es_product_name": "Trigo Sarraceno Cocido",
+      "en_product_name": "Cooked Buckwheat",
+      "category": { "en": "Grains & Pasta", "es": "Cereales y Granos" },
+      "nutriments": {
+        "energy-kcal_100g": 92,
+        "proteins_100g": 3.4,
+        "carbohydrates_100g": 19.9,
+        "fat_100g": 1
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 168, "measureId": 1157 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1158 }
+      ]
+    },
+    {
+      "id": "local-96",
+      "es_product_name": "Frijoles Rojos",
+      "en_product_name": "Kidney Beans",
+      "category": { "en": "Legumes", "es": "Legumbres" },
+      "nutriments": {
+        "energy-kcal_100g": 127,
+        "proteins_100g": 8.7,
+        "carbohydrates_100g": 22.8,
+        "fat_100g": 0.5
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 177, "measureId": 1159 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1160 }
+      ]
+    },
+    {
+      "id": "local-97",
+      "es_product_name": "Edamame",
+      "en_product_name": "Edamame",
+      "category": { "en": "Legumes", "es": "Legumbres" },
+      "nutriments": {
+        "energy-kcal_100g": 121,
+        "proteins_100g": 11.9,
+        "carbohydrates_100g": 8.9,
+        "fat_100g": 5.2
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza Cocida", "en_disseminationText": "Cooked Cup", "gramWeight": 155, "measureId": 1161 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1162 }
+      ]
+    },
+    {
+      "id": "local-98",
+      "es_product_name": "Semillas de Lino",
+      "en_product_name": "Flaxseeds",
+      "category": { "en": "Nuts & Seeds", "es": "Frutos Secos y Semillas" },
+      "nutriments": {
+        "energy-kcal_100g": 534,
+        "proteins_100g": 18.3,
+        "carbohydrates_100g": 28.9,
+        "fat_100g": 42.2
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Cucharada", "en_disseminationText": "Tablespoon", "gramWeight": 10, "measureId": 1163 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1164 }
+      ]
+    },
+    {
+      "id": "local-99",
+      "es_product_name": "Semillas de Calabaza",
+      "en_product_name": "Pumpkin Seeds",
+      "category": { "en": "Nuts & Seeds", "es": "Frutos Secos y Semillas" },
+      "nutriments": {
+        "energy-kcal_100g": 559,
+        "proteins_100g": 30,
+        "carbohydrates_100g": 10.7,
+        "fat_100g": 49
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Cucharada", "en_disseminationText": "Tablespoon", "gramWeight": 12, "measureId": 1165 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 28, "measureId": 1166 }
+      ]
+    },
+    {
+      "id": "local-100",
+      "es_product_name": "Aceite de Coco",
+      "en_product_name": "Coconut Oil",
+      "category": { "en": "Oils & Fats", "es": "Aceites y Grasas" },
+      "nutriments": {
+        "energy-kcal_100g": 892,
+        "proteins_100g": 0,
+        "carbohydrates_100g": 0,
+        "fat_100g": 100
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Cucharada", "en_disseminationText": "Tablespoon", "gramWeight": 13.6, "measureId": 1167 },
+        { "es_disseminationText": "Cucharadita", "en_disseminationText": "Teaspoon", "gramWeight": 4.5, "measureId": 1168 }
+      ]
+    },
+    {
+      "id": "local-101",
+      "es_product_name": "Aceite de Aguacate",
+      "en_product_name": "Avocado Oil",
+      "category": { "en": "Oils & Fats", "es": "Aceites y Grasas" },
+      "nutriments": {
+        "energy-kcal_100g": 884,
+        "proteins_100g": 0,
+        "carbohydrates_100g": 0,
+        "fat_100g": 100
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Cucharada", "en_disseminationText": "Tablespoon", "gramWeight": 14, "measureId": 1169 },
+        { "es_disseminationText": "Cucharadita", "en_disseminationText": "Teaspoon", "gramWeight": 4.5, "measureId": 1170 }
+      ]
+    },
+    {
+      "id": "local-102",
+      "es_product_name": "Agua de Coco",
+      "en_product_name": "Coconut Water",
+      "category": { "en": "Beverages", "es": "Bebidas" },
+      "nutriments": {
+        "energy-kcal_100g": 19,
+        "proteins_100g": 0.7,
+        "carbohydrates_100g": 3.7,
+        "fat_100g": 0.2
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 240, "measureId": 1171 },
+        { "es_disseminationText": "Botella Pequeña", "en_disseminationText": "Small Bottle", "gramWeight": 500, "measureId": 1172 }
+      ]
+    },
+    {
+      "id": "local-103",
+      "es_product_name": "Té Verde",
+      "en_product_name": "Green Tea",
+      "category": { "en": "Beverages", "es": "Bebidas" },
+      "nutriments": {
+        "energy-kcal_100g": 1,
+        "proteins_100g": 0,
+        "carbohydrates_100g": 0,
+        "fat_100g": 0
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 240, "measureId": 1173 }
+      ]
+    },
+    {
+      "id": "local-104",
+      "es_product_name": "Stevia",
+      "en_product_name": "Stevia",
+      "category": { "en": "Sweetener", "es": "Endulzante" },
+      "nutriments": {
+        "energy-kcal_100g": 0,
+        "proteins_100g": 0,
+        "carbohydrates_100g": 0,
+        "fat_100g": 0
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Cucharadita", "en_disseminationText": "Teaspoon", "gramWeight": 4, "measureId": 1174 },
+        { "es_disseminationText": "Sobre", "en_disseminationText": "Packet", "gramWeight": 1, "measureId": 1175 }
+      ]
+    },
+    {
+      "id": "local-105",
+      "es_product_name": "Arándanos",
+      "en_product_name": "Blueberries",
+      "category": { "en": "Fruit", "es": "Fruta" },
+      "nutriments": {
+        "energy-kcal_100g": 57,
+        "proteins_100g": 0.7,
+        "carbohydrates_100g": 14.5,
+        "fat_100g": 0.3
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 148, "measureId": 1133 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 50, "measureId": 1134 }
       ]
     }
   ]
