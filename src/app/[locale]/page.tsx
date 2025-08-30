@@ -12,10 +12,10 @@ const ogImage = '/squareLogo.svg';
 
 export const metadata = {
   // title: 'Lite Trainer — Beginner Friendly Fitness Coaching Software for Online & In-Person Coaches',
-  title: 'Lite Trainer - Beginner Friendly Fitness Coaching Software',
+  title: 'Lite Trainer | Beginner Friendly Fitness Coaching Software',
   description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches - no bloat, just essential features. English & Spanish support.',
   openGraph: {
-    title: 'Lite Trainer — Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
+    title: 'Lite Trainer | Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
     description: 'Beginner-friendly, affordable client management system for In-person & Online fitness coaches.',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
@@ -136,18 +136,17 @@ export default function LiteTrainerLanding() {
                     <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                   </button>
                 </Link>
-                <button className="cursor-not-allowed text-white border border-white/30 px-8 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
+                <button className="cursor-not-allowed text-white border border-white/30 px-6 mx-2 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
                   {t('hero.cta2') || 'Watch Demo'}
                 </button>
               </div>
             </div>
             <div className='relative hidden w-full h-64 md:h-auto xl:block'>
-              <div className="absolute top-0 left-0 w-80 h-full rounded-l-xl bg-gradient-to-l from-transparent via-gray-700/30 to-black/50 z-10"></div>
               <img 
                 src='./dashboardSC.webp'
                 alt="Lite Trainer app dashboard showing weekly workout and nutrition plan" 
                 fetchPriority='high'
-                className='w-full h-full object-cover object-left rounded-2xl'
+                className='w-full h-full object-cover object-left'
               />
             </div>
           </div>
