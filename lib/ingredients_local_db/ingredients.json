@@ -117,14 +117,13 @@
       "en_product_name": "Chicken Breast",
       "category": { "en": "Poultry", "es": "Aves" },
       "nutriments": {
-        "energy-kcal_100g": 165,
-        "proteins_100g": 31,
+        "energy-kcal_100g": 98.2,
+        "proteins_100g": 20.5,
         "carbohydrates_100g": 0,
-        "fat_100g": 3.6
+        "fat_100g": 2.23
       },
       "foodMeasures": [
-          {"es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 120, "measureId": 1008},
-          {"es_disseminationText": "Porción Cocida", "en_disseminationText": "Cooked Serving", "gramWeight": 100, "measureId": 1009}
+          {"es_disseminationText": "Porción Cocida(112g)", "en_disseminationText": "Cooked Serving(4oz)", "gramWeight": 112, "measureId": 1009}
       ]
     },
     {
@@ -982,7 +981,7 @@
         "fat_100g": 6.7
       },
       "foodMeasures": [
-          {"es_disseminationText": "Porcíon", "en_disseminationText": "Scoop", "gramWeight": 15, "measureId": 1109}
+          {"es_disseminationText": "Porcíon", "en_disseminationText": "Scoop", "gramWeight": 30, "measureId": 1109}
       ]
     },
     {
@@ -1195,7 +1194,8 @@
         "fat_100g": 13
       },
       "foodMeasures": [
-          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 7.5, "measureId": 1122}
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 7.5, "measureId": 1122},
+          { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 125, "measureId": 1008 }
       ]
     },
     {
@@ -1210,7 +1210,8 @@
         "fat_100g": 1.2
       },
       "foodMeasures": [
-          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 7.5, "measureId": 1123}
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 7.5, "measureId": 1123},
+          { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 120, "measureId": 1135 }
       ]
     },
     {
