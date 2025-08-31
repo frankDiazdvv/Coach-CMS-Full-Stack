@@ -285,8 +285,8 @@
   },
 
   "metadata": {
-    "title": "Lite Trainer - Gestión Simple de Clientes para Entrenadores de Fitness",
-    "description": "Lite Trainer es un sistema de gestión de clientes asequible y fácil de usar para entrenadores de fitness principiantes. Gestiona clientes, entrenamientos y nutrición sin complicaciones.",
+    "title": "LITE Trainer - Gestión Simple de Clientes para Entrenadores de Fitness",
+    "description": "LITE Trainer es un sistema de gestión de clientes asequible y fácil de usar para entrenadores de fitness principiantes. Gestiona clientes, entrenamientos y nutrición sin complicaciones.",
     "keywords": "entrenamiento fitness, gestión de clientes, planificación de entrenamientos, seguimiento de nutrición, aplicación bilingüe de fitness"
   },
   "LandingPage": {
@@ -294,10 +294,11 @@
       "badge": "Perfecto para Entrenadores Principiantes",
       "title1": "Entrenamiento Simple",
       "title2": "Hecho Poderoso",
-      "description": "El puente perfecto entre herramientas básicas y software empresarial costoso. ",
-      "description2": " te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio de entrenamiento sin complejidad ni altos costos.",
-      "cta1": "Únete a Lite Trainer Ahora",
-      "cta2": "Hazta 3 Clientes Gratis antes de Comprometerte"
+      "description": "El puente perfecto entre herramientas básicas y software costoso. ",
+      "description2": " te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio sin complejidad ni altos costos.",
+      "cta1": "Únete a LITE Trainer",
+      "cta2": "3 Clientes Gratis antes de Comprometerte",
+      "underButton": "3 clientes GRATIS | No Tarjeta Requerida"
     },
     "stats": {
       "price": "Precio Inicial/Mes",
@@ -344,8 +345,8 @@
       ]
     },
     "why": {
-      "title1": "¿Por Qué Elegir",
-      "title2": "Lite Trainer?",
+      "title1": "¿Por qué elegir",
+      "title2": "LITE Trainer?",
       "items": [
         {
           "title": "Sin Curva de Aprendizaje",
@@ -381,8 +382,8 @@
         "description": "Perfecto para comenzar",
         "per": "por mes",
         "features": [
-          "Hasta 10 clientes",
           "Primeros 3 clientes gratis",
+          "Hasta 15 clientes",
           "Gestión completa de clientes",
           "Planificación de entrenamientos y nutrición",
           "Notificaciones en tiempo real",
@@ -406,13 +407,13 @@
           "Soporte prioritario",
           "Más funciones en desarrollo"
         ],
-        "cta": "Notifícame Cuando Esté Disponible"
+        "cta": "Disponible Proximamente"
       }
     },
     "cta": {
       "title1": "¿Listo para Transformar",
       "title2": "tu Negocio de Entrenamiento?",
-      "description": "Diseñado para entrenadores que recién comienzan, Lite Trainer te ayuda a liberarte de la carga de manejar múltiples aplicaciones. No necesitas comprometerte con software costoso.",
+      "description": "Diseñado para entrenadores que recién comienzan, LITE Trainer te ayuda a liberarte de la carga de manejar múltiples aplicaciones. No necesitas comprometerte con software costoso.",
       "button": "Comienza tu Prueba Gratis Ahora",
       "note": "Dizfruta de los primeros 3 clientes gratis. No tarjeta requerida. Sin compromisos."
     },
@@ -445,7 +446,8 @@
   "commentPlaceholder": "ej. Enfócate en tu forma",
   "videoLinkPlaceholder": "Cualquier Link de Video",
 
-  "getStarted": "Comenzar",
+  "getStarted": "Crea tu Cuenta",
+  "signIn": "Inicia Sesión",
   "pricing": "Precios",
   "features": "Prestaciones",
 

@@ -241,126 +241,130 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
             
             <fieldset 
               disabled={!!(coach && !coach.isSubscribed && clientLength >= 3)}
-              className='text-gray-400'
+              className={
+              coach && !coach.isSubscribed && clientLength >= 3
+                ? "opacity-60 pointer-events-none text-gray-400"
+                : undefined
+              }
             >
               {coach && !coach.isSubscribed && clientLength >= 3 && (
-                <p className="text-red-500 mb-6">
-                  You’ve reached the free client limit. Upgrade your plan to edit clients.*
-                </p>
+              <p className="text-red-500 mb-6">
+                You’ve reached the free client limit. Upgrade your plan to edit clients.*
+              </p>
               )}
 
               {/* Personal Information */}
               <div>
-                <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
-                  <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center">
-                    <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                      <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
-                    </svg>
-                  </div>
-                  {t('personalInformation')}
-                </h3>
-                
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('firstName')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="firstName"
-                      value={formData.firstName || ''}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                      placeholder={t('enterFirstName')}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('lastName')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="text"
-                      name="lastName"
-                      value={formData.lastName || ''}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                      placeholder={t('enterLastName')}
-                    />
-                  </div>
+              <h3 className="text-lg font-semibold text-gray-900 mb-4 flex items-center gap-2">
+                <div className="w-6 h-6 bg-blue-100 rounded-lg flex items-center justify-center">
+                <svg className="w-4 h-4 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
+                </svg>
                 </div>
+                {t('personalInformation')}
+              </h3>
+              
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('firstName')} <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="firstName"
+                  value={formData.firstName || ''}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  placeholder={t('enterFirstName')}
+                />
+                </div>
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('lastName')} <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="text"
+                  name="lastName"
+                  value={formData.lastName || ''}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  placeholder={t('enterLastName')}
+                />
+                </div>
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('phone')} <span className="text-red-500">*</span>
-                    </label>
-                    <input
-                      type="tel"
-                      name="phone"
-                      value={formData.phone || ''}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                      placeholder={t('enterPhone')}
-                    />
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">
-                      {t('newPassword')} ({t('optional')})
-                    </label>
-                    <input
-                      type="password"
-                      name="password"
-                      value={formData.password || ''}
-                      autoComplete='new-password'
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                      placeholder={t('typeNewPassword')}
-                    />
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('phone')} <span className="text-red-500">*</span>
+                </label>
+                <input
+                  type="tel"
+                  name="phone"
+                  value={formData.phone || ''}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  placeholder={t('enterPhone')}
+                />
                 </div>
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                  {t('newPassword')} ({t('optional')})
+                </label>
+                <input
+                  type="password"
+                  name="password"
+                  value={formData.password || ''}
+                  autoComplete='new-password'
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  placeholder={t('typeNewPassword')}
+                />
+                </div>
+              </div>
 
-                <div className="mt-4">
-                  <label className="block text-sm font-medium text-gray-700 mb-2">
-                    {t('email')} <span className="text-red-500">*</span>
-                  </label>
-                  <input
-                    type="email"
-                    name="email"
-                    value={formData.email || ''}
-                    autoComplete='client@email.com'
-                    onChange={handleChange}
-                    className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                    placeholder={t('enterEmail')}
-                  />
-                </div>
+              <div className="mt-4">
+                <label className="block text-sm font-medium text-gray-700 mb-2">
+                {t('email')} <span className="text-red-500">*</span>
+                </label>
+                <input
+                type="email"
+                name="email"
+                value={formData.email || ''}
+                autoComplete='client@email.com'
+                onChange={handleChange}
+                className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                placeholder={t('enterEmail')}
+                />
+              </div>
 
-                <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('gender')}</label>
-                    <select
-                      name="gender"
-                      value={formData.gender || ''}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white appearance-none"
-                    >
-                      <option value="">{t('selectGender')}</option>
-                      <option value="Male">{t('male')}</option>
-                      <option value="Female">{t('female')}</option>
-                      <option value="Other">{t('other')}</option>
-                    </select>
-                  </div>
-                  <div>
-                    <label className="block text-sm font-medium text-gray-700 mb-2">{t('goal')}</label>
-                    <input
-                      type="text"
-                      name="goal"
-                      value={formData.goal || ''}
-                      onChange={handleChange}
-                      className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
-                      placeholder={t('enterGoal')}
-                    />
-                  </div>
+              <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mt-4">
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('gender')}</label>
+                <select
+                  name="gender"
+                  value={formData.gender || ''}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white appearance-none"
+                >
+                  <option value="">{t('selectGender')}</option>
+                  <option value="Male">{t('male')}</option>
+                  <option value="Female">{t('female')}</option>
+                  <option value="Other">{t('other')}</option>
+                </select>
                 </div>
+                <div>
+                <label className="block text-sm font-medium text-gray-700 mb-2">{t('goal')}</label>
+                <input
+                  type="text"
+                  name="goal"
+                  value={formData.goal || ''}
+                  onChange={handleChange}
+                  className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
+                  placeholder={t('enterGoal')}
+                />
+                </div>
+              </div>
               </div>
             </fieldset>
             
@@ -430,7 +434,7 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
                 </div>
               </div>
 
-              <div className="mt-4">
+              {/* <div className="mt-4">
                 <label className="block text-sm font-medium text-gray-700 mb-2">{t('imageUrl')}</label>
                 <input
                   type="url"
@@ -440,7 +444,7 @@ const ViewClientDetailsModal: React.FC<ViewClientDetailsProps> = ({ isOpen, onCl
                   className="w-full px-4 py-3 border border-gray-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-gray-50 focus:bg-white"
                   placeholder={t('enterImageUrl')}
                 />
-              </div>
+              </div> */}
             </div>
 
             

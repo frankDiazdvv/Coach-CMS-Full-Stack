@@ -40,7 +40,7 @@ export default function LanguageToggle() {
                 className={`w-12 h-7 flex items-center rounded-full p-0 cursor-pointer transition-colors duration-300 bg-gray-700`}
             >
             <div
-                className={`${languageOpen ? "bg-[url(/spain_round.webp)] bg-center bg-size-[48px]" : "bg-[url(/us_round.webp)] bg-center bg-size-[48px]"} w-7 h-7 rounded-full shadow-md transform transition-all duration-400 ${
+                className={`${languageOpen ? "bg-[url(/spain_round.webp)] bg-center bg-size-[42px]" : "bg-[url(/us_round.webp)] bg-center bg-size-[42px]"} w-7 h-7 rounded-full shadow-md transform transition-all duration-400 ${
                 languageOpen ? "translate-x-5" : ""
                 }`}
             ></div>

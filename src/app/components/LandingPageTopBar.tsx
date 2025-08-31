@@ -19,6 +19,7 @@ export default function LandingPageTopBar() {
   }, []);
 
   const loginPage = '/login';
+  const signUpPage = '/sign-up';
   const topLogo = '/DarkBG-logo.svg';
 
   
@@ -33,12 +34,15 @@ export default function LandingPageTopBar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-8">
+          <div className="hidden md:flex items-center space-x-6">
             <a href="#features" className="text-gray-300 hover:text-white transition-colors">{t("features")}</a>
             <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">{t("pricing")}</a>
             <LanguageToggle/>
-            <Link href={loginPage} className="bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+            <Link href={signUpPage} className="bg-gradient-to-r from-purple-800 to-[#416bbb] text-white text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
               {t("getStarted")}
+            </Link>
+            <Link href={loginPage} className="bg-gradient-to-r from-purple-300 to-[#b5c9ed] text-purple-950 text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-200 hover:to-pink-200 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+              {t("signIn")}
             </Link>
           </div>
 

@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { FaHome, FaUsers, FaInfoCircle, FaRuler, FaUser } from "react-icons/fa"; // Import icons from react-icons
 import { useState } from "react";
+import {Home, Users, Info, Ruler, User} from "lucide-react";
 
 const LeftSideNav: React.FC = () => {
   const [hoveredItem, setHoveredItem] = useState<string | null>(null); // State for hover text
@@ -28,7 +29,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={coachDashboard} className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <FaHome />
+            <Home />
           </Link>
           {hoveredItem === "Home" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -43,7 +44,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={allClients} className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <FaUsers />
+            <Users />
           </Link>
           {hoveredItem === "Clients" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -60,7 +61,7 @@ const LeftSideNav: React.FC = () => {
 
           {/* Enable for production use <Link href={clientMeasurements}> */}
           <div className="cursor-not-allowed flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <FaRuler />
+            <Ruler />
           </div>
           {hoveredItem === "Measurements" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -75,7 +76,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={coachProfile} aria-disabled className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors {some-condition ? 'pointer-events-none' : ''}">
-            <FaUser />
+            <User />
           </Link>
           {hoveredItem === "Profile" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -90,7 +91,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={aboutPage} className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <FaInfoCircle />
+            <Info />
           </Link>
           {hoveredItem === "About" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -110,7 +111,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={coachDashboard} className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <FaHome />
+            <Home />
           </Link>
           {hoveredItem === "Home" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -125,7 +126,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={coachProfile} aria-disabled className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors {some-condition ? 'pointer-events-none' : ''}">
-            <FaUser />
+            <User />
           </Link>
           {hoveredItem === "Profile" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
@@ -140,7 +141,7 @@ const LeftSideNav: React.FC = () => {
           onMouseLeave={() => setHoveredItem(null)}
         >
           <Link href={aboutPage} className="flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <FaInfoCircle />
+            <Info />
           </Link>
           {hoveredItem === "About" && (
             <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">

@@ -6,6 +6,7 @@ import Image from 'next/image';
 
 // Define constants
 const loginPage = '/login';
+const signUpPage = '/sign-up';
 const footerLogo = '/DarkBG-logo.svg';
 const domain = 'https://litetrainer.com';
 const ogImage = '/squareLogo.svg';
@@ -111,7 +112,7 @@ export default function LiteTrainerLanding() {
                 </span>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-bold mb-8 leading-tight">
+              <h1 className="text-5xl md:text-6xl font-bold mb-8 leading-tight">
                 <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent">
                   {t('hero.title1') || 'Simple Coaching'}
                 </span>
@@ -129,13 +130,17 @@ export default function LiteTrainerLanding() {
                   'Weekly Workout & Nutrition Planning for Beginner Coaches — without the complexity or cost.'}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                <Link href={loginPage}>
-                  <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
-                    {t('hero.cta1') || 'Start Free Trial for Lite Trainer Coaching App'}
-                    <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
-                  </button>
-                </Link>
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-start">
+                <div>
+                  <Link href={signUpPage}>
+                    <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
+                      {t('hero.cta1') || 'Start Free Trial for Lite Trainer Coaching App'}
+                      <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+                    </button>
+                  </Link>
+                  <p className='text-sm text-gray-300 mt-1'>{t("hero.underButton")}</p>
+                </div>
+                
                 <button className="cursor-not-allowed text-white border border-white/30 px-6 mx-2 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
                   {t('hero.cta2') || 'Watch Demo'}
                 </button>
@@ -354,7 +359,7 @@ export default function LiteTrainerLanding() {
                 </div>
               </div>
 
-              <Link href={loginPage}>
+              <Link href={signUpPage}>
                 <button className="cursor-pointer w-full bg-gradient-to-r from-purple-500 to-pink-500 text-white py-3 rounded-full font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105">
                   {t('pricing.basic.cta') || 'Get Started'}
                 </button>
@@ -429,7 +434,7 @@ export default function LiteTrainerLanding() {
             {t('cta.description') || 'Join the growing community of coaches who’ve discovered the perfect balance of simplicity and power.'}
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
-            <Link href={loginPage}>
+            <Link href={signUpPage}>
               <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
                 {t('cta.button') || 'Start Free Trial Now'}
                 <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />

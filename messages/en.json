@@ -282,8 +282,8 @@
   },
 
   "metadata": {
-    "title": "Lite Trainer - Simple Client Management for Fitness Coaches",
-    "description": "Lite Trainer is an affordable, easy-to-use client management system for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.",
+    "title": "LITE Trainer - Simple Client Management for Fitness Coaches",
+    "description": "LITE Trainer is an affordable, easy-to-use client management system for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.",
     "keywords": "fitness coaching, client management, workout planning, nutrition tracking, bilingual fitness app"
   },
   "LandingPage": {
@@ -294,7 +294,8 @@
       "description": "The perfect bridge between basic tools and expensive enterprise software. ",
       "description2": " gives you all the core features you need to grow your coaching business, without the complexity or cost.",
       "cta1": "Join LITE Trainer Now",
-      "cta2": "Up to 3 Clients Free before you commit"
+      "cta2": "Up to 3 Clients Free before you commit",
+      "underButton": "Includes 3 FREE clients | No CC Required"
     },
     "stats": {
       "price": "Starting Price/Month",
@@ -342,7 +343,7 @@
     },
     "why": {
       "title1": "Why Choose",
-      "title2": "Lite Trainer?",
+      "title2": "LITE Trainer?",
       "items": [
         {
           "title": "No Learning Curve",
@@ -379,13 +380,13 @@
         "per": "per month",
         "features": [
           "First 3 clients free",
-          "Up to 10 clients",
+          "Up to 15 clients",
           "Complete client management",
           "Workout & nutrition planning",
-          "Real-time notifications",
+          "Completion Notifications",
           "Mobile-friendly interface",
           "English & Spanish support",
-          "Video tutorial integration"
+          "Link tutorial integration"
         ],
         "cta": "Get Started"
       },
@@ -409,7 +410,7 @@
     "cta": {
       "title1": "Ready to Transform",
       "title2": "Your Coaching Business?",
-      "description": "Designed for coaches just starting out, Lite Trainer helps you break free from juggling multiple apps. No need to commit to expensive software.",
+      "description": "Designed for coaches just starting out, LITE Trainer helps you break free from juggling multiple apps. No need to commit to expensive software.",
       "button": "Join LITE Trainer Now",
       "note": "Enjoy up to 3 clients for free. No credit card required. No strings attached."
     },
@@ -444,7 +445,8 @@
   "commentPlaceholder": "e.g., Focus on form",
   "videoLinkPlaceholder": "Any video link",
 
-  "getStarted": "Get Started",
+  "getStarted": "Create Account",
+  "signIn": "Login",
   "pricing": "Pricing",
   "features": "Features",
 
