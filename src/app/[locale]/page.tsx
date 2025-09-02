@@ -91,7 +91,7 @@ export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white overflow-hidden">
+    <div className="cursor-default min-h-screen bg-gradient-to-br from-black via-purple-950 to-black text-white overflow-hidden">
       {/* Animated Background Elements */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
         <div className="absolute -top-40 -right-40 w-80 h-80 bg-purple-900 rounded-full mix-blend-multiply filter blur-xl opacity-70 animate-pulse"></div>
@@ -458,7 +458,7 @@ export default function LiteTrainerLanding() {
       </section>
 
       {/* Footer */}
-      <footer className="relative py-12 px-4 sm:px-6 lg:px-8 border-t border-white/10">
+      <footer className="relative pt-12 px-4 sm:px-6 lg:px-8 border-t border-white/10">
         <div className="max-w-7xl mx-auto">
           <div className="flex flex-col md:flex-row justify-between items-center">
             <div className="flex items-center space-x-2 mb-4 md:mb-0">
@@ -471,38 +471,27 @@ export default function LiteTrainerLanding() {
                 className="object-contain"
               />
             </div>
-            <div className="text-gray-400 text-sm">
-              © {new Date().getFullYear()} Lite Trainer. {t('footer.rights') || 'All rights reserved.'}
+            <div className='opacity-90 hover:opacity-100'>
+              <Link 
+                href={'https://www.linkedin.com/posts/lite-trainer_litetrainer-fitness-coaching-activity-7364771149496426496-bd4R'}
+                target="_blank"
+                className='flex flex-row gap-0.5'
+              >
+                <Image
+                  src={'./linkedin-icon-white.svg'}
+                  alt="LinkedIn Profile"
+                  width={24}
+                  height={24}
+                />
+                <p>Linkedin</p>
+              </Link>
             </div>
           </div>
+        </div>
+        <div className="flex mt-10 mb-4 text-gray-400 text-sm justify-center">
+          © {new Date().getFullYear()} Lite Trainer. {t('footer.rights') || 'All rights reserved.'}
         </div>
       </footer>
     </div>
   );
 }
-
-
-
-/*
-I'm in the developing phase still. Honestly, I've been developing it since April. I've been taking it slow since I've also been learning with this application. 
-But I believe I'm close to being able to launch the MVP. I mean, I already have it up on the Internet. I already bought a domain. I already have a landing page, a 
-very simple one, but it works. I already implemented Stripe for payment processing. So let me explain the flow to you a little bit so you can have an idea of more 
-or less what's happening. So a client, and by that I mean a coach, goes to the landing page. They review the important data, whatever, and then they decide to create 
-an account. So they go to the sign-up page. They create their account. They place their name, email, their personal plans that they want to offer, and their cell 
-phone number. That's it. They create their account with no credit card in between. They get three free client creations. So they can manage up to three clients without 
-having to ever use their credit card. Once they hit the three-client creation mark, they will then hit a paywall. Once they hit the paywall, they have to either pay or 
-stop using. So they pay the starter plan, and now they have up to 15 clients. I am planning on building a pro plan later on, but for now I want to launch the starter 
-plan. The starter plan allows you to do basically everything. A coach will be able to create a client from the dashboard. This is how the dashboard looks like. 
-You have the coach's name up top, a big button that says create client. Within the main section, you have a chart with every single client that has a workout due today. 
-Underneath, you have three charts. One, it's a pie chart telling you all the clients that you currently have enrolled in plans organized by plan. You can view the 
-percentage of all the plans that you have assigned to each client. In the middle, you have client logs. Every time a client does a workout successfully, and they log a 
-message that they completed the workout, or they just simply completed the workout, it would show up in there as a line chart. To the right of that, you have a warnings 
-chart where you will see all the clients which their membership is about to expire, or the ones which their membership has already expired. To the right of the screen, 
-you have a long sidebar for notifications. Each time a client logs a workout, you will see their notification there. John Doe logged their workout on Wednesday. This is 
-the message they left, and then the time stamp. That's basically it. To the left of the screen, you have a side nav menu for navigation. You have home, all clients, 
-profile, about, and so on. When it comes to creating a client, the coach clicks that big button in the middle, and you see a modal for the client information. You start by 
-filling out the personal information. Name, email, gender, weight, target weight, goal, what plan you want to assign for them, the expiring date for their plan, and then 
-you see two buttons in the bottom. One to add a workout, and then one to add a nutrition plan. Once you click on either one of them, you will be taken to a new page, which 
-is the workout or nutrition builder. In here, you can build their weekly workouts or nutrition plan, just for the week. You have an empty Monday through Sunday clean schedule. 
-In there, you can add, for example, the workouts. If you want, I can explain that to you right now.
-*/
