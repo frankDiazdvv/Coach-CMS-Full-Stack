@@ -3,6 +3,7 @@ import { ChevronRight, Users, Calendar, Bell, BarChart3, Globe, Smartphone, Vide
 import LandingPageTopBar from '../components/LandingPageTopBar';
 import Link from 'next/link';
 import Image from 'next/image';
+import "flag-icons/css/flag-icons.min.css";
 
 // Define constants
 const loginPage = '/login';
@@ -130,7 +131,7 @@ export default function LiteTrainerLanding() {
                   'Weekly Workout & Nutrition Planning for Beginner Coaches — without the complexity or cost.'}
               </p>
 
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-start">
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start">
                 <div>
                   <Link href={signUpPage}>
                     <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
@@ -166,10 +167,21 @@ export default function LiteTrainerLanding() {
               <div className="text-gray-400">{t('stats.clients') || 'Clients Included'}</div>
             </div>
             <div className="text-center">
-              <div className="text-5xl bg-clip-text mb-2">🇺🇸 🇪🇸</div>
+              <div className="text-5xl bg-clip-text mb-2"><span className='fi fi-us'></span> <span className='fi fi-es'></span></div>
               <div className="text-gray-400">{t('stats.languages') || 'Languages Supported'}</div>
             </div>
-          </div>
+            <div className='flex flex-row gap-2 mt-8 items-center justify-center md:col-span-3'>
+              <p>Featured on:</p>
+              <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity'>
+                <Image
+                  src={'/goodFirmsLogo.png'}
+                  alt="GoodFirms Logo"
+                  width={150}
+                  height={40}
+                />
+              </Link>
+            </div>
+          </div> 
         </div>
       </main>
 
