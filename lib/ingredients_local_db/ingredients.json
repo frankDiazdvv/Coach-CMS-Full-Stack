@@ -713,7 +713,8 @@
       },
       "foodMeasures": [
           {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 28, "measureId": 1078},
-          {"es_disseminationText": "Taza Rallada", "en_disseminationText": "Shredded Cup", "gramWeight": 113, "measureId": 1079}
+          {"es_disseminationText": "Taza Rallada", "en_disseminationText": "Shredded Cup", "gramWeight": 113, "measureId": 1079},
+          {"es_disseminationText": "Rebanada Fina", "en_disseminationText": "Thin Slice", "gramWeight": 22, "measureId": 10800}
       ]
     },
     {
@@ -966,7 +967,7 @@
         "fat_100g": 0.1
       },
       "foodMeasures": [
-          {"es_disseminationText": "Tbsp", "en_disseminationText": "Cucharada", "gramWeight": 15, "measureId": 1108}
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 15, "measureId": 1108}
       ]
     },
     {
@@ -1065,13 +1066,15 @@
       "en_product_name": "Egg Whites",
       "category": { "en": "Dairy & Eggs", "es": "Lácteos y Huevos" },
       "nutriments": {
-        "energy-kcal_100g": 52,
+        "energy-kcal_100g": 54,
         "proteins_100g": 11,
         "carbohydrates_100g": 0.7,
         "fat_100g": 0.2
       },
       "foodMeasures": [
-          {"es_disseminationText": "Clara de Huevo Grande", "en_disseminationText": "Large Egg White", "gramWeight": 33, "measureId": 1113}
+          {"es_disseminationText": "Vaso", "en_disseminationText": "Cup", "gramWeight": 240, "measureId": 1113},
+          {"es_disseminationText": "Medio Vaso", "en_disseminationText": "1/2 Cup", "gramWeight": 120, "measureId": 11140}
+          
       ]
     },
     {

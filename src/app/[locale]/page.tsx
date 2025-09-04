@@ -473,7 +473,7 @@ export default function LiteTrainerLanding() {
             </div>
             <div className='opacity-90 hover:opacity-100'>
               <Link 
-                href={'https://www.linkedin.com/posts/lite-trainer_litetrainer-fitness-coaching-activity-7364771149496426496-bd4R'}
+                href={'https://www.linkedin.com/company/lite-trainer/posts/?feedView=all'}
                 target="_blank"
                 className='flex flex-row gap-0.5'
               >

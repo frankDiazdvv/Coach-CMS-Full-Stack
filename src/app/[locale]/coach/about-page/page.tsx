@@ -1,6 +1,7 @@
 import LeftSideNav from "@/app/components/LeftSideNav";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
+import Link from "next/link";
 
 export default function AboutPage(){
     const t = useTranslations();
@@ -25,12 +26,18 @@ export default function AboutPage(){
                             {t("thankYouText")}
                         </p>
                         <p className="mt-2">
-                            <a href="mailto:fmdiazvip@gmail.com" className="text-yellow-600 p-1 rounded-lg hover:bg-yellow-50/70 transition-all duration-100">
+                            <a href="mailto:fmdiazvip@gmail.com" className="text-yellow-600 rounded-lg hover:bg-yellow-50/70 transition-all duration-100">
                                 {t("contactUs")}
                             </a>
-                        </p>
-                        
+                        </p>                      
                     </div> 
+                    <h3 className="pt-4 mb-2 text-gray-500">{t("leaveReviewTitle")}:</h3>
+                    <Link
+                        href={'https://www.goodfirms.co/review/68aa3bf8a1cab3372205b012'}
+                        className="text-purple-600 rounded-lg hover:bg-purple-50/70 transition-all duration-100"
+                    >
+                        {t("leaveReviewLink")}
+                    </Link>
                 </div>
             </main>
             <footer className="absolute bottom-20 md:bottom-0 left-0 md:left-20 right-0 text-white py-4">
