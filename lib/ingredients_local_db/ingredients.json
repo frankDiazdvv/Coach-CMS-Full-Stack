@@ -1676,6 +1676,22 @@
         { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 148, "measureId": 1133 },
         { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 50, "measureId": 1134 }
       ]
+    },
+    {
+      "id": "local-106",
+      "es_product_name": "Mani en Polvo",
+      "en_product_name": "Peanut Powder",
+      "category": { "en": "Nuts & Seeds", "es": "Frutos Secos y Semillas" },
+      "nutriments": {
+        "energy-kcal_100g": 375,
+        "proteins_100g": 50,
+        "carbohydrates_100g": 37.5,
+        "fat_100g": 12.5
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 148, "measureId": 1135 },
+        { "es_disseminationText": "Porción(2-cucharadas/16g)", "en_disseminationText": "Serving(2-tbsp/16g)", "gramWeight": 50, "measureId": 1136 }
+      ]
     }
   ]
 }
