@@ -1689,8 +1689,24 @@
         "fat_100g": 12.5
       },
       "foodMeasures": [
-        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 148, "measureId": 1135 },
-        { "es_disseminationText": "Porción(2-cucharadas/16g)", "en_disseminationText": "Serving(2-tbsp/16g)", "gramWeight": 50, "measureId": 1136 }
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 85, "measureId": 1135 },
+        { "es_disseminationText": "Porción(2 cucharadas)", "en_disseminationText": "Serving(2 tbsp)", "gramWeight": 16, "measureId": 1136 }
+      ]
+    },
+    {
+      "id": "local-107",
+      "es_product_name": "Durazno",
+      "en_product_name": "Peaches",
+      "category": { "en": "Fruit", "es": "Fruta" },
+      "nutriments": {
+        "energy-kcal_100g": 39,
+        "proteins_100g": 1.4,
+        "carbohydrates_100g": 10.2,
+        "fat_100g": 0.4
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Rebanada", "en_disseminationText": "Slice", "gramWeight": 30, "measureId": 1137 },
+        { "es_disseminationText": "Regular", "en_disseminationText": "Regular", "gramWeight": 240, "measureId": 1138 }
       ]
     }
   ]
