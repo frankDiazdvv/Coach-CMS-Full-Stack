@@ -1708,6 +1708,22 @@
         { "es_disseminationText": "Rebanada", "en_disseminationText": "Slice", "gramWeight": 30, "measureId": 1137 },
         { "es_disseminationText": "Regular", "en_disseminationText": "Regular", "gramWeight": 240, "measureId": 1138 }
       ]
+    },
+     {
+      "id": "local-108",
+      "es_product_name": "Palomitas de Maíz",
+      "en_product_name": "Popcorn",
+      "category": { "en": "Grains & Pasta", "es": "Cereales y Granos" },
+      "nutriments": {
+        "energy-kcal_100g": 387,
+        "proteins_100g": 13,
+        "carbohydrates_100g": 78,
+        "fat_100g": 4
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Vaso", "en_disseminationText": "Cup", "gramWeight": 8, "measureId": 1139 },
+        { "es_disseminationText": "Porción(3 vasos)", "en_disseminationText": "Portion(3 cups)", "gramWeight": 24, "measureId": 1140 }
+      ]
     }
   ]
 }
