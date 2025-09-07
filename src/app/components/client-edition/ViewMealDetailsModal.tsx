@@ -1,9 +1,17 @@
 'use client';
+// MEAL ALREADY SAVES TO LIBRARY. NOW i NEED TO CREATE A LIBRARY MODAL TO VIEW AND ADD MEALS TO THE DAY SELECTED!!!!
+
+
+
+
+
+
 
 import { useState } from 'react';
 import FoodSearchModal from './FoodSearchModal';
 import AddCustomFoodModal from './AddCustomFoodModal';
 import { useTranslations } from 'next-intl';
+import {Ellipsis} from 'lucide-react'
 
 interface INutritionFood {
   name: string;
@@ -44,6 +52,7 @@ const ViewMealDetails: React.FC<ViewMealDetailsProps> = ({
   const [comment, setComment] = useState(meal.comment || '');
   const [isFoodSearchOpen, setIsFoodSearchOpen] = useState(false);
   const [isCustomFoodOpen, setIsCustomFoodOpen] = useState(false);
+  const [isPopUpMenuOpen, setIsPopUpMenuOpen] = useState(false);
 
   // Calculate total macros
   const totalMacros = foods.reduce((totals, food) => ({
@@ -52,6 +61,40 @@ const ViewMealDetails: React.FC<ViewMealDetailsProps> = ({
     carbs: totals.carbs + food.carbs,
     fats: totals.fats + food.fats,
   }), { calories: 0, protein: 0, carbs: 0, fats: 0 });
+
+  const handleSaveToLibrary = async () => {
+    try {
+      const id = localStorage.getItem("id");
+      if(!id){
+        console.error("No Coach ID!");
+      }
+    
+      const res = await fetch("/api/savedMeals", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+          coachId: id,
+          mealName,
+          foods,
+        }),
+      });
+
+      if (!res.ok) {
+        throw new Error("Failed to save meal");
+      }
+
+      const data = await res.json();
+      console.log("Meal saved:", data);
+      alert("✅ Meal saved to your library!");
+      setIsPopUpMenuOpen(false);
+    } catch (error) {
+      console.error(error);
+      alert("❌ Something happened adding the meal to the library!");
+    }
+  };
+
 
   const handleAddFood = (food: Omit<INutritionFood, 'quantity' | 'unit'>, quantity: number, unit: string) => {
     setFoods((prev) => [
@@ -77,6 +120,8 @@ const ViewMealDetails: React.FC<ViewMealDetailsProps> = ({
     onClose();
   };
 
+
+
   if (!isOpen) return null;
 
   return (
@@ -84,20 +129,41 @@ const ViewMealDetails: React.FC<ViewMealDetailsProps> = ({
       <div className="w-full max-w-2xl bg-white rounded-2xl shadow-2xl max-h-[95vh] flex flex-col">
         
         {/* Header */}
-        <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-t-2xl">
+        <div className="relative bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-t-2xl">
           <div className="flex items-center justify-between">
             <h2 className="text-xl font-bold text-white">
               {t("detailsFor")} {meal.mealName}
             </h2>
-            <button
-              onClick={onClose}
-              className="text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
-            >
-              <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
-              </svg>
-            </button>
+            <div className='flex flex-row justify-center items-center gap-2'>
+              <button 
+                className='text-white/90 hover:text-white transition-colors rounded-full hover:bg-white/10 cursor-pointer'
+                onClick={() => setIsPopUpMenuOpen(!isPopUpMenuOpen)}
+              >
+                <Ellipsis/>
+              </button>  
+              <button
+                onClick={onClose}
+                className="text-white/90 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10 cursor-pointer"
+              >
+                <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
           </div>
+          {/* POP UP MENU - OPENED */}
+          {isPopUpMenuOpen && 
+            <div className='absolute top-10 right-0 rounded-lg bg-white border shadow-md'>
+              <div className='flex flex-col text-start'>
+                <button 
+                  onClick={handleSaveToLibrary}
+                  className='cursor-pointer hover:bg-gray-50 py-2 px-3 rounded-lg text-start'
+                >
+                  {t("saveMeal")}
+                </button>
+              </div>
+            </div>
+          }
         </div>
 
         {/* Content */}

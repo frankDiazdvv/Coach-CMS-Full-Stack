@@ -1724,6 +1724,21 @@
         { "es_disseminationText": "Vaso", "en_disseminationText": "Cup", "gramWeight": 8, "measureId": 1139 },
         { "es_disseminationText": "Porción(3 vasos)", "en_disseminationText": "Portion(3 cups)", "gramWeight": 24, "measureId": 1140 }
       ]
+    },
+    {
+      "id": "local-109",
+      "es_product_name": "Carne Molida 85% Magra",
+      "en_product_name": "Ground Beef 85% Lean",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 223,
+        "proteins_100g": 16.91,
+        "carbohydrates_100g": 0,
+        "fat_100g": 16.91
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1000}
+      ]
     }
   ]
 }
