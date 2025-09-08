@@ -35,7 +35,6 @@ const FoodSearchModal: React.FC<FoodSearchModalProps> = ({ isOpen, onClose, onSe
   const t = useTranslations();
   const locale = useLocale();
 
-  const API_KEY = 'JcaHk6y5uiwKlPLBt1hietUxOn2yb6JgbEZNhHcn';
   const noImage = '/no-image-icon.png';
 
   const filterIngredients = (results: any[]) => {

@@ -4,11 +4,14 @@ import { useState, useEffect } from 'react';
 import WorkoutDetailsModal from './WorkoutDetailsModal';
 import { useLocale, useTranslations } from 'next-intl';
 import WorkoutLibraryModal from './CustomWorkoutLibrary';
+import exercises from '../../../../lib/exercises_local_db/exercises.json'
 
 interface Workout {
-  id: number;
+  id: string;
   name: string;
+  name_es: string;
   category: string;
+  primaryMuscles: string;
   images: string[];
   sets: number,
   reps: number,
@@ -46,6 +49,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   const locale = useLocale();
 
   const noWorkoutIcon = '/no-image-icon.png';
+  const BASE_IMG_URL = "https://raw.githubusercontent.com/frankDiazdvv/lite-trainer-exercise-images/main/";
 
   useEffect(() => {
     const id = localStorage.getItem('id');
@@ -60,54 +64,62 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
         setIsLoading(true);
         setError('');
 
-        const languageId = locale === 'es' ? 4 : 2;
-
-
         try {
-            const response = await fetch(`https://wger.de/api/v2/exerciseinfo/?language=${languageId}&limit=2000`);
-            if (!response.ok) throw new Error('Failed to fetch workouts');
-            const data = await response.json();
+        //     const response = await fetch(`https://wger.de/api/v2/exerciseinfo/?language=${languageId}&limit=2000`);
+        //     if (!response.ok) throw new Error('Failed to fetch workouts');
+        //     const data = await response.json();
 
-            // Map exercises with name, description, and fetch images
-            const workoutListPromises = data.results.map(async (w: any) => {
-              const translation = w.translations.find((t: any) => t.language === languageId);
-              const category = w.category ? w.category.name : 'No Category';
+        //     // Map exercises with name, description, and fetch images
+        //     const workoutListPromises = data.results.map(async (w: any) => {
+        //       const translation = w.translations.find((t: any) => t.language === languageId);
+        //       const category = w.category ? w.category.name : 'No Category';
 
-              // Fetch images for this exercise
-              let images: string[] = [];
-              try {
-                const imageResponse = await fetch(`https://wger.de/api/v2/exerciseimage/?exercise=${w.id}`);
-                if (imageResponse.ok) {
-                  const imageData = await imageResponse.json();
-                  images = imageData.results.map((img: any) => img.image);
-                }
-              } catch (imgError) {
-                console.warn(`No images found for exercise ${w.id}`);
-              }
+        //       // Fetch images for this exercise
+        //       let images: string[] = [];
+        //       try {
+        //         const imageResponse = await fetch(`https://wger.de/api/v2/exerciseimage/?exercise=${w.id}`);
+        //         if (imageResponse.ok) {
+        //           const imageData = await imageResponse.json();
+        //           images = imageData.results.map((img: any) => img.image);
+        //         }
+        //       } catch (imgError) {
+        //         console.warn(`No images found for exercise ${w.id}`);
+        //       }
 
-              return translation && translation.name && translation.name.trim() !== ''
-                ? {
-                    id: w.id,
-                    name: translation.name,
-                    category: category,
-                    images,
-                  }
-                : null;
-            });
+        //       return translation && translation.name && translation.name.trim() !== ''
+        //         ? {
+        //             id: w.id,
+        //             name: translation.name,
+        //             category: category,
+        //             images,
+        //           }
+        //         : null;
+        //     });
 
-            // Resolve all promises to get the workout list
-            const workoutList = (await Promise.all(workoutListPromises)).filter(
-              (w: any) => w !== null
-            );
+        //     // Resolve all promises to get the workout list
+        //     const workoutList = (await Promise.all(workoutListPromises)).filter(
+        //       (w: any) => w !== null
+        //     );
 
-            setWorkouts(workoutList);
-            setFilteredWorkouts(workoutList);
+        //     setWorkouts(workoutList);
+        //     setFilteredWorkouts(workoutList);
+
+        let data = exercises;
+
+        // Attach full URLs to images
+        const workoutList = data.map((w: any) => ({
+          ...w,
+          images: w.images.map((img: string) => BASE_IMG_URL + img),
+        }));
+
+        setWorkouts(workoutList);
+        setFilteredWorkouts(workoutList);
 
         } catch (err: unknown) {
-          const message = err instanceof Error ? err.message : "Failed to Load Workouts";
-          setError(message);
+            const message = err instanceof Error ? err.message : "Failed to Load Workouts";
+            setError(message);
         } finally {
-          setIsLoading(false);
+            setIsLoading(false);
         }
       };
 
@@ -119,11 +131,21 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   useEffect(() => {
     setFilteredWorkouts(
       workouts.filter(
-        (workout) =>
-          workout.name &&
-          workout.category &&
-          (workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            tCategory(workout.category).toLowerCase().includes(searchQuery.toLowerCase()))
+        (workout) => {
+          if(locale == "en"){
+            return(
+              workout.name &&
+              (workout.name.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                tCategory(workout.primaryMuscles[0]).toLowerCase().includes(searchQuery.toLowerCase()))
+            )
+          } else {
+            return(
+              workout.name_es &&
+              (workout.name_es.toLowerCase().includes(searchQuery.toLowerCase()) ||
+                tCategory(workout.primaryMuscles[0]).toLowerCase().includes(searchQuery.toLowerCase()))
+            )            
+          }
+        }
       )
     );
   }, [searchQuery, workouts, tCategory]);
@@ -177,13 +199,13 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
                   className="flex items-center gap-4 cursor-pointer rounded-md p-2 hover:bg-gray-100 transition"
                 >
                   <img
-                    src={workout.images[0] || noWorkoutIcon}
+                    src={ workout.images[0] || noWorkoutIcon}
                     alt=''
                     className="w-14 h-14 object-cover rounded-md bg-gray-200"
                   />
                   <div>
-                    <h3 className="text-base font-medium text-black">{workout.name}</h3>
-                    <p className='text-sm text-gray-500'>{tCategory(workout.category)}</p>
+                    <h3 className="text-base font-medium text-black">{locale == "en" ? workout.name : workout.name_es}</h3>
+                    <p className='text-sm text-gray-500'>{tCategory(workout.primaryMuscles[0])}</p>
                   </div>
                  
                 </div>
