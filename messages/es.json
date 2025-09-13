@@ -248,9 +248,13 @@
 
   "buildNutritionPlan": "Construir Plan Nutricional",
   "savePlan": "Guardar Plan",
-  "addMeal": "Añadir Comida",
+  "addMeal": "Nueva",
+  "fromMealLibrary": "Mi Librería",
   "hasComment": "Contiene Comentario",
   "ingredientsInMeal": "{count, plural, =0 {Nada Aquí} one {{count} ingrediente} other {{count} ingredientes}}",
+  "mealLibrary": "Librería de Comidas",
+  "loadingYourMeals": "Loading Your Meals...",
+  "noMeals": "Nada que ver aquí",
 
   "detailsFor": "Detalles para",
   "mealName": "Nombre de Comida",

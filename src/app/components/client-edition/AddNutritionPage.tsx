@@ -6,6 +6,8 @@ import AddMealModal from './AddMealModal';
 import ViewMealDetails from './ViewMealDetailsModal';
 import { useTranslations } from 'next-intl';
 import { FaRegCommentDots } from 'react-icons/fa';
+import AddMealFromLibraryModal from './AddMealFromLibraryModal';
+import { ISavedMeal } from '../../../../lib/models/savedMeals';
 
 interface INutritionFood {
   name: string;
@@ -34,14 +36,19 @@ const AddNutritionPage: React.FC = () => {
   const router = useRouter();
   const [schedule, setSchedule] = useState<INutritionDay[]>([]);
   const [selectedDay, setSelectedDay] = useState<string | null>(null);
+  const [selectedLibraryDay, setSelectedLibraryDay] = useState<string | null>(null); //Day of the week selected
   const [selectedMeal, setSelectedMeal] = useState<{
     day: string;
     index: number;
     meal: INutritionItem;
   } | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const [loadingLibrary, setLoadingLibrary] = useState<boolean>(true);
   const [error, setError] = useState<string | null>(null);
   const [isEditing, setIsEditing] = useState<boolean>(false); // Mode flag
+  const [isLibraryOpen, setIsLibraryOpen] = useState<boolean>(false); //Is library open?
+  const [mealLibrary, setMealLibrary] = useState<ISavedMeal[]>([]); //All elements in the library of meals
+  const [selectedLibraryMeal, setSelectedLibraryMeal] = useState<ISavedMeal | null>(null); //Meal selected after clicking on an element in the library
   const [firstName, setFirstName] = useState<string>('');
   const [lastName, setLastName] = useState<string>('');
 
@@ -61,7 +68,6 @@ const AddNutritionPage: React.FC = () => {
     const nutritionScheduleId = localStorage.getItem('nutritionScheduleId');
     const clientFirstName = localStorage.getItem('userFirstName');
     const clientLastName = localStorage.getItem('userLastName');
-    const storedNotes = localStorage.getItem('nutritionNotes'); // Load notes
 
     setFirstName(clientFirstName || '');
     setLastName(clientLastName || '');
@@ -109,7 +115,7 @@ const AddNutritionPage: React.FC = () => {
       }
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : t("genericError");
-      console.log(error);
+      console.log(err);
       setError(message);
     } finally {
       setLoading(false);
@@ -176,7 +182,41 @@ const AddNutritionPage: React.FC = () => {
     setSelectedMeal({ day, index, meal });
   };
 
+  const handleOpenMealLibrary = async (day: string) => {
+    const id = localStorage.getItem("id");
+
+    setIsLibraryOpen(true);
+    setLoadingLibrary(true);
+
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) throw new Error('No authentication token');
+
+      const response = await fetch(`/api/savedMeals?coachId=${id}`, {
+        headers: {
+          'Authorization': `Bearer ${token}`,
+          'Content-Type': 'application/json',
+        },
+      });
+
+      if (!response.ok) throw new Error('Failed to fetch you saved meals');
+      const data = await response.json();
+      setMealLibrary(data);
+      setSelectedLibraryDay(day)
+      
+    } catch (err: unknown) {
+        const message = err instanceof Error ? err.message : t("genericError");
+        console.log(err);
+        setError(message);
+    } finally {
+        setLoadingLibrary(false);
+    }
+  };
+
   const handleSelectMeal = (meal: INutritionItem) => {
+    console.log("Handling meal: ", meal);
+    console.log("Selected Library Day: ", selectedLibraryDay);
+    
     if (selectedDay) {
       setSchedule((prev) => {
         const existingDay = prev.find((d) => d.weekDay === selectedDay);
@@ -188,6 +228,18 @@ const AddNutritionPage: React.FC = () => {
           );
         }
         return [...prev, { weekDay: selectedDay, items: [meal] }];
+      });
+    } else if (selectedLibraryDay) {
+      setSchedule((prev) => {
+        const existingDay = prev.find((d) => d.weekDay === selectedLibraryDay);
+        if (existingDay) {
+          return prev.map((d) =>
+            d.weekDay === selectedLibraryDay
+              ? { ...d, items: [...d.items, meal] }
+              : d
+          );
+        }
+        return [...prev, { weekDay: selectedLibraryDay, items: [meal] }];
       });
     }
   };
@@ -372,7 +424,7 @@ const AddNutritionPage: React.FC = () => {
       
 
       {/* Meal Plan Editor */}
-      <div className="fixed bottom-4 left-4 right-4 top-32 bg-white rounded-lg shadow-lg pt-2">
+      <div className="fixed bottom-4 left-4 right-4 top-32 rounded-lg shadow-lg pt-2 bg-white">
         <div className="grid grid-cols-7 h-full p-0 overflow-y-auto">
           {daysOfWeek.map((day) => {
             const dayMacros = calculateMacros(
@@ -391,22 +443,42 @@ const AddNutritionPage: React.FC = () => {
                   <span className="text-purple-600 font-semibold">{dayMacros.fats}g</span>
                 </div>
                 <div className="flex-1 flex-col p-1 gap-1 w-full border-x border-slate-200 justify-center">
-                  <button
-                    onClick={() => handleAddMeal(day)}
-                    disabled={loading}
-                    className="w-full mb-4 p-2 cursor-pointer border-2 border-dashed border-green-300 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all duration-200 group"
-                  >
-                    <div className="flex flex-col items-center gap-2">
-                      <div className="w-8 h-8 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors">
-                        <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                          <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
-                        </svg>
+                  {/* ADD MEALS BUTTONS */}
+                  <div className='flex flex-row gap-1'>
+                    <button
+                      onClick={() => handleAddMeal(day)}
+                      disabled={loading}
+                      className="w-full mb-1.5 px-2 py-1 cursor-pointer border-2 border-dashed border-green-300 rounded-xl hover:border-green-500 hover:bg-green-50 transition-all duration-200 group"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-6 h-6 bg-green-100 rounded-full flex items-center justify-center group-hover:bg-green-200 transition-colors">
+                          <svg className="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                        </div>
+                        <span className="text-sm font-medium text-green-600 group-hover:text-green-700">
+                          {t('addMeal')}
+                        </span>
                       </div>
-                      <span className="text-sm font-medium text-green-600 group-hover:text-green-700">
-                        {t('addMeal')}
-                      </span>
-                    </div>
-                  </button>
+                    </button>
+
+                    <button
+                      onClick={() => handleOpenMealLibrary(day)}
+                      disabled={loading}
+                      className="w-full mb-1.5 px-2 py-1 cursor-pointer border-2 border-dashed border-blue-300 rounded-xl hover:border-blue-500 hover:bg-blue-50 transition-all duration-200 group"
+                    >
+                      <div className="flex flex-col items-center">
+                        <div className="w-6 h-6 bg-blue-100 rounded-full flex items-center justify-center group-hover:bg-blue-200 transition-colors">
+                          <svg className="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 6v6m0 0v6m0-6h6m-6 0H6" />
+                          </svg>
+                        </div>
+                        <span className="text-sm font-medium text-blue-600 group-hover:text-blue-700">
+                          {t("fromMealLibrary")}
+                        </span>
+                      </div>
+                    </button>
+                  </div>                  
 
                   {/* Display meals for the day */}
                   {loading ? (
@@ -437,14 +509,65 @@ const AddNutritionPage: React.FC = () => {
                         
                       </div>
                     ))}
-                </div>  
+                </div>
               </div>
             );
           })}
         </div>
-      </div>
+      </div>  
 
-      
+      {/* OPENING MEAL LIBRARY */}
+      {isLibraryOpen && selectedLibraryDay && (
+        <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40 backdrop-blur-sm p-4">
+          <div className="w-full max-w-lg bg-white rounded-2xl shadow-2xl max-h-[95vh] flex flex-col">
+            
+            {/* Header */}
+            <div className="bg-gradient-to-r from-blue-500 to-purple-600 px-4 py-2 rounded-t-2xl">
+              <div className="flex items-center justify-between">
+                <h2 className="text-xl font-semibold cursor-default text-white">
+                  {t("mealLibrary")}
+                </h2>
+                <button
+                  onClick={() => setIsLibraryOpen(!isLibraryOpen)}
+                  className="cursor-pointer text-white/80 hover:text-white transition-colors p-1 rounded-full hover:bg-white/10"
+                >
+                  <svg className="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M6 18L18 6M6 6l12 12" />
+                  </svg>
+                </button>
+              </div>
+            </div>
+
+            {/* Content */}
+            <div className="flex-1 overflow-y-auto p-6 min-h-60">
+              <div className="w-full">
+                {loadingLibrary ? (
+                  <div className='flex justify-center h-40'>
+                      <p className='self-center text-gray-400 font-semibold animate-pulse'>{t("loadingYourMeals")}</p>
+                  </div>
+                  ) : (
+                    mealLibrary.length > 0 ? (
+                      mealLibrary.map((meal, index) => (
+                        <p 
+                          className='cursor-pointer self-center font-semibold border-b p-2 py-4 hover:bg-gray-50' 
+                          key={meal._id.toString()}
+                          onClick={() => setSelectedLibraryMeal(meal)}
+                        >
+                            {index + 1} - {meal.mealName}
+                        </p>
+                      ))
+                    ) : (
+                      <div className='flex justify-center h-40'>
+                          <p className='self-center text-gray-400 font-semibold'>{t("noMeals")}</p>
+                      </div>
+                    )
+                  )}                  
+              </div>
+            </div>
+          </div>
+        </div>
+      )} 
+       
 
       {/* Add Meal Modal */}
       <AddMealModal
@@ -452,6 +575,20 @@ const AddNutritionPage: React.FC = () => {
         onClose={() => setSelectedDay(null)}
         onSelectMeal={handleSelectMeal}
       />
+
+      
+      {/* Add Meal From Library Modal */}
+      {selectedLibraryMeal && (
+        <AddMealFromLibraryModal
+          isOpen={true}
+          libraryMeal={selectedLibraryMeal}
+          onClose={() => {
+            setSelectedLibraryDay(null);
+            setSelectedLibraryMeal(null);
+          }}
+          onSelectMeal={handleSelectMeal}
+        />
+      )}
 
       {/* On Click View Meal Details */}
       {selectedMeal && (

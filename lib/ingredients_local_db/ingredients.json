@@ -706,15 +706,16 @@
       "en_product_name": "Mozzarella Cheese",
       "category": { "en": "Cheese & Dairy", "es": "Quesos y Lácteos" },
       "nutriments": {
-        "energy-kcal_100g": 280,
-        "proteins_100g": 28,
-        "carbohydrates_100g": 3.1,
-        "fat_100g": 17
+        "energy-kcal_100g": 286,
+        "proteins_100g": 23.8,
+        "carbohydrates_100g": 4.1,
+        "fat_100g": 19
       },
       "foodMeasures": [
           {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 28, "measureId": 1078},
-          {"es_disseminationText": "Taza Rallada", "en_disseminationText": "Shredded Cup", "gramWeight": 113, "measureId": 1079},
-          {"es_disseminationText": "Rebanada Fina", "en_disseminationText": "Thin Slice", "gramWeight": 22, "measureId": 10800}
+          {"es_disseminationText": "Rebanada Fina", "en_disseminationText": "Thin Slice", "gramWeight": 21, "measureId": 10879},
+          {"es_disseminationText": "Taza Rallada", "en_disseminationText": "Shredded Cup", "gramWeight": 113, "measureId": 1080}
+
       ]
     },
     {
@@ -1737,7 +1738,22 @@
         "fat_100g": 16.91
       },
       "foodMeasures": [
-          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1000}
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1141}
+      ]
+    },
+    {
+      "id": "local-110",
+      "es_product_name": "Prosciutto",
+      "en_product_name": "Prosciutto",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 221,
+        "proteins_100g": 28.6,
+        "carbohydrates_100g": 0,
+        "fat_100g": 12.5
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción(2 Rebanadas Finas)", "en_disseminationText": "Serving(2 thin slices)", "gramWeight": 28, "measureId": 1142}
       ]
     }
   ]

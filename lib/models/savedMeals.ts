@@ -7,6 +7,8 @@ export interface ISavedMeal {
   foods: INutritionFood[];
   createdAt?: Date;
   updatedAt?: Date;
+  _id: Types.ObjectId;
+
 }
 
 const SavedMealSchema = new Schema<ISavedMeal>(

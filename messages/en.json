@@ -244,9 +244,13 @@
 
   "buildNutritionPlan": "Build Nutrition Plan",
   "savePlan": "Save Plan",
-  "addMeal": "Add Meal",
+  "addMeal": "New",
+  "fromMealLibrary": "Library",
   "hasComment": "Has Comment",
   "ingredientsInMeal": "{count, plural, =0 {No Ingredients} once {{count} ingredient} other {{count} ingredients}}",
+  "mealLibrary": "My Meal Library",
+  "loadingYourMeals": "Loading Your Meals...",
+  "noMeals": "Nothing to see here.",
 
 
   "detailsFor": "Details For",
