@@ -264,9 +264,7 @@
         "fat_100g": 4.9
       },
       "foodMeasures": [
-          {"es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 120, "measureId": 1024},
-          {"es_disseminationText": "Lata Grande", "en_disseminationText": "Larger Can", "gramWeight": 170, "measureId": 1025},
-          {"es_disseminationText": "Lata Pequeña", "en_disseminationText": "Smaller Can", "gramWeight": 80, "measureId": 9026}
+          {"es_disseminationText": "Filete", "en_disseminationText": "Fillet", "gramWeight": 120, "measureId": 1024}
       ]
     },
     {
@@ -1674,8 +1672,8 @@
         "fat_100g": 0.3
       },
       "foodMeasures": [
-        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 148, "measureId": 1133 },
-        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 50, "measureId": 1134 }
+        { "es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 148, "measureId": 11330 },
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 50, "measureId": 11340 }
       ]
     },
     {
@@ -1754,6 +1752,67 @@
       },
       "foodMeasures": [
           {"es_disseminationText": "Porción(2 Rebanadas Finas)", "en_disseminationText": "Serving(2 thin slices)", "gramWeight": 28, "measureId": 1142}
+      ]
+    },
+    {
+      "id": "local-111",
+      "es_product_name": "Lata de Atún",
+      "en_product_name": "Tuna Can",
+      "category": { "en": "Fish & Seafood", "es": "Pescado y Mariscos" },
+      "nutriments": {
+        "energy-kcal_100g": 106,
+        "proteins_100g": 21.2,
+        "carbohydrates_100g": 0,
+        "fat_100g": 0.1
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Lata Grande", "en_disseminationText": "Larger Can", "gramWeight": 170, "measureId": 1025},
+          {"es_disseminationText": "Lata Pequeña", "en_disseminationText": "Smaller Can", "gramWeight": 85, "measureId": 91026}
+      ]
+    },
+    {
+      "id": "local-112",
+      "es_product_name": "Jamón de Pavo",
+      "en_product_name": "Turkey Ham",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 125,
+        "proteins_100g": 17.5,
+        "carbohydrates_100g": 0,
+        "fat_100g": 5
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Serving(28g)", "en_disseminationText": "Porcíon(28g)", "gramWeight": 28, "measureId": 1143}
+      ]
+    },
+    {
+      "id": "local-113",
+      "es_product_name": "Tofu",
+      "en_product_name": "Tofu",
+      "category": { "en": "Plant-Based Proteins", "es": "Proteínas Vegetales" },
+      "nutriments": {
+        "energy-kcal_100g": 76,
+        "proteins_100g": 8,
+        "carbohydrates_100g": 1.9,
+        "fat_100g": 4.8
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 100, "measureId": 1144 }
+      ]
+    },
+    {
+      "id": "local-114",
+      "es_product_name": "Creatina Monohidrato",
+      "en_product_name": "Creatine Monohydrate",
+      "category": { "en": "Supplements", "es": "Suplementos" },
+      "nutriments": {
+        "energy-kcal_100g": 0,
+        "proteins_100g": 0,
+        "carbohydrates_100g": 0,
+        "fat_100g": 0
+      },
+      "foodMeasures": [
+        { "es_disseminationText": "Cucharadita", "en_disseminationText": "Teaspoon", "gramWeight": 5, "measureId": 1145 }
       ]
     }
   ]
