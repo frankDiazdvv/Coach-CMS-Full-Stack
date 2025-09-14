@@ -169,15 +169,15 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
   return (
     <>
       <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
-        <div className="w-full max-w-md rounded-lg bg-white p-6 shadow-lg">
-          <h2 className="mb-4 text-2xl font-semibold text-gray-800">{t("addWorkout")}</h2>
+        <div className="w-full max-w-xl rounded-lg bg-white px-6 py-4 shadow-lg">
+          <h2 className="mb-2 text-2xl font-semibold text-gray-800">{t("addWorkout")}</h2>
           {/* Search Bar */}
           <input
             type="text"
             placeholder={t("searchBarPlaceholder")}
             value={searchQuery}
             onChange={(e) => setSearchQuery(e.target.value)}
-            className="mb-4 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
+            className="mb-2 w-full rounded-md border border-gray-300 px-3 py-2 focus:border-blue-500 focus:outline-none"
           />
 
           {/* Scrollable Workout List */}
@@ -189,27 +189,29 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
             ) : filteredWorkouts.length === 0 ? (
               <p className="text-gray-500">{t("noWorkoutFound")}</p>
             ) : (
-              filteredWorkouts.map((workout) => (
-                <div
-                  key={workout.id}
-                  onClick={() => {
-                    handleWorkoutSelect(workout.name, workout.images)
-                    
-                  }}
-                  className="flex items-center gap-4 cursor-pointer rounded-md p-2 hover:bg-gray-100 transition"
-                >
-                  <img
-                    src={ workout.images[0] || noWorkoutIcon}
-                    alt=''
-                    className="w-14 h-14 object-cover rounded-md bg-gray-200"
-                  />
-                  <div>
-                    <h3 className="text-base font-medium text-black">{locale == "en" ? workout.name : workout.name_es}</h3>
-                    <p className='text-sm text-gray-500'>{tCategory(workout.primaryMuscles[0])}</p>
+              <div className='flex flex-row justify-center flex-wrap gap-4'>
+                {filteredWorkouts.map((workout) => (
+                  <div
+                    key={workout.id}
+                    onClick={() => {
+                      handleWorkoutSelect(workout.name, workout.images)
+                      
+                    }}
+                    className="flex flex-col items-center w-40 gap-1 cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
+                  >
+                    <img
+                      src={ workout.images[0] || noWorkoutIcon}
+                      alt=''
+                      className="w-40 h-36 object-cover rounded-md bg-gray-200"
+                    />
+                    <div className='w-full overflow-auto'>
+                      <h3 className="text-base font-medium text-black">{locale == "en" ? workout.name : workout.name_es}</h3>
+                      <p className='text-sm text-gray-500'>{tCategory(workout.primaryMuscles[0])}</p>
+                    </div>
+                  
                   </div>
-                 
-                </div>
-              ))
+                ))}
+              </div>
             )}
           </div>
 

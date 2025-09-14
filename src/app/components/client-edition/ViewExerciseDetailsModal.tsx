@@ -2,6 +2,7 @@
 
 import { useTranslations } from 'next-intl';
 import { useState } from 'react';
+import Link from 'next/link';
 
 interface ViewExerciseDetailsProps {
   isOpen: boolean;
@@ -61,12 +62,19 @@ const ViewExerciseDetails: React.FC<ViewExerciseDetailsProps> = ({ isOpen, worko
         </h2>
         <div className="mb-4 flex flex-row overflow-x-auto gap-2">
           {workout.workoutImages.map((img, index) => (
-            <img
+            <Link
               key={index}
-              src={img}
-              alt={`Workout image ${index + 1}`}
-              className="h-24 min-w-15 w-auto rounded border border-gray-200"
-            />
+              href={img}
+              target='_blank'
+            >
+              <img
+                key={index}
+                src={img}
+                alt={`Workout image ${index + 1}`}
+                className="h-24 min-w-15 w-auto rounded border border-gray-200"
+              />
+            </Link>
+            
           ))}
         </div>
         <form onSubmit={handleSubmit} className="space-y-4">
