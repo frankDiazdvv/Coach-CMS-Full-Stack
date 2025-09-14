@@ -5,6 +5,7 @@ import { useRouter } from 'next/navigation';
 import AddWorkoutModal from './AddWorkoutModal';
 import WorkoutCard from './WorkoutCard';
 import ViewExerciseDetails from './ViewExerciseDetailsModal';
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 import { useTranslations } from 'next-intl';
 
 interface IWorkout {
@@ -309,20 +310,60 @@ const AddWorkoutPage: React.FC = () => {
                     <div className="flex items-center justify-center py-8">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-blue-500"></div>
                     </div>
-                  ) : schedule.length > 0 && schedule.find((d) => d.weekDay === day)
-                  ?.workouts.map((workout, index) => (
-                    <WorkoutCard
-                      key={index}
-                      name={workout.name}
-                      workoutImages={workout.workoutImages}
-                      sets={workout.sets}
-                      reps={workout.reps}
-                      targetWeight={workout.targetWeight}
-                      comment={workout.comment}
-                      workoutUrl={workout.workoutUrl}
-                      onClick={() => handleOpenDetails(day,index, workout)}
-                    />
-                  ))} 
+                  ) : <DragDropContext
+                        onDragEnd={(result) => {
+                          if (!result.destination) return;
+
+                          const { source, destination } = result;
+
+                          setSchedule((prev) =>
+                            prev.map((d) => {
+                              if (d.weekDay !== day) return d;
+
+                              const reordered = Array.from(d.workouts);
+                              const [moved] = reordered.splice(source.index, 1);
+                              reordered.splice(destination.index, 0, moved);
+
+                              return { ...d, workouts: reordered };
+                            })
+                          );
+                        }}
+                      >
+                        <Droppable droppableId={day}>
+                          {(provided) => (
+                            <div
+                              {...provided.droppableProps}
+                              ref={provided.innerRef}
+                              className="flex-1 flex-col p-2 gap-1 w-full border-x border-slate-200 overflow-y-auto justify-center"
+                            >
+                              {schedule.find((d) => d.weekDay === day)?.workouts.map((workout, index) => (
+                                <Draggable key={`${day}-${index}`} draggableId={`${day}-${index}`} index={index}>
+                                  {(provided) => (
+                                    <div
+                                      ref={provided.innerRef}
+                                      {...provided.draggableProps}
+                                      {...provided.dragHandleProps}
+                                    >
+                                      <WorkoutCard
+                                        name={workout.name}
+                                        workoutImages={workout.workoutImages}
+                                        sets={workout.sets}
+                                        reps={workout.reps}
+                                        targetWeight={workout.targetWeight}
+                                        comment={workout.comment}
+                                        workoutUrl={workout.workoutUrl}
+                                        onClick={() => handleOpenDetails(day, index, workout)}
+                                      />
+                                    </div>
+                                  )}
+                                </Draggable>
+                              ))}
+                              {provided.placeholder}
+                            </div>
+                          )}
+                        </Droppable>
+                      </DragDropContext>
+                  } 
               </div>
             </div>
           ))}

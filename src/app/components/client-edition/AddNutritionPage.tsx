@@ -8,6 +8,7 @@ import { useTranslations } from 'next-intl';
 import { FaRegCommentDots } from 'react-icons/fa';
 import AddMealFromLibraryModal from './AddMealFromLibraryModal';
 import { ISavedMeal } from '../../../../lib/models/savedMeals';
+import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
 
 interface INutritionFood {
   name: string;
@@ -485,30 +486,76 @@ const AddNutritionPage: React.FC = () => {
                     <div className="flex items-center justify-center py-8">
                       <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-green-500"></div>
                     </div>
-                  ) : Array.isArray(schedule) && schedule.length > 0 && schedule.find((d) => d.weekDay === day)
-                    ?.items.map((meal, index) => (
-                      <div
-                        key={index}
-                        onClick={() => handleOpenDetails(day, index, meal)}
-                        className="w-full p-3 mb-2 border border-gray-200 rounded-xl bg-white hover:bg-gray-50 hover:shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105"
-                      >
-                        <div className="flex items-center justify-between mb-2">
-                          <h4 className="text-sm font-semibold text-gray-800 truncate">{meal.mealName}</h4>
-                          <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
-                          </svg>
+                  ) : 
+                  <DragDropContext
+                    onDragEnd={(result) => {
+                      if (!result.destination) return;
+
+                      const { source, destination } = result;
+
+                      setSchedule((prev) =>
+                        prev.map((d) => {
+                          if (d.weekDay !== day) return d;
+
+                          const reordered = Array.from(d.items);
+                          const [moved] = reordered.splice(source.index, 1);
+                          reordered.splice(destination.index, 0, moved);
+
+                          return { ...d, items: reordered };
+                        })
+                      );
+                    }}
+                  >
+                    <Droppable droppableId={day}>
+                      {(provided) => (
+                        <div
+                          {...provided.droppableProps}
+                          ref={provided.innerRef}
+                          className="flex-1 flex-col p-1 gap-1 w-full justify-center"
+                        >
+                          {Array.isArray(schedule) && schedule.length > 0 && schedule.find((d) => d.weekDay === day)
+                                ?.items.map((meal, index) => (
+                            <Draggable key={`${day}-${index}`} draggableId={`${day}-${index}`} index={index}>
+                              {(provided) => (
+                                <div
+                                  ref={provided.innerRef}
+                                  {...provided.draggableProps}
+                                  {...provided.dragHandleProps}
+                                >
+                                  <div
+                                    key={index}
+                                    onClick={() => handleOpenDetails(day, index, meal)}
+                                    className="w-full p-3 mb-2 border border-gray-200 rounded-xl bg-white hover:bg-gray-50 hover:shadow-md cursor-pointer transition-all duration-200 transform hover:scale-105"
+                                  >
+                                    <div className="flex items-center justify-between mb-2">
+                                      <h4 className="text-sm font-semibold text-gray-800 truncate">{meal.mealName}</h4>
+                                      <svg className="w-4 h-4 text-gray-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 5l7 7-7 7" />
+                                      </svg>
+                                    </div>
+                                    <div className="flex flex-row justify-between">
+                                      <p  className="text-xs text-gray-600 truncate">
+                                        {t("ingredientsInMeal", {count: meal.foods.length})}
+                                      </p>
+                                      {meal.comment && (
+                                        <p className="text-xs self-center text-amber-600 font-medium"><FaRegCommentDots/></p>
+                                      )}
+                                    </div>
+                                    
+                                  </div>
+                                </div>
+                              )}
+                            </Draggable>
+                          ))}
+                          {provided.placeholder}
                         </div>
-                        <div className="flex flex-row justify-between">
-                          <p  className="text-xs text-gray-600 truncate">
-                            {t("ingredientsInMeal", {count: meal.foods.length})}
-                          </p>
-                          {meal.comment && (
-                            <p className="text-xs self-center text-amber-600 font-medium"><FaRegCommentDots/></p>
-                          )}
-                        </div>
-                        
-                      </div>
-                    ))}
+                      )}
+                    </Droppable>
+                  </DragDropContext>
+                  
+                  
+                    
+                    }
                 </div>
               </div>
             );
