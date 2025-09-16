@@ -526,7 +526,7 @@
     {
       "id": "local-33",
       "es_product_name": "Queso Fresco",
-      "en_product_name": "Cottage Cheese",
+      "en_product_name": "Queso Fresco",
       "category": { "en": "Cheese & Dairy", "es": "Quesos y Lácteos" },
       "nutriments": {
         "energy-kcal_100g": 299,
@@ -1016,7 +1016,7 @@
     },
     {
       "id": "local-64",
-      "es_product_name": "Requesón (Cottage Cheese)",
+      "es_product_name": "Requesón (Queso Cottage)",
       "en_product_name": "Cottage Cheese",
       "category": { "en": "Dairy & Eggs", "es": "Lácteos y Huevos" },
       "nutriments": {
@@ -1813,6 +1813,52 @@
       },
       "foodMeasures": [
         { "es_disseminationText": "Cucharadita", "en_disseminationText": "Teaspoon", "gramWeight": 5, "measureId": 1145 }
+      ]
+    },
+    {
+      "id": "local-115",
+      "es_product_name": "Requesón - 2% Bajo en Grasa",
+      "en_product_name": "Cottage Cheese - 2% Low Fat",
+      "category": { "en": "Cheese & Dairy", "es": "Quesos y Lácteos" },
+      "nutriments": {
+        "energy-kcal_100g": 80,
+        "proteins_100g": 11.45,
+        "carbohydrates_100g": 4.4,
+        "fat_100g": 2.2
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 113, "measureId": 1146},
+          {"es_disseminationText": "Taza", "en_disseminationText": "Cup", "gramWeight": 226, "measureId": 1147}
+      ]
+    },
+    {
+      "id": "local-116",
+      "es_product_name": "Salchicha de Res",
+      "en_product_name": "Beef Sausage",
+      "category": { "en": "Meat", "es": "Carne" },
+      "nutriments": {
+        "energy-kcal_100g": 260,
+        "proteins_100g": 14.2,
+        "carbohydrates_100g": 0.2,
+        "fat_100g": 21.2
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Salchicha", "en_disseminationText": "Link", "gramWeight": 85, "measureId": 1148}
+      ]
+    },
+    {
+      "id": "local-117",
+      "es_product_name": "Flan",
+      "en_product_name": "Flan",
+      "category": { "en": "Sweets", "es": "Dulces" },
+      "nutriments": {
+        "energy-kcal_100g": 270,
+        "proteins_100g": 8,
+        "carbohydrates_100g": 36,
+        "fat_100g": 10.5
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Porción (85g)", "en_disseminationText": "Serving (3oz)", "gramWeight": 85, "measureId": 1148}
       ]
     }
   ]
