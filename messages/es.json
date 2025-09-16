@@ -198,6 +198,7 @@
   "weeklyNutritionSchedule": "Horario Nutricional Semanal",
   "noMealsPlanned": "Ninguna comida planeada",
   "ingredients": "Ingredientes",
+  "ingredient": "Ingrediente",
   "totalMacros": "Macros Totales",
   "note": "Note",
 
@@ -255,6 +256,8 @@
   "mealLibrary": "Librería de Comidas",
   "loadingYourMeals": "Loading Your Meals...",
   "noMeals": "Nada que ver aquí",
+  "failedToFetchLib": "Fallo al recuperar comidas",
+  "deleteMeal": "Estás seguro de borrar esta comida?",
 
   "detailsFor": "Detalles para",
   "mealName": "Nombre de Comida",

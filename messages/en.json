@@ -195,6 +195,7 @@
   "weeklyNutritionSchedule": "Weekly Nutrition Schedule",
   "noMealsPlanned": "No meals planned",
   "ingredients": "Ingredients",
+  "ingredient": "Ingredient",
   "totalMacros": "Total Macros",
   "note": "Note",
 
@@ -251,6 +252,8 @@
   "mealLibrary": "My Meal Library",
   "loadingYourMeals": "Loading Your Meals...",
   "noMeals": "Nothing to see here.",
+  "failedToFetchLib": "Failed to fetch you saved meals",
+  "deleteMeal": "Are you sure to delete this meal?",
 
 
   "detailsFor": "Details For",
@@ -489,6 +492,5 @@
   "contactUs": "Contact Us",
   "leaveReviewTitle": "Leave Us a Review in GoodFirms",
   "leaveReviewLink": "Leave a Review"
-
 
 }

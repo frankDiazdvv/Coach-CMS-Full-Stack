@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation';
 import AddMealModal from './AddMealModal';
 import ViewMealDetails from './ViewMealDetailsModal';
 import { useTranslations } from 'next-intl';
-import { FaRegCommentDots } from 'react-icons/fa';
+import { FaRegCommentDots, FaRegTrashAlt } from 'react-icons/fa';
 import AddMealFromLibraryModal from './AddMealFromLibraryModal';
 import { ISavedMeal } from '../../../../lib/models/savedMeals';
 import { DragDropContext, Droppable, Draggable } from "@hello-pangea/dnd";
@@ -212,6 +212,35 @@ const AddNutritionPage: React.FC = () => {
     } finally {
         setLoadingLibrary(false);
     }
+  };
+
+  const handleDeleteLibraryMeal = async (meal: ISavedMeal) => {
+    const result = await confirm(t("deleteMeal"));
+    if(result){
+      try {
+        const token = localStorage.getItem('token');
+        if (!token) throw new Error('No authentication token');
+
+        const response = await fetch(`/api/savedMeals/${meal._id}`, {
+          method: 'DELETE',
+          headers: {
+            'Authorization': `Bearer ${token}`,
+            'Content-Type': 'application/json',
+          },
+        });
+
+        if (!response.ok) throw new Error(t('failedToFetchLib'));
+
+        setMealLibrary((prevMeals) =>
+          prevMeals.filter((m) => m._id !== meal._id)
+        );
+      
+      } catch (err: unknown) {
+          const message = err instanceof Error ? err.message : t("genericError");
+          console.log(err);
+          setError(message);
+      }
+    }  
   };
 
   const handleSelectMeal = (meal: INutritionItem) => {
@@ -585,7 +614,7 @@ const AddNutritionPage: React.FC = () => {
               </div>
             </div>
 
-            {/* Content */}
+            {/* Content of Meal Library*/}
             <div className="flex-1 overflow-y-auto p-6 min-h-60">
               <div className="w-full">
                 {loadingLibrary ? (
@@ -595,13 +624,24 @@ const AddNutritionPage: React.FC = () => {
                   ) : (
                     mealLibrary.length > 0 ? (
                       mealLibrary.map((meal, index) => (
-                        <p 
-                          className='cursor-pointer self-center font-semibold border-b p-2 py-4 hover:bg-gray-50' 
+                        <div 
+                          className='flex flex-row justify-between items-center font-semibold border-b p-2 py-3 hover:bg-gray-50'
                           key={meal._id.toString()}
-                          onClick={() => setSelectedLibraryMeal(meal)}
                         >
-                            {index + 1} - {meal.mealName}
-                        </p>
+                          <div className='flex flex-row cursor-pointer hover:bg-gray-400' onClick={() => setSelectedLibraryMeal(meal)}>
+                            <p className='mr-1'>{index + 1} - </p>
+                            <div>
+                              <p>{meal.mealName}</p>
+                              <p className='text-xs font-normal text-gray-600'>{meal.foods.length} {t("ingredient")}(s)</p>
+                            </div>
+                          </div>
+                          <button 
+                            className=' text-gray-400 rounded-full p-2 hover:bg-red-100 hover:text-red-700'
+                            onClick={() => handleDeleteLibraryMeal(meal)}
+                          >
+                            <FaRegTrashAlt/>
+                          </button>
+                        </div>
                       ))
                     ) : (
                       <div className='flex justify-center h-40'>

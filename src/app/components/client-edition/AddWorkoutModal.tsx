@@ -194,7 +194,7 @@ const AddWorkoutModal: React.FC<AddWorkoutModalProps> = ({ isOpen, onClose, onSe
                   <div
                     key={workout.id}
                     onClick={() => {
-                      handleWorkoutSelect(workout.name, workout.images)
+                      handleWorkoutSelect(locale === 'en'? workout.name : workout.name_es, workout.images)
                       
                     }}
                     className="flex flex-col items-center w-40 gap-1 cursor-pointer rounded-md p-1 hover:bg-gray-100 transition"
