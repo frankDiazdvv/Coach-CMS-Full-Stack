@@ -1128,10 +1128,10 @@
       "en_product_name": "Chicken Thigh",
       "category": { "en": "Poultry", "es": "Aves" },
       "nutriments": {
-        "energy-kcal_100g": 209,
-        "proteins_100g": 26,
-        "carbohydrates_100g": 0,
-        "fat_100g": 11
+        "energy-kcal_100g": 142,
+        "proteins_100g": 17,
+        "carbohydrates_100g": 0.4,
+        "fat_100g": 8
       },
       "foodMeasures": [
           {"es_disseminationText": "Porción", "en_disseminationText": "Serving", "gramWeight": 112, "measureId": 1117}  
@@ -1919,6 +1919,21 @@
       },
       "foodMeasures": [
           {"es_disseminationText": "Vaso(240ml)", "en_disseminationText": "Cup(8fl oz)", "gramWeight": 240, "measureId": 1153}
+      ]
+    },
+    {
+      "id": "local-122",
+      "es_product_name": "Polvo de Cacao 100%, Sin Azúcar",
+      "en_product_name": "Unsweetened Cocoa Powder 100%",
+      "category": { "en": "Sweets", "es": "Dulces" },
+      "nutriments": {
+        "energy-kcal_100g": 200,
+        "proteins_100g": 20,
+        "carbohydrates_100g": 60,
+        "fat_100g": 10
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 5, "measureId": 1154}
       ]
     }
   ]
