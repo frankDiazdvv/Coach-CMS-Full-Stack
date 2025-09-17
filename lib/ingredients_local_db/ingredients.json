@@ -1858,7 +1858,67 @@
         "fat_100g": 10.5
       },
       "foodMeasures": [
-          {"es_disseminationText": "Porción (85g)", "en_disseminationText": "Serving (3oz)", "gramWeight": 85, "measureId": 1148}
+          {"es_disseminationText": "Porción (85g)", "en_disseminationText": "Serving (3oz)", "gramWeight": 85, "measureId": 1149}
+      ]
+    },
+    {
+      "id": "local-118",
+      "es_product_name": "Crema de Leche",
+      "en_product_name": "Half and Half",
+      "category": { "en": "Dairy & Eggs", "es": "Lácteos y Huevos" },
+      "nutriments": {
+        "energy-kcal_100g": 133,
+        "proteins_100g": 1.3,
+        "carbohydrates_100g": 3.3,
+        "fat_100g": 10
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 15, "measureId": 1150}
+      ]
+    },
+    {
+      "id": "local-119",
+      "es_product_name": "Ketchup",
+      "en_product_name": "Ketchup",
+      "category": { "en": "Spreads & Toppings", "es": "Untables y Aderezos" },
+      "nutriments": {
+        "energy-kcal_100g": 117,
+        "proteins_100g": 0.3,
+        "carbohydrates_100g": 29.4,
+        "fat_100g": 0.3
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 17, "measureId": 1151}
+      ]
+    },
+    {
+      "id": "local-120",
+      "es_product_name": "Salsa Barbacoa/BBQ",
+      "en_product_name": "BBQ Sauce",
+      "category": { "en": "Spreads & Toppings", "es": "Untables y Aderezos" },
+      "nutriments": {
+        "energy-kcal_100g": 194.6,
+        "proteins_100g": 0.4,
+        "carbohydrates_100g": 50,
+        "fat_100g": 0.3
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Cucharada", "en_disseminationText": "Tbsp", "gramWeight": 18, "measureId": 1152}
+      ]
+    },
+    {
+      "id": "local-121",
+      "es_product_name": "Caldo de Hueso de Pollo",
+      "en_product_name": "Chicken Bone Broth",
+      "category": { "en": "Beverages", "es": "Bebidas" },
+      "nutriments": {
+        "energy-kcal_100g": 19,
+        "proteins_100g": 3.78,
+        "carbohydrates_100g": 0.05,
+        "fat_100g": 0.21
+      },
+      "foodMeasures": [
+          {"es_disseminationText": "Vaso(240ml)", "en_disseminationText": "Cup(8fl oz)", "gramWeight": 240, "measureId": 1153}
       ]
     }
   ]
