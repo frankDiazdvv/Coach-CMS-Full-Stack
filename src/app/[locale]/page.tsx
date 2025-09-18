@@ -109,7 +109,15 @@ export default function LiteTrainerLanding() {
               <div className="mb-8">
                 <span className="inline-flex items-center px-4 py-2 rounded-full text-sm bg-purple-500/20 text-purple-300 border border-purple-500/30">
                   <Star className="w-4 h-4 mr-2" />
-                  {t('hero.badge') || 'Perfect for Beginner Coaches'}
+                  {t('hero.badge') || 'Featured on GoodFirms'}
+                  <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity pl-2'>
+                    <Image
+                      src={'/goodFirmsLogo.png'}
+                      alt="GoodFirms Logo"
+                      width={120}
+                      height={20}
+                    />
+                  </Link>
                 </span>
               </div>
 
@@ -139,7 +147,7 @@ export default function LiteTrainerLanding() {
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </button>
                   </Link>
-                  <p className='text-sm text-gray-300 mt-1'>{t("hero.underButton")}</p>
+                  <p className='text-sm text-gray-300 mt-1'>🚀 {t("hero.underButton")}</p>
                 </div>
                 
                 <button className="cursor-not-allowed text-white border border-white/30 px-6 mx-2 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
@@ -171,7 +179,7 @@ export default function LiteTrainerLanding() {
               <div className="text-gray-400">{t('stats.languages') || 'Languages Supported'}</div>
             </div>
             <div className='flex flex-row gap-2 mt-8 items-center justify-center md:col-span-3'>
-              <p>Featured on:</p>
+              <p>{t("hero.badge")}</p>
               <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity'>
                 <Image
                   src={'/goodFirmsLogo.png'}
