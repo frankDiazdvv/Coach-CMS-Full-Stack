@@ -331,7 +331,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
             </div>
 
             {/* Profile Image */}
-            <div>
+            {/* <div>
               <label htmlFor="imageUrl" className="block text-xs font-medium text-gray-600 mb-1">Profile Image URL <span className="text-gray-400">({t("optional")})</span></label>
               <input
                 type="url"
@@ -342,7 +342,7 @@ const AddClientModal: React.FC<AddClientModalProps> = ({ isOpen, onClose, onClie
                 className="w-full px-3 py-2 text-sm border border-gray-300 rounded-md focus:ring-1 focus:ring-blue-500 focus:border-blue-500 transition-colors placeholder-gray-400"
                 placeholder={t("featureComingSoon")}
               />
-            </div>
+            </div> */}
 
             {error && <p className="text-sm text-red-500 text-center bg-red-50 p-2 rounded-md">{error}</p>}
             
