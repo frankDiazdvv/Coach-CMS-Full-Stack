@@ -424,6 +424,12 @@
         "cta": "Disponible Proximamente"
       }
     },
+    "tutorials":{
+      "title1": "Empieza Hoy Mismo",
+      "title2": "Al final de este breve video sabras:",
+      "ol1": "Crear tu cuenta de Coach",
+      "ol2": "Crear tu primer cliente"
+    },
     "cta": {
       "title1": "¿Listo para Transformar",
       "title2": "tu Negocio de Entrenamiento?",
@@ -464,6 +470,7 @@
   "signIn": "Inicia Sesión",
   "pricing": "Precios",
   "features": "Prestaciones",
+  "tutorials": "Tutoriales",
 
   "addFood": "Añadir Comida",
   "search": "Buscar",

@@ -37,6 +37,7 @@ export default function LandingPageTopBar() {
           <div className="hidden md:flex items-center space-x-6">
             <a href="#features" className="text-gray-300 hover:text-white transition-colors">{t("features")}</a>
             <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">{t("pricing")}</a>
+            <a href="#video-demo" className="text-gray-300 hover:text-white transition-colors">{t("tutorials")}</a>
             <LanguageToggle/>
             <Link href={signUpPage} className="bg-gradient-to-r from-purple-800 to-[#416bbb] text-white text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
               {t("getStarted")}

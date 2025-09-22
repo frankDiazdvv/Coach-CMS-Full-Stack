@@ -421,6 +421,12 @@
         "cta": "Available Soon"
       }
     },
+    "tutorials":{
+      "title1": "Get Started Today",
+      "title2": "By the end of this 2 minute video you will know how to:",
+      "ol1": "Create your Coach Account",
+      "ol2": "Create your First Client"
+    },
     "cta": {
       "title1": "Ready to Transform",
       "title2": "Your Coaching Business?",
@@ -463,6 +469,7 @@
   "signIn": "Login",
   "pricing": "Pricing",
   "features": "Features",
+  "tutorials": "Tutorials",
 
   "addFood": "Add Food",
   "search": "Search",

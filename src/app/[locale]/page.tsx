@@ -231,6 +231,31 @@ export default function LiteTrainerLanding() {
             ))}
           </div>
         </div>
+        
+      </section>
+      {/* embedded video tutorial */}
+      
+      <section id='video-demo'>
+        <div className="flex flex-col md:flex-row justify-center gap-4 items-center min-h-screen">
+          <div className="w-full max-w-3xl aspect-video">
+            <iframe
+              className="w-full h-full rounded-2xl shadow-lg"
+              src="https://www.youtube.com/embed/KHSpe19NfZE?si=cr0t8Zx1chTgjMQ8" 
+              title="LITE Trainer Create account and client Demo"
+              frameBorder="0"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+            ></iframe>
+          </div>
+          <div className='max-w-lg p-4'>
+            <h2 className='text-4xl md:text-5xl text-center md:text-left font-bold mb-4 md:mb-8'>{t("tutorials.title1")}</h2>
+            <p className='text-lg text-gray-300'>{t("tutorials.title2")}</p>
+            <ol className='text-lg text-gray-300 list-disc list-inside mt-2 md:mt-4 pl-2 space-y-2'>
+              <li>{t("tutorials.ol1")}</li>
+              <li>{t("tutorials.ol2")}</li>
+            </ol>
+          </div>
+        </div>
       </section>
 
       {/* Why Lite Trainer Section */}
