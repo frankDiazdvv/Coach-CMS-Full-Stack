@@ -15,10 +15,10 @@ const ogImage = '/squareLogo.svg';
 export const metadata = {
   // title: 'Lite Trainer — Beginner Friendly Fitness Coaching Software for Online & In-Person Coaches',
   title: 'Lite Trainer | Beginner Friendly Fitness Coaching Software',
-  description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches - no bloat, just essential features. English & Spanish support.',
+  description: 'Lite Trainer is beginner-friendly coaching software for personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out. Bilingual support in English and Spanish.',
   openGraph: {
     title: 'Lite Trainer | Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
-    description: 'Beginner-friendly, affordable client management system for In-person & Online fitness coaches.',
+    description: 'Lite Trainer is beginner-friendly coaching software for personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
     images: [
@@ -41,6 +41,13 @@ export const metadata = {
     icon: '/favicon.ico',
     shortcut: '/favicon.ico', 
   },
+  SoftwareApplication: {
+    name: 'LITE Trainer',
+    ApplicationCategory: 'FitnessSoftware / CoachingSoftware',
+    OperatingSystem: 'Web, Mobile',
+    Price: '$9.99/month (with 3 clients free)',
+    offers: 'Up to 3 clients free, then $9.99/month for up to 15 clients',
+  }
 };
 
 
@@ -134,13 +141,12 @@ export default function LiteTrainerLanding() {
               <p className="text-xl md:text-2xl text-gray-300 mb-12 max-w-4xl mx-auto leading-relaxed">
                 {t('hero.description') ||
                   'The perfect bridge between basic tools and expensive enterprise software.'}
-                <span className="text-purple-300">LITE Trainer</span>
                 {t('hero.description2') ||
                   'Weekly Workout & Nutrition Planning for Beginner Coaches — without the complexity or cost.'}
               </p>
 
               <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start">
-                <div>
+                <div className='flex flex-col items-center'>
                   <Link href={signUpPage}>
                     <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-[#B2CAF6] text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
                       {t('hero.cta1') || 'Start Free Trial for Lite Trainer Coaching App'}
@@ -372,7 +378,7 @@ export default function LiteTrainerLanding() {
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
-                  <span className="text-gray-300">{t('pricing.basic.features.0') || 'Up to 10 clients'}</span>
+                  <span className="text-gray-300">{t('pricing.basic.features.0') || 'Up to 15 clients'}</span>
                 </div>
                 <div className="flex items-center gap-3">
                   <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
@@ -504,11 +510,24 @@ export default function LiteTrainerLanding() {
                 className="object-contain"
               />
             </div>
-            <div className='opacity-90 hover:opacity-100'>
+            <div className='flex flex-row gap-6'>
+              <Link 
+                href={'https://www.youtube.com/@litetrainer'}
+                target="_blank"
+                className='flex flex-row gap-0.5 opacity-90 hover:opacity-100'
+              >
+                <Image
+                  src={'./youtube-icon-white.svg'}
+                  alt="Youtube Channel"
+                  width={24}
+                  height={24}
+                />
+                <p>Youtube</p>
+              </Link>
               <Link 
                 href={'https://www.linkedin.com/company/lite-trainer/posts/?feedView=all'}
                 target="_blank"
-                className='flex flex-row gap-0.5'
+                className='flex flex-row gap-0.5 opacity-90 hover:opacity-100'
               >
                 <Image
                   src={'./linkedin-icon-white.svg'}

@@ -297,16 +297,16 @@
 
   "metadata": {
     "title": "LITE Trainer - Simple Client Management for Fitness Coaches",
-    "description": "LITE Trainer is an affordable, easy-to-use client management system for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.",
-    "keywords": "fitness coaching, client management, workout planning, nutrition tracking, bilingual fitness app"
+    "description": "LITE Trainer is the BEST entry-level coaching software. An affordable, easy-to-use coaching software for beginner fitness coaches. Manage clients, workouts, and nutrition with no learning curve.",
+    "keywords": "Best Entry Level Choice, Entry Level, beginner friendly, fitness coaching, client management, coaching software, workout planning, workout tracking, nutrition tracking, bilingual fitness app"
   },
   "LandingPage": {
     "hero": {
       "badge": "Featured on: ",
       "title1": "Smart Coaching",
       "title2": "Made Affordable",
-      "description": "The perfect bridge between basic tools and expensive enterprise software. ",
-      "description2": " gives you all the core features you need to grow your coaching business, without the complexity or cost.",
+      "description": "LITE Trainer is the perfect bridge between basic tools and expensive enterprise software. ",
+      "description2": "It gives you all the core features you need to grow your coaching business, without the complexity or cost.",
       "cta1": "Join LITE Trainer Now",
       "cta2": "Up to 3 Clients Free before you commit",
       "underButton": "Includes 3 FREE clients | No CC Required"
@@ -374,7 +374,7 @@
       ],
       "growth": {
         "title": "Built for Growth",
-        "description": "Start small, scale smartly",
+        "description": "The Best Entry-Level Coaching Software",
         "features": [
           "Full Client Management",
           "Weekly Workout Planning with huge Database",
@@ -465,7 +465,7 @@
   "commentPlaceholder": "e.g., Focus on form",
   "videoLinkPlaceholder": "Any video link",
 
-  "getStarted": "Create Account",
+  "getStarted": "Login to Coach Account",
   "signIn": "Login",
   "pricing": "Pricing",
   "features": "Features",
