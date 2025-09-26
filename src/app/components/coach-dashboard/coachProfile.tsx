@@ -155,6 +155,18 @@ const CoachProfile: React.FC = () => {
         }
     }
 
+    const handleSignOut = async () => {
+        if (!confirm(t('signOut'))) {
+            return;
+        }
+        localStorage.removeItem('id');
+        localStorage.removeItem('token');
+
+        window.location.href = '/';
+    }
+
+    
+
     const addPlan = () => {
         if (newPlan.trim()) {
             setPlans([...plans, newPlan.trim()]);
@@ -514,6 +526,12 @@ const CoachProfile: React.FC = () => {
                                 onClick={handleDeleteCoachAccount}
                             >
                                 {t("deleteCoachAccount")}
+                            </button>
+                             <button
+                                className="w-full mt-8 px-4 py-3 bg-gray-600 text-white rounded-xl hover:bg-gray-700 transition-all duration-200 font-medium shadow-lg hover:shadow-xl flex items-center justify-center gap-2 cursor-pointer active:scale-95"
+                                onClick={handleSignOut}
+                            >
+                                {t("signOutButton")}
                             </button>
                         </div>
                     </div>

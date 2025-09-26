@@ -465,7 +465,7 @@
   "commentPlaceholder": "e.g., Focus on form",
   "videoLinkPlaceholder": "Any video link",
 
-  "getStarted": "Login to Coach Account",
+  "getStarted": "Create Account",
   "signIn": "Login",
   "pricing": "Pricing",
   "features": "Features",
@@ -490,6 +490,8 @@
   "addCustomFood": "Add Custom Food",
 
   "confirmDeleteAccount": "Are you sure you want to delete your coach account? This action cannot be undone.",
+  "signOut": "You will be signed out and redirected to the homepage.",
+  "signOutButton": "Sign Out",
 
   "dashboardInfoTitle": "You're on mobile!",
   "clientCreationDesktop": "Open your account on desktop to create and manage clients.",

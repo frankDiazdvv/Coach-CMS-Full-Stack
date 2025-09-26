@@ -466,7 +466,7 @@
   "commentPlaceholder": "ej. Enfócate en tu forma",
   "videoLinkPlaceholder": "Cualquier Link de Video",
 
-  "getStarted": "Inicia Sesión a tu Cuenta",
+  "getStarted": "Crear Cuenta",
   "signIn": "Inicia Sesión",
   "pricing": "Precios",
   "features": "Prestaciones",
@@ -492,6 +492,9 @@
   "addCustomFood": "Añadir Comida",
 
   "confirmDeleteAccount": "¿Estás seguro de que deseas eliminar tu cuenta de coach? Esta acción no se puede deshacer.",
+  "signOut": "Va a ser desconectado y redirigido a la página principal.",
+  "signOutButton": "Cerrar Sesión",
+
 
   "dashboardInfoTitle": "Estás en móvil!",
   "clientCreationDesktop": "Abre tu cuenta en escritorio para crear y gestionar clientes.",
