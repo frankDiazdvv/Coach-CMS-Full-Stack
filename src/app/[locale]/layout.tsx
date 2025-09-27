@@ -30,7 +30,7 @@ export default async function LocaleLayout({
   const messages = (await import(`../../../messages/${locale}.json`)).default;
 
   return (
-    <html lang={locale} dir={locale === 'es' ? 'ltr' : 'ltr'}>
+    <html lang={locale} dir={locale === 'es' ? 'ltr' : 'ltr'} className='scroll-smooth'>
       <head>
         <meta charSet="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
