@@ -3,6 +3,7 @@ import { notFound } from 'next/navigation';
 import { routing } from '@/i18n/routing';
 import './globals.css';
 import { Metadata } from 'next';
+import Script from 'next/script';
 export const metadata = {
   title: {
     default: 'LITE Trainer',
@@ -49,6 +50,18 @@ export default async function LocaleLayout({
         {/* Sitemap */}
         <link rel="sitemap" href="/sitemap.xml" type="application/xml" />
       </head>
+      <Script
+        src="https://www.googletagmanager.com/gtag/js?id=G-D3V2CMBLXP"
+        strategy="afterInteractive"
+      />
+      <Script id="google-analytics" strategy="afterInteractive">
+        {`
+          window.dataLayer = window.dataLayer || [];
+          function gtag(){dataLayer.push(arguments);}
+          gtag('js', new Date());
+          gtag('config', 'G-D3V2CMBLXP');
+        `}
+      </Script>
       <body>
         <NextIntlClientProvider locale={locale} messages={messages}>
           {children}
