@@ -347,8 +347,8 @@ export default function LiteTrainerLanding() {
       <section id="pricing" className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="flex flex-row justify-center text-center gap-2 text-4xl md:text-5xl font-thin mb-4">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent py-2">
+            <h2 className="flex flex-col md:flex-row justify-center text-center md:gap-2 text-4xl md:text-5xl font-thin mb-4">
+              <span className=" ">
                 {t('pricing.title1') || 'Simple, Transparent'}
               </span>
               <br />
