@@ -29,15 +29,18 @@ export default function LandingPageTopBar() {
       <div className="mx-auto px-4 sm:px-6 lg:px-10">
         <div className="flex justify-between items-center py-4">
           <div className="flex items-center space-x-2">
-            <img src={topLogo} alt="Logo" className="w-auto h-12" />
-            
+            <Link href={"/"} scroll={true}>
+              <img src={topLogo} alt="Logo" className="w-auto h-12" />
+            </Link>       
           </div>
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-6">
-            <a href="#features" className="text-gray-300 hover:text-white transition-colors">{t("features")}</a>
-            <a href="#video-demo" className="text-gray-300 hover:text-white transition-colors">{t("tutorials")}</a>
-            <a href="#pricing" className="text-gray-300 hover:text-white transition-colors">{t("pricing")}</a>
+            <Link href="/#features" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("features")}</Link>
+            <Link href="/#video-demo" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("tutorials")}</Link>
+            <Link href="/#pricing" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("pricing")}</Link>
+            <Link href="/resources/food-db" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("resources")}</Link>
+
             <LanguageToggle/>
             <Link href={signUpPage} className="bg-gradient-to-r from-purple-800 to-[#416bbb] text-white text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
               {t("getStarted")}

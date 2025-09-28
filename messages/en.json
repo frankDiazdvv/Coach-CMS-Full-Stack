@@ -470,6 +470,7 @@
   "pricing": "Pricing",
   "features": "Features",
   "tutorials": "Tutorials",
+  "resources": "Resources",
 
   "addFood": "Add Food",
   "search": "Search",
@@ -500,6 +501,13 @@
   "thankYouText":"If you have any questions, suggestions, or feedback, please feel free to email us through this link:",
   "contactUs": "Contact Us",
   "leaveReviewTitle": "Leave Us a Review in GoodFirms",
-  "leaveReviewLink": "Leave a Review"
+  "leaveReviewLink": "Leave a Review",
+
+  "foodLibraryTitle":"LITE Trainer JSON Food Library",
+  "buildSomething": "Build Something",
+  "bilingual": "Bilingual",
+  "macrosPer100g": "Macros Per 100g",
+  "servingSizes": "Serving Sizes",
+  "categories": "Categories"
 
 }

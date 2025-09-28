@@ -471,6 +471,7 @@
   "pricing": "Precios",
   "features": "Prestaciones",
   "tutorials": "Tutoriales",
+  "resources": "Recursos",
 
   "addFood": "Añadir Comida",
   "search": "Buscar",
@@ -504,11 +505,13 @@
   "thankYouText":"Si tienes alguna pregunta, sugerencia o comentario, no dudes en enviarnos un correo a través de este enlace:",
   "contactUs": "Contáctanos",
   "leaveReviewTitle": "Déjanos una reseña en GoodFirms",
-  "leaveReviewLink": "Dejar Reseña"
+  "leaveReviewLink": "Dejar Reseña",
 
-
-
-
-
+  "foodLibraryTitle":"Libreria de Ingredientes de LITE Trainer JSON",
+  "buildSomething": "Construye Algo",
+  "bilingual": "Bilingüe",
+  "macrosPer100g": "Macros por 100g",
+  "servingSizes": "Tamaños de Porción",
+  "categories": "Categorías"
 
 }
