@@ -3,6 +3,8 @@
 import { useState, useEffect } from 'react';
 import { INutritionDay, INutritionItem, INutritionFood } from '../../../../lib/models/nutrition';
 import { useTranslations } from 'next-intl';
+import { ChevronRightIcon } from 'lucide-react';
+import router from 'next/router';
 
 const ClientNutritionDashboard: React.FC = () => {
   const t = useTranslations();
@@ -23,6 +25,7 @@ const ClientNutritionDashboard: React.FC = () => {
       const id = localStorage.getItem('id');
       if (!id) {
         setError('No client ID in localStorage');
+        router.replace('/login');
         setIsLoading(false);
         return;
       }
@@ -156,10 +159,10 @@ const ClientNutritionDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 pt-24 mb-20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 pt-22 mb-20">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {t("greeting")}, <span className="text-green-600">{clientName}</span>
           </h1>
@@ -169,19 +172,19 @@ const ClientNutritionDashboard: React.FC = () => {
         {/* Today's Meal Plan Hero Section */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-5">
+            <div className="bg-gradient-to-r from-green-600 to-emerald-600 px-6 py-4">
               <h2 className="text-xl font-bold text-white flex items-center">
                 <span className="text-2xl mr-3">🍽️</span>
                 {t("todayMealPlan")}
               </h2>
-              <p className="text-green-100 mt-1">
+              <p className="text-green-100">
                 {today.toLocaleDateString(t("locale"), { weekday: 'long', month: 'long', day: 'numeric' })}
               </p>
             </div>
             
-            <div className="p-6">
+            <div className="p-2">
               {sortedSchedule?.find((day) => day.weekDay === today.toLocaleDateString('en-US', { weekday: 'long' }))?.items.length ? (
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {sortedSchedule
                     .find((day) => day.weekDay === today.toLocaleDateString('en-US', { weekday: 'long' }))
                     ?.items.map((meal, index) => {
@@ -200,14 +203,17 @@ const ClientNutritionDashboard: React.FC = () => {
                       return (
                         <div
                           key={index}
-                          className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-5 border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-300 cursor-pointer"
+                          className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-5 border border-gray-200 hover:border-green-300 hover:shadow-md transition-all duration-300 active:scale-95 cursor-pointer"
                           onClick={() => {
                             setIsModalOpen(true);
                             setSelectedMeal(meal);
                           }}
                         >
-                          <h3 className="text-xl font-bold text-gray-900 mb-3">{meal.mealName}</h3>
-                          <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                          <div className="absolute top-5 right-5 text-gray-400">
+                            <ChevronRightIcon className="w-5 h-5" />
+                          </div>
+                          <h3 className="text-xl font-black text-gray-700 mb-3">{meal.mealName} <span className='font-normal text-sm'>- {meal.foods.length} {t("ingredients")}</span> </h3>
+                          <div className="flex flex-row justify-center gap-4 sm:grid-cols-4">
                             <div className="text-center">
                               <p className="text-sm text-gray-500 font-medium">{t("calories")}</p>
                               <p className="text-lg font-bold text-orange-600">{Math.round(mealMacros.calories)}</p>
@@ -330,9 +336,9 @@ const ClientNutritionDashboard: React.FC = () => {
                   <h4 className="text-xl font-bold text-white">{daySchedule.weekDay}</h4>
                 </div>
                 
-                <div className="p-6">
+                <div className="p-2">
                   {daySchedule.items.length > 0 ? (
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                       {daySchedule.items.map((meal, index) => {
                         const mealMacros = Array.isArray(meal.foods)
                           ? meal.foods.reduce(
@@ -349,14 +355,17 @@ const ClientNutritionDashboard: React.FC = () => {
                         return (
                           <div
                             key={index}
-                            className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-all duration-300 cursor-pointer"
+                            className="active:scale-95 bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-all duration-300 cursor-pointer"
                             onClick={() => {
                               setIsModalOpen(true);
                               setSelectedMeal(meal);
                             }}
                           >
+                            <div className="absolute top-5 right-5 text-gray-400">
+                              <ChevronRightIcon className="w-5 h-5" />
+                            </div>
                             <h5 className="text-lg font-bold text-gray-900 mb-3">{meal.mealName}</h5>
-                            <div className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+                            <div className="flex flex-row justify-center gap-4 sm:grid-cols-4">
                               <div className="text-center">
                                 <p className="text-sm text-gray-500 font-medium">{t("calories")}</p>
                                 <p className="text-lg font-bold text-orange-600">{Math.round(mealMacros.calories)}</p>
@@ -420,7 +429,7 @@ const ClientNutritionDashboard: React.FC = () => {
               </div>
 
               {/* Modal Body */}
-              <div className="p-6 max-h-[70vh] overflow-y-auto">
+              <div className="p-4 max-h-[70vh] overflow-y-auto">
                 {/* Ingredients List */}
                 <div className="mb-6">
                   <h3 className="text-xl font-bold text-gray-900 mb-4 flex items-center">
@@ -432,13 +441,17 @@ const ClientNutritionDashboard: React.FC = () => {
                       <div key={index} className="bg-gradient-to-r from-gray-50 to-slate-50 p-4 rounded-2xl border border-gray-200">
                         <div className="flex justify-between items-start">
                           <div className="flex-1">
-                            <h4 className="font-bold text-gray-900 text-lg mb-2">{food.name}</h4>
-                            <p className="text-sm text-gray-600 mb-3">
-                              <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium">
-                                {food.quantity} {food.unit}
-                              </span>
-                            </p>
-                            <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
+                            <div className='flex flex-row gap-2 items-center mb-2'>
+                              <p>{index + 1}.</p>
+                              <h4 className="font-bold text-gray-900 text-lg">{food.name}</h4>
+                              <p className="text-sm text-gray-600">
+                                <span className="inline-block bg-blue-100 text-blue-800 px-3 py-1 rounded-full text-xs font-medium text-nowrap">
+                                  {food.quantity} {food.unit}
+                                </span>
+                              </p>
+                            </div>
+                            
+                            <div className="flex flex-row justify-center gap-3 sm:grid-cols-4">
                               <div className="text-center">
                                 <p className="text-xs text-gray-500">{t("calories")}</p>
                                 <p className="font-bold text-orange-600">{Math.round(food.calories)}</p>

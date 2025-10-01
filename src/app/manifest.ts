@@ -7,7 +7,7 @@ export default function manifest(): MetadataRoute.Manifest {
     name: 'LITE Trainer Coaching',
     short_name: 'LITE Trainer',
     description: 'Personal trainer coaching software',
-    start_url: `/${getLocale() || 'en'}/client/client-workout-dashboard`,
+    start_url: `/client/client-workout-dashboard`,
     scope: '/',
     display: 'standalone',
     background_color: '#ffffff',

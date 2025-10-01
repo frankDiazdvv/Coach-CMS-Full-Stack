@@ -5,6 +5,7 @@ import { IWorkoutSchedule, IDailyWorkout } from '../../../../lib/models/workouts
 import { useFormatter, useTranslations } from 'use-intl';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { FaLink } from 'react-icons/fa';
 
 const ClientWorkoutDashboard: React.FC = () => {
   const t = useTranslations();
@@ -199,10 +200,10 @@ const ClientWorkoutDashboard: React.FC = () => {
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 pt-24 mb-20">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 pt-22 mb-20">
       <div className="max-w-4xl mx-auto">
         {/* Header */}
-        <div className="mb-8">
+        <div className="mb-4">
           <h1 className="text-3xl font-bold text-gray-900 mb-2">
             {t('greeting')}, <span className="text-blue-600">{clientName}</span>
           </h1>
@@ -227,25 +228,25 @@ const ClientWorkoutDashboard: React.FC = () => {
         {/* Today's Workout Hero Section */}
         <div className="mb-8">
           <div className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-5">
+            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-6 py-4">
               <h2 className="text-xl font-bold text-white flex items-center">
                 <span className="text-2xl mr-3">🏋️</span>
                 {t('todaysWorkout')}
               </h2>
-              <p className="text-blue-100 mt-1">
+              <p className="text-blue-100">
                 {today.toLocaleDateString(t("locale"), { weekday: 'long', month: 'long', day: 'numeric' })}
               </p>
             </div>
             
-            <div className="p-6">
+            <div className="p-2">
               {sortedSchedule?.find((day) => day.weekDay === today.toLocaleDateString('en-US', { weekday: 'long' }))?.workouts.length ? (
-                <div className="space-y-4">
+                <div className="space-y-2">
                   {sortedSchedule
                     .find((day) => day.weekDay === today.toLocaleDateString('en-US', { weekday: 'long' }))
                     ?.workouts.map((workout, index) => (
                       <div
                         key={index}
-                        className={`relative overflow-hidden rounded-2xl p-5 border-2 transition-all duration-300 ${
+                        className={`relative overflow-hidden rounded-2xl p-2 border-2 transition-all duration-300 ${
                           loggedWorkouts[getLogKey(today.toLocaleDateString('en-US', { weekday: 'long' }), today)]?.logged 
                             ? 'bg-gradient-to-r from-green-50 to-emerald-50 border-green-200 shadow-lg transform scale-[1.02]' 
                             : 'bg-gradient-to-r from-gray-50 to-slate-50 border-gray-200 hover:border-blue-300 hover:shadow-md'
@@ -259,10 +260,10 @@ const ClientWorkoutDashboard: React.FC = () => {
                           </div>
                         )}
                         
-                        <h3 className="text-xl font-bold text-gray-900 mb-3">{workout.name}</h3>
+                        <h3 className="text-xl px-4 pt-4 font-black text-gray-700 mb-3"><span className='font-normal'>{index + 1}. </span>{workout.name}</h3>
                         {workout.workoutImages && workout.workoutImages.length > 0 && (
                         <div className="mt-3 overflow-x-auto">
-                          <div className="flex gap-3 p-2 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
+                          <div className="flex flex-row justify-center items-center gap-3 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
                           {workout.workoutImages.map((image: string, imgIndex: number) => (
                             <img
                             key={imgIndex}
@@ -290,17 +291,17 @@ const ClientWorkoutDashboard: React.FC = () => {
                         </div>
                         {workout.comment !== 'No Comment' && (
                           <div className="mt-4 p-3 bg-white rounded-xl border border-gray-200">
-                            <p className="text-sm text-gray-600 italic">{workout.comment}</p>
+                            <p className="text-sm text-gray-600 italic">💬 {workout.comment}</p>
                           </div>
                         )}
                         {workout.workoutUrl && (           
                           <Link
                             href={workout.workoutUrl}
                             target="_blank"
-                            className="mt-4 w-full inline-flex items-center justify-center px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
+                            className="active:scale-95 mt-4 w-full inline-flex items-center justify-center px-5 py-2 rounded-xl bg-blue-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
                           >
-                            <span className="mr-2">▶️</span>
-                            Video Tutorial
+                            <span className="mr-2"><FaLink/></span>
+                            Tutorial Link
                           </Link>
                         )}
                       </div>
@@ -368,30 +369,30 @@ const ClientWorkoutDashboard: React.FC = () => {
         {fullSchedule && (
           <div className="space-y-6">
             <h3 className="text-2xl font-bold text-gray-900 mb-6">{t('weeklySchedule')}</h3>
-            {sortedSchedule?.map((daySchedule, dayIndex) => (
+            {sortedSchedule?.map((daySchedule) => (
               <div key={daySchedule.weekDay} className="bg-white rounded-3xl shadow-xl border border-gray-100 overflow-hidden">
                 <div className="bg-gradient-to-r from-slate-600 to-slate-700 px-6 py-4">
                   <h4 className="text-xl font-bold text-white">{daySchedule.weekDay}</h4>
                 </div>
                 
-                <div className="p-6">
+                <div className="p-2">
                   {daySchedule.workouts.length > 0 ? (
-                    <div className="space-y-4">
+                    <div className="space-y-2">
                       {daySchedule.workouts.map((workout, index) => (
                         <div
                           key={index}
                           className="bg-gradient-to-r from-gray-50 to-slate-50 rounded-2xl p-5 border border-gray-200 hover:shadow-md transition-all duration-300"
                         >
-                          <h5 className="text-lg font-bold text-gray-900 mb-3">{workout.name}</h5>
+                          <h5 className="text-lg font-bold text-gray-900 mb-3">{index + 1}. {workout.name}</h5>
                           {workout.workoutImages && workout.workoutImages.length > 0 && (
                             <div className="mt-3 overflow-x-auto">
-                              <div className="flex gap-3 p-2 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
+                              <div className="flex flex-row justify-center items-center gap-3 p-2 rounded-xl bg-gray-100" style={{ minHeight: '120px' }}>
                               {workout.workoutImages.map((image: string, imgIndex: number) => (
                                 <img
-                                key={imgIndex}
-                                src={image}
-                                alt={`Workout Image ${imgIndex + 1}`}
-                                className="w-auto h-28 rounded-lg object-contain flex-shrink-0"
+                                  key={imgIndex}
+                                  src={image}
+                                  alt={`Workout Image ${imgIndex + 1}`}
+                                  className="w-auto h-28 rounded-lg object-contain flex-shrink-0"
                                 />
                               ))}
                               </div>
@@ -413,7 +414,7 @@ const ClientWorkoutDashboard: React.FC = () => {
                           </div>
                           {workout.comment !== 'No Comment' && (
                             <div className="mt-4 p-3 bg-white rounded-xl border border-gray-200">
-                              <p className="text-sm text-gray-600 italic">{workout.comment}</p>
+                              <p className="text-sm text-gray-600 italic">💬 {workout.comment}</p>
                             </div>
                           )}
                           {workout.workoutUrl && (           
@@ -422,8 +423,8 @@ const ClientWorkoutDashboard: React.FC = () => {
                               target="_blank"
                               className="mt-4 w-full inline-flex items-center justify-center px-5 py-2 rounded-xl bg-gray-600 text-white font-semibold shadow-md hover:from-blue-600 hover:to-purple-700 transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-blue-400"
                             >
-                              <span className="mr-2">▶️</span>
-                              Video Tutorial
+                              <span className="mr-2"><FaLink/></span>
+                              Tutorial
                             </Link>
                           )}
                         </div>
