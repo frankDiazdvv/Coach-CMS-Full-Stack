@@ -9,7 +9,7 @@ export const GET = async () => {
     const coaches = await Coach.find();
     return new NextResponse(JSON.stringify(coaches), { status: 200 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error getting coaches"
+    const message = error instanceof Error ? error.message : "Error getting coaches";
     return new NextResponse(message, { status: 500 });
   }
 };
@@ -28,7 +28,7 @@ export const POST = async (request: Request) => {
     );
     return new NextResponse(JSON.stringify(newCoach), { status: 201 });
   } catch (error: unknown) {
-    const message = error instanceof Error ? error.message : "Error deleting client"
+    const message = error instanceof Error ? error.message : "Error deleting client";
     return new NextResponse(message, { status: 500 });
   }
 };

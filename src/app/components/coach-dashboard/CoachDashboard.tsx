@@ -111,6 +111,7 @@ const CoachDashboard: React.FC = () => {
       return;
     }
 
+
     try {
       // Fetch clients
       const clientsRes = await fetch('/api/client', {
@@ -123,8 +124,10 @@ const CoachDashboard: React.FC = () => {
       }
       const allClients: IClient[] = await clientsRes.json();
       const coachClients = allClients.filter(
-        (client) => client.coach._id?.toString() === localCoachId
+        (client) => client.coach?._id?.toString() === localCoachId.toString()
+        
       );
+      
       setAreCoachClients(coachClients);
       console.log('Coach clients:', coachClients);
 
@@ -245,7 +248,8 @@ const CoachDashboard: React.FC = () => {
 
     } catch (err: unknown) {
       const message = err instanceof Error ? err.message : t("genericError");
-      setError(message);
+      setError("Error fetching clients");
+      console.error('Fetch error:', message);
     } finally {
       setIsLoading(false);
     }

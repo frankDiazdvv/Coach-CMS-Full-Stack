@@ -17,7 +17,7 @@ export interface ICoach {
   resetTokenExpiry?: number;
   createdAt?: Date;
   updatedAt?: Date;
-  _id?: Types.ObjectId;
+  _id: Types.ObjectId;
 }
 
 const CoachSchema = new Schema<ICoach>(

@@ -57,7 +57,7 @@ export const POST = async (request: Request) => {
 
     // Check client limit and subscription status
     const FREE_CLIENT_LIMIT = 3;
-    const BASIC_PAID_LIMIT = 10;
+    const BASIC_PAID_LIMIT = 15;
 
     if (!coach.isSubscribed && coach.clientCount >= FREE_CLIENT_LIMIT) {
       // First, check if they have a Stripe customer
