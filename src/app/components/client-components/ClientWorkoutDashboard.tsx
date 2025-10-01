@@ -4,10 +4,12 @@ import { useState, useEffect } from 'react';
 import { IWorkoutSchedule, IDailyWorkout } from '../../../../lib/models/workouts';
 import { useFormatter, useTranslations } from 'use-intl';
 import Link from 'next/link';
+import { useRouter } from 'next/navigation';
 
 const ClientWorkoutDashboard: React.FC = () => {
   const t = useTranslations();
   const format = useFormatter();
+  const router = useRouter();
   const [clientSchedule, setClientSchedule] = useState<IWorkoutSchedule | null>(null);
   const [clientName, setClientName] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
@@ -40,6 +42,7 @@ const ClientWorkoutDashboard: React.FC = () => {
       if (!id) {
         setError('No client ID in localStorage');
         setIsLoading(false);
+        router.replace('/login');
         return;
       }
 

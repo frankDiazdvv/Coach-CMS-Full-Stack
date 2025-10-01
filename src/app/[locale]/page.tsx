@@ -5,6 +5,7 @@ import Link from 'next/link';
 import Image from 'next/image';
 import "flag-icons/css/flag-icons.min.css";
 import {Montserrat, Inter} from 'next/font/google';
+import heroIMG from '/public/dashboardSC.webp';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter-next" });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat-next" });
@@ -127,12 +128,12 @@ export default function LiteTrainerLanding() {
               </div>
 
               <h1 className="text-5xl md:text-7xl font-light mb-8 leading-none">
-                <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text  ">
-                  {t('hero.title1') || 'Simple Coaching'}
+                <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent text-shadow-2xs">
+                  {t('hero.title1') || 'Smart Coaching'}
                 </span>
                 <br />
-                <span className="font-medium bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent">
-                  {t('hero.title2') || 'Made Powerful'}
+                <span className="font-medium bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent text-shadow-sm">
+                  {t('hero.title2') || 'Made Affordable'}
                 </span>
               </h1>
 
@@ -160,10 +161,13 @@ export default function LiteTrainerLanding() {
               </div>
             </div>
             <div className='relative hidden w-full h-64 md:h-auto xl:block'>
-              <img 
-                src='./dashboardSC.webp'
+              <Image
+                src={heroIMG}
                 alt="LITE Trainer app dashboard showing weekly workout and nutrition plan" 
                 fetchPriority='high'
+                width={1200}
+                height={800}
+                placeholder="blur"
                 className='w-full h-full object-cover object-left'
               />
             </div>

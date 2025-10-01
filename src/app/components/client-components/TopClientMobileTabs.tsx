@@ -21,7 +21,7 @@ const TopClientMobileTabs: React.FC = () => {
     ]
    
     return(
-        <div className="fixed top-0 left-0 right-0 z-50 bg-gradient-to-r from-slate-800 to-slate-900 backdrop-blur-lg border-b border-slate-700/50 shadow-xl">
+        <div className="fixed top-0 left-0 right-0 z-50 bg-slate-900 backdrop-blur-lg border-b border-slate-700/50 shadow-xl">
             <div className="flex justify-center items-center h-16 px-4 max-w-md mx-auto">
                 <div className="flex bg-slate-700/50 rounded-full p-1 gap-1 w-full">
                     {links.map((link, index) => (

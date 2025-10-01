@@ -129,6 +129,8 @@ const ClientProfilePage: React.FC = () => {
         router.replace(pathWithoutLocale, { locale: nextLocale });
     }
 
+
+
     const getLanguageFlag = (lang: string) => {
         switch (lang.toLowerCase()) {
             case 'en':

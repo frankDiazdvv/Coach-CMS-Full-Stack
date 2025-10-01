@@ -1,14 +1,17 @@
 import type { MetadataRoute } from 'next'
+import { getLocale } from 'next-intl/server'
  
 export default function manifest(): MetadataRoute.Manifest {
+
   return {
     name: 'LITE Trainer Coaching',
     short_name: 'LITE Trainer',
     description: 'Personal trainer coaching software',
-    start_url: '/client/client-workout-dashboard',
+    start_url: `/${getLocale() || 'en'}/client/client-workout-dashboard`,
+    scope: '/',
     display: 'standalone',
     background_color: '#ffffff',
-    theme_color: '#000000',
+    theme_color: '#ffffff',
     icons: [
       {
         src: '/web-app-manifest-192x192.png',
