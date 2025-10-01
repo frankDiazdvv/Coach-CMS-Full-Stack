@@ -318,7 +318,7 @@ const CoachDashboard: React.FC = () => {
                 height={64}
                 className="rounded-full border-4 border-slate-100 shadow-sm"
               /> */}
-              <div className="w-14 h-14 text-2xl bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
+              <div className="hidden w-14 h-14 text-2xl bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full md:flex items-center justify-center text-white font-semibold shadow-sm">
                 {userName.charAt(0)}
               </div>
             </div>
@@ -1029,7 +1029,7 @@ const CoachDashboard: React.FC = () => {
 
         {/* Notifications Sidebar - Mobile */}
         <button
-          className="cursor-pointer xl:hidden text-white fixed right-2 bottom-20 md:bottom-2 rounded-full p-3 active:scale-95 transition-all duration-300 bg-[#1f2d3d] border border-blue-400 shadow-xl/30 z-150"
+          className="cursor-pointer xl:hidden text-white fixed right-2 bottom-24 md:bottom-2 rounded-full p-3 active:scale-95 transition-all duration-300 bg-[#1f2d3d] border border-blue-400 shadow-xl/30 z-150"
           onClick={() => setIsNotificationsOpen(!isNotificationsOpen)}
           name='Menu Button'
         >

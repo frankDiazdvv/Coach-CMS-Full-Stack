@@ -33,7 +33,7 @@ const BottomClientMenu: React.FC = () => {
 
     return(
         <div className="fixed bottom-0 left-0 right-0 z-50 bg-gradient-to-t from-slate-900 to-slate-800 backdrop-blur-lg border-t border-slate-700/50 shadow-xl">
-            <div className="flex justify-around items-center h-16 px-2 max-w-md mx-auto">
+            <div className="flex justify-around items-center h-16 px-2 mb-4 max-w-md mx-auto">
                 {links.map((link, index) => (
                     <Link
                         key={index}

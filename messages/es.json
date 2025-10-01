@@ -17,7 +17,7 @@
   "profileAlt": "Foto de perfil",
   "addClient": "Agregar Cliente",
   "todayWorkouts": "Entrenamientos de Hoy",
-  "scheduled": "{due, plural, =0 {Ninguna Sesión Hoy} one {{due} sesión} other {{due} sesiones}}",
+  "scheduled": "{due, plural, =0 {Ninguna Sesión} one {{due} sesión} other {{due} sesiones}}",
   "loadingWorkouts": "Cargando entrenamientos...",
   "loadingProfile": "Cargando tu perfil...",
   "client": "Cliente",

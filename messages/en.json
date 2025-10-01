@@ -17,7 +17,7 @@
   "profileAlt": "Profile Picture",
   "addClient": "Add Client",
   "todayWorkouts": "Today's Workouts",
-  "scheduled": "{due, plural, =0 {No Workout Scheduled} other {{due} scheduled}}",
+  "scheduled": "{due, plural, =0 {Nothing Scheduled} other {{due} scheduled}}",
   "loadingWorkouts": "Loading workouts...",
   "loadingProfile": "Loading your profile...",
   "client": "Client",
@@ -227,7 +227,7 @@
   "noCoachSubtitle": "A coach will be assigned to you soon",
   "profileOverview": "Profile Overview",
   "memberSince": "Member Since",
-  "noEspirationDate": "No Expiration Date",
+  "noExpirationDate": "No Expiration Date",
   "myContactInformation": "My Contact Information",
 
   "yourMeasurements": "Your Measurements",

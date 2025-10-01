@@ -46,7 +46,7 @@ const TotalLogsByClientChart: React.FC<{ data: ClientWorkoutSummary[] }> = ({ da
 
   return (
      <div className="w-full bg-gray-50">
-      <ResponsiveContainer width="100%" height={Math.max(320, sortedData.length * 50)}>
+      <ResponsiveContainer width="100%" height="auto" aspect={3}>
         <BarChart
           layout="vertical"
           data={sortedData}

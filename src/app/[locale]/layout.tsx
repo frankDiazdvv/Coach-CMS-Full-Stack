@@ -4,6 +4,7 @@ import { routing } from '@/i18n/routing';
 import './globals.css';
 import { Metadata } from 'next';
 import Script from 'next/script';
+import { start } from 'repl';
 export const metadata = {
   title: {
     default: 'LITE Trainer',
@@ -13,6 +14,17 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
   },
+  appleWebApp: {
+    capable: true,
+    title: 'LITE Trainer',
+    statusBarStyle: 'black-translucent',
+    startupImage: [
+      {
+        url: '/apple-splash-2048-2732.jpg',
+        media: '(device-width: 1024px) and (device-height: 1366px) and (-webkit-device-pixel-ratio: 2) and (orientation: portrait)',
+      }
+    ]
+  }
 };
 
 export default async function LocaleLayout({
