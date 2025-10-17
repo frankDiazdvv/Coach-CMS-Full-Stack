@@ -6,6 +6,7 @@ import Image from 'next/image';
 import "flag-icons/css/flag-icons.min.css";
 import {Montserrat, Inter} from 'next/font/google';
 import heroIMG from '/public/dashboardSC.webp';
+import { FaArrowDown } from "react-icons/fa";
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter-next" });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat-next" });
@@ -19,10 +20,10 @@ const ogImage = '/squareLogo.svg';
 export const metadata = {
   // title: 'LITE Trainer — Beginner Friendly Fitness Coaching Software for Online & In-Person Coaches',
   title: 'LITE Trainer | Beginner Friendly Fitness Coaching Software',
-  description: 'LITE Trainer is beginner-friendly coaching software for personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out. Bilingual support in English and Spanish.',
+  description: 'LITE Trainer is the #1 beginner-friendly coaching software for personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out. Bilingual support in English and Spanish.',
   openGraph: {
     title: 'LITE Trainer | Beginner-Friendly Fitness Coaching Software for Online & In-Person Coaches',
-    description: 'LITE Trainer is beginner-friendly coaching software for personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out',
+    description: 'LITE Trainer is the #1 coaching software for beginner personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out',
     url: 'https://litetrainer.com',
     siteName: 'LITE Trainer',
     images: [
@@ -38,7 +39,7 @@ export const metadata = {
   twitter: {
     card: 'summary_large_image',
     title: 'LITE Trainer — Beginner Friendly Client Management System',
-    description: 'Affordable, simple client management for beginner fitness coaches. Built for the core needs of online or in-person coaches — no bloat, just essential features.',
+    description: 'LITE Trainer is the #1 coaching software for beginner personal trainers. Manage workouts, nutrition, and clients in one simple app. Perfect for online fitness coaches starting out',
     images: ['https://litetrainer.com/opengraph-image.png'],
   },
   icons: {
@@ -108,43 +109,46 @@ export default function LiteTrainerLanding() {
       <LandingPageTopBar />
 
       {/* Hero Section */}
-      <main className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
+      <main className="relative flex flex-col justify-center items-center h-dvh md:pt-10 px-4 sm:px-6 lg:px-20">
         <div className="max-w-8xl mx-auto text-center">
-          <div className='flex flex-row mb-40'>
-            <div className='w-full'>
-              <div className="mb-8">
-                <span className="inline-flex items-center px-5 py-2.5 rounded-full text-sm bg-white/5 text-zinc-300 border border-white/10 backdrop-blur-xl shadow-2xl transition-all duration-300">
-                  <Star className="w-4 h-4 mr-2 text-yellow-400" />
-                  {t('hero.badge') || 'Featured on GoodFirms'}
-                  <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity pl-2'>
-                    <Image
-                      src={'/goodFirmsLogo.png'}
-                      alt="GoodFirms Logo"
-                      width={120}
-                      height={20}
-                    />
-                  </Link>
-                </span>
+          <div className='flex flex-row'>
+            <div className='w-full flex flex-col justify-between'>  
+              <div>
+                <div className="my-8">
+                  <span className="inline-flex items-center px-5 py-2 md:py-2.5 rounded-full text-sm bg-white/5 text-zinc-300 border border-white/10 backdrop-blur-xl shadow-2xl transition-all duration-300">
+                    <Star className="w-4 h-4 mr-2 text-yellow-400" />
+                    {t('hero.badge') || 'Featured on GoodFirms'}
+                    <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity pl-2'>
+                      <Image
+                        src={'/goodFirmsLogo.png'}
+                        alt="GoodFirms Logo"
+                        width={120}
+                        height={20}
+                      />
+                    </Link>
+                  </span>
+                </div>
+
+                <h1 className="text-5xl md:text-7xl 2xl:text-8xl mb-12 md:mb-8 leading-none">
+                  <span className="bg-white bg-clip-text font-normal text-transparent text-shadow-2xs">
+                    {t('hero.title1') || 'Smart Coaching'}
+                  </span>
+                  <br/>
+                  <span className="font-normal bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent text-shadow-sm">
+                    {t('hero.title2') || 'Made Affordable'}
+                  </span>
+                </h1>
+
+                <p className="font-light text-md md:text-xl xl:text-2xl text-gray-400 max-w-4xl mx-auto leading-normal md:pb-20">
+                  {t('hero.description') ||
+                    'The #1 bridge between basic tools and expensive enterprise software.'}
+                  {t('hero.description2') ||
+                    'Weekly Workout & Nutrition Planning for Beginner Coaches — without the complexity or cost.'}
+                </p>
               </div>
 
-              <h1 className="text-5xl md:text-7xl font-light mb-8 leading-none">
-                <span className="bg-gradient-to-r from-white via-purple-200 to-pink-200 bg-clip-text text-transparent text-shadow-2xs">
-                  {t('hero.title1') || 'Smart Coaching'}
-                </span>
-                <br />
-                <span className="font-medium bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent text-shadow-sm">
-                  {t('hero.title2') || 'Made Affordable'}
-                </span>
-              </h1>
-
-              <p className="font-light text-lg md:text-2xl text-gray-400 mb-12 max-w-4xl mx-auto leading-normal">
-                {t('hero.description') ||
-                  'The perfect bridge between basic tools and expensive enterprise software.'}
-                {t('hero.description2') ||
-                  'Weekly Workout & Nutrition Planning for Beginner Coaches — without the complexity or cost.'}
-              </p>
-
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start">
+              {/* JOIN BUTTON */}
+              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start mb-12">
                 <div className='flex flex-col items-center'>
                   <Link href={signUpPage}>
                     <button className="cursor-pointer group bg-gradient-to-r from-purple-800 to-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
@@ -155,15 +159,15 @@ export default function LiteTrainerLanding() {
                   <p className='text-sm text-gray-300 mt-1'>🚀 {t("hero.underButton")}</p>
                 </div>
                 
-                <button className="cursor-not-allowed text-white border border-white/30 px-6 mx-2 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
+                {/* <button className="cursor-not-allowed text-white border border-white/30 px-6 mx-2 py-4 rounded-full text-lg font-semibold hover:bg-white/10 transition-all backdrop-blur-sm">
                   {t('hero.cta2') || 'Watch Demo'}
-                </button>
+                </button> */}
               </div>
             </div>
             <div className='relative hidden w-full h-64 md:h-auto xl:block'>
               <Image
                 src={heroIMG}
-                alt="LITE Trainer app dashboard showing weekly workout and nutrition plan" 
+                alt="Image: LITE Trainer app dashboard showing weekly workout and nutrition plan" 
                 fetchPriority='high'
                 width={1200}
                 height={800}
@@ -172,34 +176,40 @@ export default function LiteTrainerLanding() {
               />
             </div>
           </div>
-          {/* Stats */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mt-20">
-            <div className="text-center">
-              <div className="text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">$9.99</div>
-              <div className="text-gray-400">{t('stats.price') || 'Starting Price/Month'}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">15</div>
-              <div className="text-gray-400">{t('stats.clients') || 'Clients Included'}</div>
-            </div>
-            <div className="text-center">
-              <div className="text-6xl bg-clip-text mb-2"><span className='fi fi-us'></span> <span className='fi fi-es'></span></div>
-              <div className="text-gray-400">{t('stats.languages') || 'Languages Supported'}</div>
-            </div>
-            <div className='flex flex-row gap-2 mt-8 items-center justify-center md:col-span-3'>
-              <p>{t("hero.badge")}</p>
-              <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity'>
-                <Image
-                  src={'/goodFirmsLogo.png'}
-                  alt="GoodFirms Logo"
-                  width={150}
-                  height={40}
-                />
-              </Link>
-            </div>
-          </div> 
         </div>
+        <div className='absolute bottom-10 border rounded-full p-2 text-2xl animate-bounce'>
+          <FaArrowDown />
+        </div>
+          
+
       </main>
+
+      {/* Stats */}
+      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-40">
+        <div className="text-center">
+          <div className="text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">$9.99</div>
+          <div className="text-gray-400">{t('stats.price') || 'Starting Price/Month'}</div>
+        </div>
+        <div className="text-center">
+          <div className="text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">15</div>
+          <div className="text-gray-400">{t('stats.clients') || 'Clients Included'}</div>
+        </div>
+        <div className="text-center">
+          <div className="text-6xl bg-clip-text mb-2"><span className='fi fi-us'></span> <span className='fi fi-es'></span></div>
+          <div className="text-gray-400">{t('stats.languages') || 'Languages Supported'}</div>
+        </div>
+        <div className='flex flex-row gap-2 mt-8 items-center justify-center md:col-span-3'>
+          <p>{t("hero.badge")}</p>
+          <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity'>
+            <Image
+              src={'/goodFirmsLogo.png'}
+              alt="GoodFirms Logo"
+              width={150}
+              height={40}
+            />
+          </Link>
+        </div>
+      </div> 
 
       {/* Features Section */}
       <section id="features" className="relative py-20 px-4 sm:px-6 lg:px-8">
@@ -356,7 +366,7 @@ export default function LiteTrainerLanding() {
                 {t('pricing.title1') || 'Simple, Transparent'}
               </span>
               <br />
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent py-2">
+              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent pb-2">
                 {t('pricing.title2') || ''}
               </span>
             </h2>
