@@ -129,7 +129,7 @@ export default function LiteTrainerLanding() {
                   </span>
                 </div>
 
-                <h1 className="text-5xl md:text-7xl 2xl:text-8xl mb-12 md:mb-8 leading-none">
+                <h1 className="text-5xl md:text-7xl 2xl:text-8xl mb-6 md:mb-8 leading-none">
                   <span className="bg-white bg-clip-text font-normal text-transparent text-shadow-2xs">
                     {t('hero.title1') || 'Smart Coaching'}
                   </span>
@@ -139,7 +139,7 @@ export default function LiteTrainerLanding() {
                   </span>
                 </h1>
 
-                <p className="font-light text-md md:text-xl xl:text-2xl text-gray-400 max-w-4xl mx-auto leading-normal md:pb-20">
+                <p className="font-light text-md md:text-xl xl:text-2xl text-gray-400 max-w-4xl mx-auto leading-normal pb-24 md:pb-20">
                   {t('hero.description') ||
                     'The #1 bridge between basic tools and expensive enterprise software.'}
                   {t('hero.description2') ||
@@ -148,7 +148,7 @@ export default function LiteTrainerLanding() {
               </div>
 
               {/* JOIN BUTTON */}
-              <div className="flex flex-col sm:flex-row gap-4 justify-center items-center sm:items-start mb-12">
+              <div className="flex flex-row gap-4 justify-center items-center sm:items-start mb-12">
                 <div className='flex flex-col items-center'>
                   <Link href={signUpPage}>
                     <button className="cursor-pointer group bg-gradient-to-r from-purple-800 to-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
@@ -177,9 +177,10 @@ export default function LiteTrainerLanding() {
             </div>
           </div>
         </div>
-        <div className='absolute bottom-10 border rounded-full p-2 text-2xl animate-bounce'>
+        <Link href="/#features" scroll={true} className='absolute bottom-10 rounded-full p-2 border-2 border-gray-200/70 text-gray-200/70 text-2xl animate-bounce'>
           <FaArrowDown />
-        </div>
+        </Link>
+        
           
 
       </main>

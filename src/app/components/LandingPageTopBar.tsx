@@ -62,7 +62,7 @@ export default function LandingPageTopBar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-slate-800/95 backdrop-blur-lg rounded-lg mt-2 p-6 space-y-4">
+          <div className="md:hidden bg-slate-800/95 backdrop-blur-lg rounded-lg mt-2 p-6 space-y-4 transform transition-transform duration-1000 ease-in-out mb-6">
             <a href="#features" className="block text-gray-300 hover:text-white transition-colors">{t("features")}</a>
             <a href="#pricing" className="block text-gray-300 hover:text-white transition-colors">{t("pricing")}</a>
             <LanguageToggle/>
