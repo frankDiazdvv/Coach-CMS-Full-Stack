@@ -42,6 +42,8 @@
   "noWorkoutsToday": "Este cliente no tiene entrenamientos programados para hoy.",
   "clientProfileAlt": "Foto de Perfil del Cliente",
   "clientLogs": "Registros de Clientes",
+  "noLogs": "No hay registros",
+  "logExplain": "Registros se mostraran aqui",
   "membershipStatus": "Estado de Membresía",
   "allCurrent": "¡Todo al día!",
   "noExpirationsSoon": "No hay membresías que expiren pronto",

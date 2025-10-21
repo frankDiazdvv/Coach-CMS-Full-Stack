@@ -42,6 +42,8 @@
   "noWorkoutsToday": "This client has no workouts scheduled for today.",
   "clientProfileAlt": "Client Profile Picture",
   "clientLogs": "Client Logs",
+  "noLogs": "No Logging yet",
+  "logExplain": "Client logs will show here",
   "requireAttention": "Requires Attention",
   "allCurrent": "All current!",
   "noExpirationsSoon": "No memberships expiring soon",
