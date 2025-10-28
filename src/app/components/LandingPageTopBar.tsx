@@ -42,10 +42,10 @@ export default function LandingPageTopBar() {
             <Link href="/resources/food-db" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("resources")}</Link>
 
             <LanguageToggle/>
-            <Link href={signUpPage} className="bg-gradient-to-r from-purple-800 to-[#416bbb] text-white text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+            <Link href={signUpPage} className="bg-linear-to-r from-purple-800 to-[#416bbb] text-white text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
               {t("getStarted")}
             </Link>
-            <Link href={loginPage} className="bg-gradient-to-r from-purple-300 to-[#b5c9ed] text-purple-950 text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-200 hover:to-pink-200 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
+            <Link href={loginPage} className="bg-linear-to-r from-purple-300 to-[#b5c9ed] text-purple-950 text-lg font-semibold px-6 py-2 rounded-lg hover:from-purple-200 hover:to-pink-200 transition-all transform hover:scale-105 shadow-lg hover:shadow-purple-500/25">
               {t("signIn")}
             </Link>
           </div>
@@ -67,12 +67,12 @@ export default function LandingPageTopBar() {
             <a href="#pricing" className="block text-gray-300 hover:text-white transition-colors">{t("pricing")}</a>
             <LanguageToggle/>
             <Link href={'./sign-up'}>
-              <button className="w-full bg-gradient-to-r from-blue-700 to-red-700 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all">
+              <button className="w-full bg-linear-to-r from-blue-700 to-red-700 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all">
                 {t("getStarted")}
               </button>
             </Link>
             <Link href={'./login'}>
-              <button className="w-full mt-3 bg-gradient-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all">
+              <button className="w-full mt-3 bg-linear-to-r from-purple-500 to-pink-500 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all">
                 {t("signIn")}
               </button>
             </Link>

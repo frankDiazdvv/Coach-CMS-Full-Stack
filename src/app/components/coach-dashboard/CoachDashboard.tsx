@@ -27,6 +27,7 @@ interface ClientPlanSummary {
   name: string;
   value: number;
   color: string;
+  [key: string]: string | number;
 } 
 
 interface DueSoon {
@@ -274,7 +275,7 @@ const CoachDashboard: React.FC = () => {
 
   if (!coachId) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 to-slate-100 flex items-center justify-center">
+      <div className="min-h-screen bg-linear-to-br from-slate-50 to-slate-100 flex items-center justify-center">
         <div className="bg-white rounded-2xl shadow-xl p-8 max-w-md w-full mx-4">
           <div className="text-center">
             <div className="w-16 h-16 bg-red-100 rounded-full flex items-center justify-center mx-auto mb-4">
@@ -318,7 +319,7 @@ const CoachDashboard: React.FC = () => {
                 height={64}
                 className="rounded-full border-4 border-slate-100 shadow-sm"
               /> */}
-              <div className="hidden w-14 h-14 text-2xl bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full md:flex items-center justify-center text-white font-semibold shadow-sm">
+              <div className="hidden w-14 h-14 text-2xl bg-linear-to-r from-indigo-500 to-indigo-600 rounded-full md:flex items-center justify-center text-white font-semibold shadow-sm">
                 {userName.charAt(0)}
               </div>
             </div>
@@ -334,7 +335,7 @@ const CoachDashboard: React.FC = () => {
             (coach.isSubscribed && areCoachClients.length >= 10)) ? (
             <button
               onClick={() => setIsModalOpen(true)}
-              className="hidden group relative md:inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-gray-400 to-gray-500
+              className="hidden group relative md:inline-flex items-center gap-2 px-6 py-3 bg-linear-to-r from-gray-400 to-gray-500
               text-white cursor-not-allowed font-medium rounded-xl shadow-md"
               disabled
             >
@@ -346,7 +347,7 @@ const CoachDashboard: React.FC = () => {
           ) : (
             <button
               onClick={() => setIsModalOpen(true)}
-              className="hidden group relative md:inline-flex items-center gap-2 px-3 md:px-6 py-4 md:py-3 bg-gradient-to-r from-blue-600 to-blue-700
+              className="hidden group relative md:inline-flex items-center gap-2 px-3 md:px-6 py-4 md:py-3 bg-linear-to-r from-blue-600 to-blue-700
               text-white cursor-pointer font-medium rounded-xl shadow-md hover:from-blue-700 hover:to-blue-800 transition-all duration-200 transform hover:scale-105 hover:shadow-lg active:scale-95"
             >
               <svg className="w-5 h-5 transition-transform group-hover:rotate-90" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -390,7 +391,7 @@ const CoachDashboard: React.FC = () => {
         <div className="mb-8">
           <div className="flex items-center justify-between mb-6">
             <div className="flex items-center gap-3">
-              <div className="w-10 h-10 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+              <div className="w-10 h-10 bg-linear-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
                 <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                   <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                 </svg>
@@ -462,7 +463,7 @@ const CoachDashboard: React.FC = () => {
                                   height={40}
                                   className="rounded-full border-2 border-slate-100"
                                 /> */}
-                                <div className="w-10 h-10 text-lg bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
+                                <div className="w-10 h-10 text-lg bg-linear-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
                                   <p>{client.firstName.charAt(0)}{client.lastName.charAt(0)}</p>
                                 </div>
                               </div>
@@ -508,11 +509,11 @@ const CoachDashboard: React.FC = () => {
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-150 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-2xl max-h-[90vh] overflow-hidden border border-slate-200">
               {/* Header */}
-              <div className="bg-gradient-to-r from-blue-50 to-blue-100 p-6 border-b border-slate-200">
+              <div className="bg-linear-to-r from-blue-50 to-blue-100 p-6 border-b border-slate-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
+                      <div className="w-12 h-12 bg-linear-to-r from-blue-500 to-blue-600 rounded-xl flex items-center justify-center">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M16 7a4 4 0 11-8 0 4 4 0 018 0zM12 14a7 7 0 00-7 7h14a7 7 0 00-7-7z" />
                         </svg>
@@ -542,7 +543,7 @@ const CoachDashboard: React.FC = () => {
                 {/* Contact Information */}
                 <div className="mb-8">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-linear-to-r from-green-500 to-green-600 rounded-lg flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 8l7.89 4.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z" />
                       </svg>
@@ -587,7 +588,7 @@ const CoachDashboard: React.FC = () => {
                 {/* Today's Workouts */}
                 <div>
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-linear-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M13 10V3L4 14h7v7l9-11h-7z" />
                       </svg>
@@ -633,7 +634,7 @@ const CoachDashboard: React.FC = () => {
                                 {workout.comment && (
                                   <div className="bg-amber-50 border border-amber-200 rounded-lg p-3 mt-3">
                                     <p className="text-sm text-amber-800 italic flex items-start gap-2">
-                                      <svg className="w-4 h-4 text-amber-600 mt-0.5 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                      <svg className="w-4 h-4 text-amber-600 mt-0.5 shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M7 8h10M7 12h4m1 8l-4-4H5a2 2 0 01-2-2V6a2 2 0 012-2h14a2 2 0 012 2v8a2 2 0 01-2 2h-3l-4 4z" />
                                       </svg>
                                       {workout.comment}
@@ -680,7 +681,7 @@ const CoachDashboard: React.FC = () => {
                 <div className="bg-white rounded-2xl shadow-sm p-6 border border-slate-200">
                   <div className="flex items-center justify-between mb-4">
                     <h2 className="text-xl font-bold text-gray-800">{t('clientLogs')}</h2>
-                    <div className="w-8 h-8 bg-gradient-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-linear-to-r from-orange-500 to-orange-600 rounded-lg flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M9 19v-6a2 2 0 00-2-2H5a2 2 0 00-2 2v6a2 2 0 002 2h2a2 2 0 002-2zm0 0V9a2 2 0 012-2h2a2 2 0 012 2v10m-6 0a2 2 0 002 2h2a2 2 0 002-2m0 0V5a2 2 0 012-2h2a2 2 0 012 2v14a2 2 0 01-2 2h-2a2 2 0 01-2-2z" />
                       </svg>
@@ -698,7 +699,7 @@ const CoachDashboard: React.FC = () => {
                   <div className="p-6 border-b border-slate-200">
                     <div className="flex items-center justify-between">
                       <div className="flex items-center gap-3">
-                        <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                        <div className="w-8 h-8 bg-linear-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
                           <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                             <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                           </svg>
@@ -747,7 +748,7 @@ const CoachDashboard: React.FC = () => {
                                   height={32}
                                   className="rounded-full border-2 border-slate-100"
                                 /> */}
-                                <div className="w-10 h-10 text-lg bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
+                                <div className="w-10 h-10 text-lg bg-linear-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
                                   {due.firstName.charAt(0)}{due.lastName.charAt(0)}
                                 </div>
                                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-yellow-400 rounded-full border-2 border-white"></div>
@@ -777,7 +778,7 @@ const CoachDashboard: React.FC = () => {
                                   height={32}
                                   className="rounded-full border-2 border-slate-100"
                                 /> */}
-                                <div className="w-10 h-10 text-lg bg-gradient-to-r from-indigo-500/65 to-indigo-600/50 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
+                                <div className="w-10 h-10 text-lg bg-linear-to-r from-indigo-500/65 to-indigo-600/50 rounded-full flex items-center justify-center text-white font-semibold shadow-sm">
                                   {expired.firstName.charAt(0)}{expired.lastName.charAt(0)}
                                 </div>
                                 <div className="absolute -top-1 -right-1 w-4 h-4 bg-gray-300 rounded-full border-2 border-white"></div>
@@ -802,11 +803,11 @@ const CoachDashboard: React.FC = () => {
           <div className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50 p-4">
             <div className="bg-white rounded-2xl shadow-2xl w-full max-w-lg max-h-[90vh] overflow-hidden border border-slate-200">
               {/* Header */}
-              <div className="bg-gradient-to-r from-amber-50 to-orange-100 p-6 border-b border-slate-200">
+              <div className="bg-linear-to-r from-amber-50 to-orange-100 p-6 border-b border-slate-200">
                 <div className="flex items-center justify-between">
                   <div className="flex items-center gap-4">
                     <div className="relative">
-                      <div className="w-12 h-12 bg-gradient-to-r from-amber-500 to-orange-600 rounded-xl flex items-center justify-center">
+                      <div className="w-12 h-12 bg-linear-to-r from-amber-500 to-orange-600 rounded-xl flex items-center justify-center">
                         <svg className="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                           <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M12 8v4l3 3m6-3a9 9 0 11-18 0 9 9 0 0118 0z" />
                         </svg>
@@ -835,7 +836,7 @@ const CoachDashboard: React.FC = () => {
                 {/* Membership Information */}
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-linear-to-r from-red-500 to-red-600 rounded-lg flex items-center justify-center">
                       <svg className="w-4 h-4 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z" />
                       </svg>
@@ -871,7 +872,7 @@ const CoachDashboard: React.FC = () => {
                 {/* Client Information */}
                 <div className="mb-6">
                   <h3 className="text-lg font-semibold text-gray-800 mb-4 flex items-center gap-2">
-                    <div className="w-8 h-8 bg-gradient-to-r from-blue-300 to-blue-400 rounded-lg flex items-center justify-center">
+                    <div className="w-8 h-8 bg-linear-to-r from-blue-300 to-blue-400 rounded-lg flex items-center justify-center">
                       <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z" />
                       </svg>
@@ -929,7 +930,7 @@ const CoachDashboard: React.FC = () => {
           <div className="p-6 border-b border-slate-600">
             <div className="flex items-center justify-between">
               <div className="flex items-center gap-3">
-                <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                <div className="w-10 h-10 bg-linear-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
                   <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.5-3.5a1.5 1.5 0 010-2.12L20 8h-5m-5 9H5l3.5-3.5a1.5 1.5 0 000-2.12L5 8h5m0 0V3m0 5v10" />
                   </svg>
@@ -967,12 +968,12 @@ const CoachDashboard: React.FC = () => {
                 {workoutLogs.map((log) => (
                   <div
                     key={log._id}
-                    className="group relative bg-gradient-to-r bg-[#324d6c] rounded-xl p-3 
+                    className="group relative bg-linear-to-r bg-[#324d6c] rounded-xl p-3 
                     transition-all duration-200 border border-slate-600 hover:border-indigo-200 hover:shadow-md"
                   >
                     <div className="flex items-start gap-3">
                       <div className="relative">
-                        <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-sm">
+                        <div className="w-10 h-10 bg-linear-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-sm">
                           {log.client.firstName.charAt(0)}
                         </div>
                       </div>
@@ -1040,7 +1041,7 @@ const CoachDashboard: React.FC = () => {
             <div className="p-6 border-b border-slate-600">
               <div className="flex items-center justify-between px-6">
                 <div className="flex items-center gap-3">
-                  <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
+                  <div className="w-10 h-10 bg-linear-to-r from-indigo-500 to-indigo-600 rounded-xl flex items-center justify-center">
                     <svg className="w-5 h-5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                       <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M15 17h5l-3.5-3.5a1.5 1.5 0 010-2.12L20 8h-5m-5 9H5l3.5-3.5a1.5 1.5 0 000-2.12L5 8h5m0 0V3m0 5v10" />
                     </svg>
@@ -1078,12 +1079,12 @@ const CoachDashboard: React.FC = () => {
                   {workoutLogs.map((log) => (
                     <div
                       key={log._id}
-                      className="group relative bg-gradient-to-r bg-[#324d6c] rounded-xl p-3 
+                      className="group relative bg-linear-to-r bg-[#324d6c] rounded-xl p-3 
                       transition-all duration-200 border border-slate-600 hover:border-indigo-200 hover:shadow-md"
                     >
                       <div className="flex items-start gap-3">
                         <div className="relative">
-                          <div className="w-10 h-10 bg-gradient-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-sm">
+                          <div className="w-10 h-10 bg-linear-to-r from-indigo-500 to-indigo-600 rounded-full flex items-center justify-center text-white font-bold shadow-sm">
                             {log.client.firstName.charAt(0)}
                           </div>
                         </div>

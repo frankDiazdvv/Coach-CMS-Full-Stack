@@ -53,22 +53,25 @@ const LeftSideNav: React.FC = () => {
           )}
         </li>
         {/* Measurements Page */}
-        <li
-          className="relative"
-          onMouseEnter={() => setHoveredItem("Measurements")}
-          onMouseLeave={() => setHoveredItem(null)}
-        >
+        {/* 
+          <li
+            className="relative"
+            onMouseEnter={() => setHoveredItem("Measurements")}
+            onMouseLeave={() => setHoveredItem(null)}
+          >
 
-          {/* Enable for production use <Link href={clientMeasurements}> */}
-          <div className="cursor-not-allowed flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
-            <Ruler />
-          </div>
-          {hoveredItem === "Measurements" && (
-            <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
-              Measurements
-            </span>
-          )}
-        </li>
+            /* Enable for production use <Link href={clientMeasurements}>
+            <div className="cursor-not-allowed flex items-center justify-center text-2xl hover:text-gray-300 transition-colors">
+              <Ruler />
+            </div>
+            {hoveredItem === "Measurements" && (
+              <span className="absolute left-full ml-2 bg-gray-800 text-white text-xs rounded py-1 px-2 whitespace-nowrap">
+                Measurements
+              </span>
+            )}
+          </li>
+        */}
+        
         {/* Coach Profile */}
         <li
           className="relative"

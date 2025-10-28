@@ -103,7 +103,7 @@ export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
-    <div className={`cursor-default min-h-screen bg-gradient-to-br from-blue-950 via-black to-zinc-950 text-white overflow-hidden`}>
+    <div className={`cursor-default min-h-screen bg-linear-to-br from-blue-950 via-black to-zinc-950 text-white overflow-hidden`}>
 
       {/* Navigation */}
       <LandingPageTopBar />
@@ -134,7 +134,7 @@ export default function LiteTrainerLanding() {
                     {t('hero.title1') || 'Smart Coaching'}
                   </span>
                   <br/>
-                  <span className="font-normal bg-gradient-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent text-shadow-sm">
+                  <span className="font-normal bg-linear-to-r from-[#2A2DAF] to-[#B2CAF6] bg-clip-text text-transparent text-shadow-sm">
                     {t('hero.title2') || 'Made Affordable'}
                   </span>
                 </h1>
@@ -151,7 +151,7 @@ export default function LiteTrainerLanding() {
               <div className="flex flex-row gap-4 justify-center items-center sm:items-start mb-12">
                 <div className='flex flex-col items-center'>
                   <Link href={signUpPage}>
-                    <button className="cursor-pointer group bg-gradient-to-r from-purple-800 to-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
+                    <button className="cursor-pointer group bg-linear-to-r from-purple-800 to-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
                       {t('hero.cta1') || 'Start Free Trial for LITE Trainer Coaching App'}
                       <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
                     </button>
@@ -217,11 +217,11 @@ export default function LiteTrainerLanding() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-light mb-6">
-              <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
                 {t('features.title1') || 'Everything You Need to'}
               </span>
               <br />
-              <span className="bg-gradient-to-r from-purple-400 to-[#B2CAF6] bg-clip-text text-transparent">
+              <span className="bg-linear-to-r from-purple-400 to-[#B2CAF6] bg-clip-text text-transparent">
                 {t('features.title2') || 'Scale Your Coaching'}
               </span>
             </h2>
@@ -278,22 +278,22 @@ export default function LiteTrainerLanding() {
       </section>
 
       {/* Why LITE Trainer Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-950/20 to-blue-900/20">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-purple-950/20 to-blue-900/20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-thin mb-8">
-                <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
                   {t('why.title1') || 'Why Choose'}
                 </span>
                 <br />
-                <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+                <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
                   {t('why.title2') || 'LITE Trainer?'}
                 </span>
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4 hover:scale-[1.02] transition-transform">
-                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -302,7 +302,7 @@ export default function LiteTrainerLanding() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4 hover:scale-[1.02] transition-transform">
-                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -311,7 +311,7 @@ export default function LiteTrainerLanding() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4 hover:scale-[1.02] transition-transform">
-                  <div className="w-6 h-6 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center flex-shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -322,9 +322,9 @@ export default function LiteTrainerLanding() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:scale-[1.02] transition-transform">
+              <div className="bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:scale-[1.02] transition-transform">
                 <div className="text-center mb-6">
-                  <div className="w-16 h-16 bg-gradient-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
+                  <div className="w-16 h-16 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Target className="w-8 h-8 text-white" />
                   </div>
                   <h3 className="text-3xl font-thin text-white">{t('why.growth.title') || 'Built for Growth'}</h3>
@@ -367,7 +367,7 @@ export default function LiteTrainerLanding() {
                 {t('pricing.title1') || 'Simple, Transparent'}
               </span>
               <br />
-              <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent pb-2">
+              <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent pb-2">
                 {t('pricing.title2') || ''}
               </span>
             </h2>
@@ -383,57 +383,57 @@ export default function LiteTrainerLanding() {
                 <h3 className="text-3xl text-white mb-2">{t('pricing.basic.title') || 'Basic Plan'}</h3>
                 <p className="text-gray-400 mb-6">{t('pricing.basic.description') || 'Perfect for getting started'}</p>
                 <div className="text-5xl text-white">
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$9.99</span>
+                  <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">$9.99</span>
                 </div>
                 <p className="text-gray-400">{t('pricing.basic.per') || 'per month'}</p>
               </div>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.0') || 'Up to 15 clients'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.1') || 'First 3 clients free'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.2') || 'Complete client management'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.3') || 'Workout & nutrition planning'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.4') || 'Real-time notifications'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.5') || 'Mobile-friendly interface'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.6') || 'English & Spanish support'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.basic.features.7') || 'Video tutorial integration'}</span>
                 </div>
               </div>
 
               <Link href={signUpPage}>
-                <button className="cursor-pointer w-full bg-gradient-to-r from-purple-600/50 to-pink-600/50 text-white py-3 rounded-full font-thin hover:from-purple-600/70 hover:to-pink-600/70 transition-all transform hover:scale-105">
+                <button className="cursor-pointer w-full bg-linear-to-r from-purple-600/50 to-pink-600/50 text-white py-3 rounded-full font-thin hover:from-purple-600/70 hover:to-pink-600/70 transition-all transform hover:scale-105">
                   {t('pricing.basic.cta') || 'Get Started'}
                 </button>
               </Link>
             </article>
 
             {/* VIP Plan */}
-            <article className="relative bg-gradient-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-400 transition-all duration-300">
+            <article className="relative bg-linear-to-br from-purple-900/30 to-pink-900/30 backdrop-blur-sm border-2 border-purple-500/50 rounded-2xl p-8 hover:border-purple-400 transition-all duration-300">
               <div className="absolute -top-4 left-1/2 transform -translate-x-1/2">
-                <span className="bg-gradient-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
+                <span className="bg-linear-to-r from-purple-500 to-pink-500 text-white px-4 py-2 rounded-full text-sm font-semibold">
                   {t('pricing.vip.coming') || 'Coming Soon'}
                 </span>
               </div>
@@ -442,34 +442,34 @@ export default function LiteTrainerLanding() {
                 <h3 className="text-3xl text-white mb-2">{t('pricing.vip.title') || 'VIP Plan'}</h3>
                 <p className="text-gray-400 mb-6">{t('pricing.vip.description') || 'Advanced features for scaling coaches'}</p>
                 <div className="text-5xl text-white">
-                  <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{t('pricing.vip.price') || 'TBA'}</span>
+                  <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">{t('pricing.vip.price') || 'TBA'}</span>
                 </div>
                 <p className="text-gray-400">{t('pricing.vip.per') || 'per month'}</p>
               </div>
 
               <div className="space-y-4 mb-8">
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.vip.features.0') || 'Up to 25 clients'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Check className="w-5 h-5 text-green-400 flex-shrink-0" />
+                  <Check className="w-5 h-5 text-green-400 shrink-0" />
                   <span className="text-gray-300">{t('pricing.vip.features.1') || 'All Basic plan features'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <Star className="w-5 h-5 text-purple-400 shrink-0" />
                   <span className="text-purple-300">{t('pricing.vip.features.2') || 'Specialized measurement system'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <Star className="w-5 h-5 text-purple-400 shrink-0" />
                   <span className="text-purple-300">{t('pricing.vip.features.3') || 'Advanced analytics'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <Star className="w-5 h-5 text-purple-400 shrink-0" />
                   <span className="text-purple-300">{t('pricing.vip.features.4') || 'Priority support'}</span>
                 </div>
                 <div className="flex items-center gap-3">
-                  <Star className="w-5 h-5 text-purple-400 flex-shrink-0" />
+                  <Star className="w-5 h-5 text-purple-400 shrink-0" />
                   <span className="text-purple-300">{t('pricing.vip.features.5') || 'More features in development'}</span>
                 </div>
               </div>
@@ -483,14 +483,14 @@ export default function LiteTrainerLanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-gradient-to-r from-purple-900/30 to-pink-900/30">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-purple-900/30 to-pink-900/30">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-thin mb-6">
-            <span className="bg-gradient-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
               {t('cta.title1') || 'Ready to Transform'}
             </span>
             <br />
-            <span className="bg-gradient-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
+            <span className="bg-linear-to-r from-purple-400 to-pink-400 bg-clip-text text-transparent">
               {t('cta.title2') || 'Your Coaching Business?'}
             </span>
           </h2>
@@ -499,7 +499,7 @@ export default function LiteTrainerLanding() {
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center items-center">
             <Link href={signUpPage}>
-              <button className="cursor-pointer group bg-gradient-to-r from-purple-500 to-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
+              <button className="cursor-pointer group bg-linear-to-r from-purple-500 to-blue-700 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center">
                 {t('cta.button') || 'Start Free Trial Now'}
                 <ChevronRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
               </button>

@@ -14,7 +14,7 @@ const CustomTooltip = ({ active, payload, label }: any) => {
       <div className="bg-white/40 border border-gray-200 rounded-lg shadow-lg p-3 backdrop-blur-sm">
         <p className="text-sm font-medium text-gray-900">{label}</p>
         <p className="text-sm text-gray-600">
-          <span className="inline-block w-2 h-2 bg-gradient-to-r from-orange-500 to-orange-600 rounded-full mr-2"></span>
+          <span className="inline-block w-2 h-2 bg-linear-to-r from-orange-500 to-orange-600 rounded-full mr-2"></span>
           {payload[0].value} workouts logged
         </p>
       </div>
@@ -49,11 +49,11 @@ const TotalLogsByClientChart: React.FC<{ data: ClientWorkoutSummary[] }> = ({ da
   return (
      <div className="w-full bg-gray-50">
       {sortedData.length > 0 ? (
-        <ResponsiveContainer width="100%" height="auto" aspect={3}>
+        <ResponsiveContainer width="100%" aspect={2}>
           <BarChart
             layout="vertical"
             data={sortedData}
-            margin={{ top: 0, right: 30, left: 0, bottom: 30 }}
+            margin={{ top: 0, right: 0, left: 0, bottom: 0 }}
           >
             <XAxis 
               type="number" 
@@ -63,13 +63,13 @@ const TotalLogsByClientChart: React.FC<{ data: ClientWorkoutSummary[] }> = ({ da
             <YAxis
               dataKey="clientName"
               type="category"
-              width={120}
+              width={100}
               tick={{ 
                 fontSize: 14, 
                 fill: '#374151', 
                 fontWeight: 500 
               }}
-              axisLine={false}
+              axisLine={true}
               tickLine={false}
               interval={0}
             />

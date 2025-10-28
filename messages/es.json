@@ -193,7 +193,7 @@
   "protein": "Proteina",
   "carbs": "Carbohidratos",
   "fats": "Grasas",
-  "noMealPlanned": "No hay comidas planeadas",
+  "noMealPlanned": "No hay comidas planeadas. Agrega una comida y selecciona '...' para agregar a libreria.",
   "contactCoachforMeal": "Contacta a tu coach para asistencia nutritional",
   "weeklyMacroAverage": "Promedio de Macros Semanal",
   "grams": "gramos",
