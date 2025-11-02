@@ -103,8 +103,8 @@ export default function LiteTrainerLanding() {
   return (
     <div className={`relative cursor-default min-h-screen bg-black text-white overflow-hidden`}>
 
-      <div className="w-full absolute">
-        <DarkVeil warpAmount={5} />
+      <div className="w-full h-[110rem] absolute">
+        <DarkVeil warpAmount={3}/>
       </div>
       {/* Navigation */}
       <LandingPageTopBar />
