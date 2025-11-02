@@ -35,7 +35,7 @@ export default function LandingPageTopBar() {
           </div>
 
           {/* Desktop Menu */}
-          <div className="hidden md:flex items-center space-x-6">
+          <div className="hidden xl:flex items-center space-x-6">
             <Link href="/#features" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("features")}</Link>
             <Link href="/#video-demo" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("tutorials")}</Link>
             <Link href="/#pricing" scroll={true} className="text-gray-300 hover:text-white transition-colors">{t("pricing")}</Link>
@@ -52,7 +52,7 @@ export default function LandingPageTopBar() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-white"
+            className="xl:hidden text-white hover:cursor-pointer"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             name='Menu Button'
           >
@@ -62,9 +62,13 @@ export default function LandingPageTopBar() {
 
         {/* Mobile Menu */}
         {isMenuOpen && (
-          <div className="md:hidden bg-slate-800/95 backdrop-blur-lg rounded-lg mt-2 p-6 space-y-4 transform transition-transform duration-1000 ease-in-out mb-6">
-            <a href="#features" className="block text-gray-300 hover:text-white transition-colors">{t("features")}</a>
-            <a href="#pricing" className="block text-gray-300 hover:text-white transition-colors">{t("pricing")}</a>
+          <div className="xl:hidden bg-slate-800/95 backdrop-blur-lg rounded-lg mt-2 p-6 space-y-4 transform transition-transform duration-1000 ease-in-out mb-6">
+            
+            <Link href="/#features" scroll={true} className="block text-gray-300 hover:text-white transition-colors">{t("features")}</Link>
+            <Link href="/#video-demo" scroll={true} className="block text-gray-300 hover:text-white transition-colors">{t("tutorials")}</Link>
+            <Link href="/#pricing" scroll={true} className="block text-gray-300 hover:text-white transition-colors">{t("pricing")}</Link>
+            <Link href="/resources/food-db" scroll={true} className="block text-gray-300 hover:text-white transition-colors">{t("resources")}</Link>
+
             <LanguageToggle/>
             <Link href={'./sign-up'}>
               <button className="w-full bg-linear-to-r from-blue-700 to-red-700 text-white px-6 py-2 rounded-full hover:from-purple-600 hover:to-pink-600 transition-all">

@@ -14,7 +14,7 @@ const stripe = new Stripe(process.env.STRIPE_SECRET_KEY!, {
 
 export async function GET() {
   try {
-    await connect();
+    await connect();  
     console.log('Fetching clients');
     const clients = await Client.find().populate('coach').populate('workoutSchedule').lean();
     return new NextResponse(JSON.stringify(clients), { status: 200 });

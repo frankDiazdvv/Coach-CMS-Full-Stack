@@ -7,6 +7,7 @@ import "flag-icons/css/flag-icons.min.css";
 import {Montserrat, Inter} from 'next/font/google';
 import heroIMG from '/public/dashboardSC.webp';
 import { FaArrowDown } from "react-icons/fa";
+import DarkVeil from '../components/ui/DarkVeil';
 
 const inter = Inter({ subsets: ["latin"], variable: "--font-inter-next" });
 const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat-next" });
@@ -103,10 +104,15 @@ export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
-    <div className={`cursor-default min-h-screen bg-linear-to-br from-blue-950 via-black to-zinc-950 text-white overflow-hidden`}>
+    <div className={`relative cursor-default min-h-screen bg-zinc-950 text-white overflow-hidden`}>
 
+      <div className="absolute inset-0 z-0">
+        <DarkVeil />
+      </div>
       {/* Navigation */}
       <LandingPageTopBar />
+
+       
 
       {/* Hero Section */}
       <main className="relative flex flex-col justify-center items-center h-dvh md:pt-10 px-4 sm:px-6 lg:px-20">
@@ -139,7 +145,7 @@ export default function LiteTrainerLanding() {
                   </span>
                 </h1>
 
-                <p className="font-light text-md md:text-xl xl:text-2xl text-gray-400 max-w-4xl mx-auto leading-normal pb-24 md:pb-20">
+                <p className="font-light text-md md:text-xl xl:text-2xl text-gray-300 max-w-4xl mx-auto leading-normal pb-24 md:pb-20">
                   {t('hero.description') ||
                     'The #1 bridge between basic tools and expensive enterprise software.'}
                   {t('hero.description2') ||
@@ -169,37 +175,45 @@ export default function LiteTrainerLanding() {
                 src={heroIMG}
                 alt="Image: LITE Trainer app dashboard showing weekly workout and nutrition plan" 
                 fetchPriority='high'
-                width={1200}
-                height={800}
+                width={900}
+                height={700}
                 placeholder="blur"
                 className='w-full h-full object-cover object-left'
               />
             </div>
           </div>
         </div>
-        <Link href="/#features" scroll={true} className='absolute bottom-10 rounded-full p-2 border-2 border-gray-200/70 text-gray-200/70 text-2xl animate-bounce'>
+        <Link href="/#start-free" scroll={true} className='absolute bottom-10 rounded-full p-2 border-2 border-gray-200/70 text-gray-200/70 text-2xl animate-bounce'>
           <FaArrowDown />
         </Link>
-        
-          
-
       </main>
 
       {/* Stats */}
-      <div className="grid grid-cols-1 md:grid-cols-3 gap-8 my-40">
-        <div className="text-center">
-          <div className="text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">$9.99</div>
+      <div id='start-free' className="grid grid-cols-1 md:grid-cols-3 gap-8 my-40">
+        <h1 className='flex justify-center md:col-span-3 text-3xl md:text-6xl font-light mb-12 z-10'>{t("freePlan.startCoaching")}<span className='rounded-lg bg-[#1b50b3] p-2 mx-2 -rotate-3 font-semibold'> {t("stats.free")}</span></h1>
+        <div className="text-center z-10">
+          <div className="text-4xl md:text-6xl font-thin text-[#6e9ef8] mb-2">{t("stats.free")}</div>
           <div className="text-gray-400">{t('stats.price') || 'Starting Price/Month'}</div>
         </div>
-        <div className="text-center">
-          <div className="text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">15</div>
+        <div className="text-center z-10">
+          <div className="text-4xl md:text-6xl font-thin bg-[#6e9ef8] bg-clip-text text-transparent mb-2">3</div>
           <div className="text-gray-400">{t('stats.clients') || 'Clients Included'}</div>
         </div>
-        <div className="text-center">
+        <div className="text-center z-10">
           <div className="text-6xl bg-clip-text mb-2"><span className='fi fi-us'></span> <span className='fi fi-es'></span></div>
           <div className="text-gray-400">{t('stats.languages') || 'Languages Supported'}</div>
         </div>
-        <div className='flex flex-row gap-2 mt-8 items-center justify-center md:col-span-3'>
+        <div className='flex justify-center items-center md:col-span-3 mt-12 gap-3 z-10'>
+          <p className='text-xl max-w-3xl'>{t("freePlan.moreClients")}</p>
+          <Link href='#pricing'>
+            <button className='cursor-pointer group bg-linear-to-r from-purple-800 to-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center'>
+              {t("freePlan.exploreMore")}
+              <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
+            </button>
+          </Link>
+          
+        </div>
+        <div className='flex flex-row gap-2 items-center justify-center md:col-span-3 z-10'>
           <p>{t("hero.badge")}</p>
           <Link href={'http://www.goodfirms.com/'} target="_blank" className='hover:opacity-80 transition-opacity'>
             <Image
@@ -256,7 +270,7 @@ export default function LiteTrainerLanding() {
       
       <section id='video-demo'>
         <div className="flex flex-col md:flex-row justify-center gap-4 items-center min-h-screen">
-          <div className="w-full max-w-3xl aspect-video">
+          <div className="w-full max-w-3xl aspect-video z-10">
             <iframe
               className="w-full h-full rounded-2xl shadow-lg"
               src="https://www.youtube.com/embed/KHSpe19NfZE?si=cr0t8Zx1chTgjMQ8" 
@@ -266,7 +280,7 @@ export default function LiteTrainerLanding() {
               allowFullScreen
             ></iframe>
           </div>
-          <div className='max-w-lg p-4 font-thin'>
+          <div className='max-w-lg p-4 font-thin z-10'>
             <h2 className='text-4xl md:text-5xl text-center md:text-left font-thin mb-4 md:mb-8'>{t("tutorials.title1")}</h2>
             <p className='text-lg text-gray-300'>{t("tutorials.title2")}</p>
             <ol className='text-lg text-gray-300 list-disc list-inside mt-2 md:mt-4 pl-2 space-y-2'>
@@ -557,6 +571,7 @@ export default function LiteTrainerLanding() {
           © {new Date().getFullYear()} LITE Trainer. {t('footer.rights') || 'All rights reserved.'}
         </div>
       </footer>
+      
     </div>
   );
 }

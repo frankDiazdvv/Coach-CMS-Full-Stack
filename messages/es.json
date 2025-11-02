@@ -232,9 +232,7 @@
   "profileOverview": "Resumen de Perfil",
   "memberSince": "Miembro Desde",
   "noExpirationDate": "Sin fecha de Expiración",
-  "myContactInformation": "Mi Información de Contacto",
-
-
+  "myContactInformation": "Mi Información de Contacto", 
   
   "yourMeasurements": "Tus Medidas",
   "comingSoon": "Esta función estará disponible próximamente",
@@ -308,23 +306,29 @@
   "LandingPage": {
     "hero": {
       "badge": "Presentado en: ",
-      "title1": "Entrenamiento Capaz",
+      "title1": "Gran Entrenamiento",
       "title2": "De Forma Asequible",
       "description": "LITE Trainer es el puente perfecto entre herramientas básicas y software costoso. ",
-      "description2": "Te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio sin complejidad ni altos costos.",
+      "description2": "Te ofrece todas las funciones esenciales que necesitas para hacer crecer tu negocio sin complejidad ni altos costos. Comienza GRATIS hoy!",
       "cta1": "Únete a LITE Trainer",
       "cta2": "3 Clientes Gratis antes de Comprometerte",
       "underButton": "3 clientes GRATIS | No Tarjeta Requerida"
     },
+    "freePlan":{
+      "startCoaching":"Comienza a entrenar hoy",
+      "moreClients": "Necesitas mas clientes?",
+      "exploreMore": "Explora Otros Planes"
+    },
     "stats": {
       "price": "Precio Inicial/Mes",
+      "free": "GRATIS",
       "clients": "Clientes Incluidos",
       "languages": "Idiomas Soportados"
     },
     "features": {
       "title1": "Todo lo que Necesitas para",
       "title2": "Escalar tu Entrenamiento",
-      "description": "Concéntrate en lo que más importa — entrenar a tus clientes. Nosotros nos encargamos de la tecnología.",
+      "description": "Concéntrate en lo que más importa, entrenar a tus clientes. Nosotros nos encargamos de la tecnología.",
       "items": [
         {
           "title": "Gestión Completa de Clientes",
@@ -442,7 +446,7 @@
     "footer": {
       "rights": "Todos los derechos reservados."
     }
-  },
+  },  
   "noWorkoutFound": "No Se Encontraron Resultados",
   "fromLibrary": "+ Mis Entrenamientos",
   "close": "Cerrar",

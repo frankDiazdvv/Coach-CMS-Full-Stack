@@ -2,21 +2,22 @@ import LandingPageTopBar from "@/app/components/LandingPageTopBar";
 import { useTranslations } from "next-intl";
 import Image from "next/image";
 import Link from "next/link";
-
+import DarkVeil from "@/app/components/ui/DarkVeil";
 
 
 export default function ResourcesPage() {
 
     const t = useTranslations();
 
+
     return(
-        <div className="min-h-screen bg-gradient-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
+        <div className="min-h-screen bg-linear-to-b from-slate-900 via-slate-800 to-slate-900 text-white">
             <LandingPageTopBar/>
 
             <main className="relative pt-32 pb-20 px-4 sm:px-6 lg:px-8">
                 <div className="max-w-8xl mx-auto text-center">
                     <h1 className="text-5xl md:text-7xl font-light mb-8 leading-none">
-                        {t("buildSomething")} <span className="bg-gradient-to-r from-blue-600 to-blue-200 bg-clip-text text-transparent">Cool</span>
+                        {t("buildSomething")} <span className="bg-linear-to-r from-blue-600 to-blue-200 bg-clip-text text-transparent">Cool</span>
                     </h1>
                     <div className="mt-12">
                         <div className="flex flex-row rounded-3xl max-w-xl max-h-80 mx-auto bg-slate-800/90 backdrop-blur-sm hover:shadow-lg">

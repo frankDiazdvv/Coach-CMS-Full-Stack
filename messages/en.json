@@ -308,13 +308,19 @@
       "title1": "Smart Coaching",
       "title2": "Made Affordable",
       "description": "LITE Trainer is the perfect bridge between basic tools and expensive enterprise software. ",
-      "description2": "It gives you all the core features you need to grow your coaching business, without the complexity or cost.",
+      "description2": "It gives you all the core features you need to grow your coaching business, without the complexity or cost. Start FREE today!",
       "cta1": "Join LITE Trainer Now",
       "cta2": "Up to 3 Clients Free before you commit",
-      "underButton": "Includes 3 FREE clients | No CC Required"
+      "underButton": "Up to 3 FREE clients | No CC Required"
+    },
+    "freePlan":{
+      "startCoaching":"Start coaching today for",
+      "moreClients": "Need more clients?",
+      "exploreMore": "Explore Other Plans"
     },
     "stats": {
       "price": "Starting Price/Month",
+      "free": "FREE",
       "clients": "Clients Included",
       "languages": "Languages Supported"
     },
@@ -440,7 +446,6 @@
       "rights": "All rights reserved."
     }
   },
-
   "noWorkoutFound": "No Workouts Found",
   "fromLibrary": "+ My Library",
   "close": "Close",
@@ -511,5 +516,6 @@
   "macrosPer100g": "Macros Per 100g",
   "servingSizes": "Serving Sizes",
   "categories": "Categories"
+
 
 }
