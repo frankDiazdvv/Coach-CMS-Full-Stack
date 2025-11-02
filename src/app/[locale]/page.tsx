@@ -1,16 +1,13 @@
 import { useTranslations } from 'next-intl';
-import { ChevronRight, Users, Calendar, Bell, BarChart3, Globe, Smartphone, Video, Target, Check, Star, ArrowRight } from 'lucide-react';
-import LandingPageTopBar from '../components/LandingPageTopBar';
+import { ChevronRight, Users, Calendar, Bell, BarChart3, Globe, Smartphone, Video, Target, Check, Star, ArrowRight, ArrowDown } from 'lucide-react';
 import Link from 'next/link';
 import Image from 'next/image';
 import "flag-icons/css/flag-icons.min.css";
-import {Montserrat, Inter} from 'next/font/google';
 import heroIMG from '/public/dashboardSC.webp';
-import { FaArrowDown } from "react-icons/fa";
-import DarkVeil from '../components/ui/DarkVeil';
+import dynamic from 'next/dynamic';
 
-const inter = Inter({ subsets: ["latin"], variable: "--font-inter-next" });
-const montserrat = Montserrat({ subsets: ["latin"], variable: "--font-montserrat-next" });
+const DarkVeil = dynamic(() => import('../components/ui/DarkVeil'));
+const LandingPageTopBar = dynamic(() => import('../components/LandingPageTopBar'));
 
 const loginPage = '/login';
 const signUpPage = '/sign-up';
@@ -104,10 +101,10 @@ export default function LiteTrainerLanding() {
   const t = useTranslations('LandingPage');
 
   return (
-    <div className={`relative cursor-default min-h-screen bg-zinc-950 text-white overflow-hidden`}>
+    <div className={`relative cursor-default min-h-screen bg-black text-white overflow-hidden`}>
 
-      <div className="absolute inset-0 z-0">
-        <DarkVeil />
+      <div className="w-full absolute">
+        <DarkVeil warpAmount={5} />
       </div>
       {/* Navigation */}
       <LandingPageTopBar />
@@ -128,6 +125,7 @@ export default function LiteTrainerLanding() {
                       <Image
                         src={'/goodFirmsLogo.png'}
                         alt="GoodFirms Logo"
+                        loading='lazy'
                         width={120}
                         height={20}
                       />
@@ -174,7 +172,7 @@ export default function LiteTrainerLanding() {
               <Image
                 src={heroIMG}
                 alt="Image: LITE Trainer app dashboard showing weekly workout and nutrition plan" 
-                fetchPriority='high'
+                priority={true}
                 width={900}
                 height={700}
                 placeholder="blur"
@@ -184,13 +182,13 @@ export default function LiteTrainerLanding() {
           </div>
         </div>
         <Link href="/#start-free" scroll={true} className='absolute bottom-10 rounded-full p-2 border-2 border-gray-200/70 text-gray-200/70 text-2xl animate-bounce'>
-          <FaArrowDown />
+          <ArrowDown />
         </Link>
       </main>
 
       {/* Stats */}
       <div id='start-free' className="grid grid-cols-1 md:grid-cols-3 gap-8 my-40">
-        <h1 className='flex justify-center md:col-span-3 text-3xl md:text-6xl font-light mb-12 z-10'>{t("freePlan.startCoaching")}<span className='rounded-lg bg-[#1b50b3] p-2 mx-2 -rotate-3 font-semibold'> {t("stats.free")}</span></h1>
+        <h2 className='flex justify-center md:col-span-3 text-3xl md:text-6xl font-light mb-12 z-10'>{t("freePlan.startCoaching")}<span className='rounded-lg bg-[#1b50b3] p-2 mx-2 -rotate-3 font-semibold'> {t("stats.free")}</span></h2>
         <div className="text-center z-10">
           <div className="text-4xl md:text-6xl font-thin text-[#6e9ef8] mb-2">{t("stats.free")}</div>
           <div className="text-gray-400">{t('stats.price') || 'Starting Price/Month'}</div>
@@ -206,7 +204,7 @@ export default function LiteTrainerLanding() {
         <div className='flex justify-center items-center md:col-span-3 mt-12 gap-3 z-10'>
           <p className='text-xl max-w-3xl'>{t("freePlan.moreClients")}</p>
           <Link href='#pricing'>
-            <button className='cursor-pointer group bg-linear-to-r from-purple-800 to-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center'>
+            <button className='cursor-pointer group bg-blue-900 text-white px-8 py-4 rounded-full text-lg font-semibold hover:from-purple-600 hover:to-pink-600 transition-all transform hover:scale-105 shadow-2xl hover:shadow-purple-500/50 flex items-center'>
               {t("freePlan.exploreMore")}
               <ArrowRight className="w-5 h-5 ml-2 group-hover:translate-x-1 transition-transform" />
             </button>
@@ -219,6 +217,7 @@ export default function LiteTrainerLanding() {
             <Image
               src={'/goodFirmsLogo.png'}
               alt="GoodFirms Logo"
+              loading='lazy'
               width={150}
               height={40}
             />
@@ -231,7 +230,7 @@ export default function LiteTrainerLanding() {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl md:text-6xl font-light mb-6">
-              <span className="bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+              <span className="">
                 {t('features.title1') || 'Everything You Need to'}
               </span>
               <br />
@@ -292,12 +291,12 @@ export default function LiteTrainerLanding() {
       </section>
 
       {/* Why LITE Trainer Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-purple-950/20 to-blue-900/20">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-blue-900/20">
         <div className="max-w-7xl mx-auto">
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
             <div>
               <h2 className="text-4xl md:text-5xl font-thin mb-8">
-                <span className="bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+                <span className="">
                   {t('why.title1') || 'Why Choose'}
                 </span>
                 <br />
@@ -307,7 +306,7 @@ export default function LiteTrainerLanding() {
               </h2>
               <div className="space-y-6">
                 <div className="flex items-start gap-4 hover:scale-[1.02] transition-transform">
-                  <div className="w-6 h-6 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -316,7 +315,7 @@ export default function LiteTrainerLanding() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4 hover:scale-[1.02] transition-transform">
-                  <div className="w-6 h-6 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -325,7 +324,7 @@ export default function LiteTrainerLanding() {
                   </div>
                 </div>
                 <div className="flex items-start gap-4 hover:scale-[1.02] transition-transform">
-                  <div className="w-6 h-6 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center shrink-0 mt-1">
+                  <div className="w-6 h-6 bg-purple-500 rounded-full flex items-center justify-center shrink-0 mt-1">
                     <Check className="w-4 h-4 text-white" />
                   </div>
                   <div>
@@ -336,7 +335,7 @@ export default function LiteTrainerLanding() {
               </div>
             </div>
             <div className="relative">
-              <div className="bg-linear-to-br from-purple-500/20 to-pink-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:scale-[1.02] transition-transform">
+              <div className="bg-purple-500/20 rounded-2xl p-8 backdrop-blur-sm border border-white/10 hover:scale-[1.02] transition-transform">
                 <div className="text-center mb-6">
                   <div className="w-16 h-16 bg-linear-to-r from-purple-500 to-pink-500 rounded-full flex items-center justify-center mx-auto mb-4">
                     <Target className="w-8 h-8 text-white" />
@@ -497,10 +496,10 @@ export default function LiteTrainerLanding() {
       </section>
 
       {/* CTA Section */}
-      <section className="relative py-20 px-4 sm:px-6 lg:px-8 bg-linear-to-r from-purple-900/30 to-pink-900/30">
+      <section className="relative py-20 px-4 sm:px-6 lg:px-8">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-4xl md:text-6xl font-thin mb-6">
-            <span className="bg-linear-to-r from-white to-gray-300 bg-clip-text text-transparent">
+            <span className="">
               {t('cta.title1') || 'Ready to Transform'}
             </span>
             <br />
@@ -531,6 +530,7 @@ export default function LiteTrainerLanding() {
               <Image
                 src={footerLogo}
                 alt="LITE Trainer Logo"
+                loading='lazy'
                 width={150}
                 height={40}
                 priority={false}
@@ -546,6 +546,7 @@ export default function LiteTrainerLanding() {
                 <Image
                   src={'./youtube-icon-white.svg'}
                   alt="Youtube Channel"
+                  loading='lazy'
                   width={24}
                   height={24}
                 />
@@ -559,6 +560,7 @@ export default function LiteTrainerLanding() {
                 <Image
                   src={'./linkedin-icon-white.svg'}
                   alt="LinkedIn Profile"
+                  loading='lazy'
                   width={24}
                   height={24}
                 />
